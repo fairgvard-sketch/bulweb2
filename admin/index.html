@@ -412,7 +412,13 @@
               <div class="menu-action-label">Template</div>
               <div class="menu-action-sub">Download template</div>
             </button>
+            <button class="menu-action-btn" id="actImportHTML" style="grid-column:1/-1">
+              <div class="menu-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="17" x2="12" y2="11"/><polyline points="9 14 12 11 15 14"/></svg></div>
+              <div class="menu-action-label">Import from menu.html</div>
+              <div class="menu-action-sub">Load all items into Firestore</div>
+            </button>
           </div>
+          <div id="importProgress" style="display:none;margin-top:12px;font-size:12px;font-family:monospace;background:var(--lineSoft);border-radius:8px;padding:12px;max-height:200px;overflow-y:auto;white-space:pre-wrap;color:var(--text)"></div>
           <div class="menu-actions-section">Display</div>
           <div class="panel-toggle-row">
             <div class="panel-toggle-info">
@@ -1225,6 +1231,168 @@
     a.download = 'bulochka-menu-template.json';
     a.click();
     toast('Template downloaded ✓');
+  };
+
+  // ── IMPORT FROM HTML ──
+  document.getElementById('actImportHTML').onclick = async () => {
+    const btn = document.getElementById('actImportHTML');
+    const prog = document.getElementById('importProgress');
+    if (!confirm('Загрузить все позиции меню из menu.html в Firestore?\n\nСуществующие позиции с тем же именем обновятся.')) return;
+
+    btn.disabled = true;
+    prog.style.display = 'block';
+    prog.textContent = '';
+
+    const log = (msg) => { prog.textContent += msg + '\n'; prog.scrollTop = prog.scrollHeight; };
+
+    const MENU = {
+      'hot-drinks': [
+        { name: 'Espresso',       nameHe: 'אספרסו',               price: '₪10 / ₪13', desc: 'Short or long. Single / Double.',                                                                     descHe: 'קצר/ארוך. יחיד/כפול.',                                                                                                                                img: 'img/hot drinks/espresso_short.webp' },
+        { name: 'Macchiato',      nameHe: 'מקיאטו',               price: '₪11 / ₪14', desc: 'Espresso with a touch of foamed milk. Short or long. Single / Double.',                              descHe: 'אספרסו עם נגיעה או באהבה של קרמת חלב. קצר/ארוך. יחיד/כפול.',                                                                                        img: 'img/hot drinks/maciatto_short.webp' },
+        { name: 'Americano',      nameHe: 'אמריקנו',              price: '₪12 / ₪14', desc: 'Long and easy. Small / Large.',                                                                       descHe: 'קטן/גדול. על בסיס סויה/שיבולת - ₪2. תוספות סירופ - קרמל/אגוזי לוז/וניל/אייריש קרים - ₪5.',                                                         img: 'img/hot drinks/americano_small.webp' },
+        { name: 'Cappuccino',     nameHe: "קפוצ'ינו",             price: '₪14 / ₪16', desc: 'Thick microfoam. Small / Large. Milk base +₪2, syrups +₪5.',                                        descHe: "הפוך בישראלי. קטן/גדול. על בסיס סויה/שיבולת - ₪2. תוספות סירופ - ₪5.",                                                                               img: 'img/hot drinks/capuchino_small.webp' },
+        { name: 'Flat White',     nameHe: 'פלאט וויס',            price: '₪14',       desc: 'Silky, low foam, two ristretto shots.',                                                              descHe: "קפוצ'ינו חזק: שליש אספרסו, שליש חלב, שליש קרמת חלב.",                                                                                                img: 'img/hot drinks/flat_white.webp' },
+        { name: 'Latte',          nameHe: 'לאטה',                 price: '₪16',       desc: 'Honey, vanilla, lavender, hazelnut.',                                                                descHe: 'כוס גדולה עם חלב מוקצף היטב ואספרסו מעל.',                                                                                                           img: 'img/hot drinks/latte_hot.webp' },
+        { name: 'Raf',            nameHe: 'ראף',                  price: '₪22',       desc: 'Warm cream, vanilla and espresso, whipped together.',                                                descHe: 'משקה חם על בסיס שמנת, וניל ואספרסו.',                                                                                                                img: 'img/hot drinks/raf.webp' },
+        { name: 'Hot Tea',        nameHe: 'תה חם',                price: '₪13',       desc: 'Ginger, peppermint, green cinnamon, apple verbena, chamomile or forest fruits.',                    descHe: "ארל גריי לבנדר ברגמוט / ג'ינג'ר אפרסק / ירוק יסמין / לימונית לואיזה / תפוח קינמון / קמומיל.",                                                       img: 'img/hot drinks/tea_hot.webp' },
+        { name: 'Hot Cocoa',      nameHe: 'שוקו חם עם מרשמלו',   price: '₪15',       desc: 'Milk-based, topped with marshmallow. Syrups +₪5. Baileys +₪10.',                                   descHe: 'על בסיס סויה/שיבולת - ₪2. תוספות סירופ - ₪5. תוספת ביילים - ₪10.',                                                                                   img: 'img/hot drinks/schoko_hot.webp' },
+        { name: 'Black Coffee',   nameHe: 'קפה שחור',             price: '₪11',       desc: 'The Israeli café standard. Black, brewed, no fuss.',                                                descHe: 'הסטנדרט הישראלי. שחור, מבושל, בלי עניינים.',                                                                                                         img: 'img/hot drinks/black_coffee.webp' },
+        { name: 'Affogato',       nameHe: 'אפוגטו',               price: '₪23',       desc: 'Vanilla gelato, double long espresso poured over.',                                                  descHe: 'כדור גלידת וניל ואספרסו כפול ארוך.',                                                                                                                  img: 'img/hot drinks/afogato.webp' },
+        { name: 'Hot Chocolate',  nameHe: 'שוקולטה חמה',         price: '₪22',       desc: 'Dense, thick, properly chocolate.',                                                                  descHe: 'משקה שוקולדי סמיך.',                                                                                                                                  img: 'img/hot drinks/chocolata.webp' },
+        { name: 'Sahlab',         nameHe: 'סחלב חם',              price: '₪24',       desc: 'Warm orchid-root drink topped with nuts, coconut, crumble and cinnamon.',                          descHe: 'עם אגוזים, קוקוס, מי וורדים וקינמון.',                                                                                                               img: 'img/hot drinks/shlav.webp' },
+        { name: 'Matcha Latte',   nameHe: "מאצ'ה לאטה",          price: '₪22',       desc: 'Organic Japanese green tea, milk-based. Syrups +₪5.',                                               descHe: "משקה על בסיס תה יפני אורגני. על בסיס סויה/שיבולת - ₪2. תוספות סירופ - ₪5.",                                                                          img: 'img/hot drinks/matcha_latte_hot.webp' },
+      ],
+      'cold-drinks': [
+        { name: 'Iced Coffee',               nameHe: 'קפה קר',                          price: '₪17', desc: 'Milk-based. Oat or soy +₪2. Syrups +₪5. Baileys +₪10.',                          descHe: 'על בסיס סויה/שיבולת - ₪2. תוספות סירופ - ₪5. תוספת ביילים - ₪10.',           img: 'img/cold drinks/cold_coffee.webp' },
+        { name: 'House Iced Tea',            nameHe: 'תה קר ביתי',                      price: '₪17', desc: 'Black tea extract, peach, lemon, mint.',                                          descHe: 'תמצית תה שחור, אפרסק, לימון, נענע.',                                           img: 'img/cold drinks/cold_tea.webp' },
+        { name: 'Iced Chocolate',            nameHe: 'שוקו קר',                         price: '₪17', desc: 'Milk-based. Oat or soy +₪2.',                                                     descHe: 'על בסיס סויה/ שיבולת - ₪2.',                                                   img: 'img/cold drinks/cold_cocoa.webp' },
+        { name: 'Fruitshake',                nameHe: 'פרישייק',                         price: '₪24', desc: 'Strawberry, banana, date, mango, melon, lychee, peach, soursop or forest berries. Oat, soy or OJ +₪3.', descHe: 'תות, בננה, מנגו, תמר, אפרסק, פירות יער. על בסיס סויה/ שיבולת/ מיץ תפוזים - ₪3.', img: 'img/cold drinks/fruit_shake.webp' },
+        { name: 'Bumble Bee',                nameHe: 'באמבל בי',                        price: '₪17', desc: 'Fresh orange juice over ice, espresso floated on top.',                           descHe: 'מיץ תפוזים על קרח ואספרסו!',                                                   img: 'img/cold drinks/Bumblebee.webp' },
+        { name: 'Black Lara',                nameHe: 'בלאק לארה',                       price: '₪17', desc: 'Tonic water over ice, espresso floated on top.',                                  descHe: 'מי טוניק על קרח ואספרסו.',                                                     img: 'img/cold drinks/black_lara.webp' },
+        { name: 'Iced Matcha',               nameHe: "מאצ'ה קרה",                       price: '₪24', desc: 'Organic Japanese green tea, milk-based. Oat or soy +₪2. Syrups +₪5.',           descHe: "משקה על בסיס תה יפני אורגני. על בסיס סויה/שיבולת - ₪2. תוספות סירופ - ₪5.",  img: 'img/cold drinks/cold_matcha.webp' },
+        { name: 'Flavoured Coconut Water',   nameHe: 'מי קוקוס בטעמים',                price: '₪17', desc: 'From fresh coconuts, no preservatives. Mango / Pink guava / Lychee.',             descHe: "מיוצר מאגוזי קוקוס טריים, ללא חומר משמר. מנגו / גויאבה ורודה / ליצ'י.",       img: 'img/cold drinks/coconut_water.webp' },
+        { name: 'Real Juice',                nameHe: 'מיץ ריאל',                        price: '₪15', desc: 'No preservatives. Orange / Ginger-Apple.',                                        descHe: "ללא חומר משמר. תפוזים / ג'ינג'ר-תפוח עץ.",                                     img: 'img/cold drinks/real_juice.webp' },
+        { name: 'Organic Apple Juice',       nameHe: 'מיץ תפוח עץ אורגני',             price: '₪17', desc: 'No added sugar, no preservatives. Cold pressed.',                                  descHe: 'ללא תוספת סוכר, ללא חומרים משמרים. COLD PRESSED.',                             img: 'img/cold drinks/apple_juice.webp' },
+        { name: 'Organic Pomegranate Juice', nameHe: 'מיץ רימון אורגני',               price: '₪17', desc: 'No added sugar, no preservatives. Cold pressed.',                                  descHe: 'ללא תוספת סוכר, ללא חומרים משמרים. COLD PRESSED.',                             img: 'img/cold drinks/pomegranate_juice.webp' },
+        { name: 'Organic Apricot Juice',     nameHe: 'מיץ משמש אורגני',               price: '₪17', desc: 'No added sugar, no preservatives. Cold pressed.',                                  descHe: 'ללא תוספת סוכר, ללא חומרים משמרים. COLD PRESSED.',                             img: 'img/cold drinks/apricot_juice.webp' },
+        { name: 'Organic Pear Juice',        nameHe: 'מיץ אגס אורגני',                price: '₪17', desc: 'No added sugar, no preservatives. Cold pressed.',                                  descHe: 'ללא תוספת סוכר, ללא חומרים משמרים. COLD PRESSED.',                             img: 'img/cold drinks/pear_juice.webp' },
+        { name: 'Organic Mulberry Juice',    nameHe: 'מיץ תות עץ אורגני',             price: '₪17', desc: 'No added sugar, no preservatives. Cold pressed.',                                  descHe: 'ללא תוספת סוכר, ללא חומרים משמרים. COLD PRESSED.',                             img: 'img/cold drinks/mulberry_juice.webp' },
+        { name: 'Fruit & Veg Blend — Yellow',nameHe: 'מיץ מיקס פירות וירקות - צהוב',  price: '₪17', desc: 'Lettuce, apple, pumpkin, pear, fresh herbs.',                                      descHe: 'תפוז, תפוח, מנגו, דלעת, גזר, אגס.',                                            img: 'img/cold drinks/juice_mix_yellow.webp' },
+        { name: 'Fruit & Veg Blend — Purple',nameHe: 'מיץ מיקס פירות וירקות - ורוד',  price: '₪17', desc: 'Dragon fruit, cornelian cherry, pomegranate, apple, strawberry, pear.',            descHe: 'דובדבן קורנליה, רימון, תפוח, תות שדה, אגס, גזר שחור.',                         img: 'img/cold drinks/juice_mix_pink.webp' },
+        { name: 'Fruit & Veg Blend — Red',   nameHe: 'מיץ מיקס פירות וירקות - אדום',  price: '₪17', desc: 'Pomegranate, beetroot, apple, pear, strawberry.',                                   descHe: 'רימון, סלק, אגס, תפוח, גזר שחור.',                                             img: 'img/cold drinks/juice_mix_red.webp' },
+        { name: 'Cucumber & Coriander',      nameHe: 'מלפפון כוסברה',                  price: '₪19', desc: 'Low glycemic, rich in quercetin and antioxidants. Gentle on blood sugar.',          descHe: 'שילוב מלפפון וכוסברה. ערך גליקמי נמוך, עשיר בקוורצטין.',                       img: 'img/cold drinks/cucumber_coriander.webp' },
+        { name: 'Acerola & Ginger',          nameHe: "אסרולה-ג'ינג'ר",                price: '₪19', desc: "Barbados cherry (Acerola) and ginger. One of nature's richest sources of vitamin C.", descHe: 'אסרולה — אחת מהמקורות העשירים ביותר בטבע לוויטמין C.',                    img: 'img/cold drinks/ginger_acerolla.webp' },
+        { name: 'Mango & Passionfruit',      nameHe: 'מנגו-פסיפלורה',                  price: '₪19', desc: 'A tropical classic. Mango for vitamin A, passionfruit for vitamin C.',             descHe: 'שילוב מנגו ופסיפלורה. ויטמין A וויטמין C.',                                    img: 'img/cold drinks/mango_paciflora.webp' },
+        { name: 'Maté & Caffeine',           nameHe: 'מאטה-קופאין',                    price: '₪19', desc: "South America's iconic social drink. Clean, sustained energy similar to coffee.",  descHe: 'המאטה — סמל חברתי ותרבותי. אנרגיה מתמשכת.',                                   img: 'img/cold drinks/matte_caffeine.webp' },
+        { name: 'Rose Hips',                 nameHe: 'ורדים',                           price: '₪19', desc: 'Edible rose fruits (Rosa canina). Rich natural source of vitamin C.',               descHe: 'פרי הורד (Rosa canina) — מקור עשיר של ויטמין C.',                              img: 'img/cold drinks/rose.webp' },
+      ],
+      'sandwiches': [
+        { name: 'Smoked Salmon',            nameHe: 'כריך סלמון מעושן',       price: '₪41',       desc: 'Cream cheese, red onion, smoked salmon, fresh lemon, cucumber, romaine. Avocado +₪8, egg +₪3.',  descHe: 'גבינת שמנת, בצל סגול, סלמון מעושן, מיץ לימון טרי, מלפפון, חסה קיסר.',        img: 'img/sandwiches/sanswich_salmon.webp' },
+        { name: 'Croissant Salmon',         nameHe: 'קרואסון סלמון מעושן',   price: '₪45',       desc: 'Cream cheese, red onion, smoked salmon, fresh lemon, cucumber, romaine — in a croissant.',        descHe: 'גבינת שמנת, בצל סגול, סלמון מעושן, מיץ לימון טרי, מלפפון, חסה קיסר.',        img: 'img/sandwiches/croissant_salmon.webp' },
+        { name: 'Tuna Sandwich',            nameHe: 'כריך טונה',              price: '₪41',       desc: 'Mayo, hard-boiled egg, tuna, tomato, cucumber, romaine. Avocado +₪8.',                          descHe: 'מיונז, ביצה קשה, טונה, עגבניה, מלפפון, חסה קיסר.',                            img: 'img/sandwiches/sandwich_tuna.webp' },
+        { name: 'Croissant Tuna',           nameHe: 'קרואסון טונה',           price: '₪45',       desc: 'Mayo, hard-boiled egg, tuna, tomato, cucumber, romaine — in a croissant.',                        descHe: 'מיונז, ביצה קשה, טונה, עגבניה, מלפפון, חסה קיסר.',                            img: 'img/sandwiches/croissant_tuna.webp' },
+        { name: 'Avocado Sandwich',         nameHe: 'כריך אבוקדו',            price: '₪41',       desc: 'Cream cheese, hard-boiled egg, avocado, salt, black pepper, fresh lemon, tomato, cucumber, romaine.', descHe: 'גבינת שמנת, ביצה קשה, פרוסות אבוקדו, מלח, פלפל שחור, מיץ לימון.',          img: 'img/sandwiches/sandwich_avocado.webp' },
+        { name: 'Croissant Avocado',        nameHe: 'קרואסון אבוקדו',         price: '₪45',       desc: 'Cream cheese, hard-boiled egg, avocado, salt, black pepper, fresh lemon, tomato, cucumber, romaine.', descHe: 'גבינת שמנת, ביצה קשה, פרוסות אבוקדו, מלח, פלפל שחור, מיץ לימון.',          img: 'img/sandwiches/croissant_avocado.webp' },
+        { name: 'Vegan Sandwich Avocado',   nameHe: 'רוסטיק אבוקדו VEGAN',   price: '₪41',       desc: 'Pine nut pesto, avocado, salt, black pepper, fresh lemon, tomato, cucumber, romaine.',             descHe: 'פסטו צנוברים, פרוסות אבוקדו, מלח, פלפל שחור, מיץ לימון.',                     img: 'img/sandwiches/sandwich_vegan.webp' },
+        { name: 'Croissant Antipasti',      nameHe: 'קרואסון אנטיפסטי',      price: '₪42',       desc: 'Mango chutney, roasted sweet potato, zucchini and bell pepper, Bulgarian cheese, romaine.',        descHe: "ממרח צ'אטני מנגו, ירקות אפויים (בטטה, זוקיני, גמבה), בולגרית מעודנת.",        img: 'img/sandwiches/croissant_antipasti.webp' },
+        { name: 'Croissant Pesto',          nameHe: 'קרואסון פסטו',           price: '₪42',       desc: 'Cream cheese, pine nut pesto, Bulgarian cheese, cucumber, romaine.',                              descHe: 'גבינת שמנת, פסטו צנוברים, בולגרית מעודנת, מלפפון, חסה קיסר.',                 img: 'img/sandwiches/croissant_pesto.webp' },
+        { name: 'Five Cheese Toast',        nameHe: 'טוסט חמש גבינות',       price: '₪46 / ₪48', desc: 'Cream cheese, cheddar, mozzarella, gouda, Scandinavian. With chopped salad.',                      descHe: "גבינת שמנת, צ'דר, מוצרלה, גאודה, סקנדינבית. לחם קסטן לבן ₪46 / דגנים ₪48.", img: 'img/sandwiches/tost_5_cheese.webp' },
+        { name: 'Tuna Salad',               nameHe: 'סלט טונה',               price: '₪44',       desc: 'Cucumber, tomato, romaine, tuna, kalamata olives, hard-boiled egg, red onion.',                    descHe: 'מלפפון, עגבניה, חסה קיסר, טונה, זיתי קלמטה, ביצה קשה, בצל סגול.',            img: 'img/salads/salad_tuna.webp' },
+        { name: 'White cheese Salad',       nameHe: 'סלט בולגרית',            price: '₪44',       desc: 'Tomato, cucumber, romaine, Bulgarian cheese, red onion, egg, corn, kalamata.',                     descHe: 'עגבניה, מלפפון, חסה קיסר, בולגרית מעודנת, בצל סגול, ביצה קשה, תירס.',         img: 'img/salads/salad_white_cheese.webp' },
+        { name: 'Chopped Salad',            nameHe: 'סלט ירקות דק',           price: '₪36',       desc: 'Cucumber, tomato, red onion, romaine, mint, olive oil, fresh lemon, salt, black pepper.',          descHe: 'מלפפון, עגבניה, בצל סגול, חסה קיסר, נענע, שמן זית, מיץ לימון.',               img: 'img/salads/choped_salad.webp' },
+        { name: 'Muesli',                   nameHe: 'מוזלי',                   price: '₪35',       desc: 'Yogurt, seasonal fruit, granola.',                                                                 descHe: 'יוגורט בקר, פירות העונה, גרנולה.',                                             img: 'img/small bites/musli.webp' },
+        { name: 'Mushroom Quiche + Salad',  nameHe: 'קיש פיטריות עם סלט אישי', price: '₪37',     desc: 'Champignon & portobello, white onion, Alfredo sauce, four-cheese blend. With chopped salad.',      descHe: 'פטריות שמפיניון ופורטובלו, בצל לבן, רוטב אלפרדו, מיקס ארבע גבינות.',          img: 'img/small bites/quiche_mushrooms_with_small_salad.webp' },
+        { name: 'Antipasti Quiche + Salad', nameHe: 'קיש אנטיפסטי עם סלט אישי', price: '₪37',   desc: 'Roasted sweet potato, zucchini and bell pepper, rose sauce, four-cheese blend. With chopped salad.', descHe: 'ירקות אפויים (בטטה, זוקיני, גמבה), רוטב רוזה, מיקס ארבע גבינות.',            img: 'img/small bites/quiche_antipasti_with_small_salad.webp' },
+      ],
+      'pastries': [
+        { name: 'Classic French Croissant',  nameHe: 'קרואסון צרפתי קלאסי',  price: '₪15', desc: 'Laminated butter dough.',                                                           descHe: 'בצק חמאה מרובד.',              img: 'img/pastries/croissant_classic_big.webp' },
+        { name: 'Pain au Chocolat',          nameHe: 'קרואסון שוקולד',        price: '₪16', desc: 'Chocolate sealed inside crisp laminated pastry.',                                   descHe: 'שוקולד בתוך מאפה מרובד פריך.', img: 'img/pastries/chocolate_big.webp' },
+        { name: 'Small French Croissant',    nameHe: 'קרואסון צרפתי קטן',    price: '₪7',  desc: 'Fits in one hand.',                                                                 descHe: 'נכנס ביד אחת.',                img: 'img/pastries/croissant_classic_small.webp' },
+        { name: 'Small Chocolate Croissant', nameHe: 'קרואסון שוקולד קטן',   price: '₪8',  desc: 'One baton of chocolate, pocket-sized.',                                             descHe: 'מקל שוקולד אחד, בגודל כיס.',   img: 'img/pastries/chocolate_small.webp' },
+        { name: 'Apple Turnover',            nameHe: 'שסון תפוח עץ',          price: '₪18', desc: 'Caramelised apple in crisp butter pastry.',                                         descHe: 'תפוח מקורמל במאפה חמאתי פריך.', img: 'img/pastries/big_apple.webp' },
+        { name: 'Cinnamon Roll',             nameHe: 'רול קינמון',            price: '₪16', desc: 'Rolled tight, glazed with cinnamon sugar.',                                         descHe: 'גלגול הדוק, מצופה סוכר קינמון.', img: 'img/pastries/cinnamon_roll.webp' },
+        { name: 'Vanilla & Raisin Roll',     nameHe: 'רול וניל צימוקים',     price: '₪16', desc: 'Vanilla cream, plump raisins, soft baked dough.',                                   descHe: 'קרם וניל, צימוקים שמנמנים, בצק אפוי רך.', img: 'img/pastries/reisins_vanilla_roll.webp' },
+        { name: 'Phyllo Fingers',            nameHe: 'אצבעות פילו',           price: '₪8',  desc: 'Crisp filo, four fillings: Bulgarian cheese · Mushroom & potato · Kashkaval · Apple, walnut & raisin.', descHe: 'בולגרית-תרד / פיטריות-תפוח אדמה / בולגרית-קשקבל / תפוח עץ-אגוזים-צימוקים.', img: 'img/pastries/filo.webp' },
+        { name: 'Mushroom Quiche',           nameHe: 'קיש פטריות',            price: '₪19', desc: 'Champignon & portobello, white onion, Alfredo sauce, four-cheese mix.',             descHe: 'פטריות שמפיניון ופורטובלו, בצל לבן, רוטב אלפרדו, מיקס ארבע גבינות.', img: 'img/pastries/quiche_mushroom.webp' },
+        { name: 'Antipasti Quiche',          nameHe: 'קיש אנטיפסטי',          price: '₪19', desc: 'Roasted sweet potato, zucchini & bell pepper, rose sauce, four-cheese mix.',       descHe: 'ירקות אפויים (בטטה, זוקיני, גמבה), רוטב רוזה, מיקס ארבע גבינות.', img: 'img/pastries/quiche_antipasti.webp' },
+      ],
+      'filled': [
+        { name: 'Vanilla Cream & Forest Berries',       nameHe: 'קרואסון קרם וניל-פירות יער',        price: '₪25', desc: 'Vanilla pastry cream, fresh mixed berries.',          descHe: 'קרם פטיסייר וניל, פירות יער טריים.',       img: 'img/Filled Croissants/croissant_wildberies_vanilla.webp' },
+        { name: 'Lemon Cream & Raspberry',              nameHe: 'קרואסון קרם לימון-פטל אדום',        price: '₪25', desc: 'Tangy lemon curd, fresh red raspberries.',            descHe: 'קרד לימון חמצמץ, פטל אדום טרי.',           img: 'img/Filled Croissants/croissant_raspberry_lemon.jpg' },
+        { name: 'Halva & Pistachio Cream',              nameHe: 'קרואסון קרם חלבה-קרם פיסטוק',       price: '₪25', desc: 'Sesame halva cream meets pistachio paste.',           descHe: 'קרם חלבה שומשום פוגש מחית פיסטוק.',        img: 'img/Filled Croissants/croissant_halva_pistachio.webp' },
+        { name: 'Bagel Cream & Salted Caramel',         nameHe: 'קרואסון קרם בייגל-קרמל מלוח',       price: '₪25', desc: 'Toasted sesame cream, ribbons of salted caramel.',    descHe: 'קרם שומשום קלוי, סרטים של קרמל מלוח.',     img: 'img/Filled Croissants/croissant_caramel_baigle.webp' },
+        { name: 'Nutella, Banana & Almonds',            nameHe: 'קרואסון נוטלה-בננה-שקדים',          price: '₪25', desc: 'Chocolate hazelnut spread, fresh banana, toasted almonds.', descHe: 'ממרח שוקולד אגוזי לוז, בננה טרייה, שקדים קלויים.', img: 'img/Filled Croissants/croissant_nutella_banana.webp' },
+        { name: 'Pistachio Cream & Pistachio Nuts',     nameHe: 'קרואסון קרם פיסטוק-אגוזי פיסטוק',  price: '₪25', desc: 'Double pistachio: cream and crushed nuts.',           descHe: 'פיסטוק כפול: קרם ואגוזים כתושים.',         img: 'img/Filled Croissants/croissant_pistachio.webp' },
+        { name: 'Apple & Lemon Cream',                  nameHe: 'קרואסון תפוח עץ-קרם לימון',         price: '₪25', desc: 'Caramelised apple, bright lemon pastry cream.',       descHe: 'תפוח מקורמל, קרם פטיסייר לימון בהיר.',     img: 'img/Filled Croissants/croissant_lemon_apples.webp' },
+      ],
+      'tartlets': [
+        { name: 'Mascarpone & Mango',                        nameHe: 'טארטלט מסקרפונה - מנגו',                   price: '₪18', desc: 'Mascarpone cream, fresh mango, buttery shortcrust.',             descHe: 'קרם מסקרפונה, מנגו טרי, בסיס פריך וחמאתי.',   img: 'img/tarts/tart_mango.webp' },
+        { name: 'Mascarpone & Strawberry',                   nameHe: 'טארטלט מסקרפונה - תות שדה',               price: '₪18', desc: 'Mascarpone cream, ripe strawberries, buttery shortcrust.',       descHe: 'קרם מסקרפונה, תות שדה בשל, בסיס פריך וחמאתי.', img: 'img/tarts/tart_strawberry.webp' },
+        { name: 'Mascarpone, Vanilla & Forest Berries',      nameHe: 'טארטלט מסקרפונה - קרם וניל - פירות יער', price: '₪18', desc: 'Mascarpone cream, vanilla, wild berries.',                        descHe: 'קרם מסקרפונה, וניל, פירות יער.',               img: 'img/tarts/tart_wildberries.webp' },
+        { name: 'Mascarpone, Pistachio & Raspberry',         nameHe: 'טארטלט מסקרפונה - קרם פיסטוק-פטל',      price: '₪18', desc: 'Mascarpone cream, pistachio paste, fresh raspberries.',           descHe: 'קרם מסקרפונה, מחית פיסטוק, פטל טרי.',         img: 'img/tarts/tart_raspberry.webp' },
+        { name: 'Lemon Meringue & Almond Frangipane',        nameHe: "לימון מרנג ופרנג'יפן שקדים",             price: '₪18', desc: 'Almond frangipane base, tangy lemon cream, torched meringue.',    descHe: "בסיס פרנג'יפן שקדים, קרם לימון חמצמץ, מרנג שרוף.", img: 'img/Main page/menu_placeholder.jpg' },
+        { name: 'Brownie, Milk Chocolate & Hazelnut Caramel',nameHe: 'בראוניז, שוקולד חלב וקרמל אגוזי לוז',    price: '₪18', desc: 'Fudgy brownie, milk chocolate cream, salted caramel, toasted hazelnuts.', descHe: 'בראוניז עשיר, קרם שוקולד חלב, קרמל מלוח, אגוזי לוז קלויים.', img: 'img/Main page/menu_placeholder.jpg' },
+      ],
+      'cakes': [
+        { name: 'Baked Cheesecake',      nameHe: 'עוגת גבינה אפויה',    price: '₪39', desc: 'Rich and dense, exactly as a cheesecake should be.',                    descHe: 'יציבה ועשירה בדיוק כמו שעוגת גבינה צריכה להיות.', img: 'img/Cakes/Cheesecake.jpg' },
+        { name: 'Tiramisu',              nameHe: 'טירמיסו',              price: '₪35', desc: 'Espresso-soaked layers, mascarpone cream, dusted with cocoa.',           descHe: 'שכבות ספוגות אספרסו, קרם מסקרפונה, מפוזר עם קקאו.', img: 'img/Main page/menu_placeholder.jpg' },
+        { name: 'Crème Brûlée',          nameHe: 'קרם ברולה',            price: '₪31', desc: 'Classic vanilla custard, caramelised sugar crust.',                      descHe: 'קסטרד וניל קלאסי, קרום סוכר מקורמל.',             img: 'img/Cakes/creme_brule.webp' },
+        { name: 'House Cake (rotating)', nameHe: 'עוגת הבית (משתנה)',   price: '₪45', desc: "Changes daily. Ask at the counter what's in today.",                     descHe: 'משתנה מדי יום. שאלו בדלפק מה יש היום.',            img: 'img/Main page/menu_placeholder.jpg' },
+      ],
+      'ice-cream': [
+        { name: 'The Classics',     nameHe: 'הקלאסית',     price: '₪39', desc: 'Belgian chocolate, classic vanilla, cookies & cream.',    descHe: 'שוקולד בלגי, וניל מקלות, וניל עוגיות.', img: 'img/ice_cream/classic.webp' },
+        { name: 'The Tropical',     nameHe: 'הטרופית',     price: '₪39', desc: 'Mango sorbet, passionfruit sorbet, coconut sorbet.',      descHe: 'סורבה מנגו, סורבה פסיפלורה, סורבה קוקוס.', img: 'img/ice_cream/tropical.webp' },
+        { name: 'The Black Forest', nameHe: 'היער השחור',  price: '₪39', desc: 'Forest berries, wild strawberry, lemon sorbet.',          descHe: 'פירות יער, תות בר, סורבה לימון.',        img: 'img/ice_cream/black_forest.webp' },
+      ],
+      'alcohol': [
+        { name: 'Chardonnay — "La Côte", Domaine R, France',                   nameHe: 'שרדונה — "לה קוטי", דומיין רו, צרפת',            price: '₪41 / ₪145', desc: 'Dry, elegant. Hints of ripe fruit and a delicate buttery note.',        descHe: 'יבש, אלגנטי, עם רמזים של פרי בשל.',            img: '' },
+        { name: 'Gewürztraminer — "Villa Wolf", Pfalz, Germany',               nameHe: 'גורצטרמינר — "ולה וולף", פפאלץ, גרמניה',         price: '₪39 / ₪135', desc: 'Semi-sweet, aromatic. Rich in tropical fruit and spice.',               descHe: 'חצי מתוק, ארומטי, שופע טעמים של פירות סרופים.', img: '' },
+        { name: 'Red Blend, Perrin — "La Vieille Ferme", Rhône Valley, France',nameHe: 'בלנד אדום פריין — "לה ויה פארם", עמק הרון, צרפת', price: '₪39 / ₪135', desc: 'Dry. Blackcurrant, cherry, warm spice.',                                 descHe: 'יבש, פטל שחור, דובדבנים ותבלינים חמים.',        img: '' },
+        { name: 'Rosé, Perrin — "La Vieille Ferme", Rhône Valley, France',    nameHe: 'רוזה פריין — "לה ויה פארם", עמק הרון, צרפת',    price: '₪72',         desc: 'Dry. Cinsault–Grenache–Syrah blend. Light, pink, refreshing. 375 ml.', descHe: 'יבש, בלנד סנסו-גרנאש-סירה, קליל ורדרד. 375 מל.', img: '' },
+        { name: 'Valpolicella — "Tommasi", Veneto, Italy',                     nameHe: "ואלפוליצ'לה — \"טומאסי\", ונטו, איטליה",         price: '₪77',         desc: 'Light, fruity red blend. 375 ml.',                                      descHe: 'בלנד אדום קליל, פירותי. 375 מל.',               img: '' },
+        { name: 'Goldstar',           nameHe: 'גולדסטאר',          price: '₪19',       desc: "Israel's leading dark lager. 330 ml.",         descHe: 'לאגר כהה המוביל בישראל. 330 מל.',  img: '' },
+        { name: 'The Red Knight – Irish Ale', nameHe: 'רד קנייט – אייל אירי', price: '₪24', desc: 'Reddish, gentle sweetness of roasted malt.',   descHe: 'אדמונית בעלת טעם מתקתק של לחת קלוי.', img: '' },
+        { name: 'The Hope Guru – IPA',nameHe: 'הופ גורו – IPA',     price: '₪24',       desc: 'Tropical fruit and citrus aromas, refined bitterness.', descHe: 'ארומה של פירות טרופים והדרים.',    img: '' },
+        { name: 'Whiskey Jameson',    nameHe: "ויסקי ג'ימסון",     price: '₪22 / ₪39', desc: 'Shot / Chaser.',  descHe: "מנה - 39 ₪ | צ'ייסר - 22 ₪.", img: '' },
+        { name: 'Gin Bombay Sapphire',nameHe: "ג'ין בומביי סמפייר", price: '₪33 / ₪39', desc: 'Neat / With tonic water.', descHe: 'תוספת מי טוניק - 6 ₪.', img: '' },
+        { name: 'Arak Elite',         nameHe: 'עראק עלית',          price: '₪15 / ₪28', desc: 'Shot / Chaser.',  descHe: "מנה - 28 ₪ | צ'ייסר - 15 ₪.", img: '' },
+        { name: 'Baileys',            nameHe: 'ביילים',              price: '₪15 / ₪28', desc: 'Shot / Chaser.',  descHe: "מנה - 28 ₪ | צ'ייסר - 15 ₪.", img: '' },
+      ],
+      'friday': [
+        { name: 'Plyushka',    nameHe: 'פליושקה',    price: '₪15', desc: 'Traditional yeast pastry — soft twisted dough layered with butter and sugar. Shaped like a heart.', descHe: 'מאפה שמרים מסורתי. בצק עגניים רך שזור בשכבות של חמאה וסוכר. מעוצב בצורת לב.', img: 'img/friday special/plushka.webp' },
+        { name: 'Vatrushka',   nameHe: 'ואטרושקה',   price: '₪19', desc: "Open-faced yeast pastry with a rich farmer's cheese filling.",                                     descHe: 'מאפה שמרים פתוח במילוי גבינת סבורוג עשיר.',                                    img: 'img/friday special/vatrushka.webp' },
+        { name: 'Sochnik',     nameHe: "סוצ'ניק",    price: '₪18', desc: "Crisp and tender, filled with farmer's cheese. A nostalgic treat.",                               descHe: 'פריך ורימוך במילוי גבינת סבורוג. מעדן נוסטלגי.',                               img: 'img/Main page/menu_placeholder.jpg' },
+        { name: 'Korzinochka', nameHe: "קארינוצ'קה", price: '₪19', desc: 'Crispy dough and fruit.',                                                                          descHe: 'בצק פריך ופירות.',                                                              img: 'img/friday special/korzinochka.webp' },
+        { name: 'Bulochka',    nameHe: "בולוצ'קה",   price: '₪18', desc: 'Soft yeast dough filled with rotating seasonal fruit.',                                            descHe: 'בצק שמרים רך ממולא בפירות משתנים.',                                            img: 'img/Main page/menu_placeholder.jpg' },
+        { name: 'Creambon',    nameHe: 'קרמבון',     price: '₪25', desc: 'A generous yeast roll filled with cream that changes with the mood.',                             descHe: 'שבלול מאפה שמרים במילוי נדיב של קרם (משתנה לפי המצב רוח).',                   img: 'img/friday special/cremobon.webp' },
+        { name: 'Cinnamon',    nameHe: 'סינבון',     price: '₪27', desc: 'Soft yeast roll with butter, brown sugar, and cinnamon, coated in rich cream cheese.',            descHe: 'שבלול שמרים עם חמאה, סוכר חום וקינמון, מצופה בקרם גבינה עשיר.',               img: 'img/friday special/cinnabon.webp' },
+      ],
+    };
+
+    let created = 0, updated = 0, errors = 0;
+    for (const [catId, items] of Object.entries(MENU)) {
+      log(`── ${catId} (${items.length})`);
+      const snap = await getDocs(collection(db, catId));
+      const existingMap = {};
+      snap.forEach(d => { existingMap[d.data().name] = d.id; });
+
+      for (const item of items) {
+        try {
+          const data = { ...item, available: true };
+          if (existingMap[item.name]) {
+            await setDoc(doc(db, catId, existingMap[item.name]), data, { merge: true });
+            log(`  ✓ ${item.name}`); updated++;
+          } else {
+            await addDoc(collection(db, catId), data);
+            log(`  + ${item.name}`); created++;
+          }
+        } catch(e) { log(`  ✗ ${item.name}: ${e.message}`); errors++; }
+      }
+    }
+    log(`\n✅ Done. Created: ${created}, Updated: ${updated}, Errors: ${errors}`);
+    btn.disabled = false;
+    btn.querySelector('.menu-action-label').textContent = 'Import from HTML ✓';
+    loadCategories();
   };
 
   // ── DISPLAY TOGGLES ──

@@ -30,7 +30,7 @@ html:lang(he) {
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; background: #fbf8f2; }
 
 body {
   background: var(--cream);
@@ -287,7 +287,7 @@ a.hero-menu-btn:hover {
 }
 .mobile-menu-close:hover { color: var(--brown-dark); }
 .mobile-menu-close::before {
-  content: '×';
+  content: '';
   font-size: 16px;
   font-weight: 300;
   line-height: 1;
