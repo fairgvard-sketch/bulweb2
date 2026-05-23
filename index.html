@@ -763,14 +763,10 @@
   function openMenu() {
     menu.classList.add('open');
     overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    if (themeColorMeta) themeColorMeta.content = '#fbf8f2';
   }
   function closeMenu() {
     menu.classList.remove('open');
     overlay.classList.remove('open');
-    document.body.style.overflow = '';
-    if (themeColorMeta) themeColorMeta.content = '#fbf8f2';
   }
   toggle.addEventListener('click', openMenu);
   close.addEventListener('click', closeMenu);

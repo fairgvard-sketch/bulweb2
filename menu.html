@@ -1920,12 +1920,10 @@
   function openMenu() {
     menu.classList.add('open');
     overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
   }
   function closeMenu() {
     menu.classList.remove('open');
     overlay.classList.remove('open');
-    document.body.style.overflow = '';
   }
   toggle.addEventListener('click', openMenu);
   close.addEventListener('click', closeMenu);
