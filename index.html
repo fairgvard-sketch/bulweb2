@@ -793,21 +793,6 @@
     });
   });
 
-  let touchStartX = 0;
-  menu.addEventListener('touchstart', e => {
-    touchStartX = e.touches[0].clientX;
-    menu.style.transition = 'none';
-  }, { passive: true });
-  menu.addEventListener('touchmove', e => {
-    const dx = e.touches[0].clientX - touchStartX;
-    if (dx < 0) menu.style.transform = `translateX(${dx}px)`;
-  }, { passive: true });
-  menu.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - touchStartX;
-    menu.style.transition = '';
-    if (dx < -80) closeMenu();
-    else menu.style.transform = '';
-  });
 </script>
 
 <script src="lang.js"></script>
