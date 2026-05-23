@@ -210,19 +210,6 @@ a.hero-menu-btn:hover {
 }
 
 /* ─── MOBILE MENU ────────────────────────── */
-.mobile-menu-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(42,31,24,0.45);
-  z-index: 190;
-  opacity: 0;
-  transition: opacity 0.35s ease;
-}
-.mobile-menu-overlay.open {
-  display: block;
-  opacity: 1;
-}
 .mobile-menu {
   position: fixed;
   top: 0;
@@ -296,7 +283,7 @@ a.hero-menu-btn:hover {
   display: flex;
   flex-direction: column;
   padding-top: 20px;
-  margin-top: auto;
+  margin-top: 32px;
   border-top: 1px solid var(--brown-faint);
   gap: 0;
 }

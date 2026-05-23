@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "extracted_text.txt",
+      "D _ Light Modern.html"
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false
+  }
+}

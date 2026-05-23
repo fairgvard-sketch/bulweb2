@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Frank+Ruhl+Libre:wght@300;400;500&family=IBM+Plex+Sans+Hebrew:wght@300;400;500&family=Inter+Tight&family=Varela+Round:wght@400;500&family=JetBrains+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Rubik:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css?v=5">
   <style>
     /* ─── HERO ─────────────────────────────── */
     .hero {
@@ -550,7 +550,6 @@
 </nav>
 
 <!-- ─── MOBILE MENU ──────────────────────────────────────── -->
-<div class="mobile-menu-overlay" id="menuOverlay"></div>
 <div class="mobile-menu" id="mobileMenu">
   <span class="mobile-menu-close" id="menuClose" data-en="Close ✕" data-he="סגור ✕">Close ✕</span>
   <a href="index.html" data-en='Home' data-he='ראשי'>Home</a>
@@ -757,21 +756,10 @@
 <script>
   const toggle = document.getElementById('navToggle');
   const menu = document.getElementById('mobileMenu');
-  const overlay = document.getElementById('menuOverlay');
   const close = document.getElementById('menuClose');
-  const themeColorMeta = document.querySelector('meta[name="theme-color"]');
-  function openMenu() {
-    menu.classList.add('open');
-    overlay.classList.add('open');
-  }
-  function closeMenu() {
-    menu.classList.remove('open');
-    overlay.classList.remove('open');
-  }
-  toggle.addEventListener('click', openMenu);
-  close.addEventListener('click', closeMenu);
-  overlay.addEventListener('click', closeMenu);
-  menu.querySelectorAll('a').forEach(l => l.addEventListener('click', closeMenu));
+  toggle.addEventListener('click', () => menu.classList.add('open'));
+  close.addEventListener('click', () => menu.classList.remove('open'));
+  menu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => menu.classList.remove('open')));
 
   const langToggle = document.getElementById('mobileLangToggle');
   const langOptions = document.getElementById('mobileLangOptions');

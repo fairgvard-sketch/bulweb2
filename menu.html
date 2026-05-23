@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Inter+Tight:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Rubik:wght@300;400;500&family=Varela+Round&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=5">
   <style>
     /* ─── MENU HEADER ───────────────────────── */
     .menu-hero {
@@ -485,7 +485,6 @@
 </nav>
 
 <!-- ─── MOBILE MENU ──────────────────────────────────────── -->
-<div class="mobile-menu-overlay" id="menuOverlay"></div>
 <div class="mobile-menu" id="mobileMenu">
   <span class="mobile-menu-close" id="menuClose" data-en="Close ✕" data-he="סגור ✕">Close ✕</span>
   <a href="index.html" class="mobile-link" data-en='Home' data-he='ראשי'>Home</a>
@@ -1916,20 +1915,10 @@
 
   const toggle = document.getElementById('navToggle');
   const menu = document.getElementById('mobileMenu');
-  const overlay = document.getElementById('menuOverlay');
   const close = document.getElementById('menuClose');
-  function openMenu() {
-    menu.classList.add('open');
-    overlay.classList.add('open');
-  }
-  function closeMenu() {
-    menu.classList.remove('open');
-    overlay.classList.remove('open');
-  }
-  toggle.addEventListener('click', openMenu);
-  close.addEventListener('click', closeMenu);
-  overlay.addEventListener('click', closeMenu);
-  menu.querySelectorAll('a').forEach(l => l.addEventListener('click', closeMenu));
+  toggle.addEventListener('click', () => menu.classList.add('open'));
+  close.addEventListener('click', () => menu.classList.remove('open'));
+  menu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => menu.classList.remove('open')));
 
   const langToggle = document.getElementById('mobileLangToggle');
   const langOptions = document.getElementById('mobileLangOptions');
