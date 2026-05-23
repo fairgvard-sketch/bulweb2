@@ -231,7 +231,7 @@ a.hero-menu-btn:hover {
   width: 100vw;
   background: var(--cream);
   z-index: 200;
-  padding: 20px 36px 48px;
+  padding: max(20px, env(safe-area-inset-top)) 36px max(48px, env(safe-area-inset-bottom));
   flex-direction: column;
   gap: 0;
   transform: translateX(-100%);
