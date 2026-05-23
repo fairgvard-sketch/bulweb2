@@ -1,0 +1,2184 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Menu — Bulochka</title>
+  <script>
+    (function(){var l=localStorage.getItem('bulochka-lang');if(l==='he'){document.documentElement.dir='rtl';document.documentElement.lang='he';}})();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Inter+Tight:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Rubik:wght@300;400;500&family=Varela+Round&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ─── MENU HEADER ───────────────────────── */
+    .menu-hero {
+      border-bottom: 1px solid var(--brown-faint);
+      padding: 0 24px;
+    }
+    .menu-hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 72px 0 48px;
+    }
+    .menu-hero-inner h1 {
+      font-family: var(--serif);
+      font-size: clamp(36px, 6vw, 96px);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.018em;
+      margin-bottom: 16px;
+      font-optical-sizing: auto;
+    }
+    .menu-hero-inner h1 em { font-style: italic; }
+    .menu-hero-inner .section-sub { margin-bottom: 36px; }
+
+    /* ─── FILTER BAR ────────────────────────── */
+    .filter-bar {
+      position: sticky;
+      top: 60px;
+      z-index: 90;
+      background: rgba(251,248,242,0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--brown-faint);
+      padding: 0 24px;
+    }
+    .filter-bar-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      overflow: hidden;
+    }
+    .filter-bar-label {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+      white-space: nowrap;
+    }
+    .filter-bar-pills {
+      display: flex;
+      gap: 6px;
+      flex: 1;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .filter-bar-pills::-webkit-scrollbar { display: none; }
+    .filter-bar-pills { cursor: grab; user-select: none; -webkit-user-select: none; }
+    .filter-bar-pills:active { cursor: grabbing; }
+    .filter-bar-pills .filter-pill { -webkit-user-drag: none; }
+    .filter-pill {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 5px 13px;
+      border-radius: 100px;
+      border: 1px solid var(--brown-faint);
+      color: var(--brown-mid);
+      white-space: nowrap;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .filter-pill:hover { border-color: rgba(42,31,24,0.3); color: var(--brown-dark); }
+    .filter-pill.active {
+      background: var(--brown-dark);
+      border-color: var(--brown-dark);
+      color: var(--cream);
+    }
+    .filter-bar-total {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+      white-space: nowrap;
+      margin-left: auto;
+    }
+    @media (max-width: 640px) {
+      .filter-bar { padding: 0 16px; }
+      .filter-bar-label { display: none; }
+      .filter-bar-total { display: none; }
+      .filter-bar-pills { gap: 4px; flex-wrap: nowrap; }
+      .filter-pill { padding: 4px 10px; font-size: 9px; flex-shrink: 0; }
+    }
+
+    /* ─── MENU CATEGORY ─────────────────────── */
+    .menu-category {
+      border-top: 1px solid var(--brown-faint);
+      padding: 0 24px;
+    }
+    .menu-category-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 0;
+    }
+    .menu-category-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 44px;
+    }
+    .menu-category-title {
+      font-family: var(--serif);
+      font-size: clamp(28px, 4vw, 56px);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.016em;
+      font-optical-sizing: auto;
+    }
+    .menu-category-title em { font-style: italic; }
+    .menu-category-meta { text-align: right; }
+    .menu-category-count {
+      font-family: var(--serif);
+      font-size: 40px;
+      font-weight: 300;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .menu-category-desc {
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--brown-light);
+      max-width: 280px;
+      margin-left: auto;
+      line-height: 1.5;
+    }
+    .menu-divider {
+      border: none;
+      border-top: 1px solid var(--brown-faint);
+      margin: 0 0 24px;
+    }
+
+    /* ─── MENU ITEMS GRID ───────────────────── */
+    .menu-items {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .menu-item {
+      display: flex;
+      flex-direction: row;
+      gap: 0;
+      border: 1px solid rgba(42,31,24,0.18);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      transition: box-shadow 0.2s;
+    }
+    .menu-item:hover { box-shadow: 0 4px 20px rgba(42,31,24,0.08); }
+
+    /* photo */
+    .menu-item-photo {
+      width: 140px;
+      min-width: 140px;
+      aspect-ratio: 1;
+      background-color: var(--cream-mid);
+      background-image:
+        repeating-linear-gradient(
+          -45deg,
+          transparent,
+          transparent 6px,
+          rgba(42,31,24,0.07) 6px,
+          rgba(42,31,24,0.07) 7px
+        );
+      flex-shrink: 0;
+      border-radius: 0;
+      overflow: hidden;
+    }
+    .menu-item-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* text area */
+    .menu-item-body {
+      display: flex;
+      flex-direction: column;
+      padding: 20px 20px 16px;
+      flex: 1;
+      min-width: 0;
+    }
+    .menu-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .menu-item-name {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 24px;
+      font-weight: 400;
+      font-style: normal;
+      line-height: 26.4px;
+      letter-spacing: -0.24px;
+      color: rgb(42, 31, 24);
+    }
+    .menu-item-price {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--brown-mid);
+      white-space: nowrap;
+    }
+    .menu-item-desc {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-style: italic;
+      color: var(--brown-light);
+      line-height: 1.5;
+      flex: 1;
+    }
+    .menu-item-veg { font-style: normal; color: var(--sage); }
+    .menu-item-action {
+      display: inline-block;
+      margin-top: 14px;
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 1px;
+      transition: color 0.2s;
+      cursor: pointer;
+      align-self: flex-start;
+    }
+    .menu-item-action:hover { color: var(--brown-dark); }
+
+    /* ─── FRIDAY PILL ──────────────────────────────────────── */
+    .filter-pill-friday { border-color: var(--sage); color: var(--sage); }
+    .filter-pill-friday:hover { border-color: var(--sage); color: var(--sage); background: rgba(107,142,90,0.08); }
+    .filter-pill-friday.active { background: var(--sage); border-color: var(--sage); color: var(--cream); }
+
+    /* ─── MENU SUBHEAD ─────────────────────── */
+    .menu-subhead {
+      grid-column: 1 / -1;
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+      padding-top: 28px;
+      padding-bottom: 8px;
+      border-top: 1px solid var(--brown-faint);
+      margin-top: 8px;
+    }
+    .menu-subhead:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+
+    /* ─── MENU LIST (no-photo layout) ──────────────────────── */
+    .menu-list { display: flex; flex-direction: column; }
+    .menu-list-item {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--brown-faint);
+    }
+    .menu-list-item:last-child { border-bottom: none; }
+    .menu-list-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 6px;
+    }
+    .menu-list-name {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      font-optical-sizing: auto;
+    }
+    .menu-list-price {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--brown-mid);
+      white-space: nowrap;
+    }
+    .menu-list-desc {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-style: italic;
+      color: var(--brown-light);
+      line-height: 1.5;
+    }
+    .menu-list-subhead {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+      padding: 24px 0 8px;
+      border-top: 1px solid var(--brown-faint);
+      margin-top: 8px;
+    }
+
+    /* ─── RESPONSIVE ────────────────────────── */
+    @media (max-width: 900px) {
+      .menu-category-header { grid-template-columns: 1fr; gap: 16px; }
+      .menu-category-meta { text-align: left; }
+      .menu-category-desc { margin-left: 0; }
+      .menu-items { grid-template-columns: 1fr; }
+      .menu-item-photo { width: 120px; min-width: 120px; }
+    }
+    @media (max-width: 640px) {
+      .menu-hero-inner { padding: 48px 0 36px; }
+      .menu-category-inner { padding: 48px 0; }
+      .menu-jump { gap: 6px; }
+      .menu-jump-item { padding: 8px 14px; }
+      .menu-item-photo { width: 100px; min-width: 100px; }
+      .menu-item-body { padding: 14px 14px 12px; }
+      .menu-item-name { font-size: 17px; }
+    }
+
+    /* ─── ADD-ON MODAL ──────────────────────────────────────── */
+    .addon-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(42,31,24,0.45);
+      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .addon-overlay.open { opacity: 1; pointer-events: all; }
+    .addon-modal {
+      background: var(--cream);
+      border-radius: 16px;
+      max-width: 460px; width: 100%;
+      max-height: 88vh; overflow-y: auto;
+      display: flex; flex-direction: column;
+      transform: translateY(16px) scale(0.98);
+      transition: transform 0.22s;
+    }
+    .addon-overlay.open .addon-modal { transform: translateY(0) scale(1); }
+    .addon-top {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 20px 20px 0;
+    }
+    .addon-img {
+      width: 72px; height: 72px; border-radius: 8px;
+      overflow: hidden; flex-shrink: 0;
+      background: var(--cream-mid);
+    }
+    .addon-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .addon-info { flex: 1; min-width: 0; padding-top: 2px; }
+    .addon-item-name {
+      font-family: var(--serif); font-size: 20px; font-weight: 300;
+      letter-spacing: -0.01em; line-height: 1.2;
+      margin-bottom: 4px; font-optical-sizing: auto;
+    }
+    .addon-item-price { font-family: var(--serif); font-size: 15px; color: var(--brown-mid); }
+    .addon-x {
+      background: none; border: none; cursor: pointer; padding: 4px;
+      font-size: 14px; color: var(--brown-light); line-height: 1;
+      transition: color 0.15s; flex-shrink: 0;
+    }
+    .addon-x:hover { color: var(--brown-dark); }
+    .addon-extras { padding: 0 20px; }
+    .addon-extras-label {
+      display: block;
+      font-family: var(--sans); font-size: 10px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--brown-light);
+      border-top: 1px solid var(--brown-faint);
+      padding-top: 16px; margin-top: 20px; margin-bottom: 4px;
+    }
+    .addon-option {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--brown-faint);
+      cursor: pointer;
+    }
+    .addon-option:last-child { border-bottom: none; }
+    .addon-option input[type=checkbox] {
+      width: 18px; height: 18px; flex-shrink: 0;
+      appearance: none; -webkit-appearance: none;
+      border: 1.5px solid rgba(42,31,24,0.25); border-radius: 4px;
+      cursor: pointer; position: relative;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .addon-option input[type=checkbox]:checked { background: var(--sage); border-color: var(--sage); }
+    .addon-option input[type=checkbox]:checked::after {
+      content: '';
+      position: absolute; top: 2px; left: 5px;
+      width: 5px; height: 8px;
+      border: 2px solid #fff; border-top: none; border-left: none;
+      transform: rotate(45deg);
+    }
+    .addon-option-name { font-family: var(--sans); font-size: 13px; flex: 1; color: var(--brown-dark); }
+    .addon-option-price { font-family: var(--serif); font-size: 14px; color: var(--brown-mid); white-space: nowrap; }
+    .addon-foot {
+      padding: 14px 20px 20px;
+      border-top: 1px solid var(--brown-faint); margin-top: 16px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      position: sticky; bottom: 0; background: var(--cream);
+    }
+    .addon-total-label {
+      display: block;
+      font-family: var(--sans); font-size: 9px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--brown-light);
+    }
+    .addon-total-num {
+      font-family: var(--serif); font-size: 24px; font-weight: 300;
+      color: var(--brown-dark); line-height: 1.1;
+    }
+    .addon-done-btn {
+      font-family: var(--sans); font-size: 11px; letter-spacing: 0.08em;
+      text-transform: uppercase; white-space: nowrap;
+      background: var(--brown-dark); color: var(--cream);
+      border: none; border-radius: 100px; padding: 11px 26px;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .addon-done-btn:hover { background: var(--brown-mid); }
+    @media (max-width: 640px) {
+      .addon-overlay { padding: 0; align-items: flex-end; }
+      .addon-modal { border-radius: 16px 16px 0 0; max-height: 82vh; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ──────────────────────────────────────────────── -->
+<nav class="nav">
+  <ul class="nav-links">
+    <li><a href="index.html" data-en='Home' data-he='ראשי'>Home</a></li>
+    <li><a href="menu.html" class="active" data-en='Menu' data-he='תפריט'>Menu</a></li>
+    <li><a href="index.html#story" data-en='Our story' data-he='הסיפור שלנו'>Our story</a></li>
+    <li><a href="careers.html" data-en='Work with us' data-he='דרושים'>Work with us</a></li>
+    <li><a href="events.html" data-en='Events' data-he='אירועים'>Events</a></li>
+  </ul>
+  <a href="index.html" class="nav-logo">Bulochka</a>
+  <div class="nav-right">
+    <div class="nav-social">
+      <a href="https://wa.me/972529662724" target="_blank" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      <a href="https://www.instagram.com/bulochka.pt" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+      <a href="https://www.facebook.com/bulochka.bulochka.2025" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+    </div>
+    <span class="nav-hours" data-en='Open until 20:00' data-he='פתוח עד 20:00' dir="ltr">Open until 20:00</span>
+    <div class="lang-switch">
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="he">עב</button>
+    </div>
+    <a href="index.html#visit" class="btn-reserve" data-en='Reserve' data-he='הזמנה'>Reserve</a>
+  </div>
+  <div class="nav-toggle" id="navToggle" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ─── MOBILE MENU ──────────────────────────────────────── -->
+<div class="mobile-menu-overlay" id="menuOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-menu-close" id="menuClose" data-en="Close" data-he="סגור">Close</span>
+  <a href="index.html" class="mobile-link" data-en='Home' data-he='ראשי'>Home</a>
+  <a href="menu.html" class="mobile-link" data-en='Menu' data-he='תפריט'>Menu</a>
+  <a href="index.html#story" class="mobile-link" data-en='Our story' data-he='הסיפור שלנו'>Our story</a>
+  <a href="careers.html" class="mobile-link" data-en='Work with us' data-he='דרושים'>Work with us</a>
+  <a href="events.html" class="mobile-link" data-en='Events' data-he='אירועים'>Events</a>
+  <a href="index.html#visit" class="mobile-menu-reserve" data-en='Reserve a table →' data-he='הזמנת שולחן ←'>Reserve a table →</a>
+  <div class="mobile-menu-secondary">
+    <a href="https://www.instagram.com/bulochka.pt" target="_blank" class="mobile-menu-secondary-link">Instagram</a>
+    <a href="https://www.facebook.com/bulochka.bulochka.2025" target="_blank" class="mobile-menu-secondary-link">Facebook</a>
+    <a href="https://www.google.com/search?q=Bulochka+Petah+Tikva" target="_blank" class="mobile-menu-secondary-link" data-en='Google Reviews' data-he='ביקורות גוגל'>Google Reviews</a>
+    <div class="mobile-menu-lang" id="mobileLangToggle">
+      <span data-en='Language' data-he='שפה'>Language</span>
+      <span class="mobile-menu-lang-arrow">›</span>
+    </div>
+    <div class="mobile-menu-lang-options" id="mobileLangOptions">
+      <button class="mobile-lang-btn" data-lang="en">English</button>
+      <button class="mobile-lang-btn" data-lang="he">עברית</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── MENU HERO ────────────────────────────────────────── -->
+<div class="menu-hero">
+  <div class="menu-hero-inner">
+    <p class="section-eyebrow" data-he="התפריט">The menu</p>
+    <h1 data-he="כל מה שאפינו ומזגנו<br><span style='color: var(--sage)'>הבוקר.</span>">Everything we baked<br>&amp; poured<br><span style="color: var(--sage)">this morning.</span></h1>
+  </div>
+</div>
+
+<!-- ─── FILTER BAR ──────────────────────────────────────── -->
+<div class="filter-bar" id="filterBar">
+  <div class="filter-bar-inner">
+    <span class="filter-bar-label" data-he="עבור ל ↓">Jump to ↓</span>
+    <div class="filter-bar-pills">
+      <a href="#hot-drinks" class="filter-pill active" data-target="hot-drinks" data-he="משקאות חמים <span>14</span>">Hot Drinks <span>14</span></a>
+      <a href="#cold-drinks" class="filter-pill" data-target="cold-drinks" data-he="משקאות קרים <span>22</span>">Cold Drinks <span>22</span></a>
+      <a href="#sandwiches" class="filter-pill" data-target="sandwiches" data-he="כריכים וסלטים <span>16</span>">Sandwiches &amp; Salads <span>16</span></a>
+      <a href="#pastries" class="filter-pill" data-target="pastries" data-he="מאפים <span>10</span>">Pastries <span>10</span></a>
+      <a href="#filled"   class="filter-pill" data-target="filled" data-he="קרואסונים ממולאים <span>07</span>">Filled croissants <span>07</span></a>
+      <a href="#tartlets" class="filter-pill" data-target="tartlets" data-he="טארטלטים <span>06</span>">Tartlets <span>06</span></a>
+      <a href="#cakes"    class="filter-pill" data-target="cakes" data-he="עוגות וקינוחים <span>04</span>">Cakes &amp; Desserts <span>04</span></a>
+      <a href="#ice-cream" class="filter-pill" data-target="ice-cream" data-he="גלידה <span>03</span>">Ice Cream <span>03</span></a>
+      <a href="#alcohol"   class="filter-pill" data-target="alcohol" data-he="אלכוהול <span>12</span>">Alcohol <span>12</span></a>
+      <a href="#friday" class="filter-pill filter-pill-friday" data-target="friday" data-he="מיוחד שישי <span>07</span>">Friday Special <span>07</span></a>
+    </div>
+    <span class="filter-bar-total" data-he="98 פריטים">98 items total</span>
+  </div>
+</div>
+
+<!-- ─── HOT DRINKS ────────────────────────────────────────── -->
+<div class="menu-category" id="hot-drinks">
+  <div class="menu-category-inner">
+    <div class="menu-category-header">
+      <h2 class="menu-category-title" data-he="משקאות <em>חמים</em>">Hot <em>drinks</em></h2>
+      <div class="menu-category-meta">
+        <div class="menu-category-count">14</div>
+        <p class="menu-category-desc" data-he="קפה קלוי בכמויות קטנות, בתוספת תה ומשקאות חמים. חלב מלא, שיבולת שועל או שקד — ללא תוספת.">Coffee roasted small-batch nearby, plus teas and warm drinks. Whole milk, oat, or almond — no surcharge.</p>
+      </div>
+    </div>
+    <hr class="menu-divider">
+    <div class="menu-items">
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/hot drinks/espresso_short.webp" alt="Espresso"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="אספרסו">Espresso</span>
+            <span class="menu-item-price">₪10 / ₪13</span>
+          </div>
+          <span class="menu-item-desc" data-he="קצר/ארוך. יחיד/כפול.">Short or long. Single / Double.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/hot drinks/maciatto_short.webp" alt="Macchiato"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="מקיאטו">Macchiato</span>
+            <span class="menu-item-price">₪11 / ₪14</span>
+          </div>
+          <span class="menu-item-desc" data-he="אספרסו עם נגיעה או באהבה של קרמת חלב. קצר/ארוך. יחיד/כפול.">Espresso with a touch of foamed milk. Short or long. Single / Double.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/hot drinks/americano_small.webp" alt="Americano"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="אמריקנו">Americano</span>
+            <span class="menu-item-price">₪12 / ₪14</span>
+          </div>
+          <span class="menu-item-desc" data-he="קטן/גדול. על בסיס סויה/שיבולת - ₪2. תוספות סירופ - קרמל/אגוזי לוז/וניל/אייריש קרים - ₪5. תוספת ביילים - ₪10.">Long and easy. Small / Large.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/hot drinks/capuchino_small.webp" alt="Cappuccino"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קפוצ'ינו">Cappuccino</span>
+            <span class="menu-item-price">₪14 / ₪16</span>
+          </div>
+          <span class="menu-item-desc" data-he="הפוך בישראלי. קטן/גדול. על בסיס סויה/שיבולת - ₪2. תוספות סירופ - קרמל/אגוזי לוז/וניל/אייריש קרים - ₪5. תוספת ביילים - ₪10.">Thick microfoam. Small / Large. Milk base +₪2, syrups +₪5.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/hot drinks/flat_white.webp" alt="Flat White"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="פלאט וויס">Flat White</span>
+            <span class="menu-item-price">₪14</span>
+          </div>
+          <span class="menu-item-desc" data-he="קפוצ'ינו חזק: שליש אספרסו, שליש חלב, שליש קרמת חלב. על בסיס סויה/שיבולת - ₪2. תוספות סירופ - קרמל/אגוזי לוז/וניל/אייריש קרים - ₪5.">Silky, low foam, two ristretto shots.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/hot drinks/latte_hot.webp" alt="Latte"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="לאטה">Latte</span>
+            <span class="menu-item-price">₪16</span>
+          </div>
+          <span class="menu-item-desc" data-he="כוס גדולה עם חלב מוקצף היטב ואספרסו מעל. על בסיס סויה/שיבולת - ₪2. תוספות סירופ - קרמל/אגוזי לוז/וניל/אייריש קרים - ₪5.">Honey, vanilla, lavender, hazelnut.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/hot drinks/raf.webp" alt="Raf"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="ראף">Raf</span>
+            <span class="menu-item-price">₪22</span>
+          </div>
+          <span class="menu-item-desc" data-he="משקה חם על בסיס שמנת, וניל ואספרסו.">Warm cream, vanilla and espresso, whipped together.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/hot drinks/tea_hot.webp" alt="Hot Tea"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="תה חם">Hot Tea</span>
+            <span class="menu-item-price">₪13</span>
+          </div>
+          <span class="menu-item-desc" data-he="ארל גריי לבנדר ברגמוט / ג'ינג'ר אפרסק / ירוק יסמין / לימונית לואיזה / תפוח קינמון / ירוק נענע מרוקאית / פירות יער / קמומיל.">Ginger, peppermint, green cinnamon, apple verbena, chamomile or forest fruits.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/hot drinks/schoko_hot.webp" alt="Hot Cocoa"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="שוקו חם עם מרשמלו">Hot Cocoa</span>
+            <span class="menu-item-price">₪15</span>
+          </div>
+          <span class="menu-item-desc" data-he="על בסיס סויה/שיבולת - ₪2. תוספות סירופ - קרמל/אגוזי לוז/וניל/אייריש קרים - ₪5. תוספת ביילים - ₪10.">Milk-based, topped with marshmallow. Syrups: caramel, hazelnut, vanilla, Irish cream +₪5. Baileys +₪10.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/hot drinks/black_coffee.webp" alt="Black Coffee"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קפה שחור">Black Coffee</span>
+            <span class="menu-item-price">₪11</span>
+          </div>
+          <span class="menu-item-desc" data-he="הסטנדרט הישראלי. שחור, מבושל, בלי עניינים.">The Israeli café standard. Black, brewed, no fuss.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/hot drinks/afogato.webp" alt="Affogato"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="אפוגטו">Affogato</span>
+            <span class="menu-item-price">₪23</span>
+          </div>
+          <span class="menu-item-desc" data-he="כדור גלידת וניל ואספרסו כפול ארוך.">Vanilla gelato, double long espresso poured over. Order it fast.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/hot drinks/chocolata.webp" alt="Dark Hot Chocolate"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="שוקולטה חמה">Hot Chocolate</span>
+            <span class="menu-item-price">₪22</span>
+          </div>
+          <span class="menu-item-desc" data-he="משקה שוקולדי סמיך.">Dense, thick, properly chocolate.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/hot drinks/shlav.webp" alt="Sahlab"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="סחלב חם">Sahlab</span>
+            <span class="menu-item-price">₪24</span>
+          </div>
+          <span class="menu-item-desc" data-he="עם אגוזים, קוקוס, מי וורדים וקינמון.">Warm orchid-root drink topped with nuts, coconut, crumble and cinnamon.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/hot drinks/matcha_latte_hot.webp" alt="Matcha Latte"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="מאצ'ה לאטה">Matcha Latte</span>
+            <span class="menu-item-price">₪22</span>
+          </div>
+          <span class="menu-item-desc" data-he="משקה על בסיס תה יפני אורגני. על בסיס סויה/שיבולת - ₪2. תוספות סירופ - קרמל/אגוזי לוז/וניל/אייריש קרים - ₪5.">Organic Japanese green tea, milk-based. Syrups: caramel, hazelnut, vanilla, Irish cream +₪5.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── COLD DRINKS ──────────────────────────────────────── -->
+<div class="menu-category" id="cold-drinks">
+  <div class="menu-category-inner">
+    <div class="menu-category-header">
+      <h2 class="menu-category-title" data-he="משקאות <em>קרים</em>">Cold <em>drinks</em></h2>
+      <div class="menu-category-meta">
+        <div class="menu-category-count">22</div>
+        <p class="menu-category-desc" data-he="עם קרח, מנוער או מוקצף. שיבולת שועל וסויה בתוספת בחלק מהמשקאות.">Iced, shaken, or blended. Oat and soy at extra charge on selected drinks.</p>
+      </div>
+    </div>
+    <hr class="menu-divider">
+    <div class="menu-items">
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/cold_coffee.webp" alt="Iced Coffee"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קפה קר">Iced Coffee</span>
+            <span class="menu-item-price">₪17</span>
+          </div>
+          <span class="menu-item-desc" data-he="על בסיס סויה/שיבולת - ₪2. תוספות סירופ - קרמל/אגוזי לוז/וניל/ אייריש קרים - ₪5. תוספת ביילים - ₪10.">Milk-based. Oat or soy +₪2. Syrups: caramel, hazelnut, vanilla, Irish cream +₪5. Baileys +₪10.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/cold_tea.webp" alt="House Iced Tea"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="תה קר ביתי">House Iced Tea</span>
+            <span class="menu-item-price">₪17</span>
+          </div>
+          <span class="menu-item-desc" data-he="תמצית תה שחור, אפרסק, לימון, נענע.">Black tea extract, peach, lemon, mint.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/cold_cocoa.webp" alt="Iced Chocolate"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="שוקו קר">Iced Chocolate</span>
+            <span class="menu-item-price">₪17</span>
+          </div>
+          <span class="menu-item-desc" data-he="על בסיס סויה/ שיבולת - ₪2.">Milk-based. Oat or soy +₪2.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/fruit_shake.webp" alt="Fruitshake"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="פרישייק">Fruitshake</span>
+            <span class="menu-item-price">₪24</span>
+          </div>
+          <span class="menu-item-desc" data-he="תות, בננה, מנגו, תמר, אפרסק, אנגס, פירות יער. על בסיס סויה/ שיבולת/ מיץ תפוזים - ₪3.">Strawberry, banana, date, mango, melon, lychee, peach, soursop or forest berries. Oat, soy or orange juice base +₪3.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/Bumblebee.webp" alt="Bumble Bee"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="באמבל בי">Bumble Bee</span>
+            <span class="menu-item-price">₪17</span>
+          </div>
+          <span class="menu-item-desc" data-he="מיץ תפוזים על קרח ואספרסו!">Fresh orange juice over ice, espresso floated on top.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/black_lara.webp" alt="Black Lara"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="בלאק לארה">Black Lara</span>
+            <span class="menu-item-price">₪17</span>
+          </div>
+          <span class="menu-item-desc" data-he="מי טוניק על קרח ואספרסו.">Tonic water over ice, espresso floated on top.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/cold_matcha.webp" alt="Iced Matcha"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="מאצ'ה קרה">Iced Matcha</span>
+            <span class="menu-item-price">₪24</span>
+          </div>
+          <span class="menu-item-desc" data-he="משקה על בסיס תה יפני אורגני. על בסיס סויה/שיבולת - ₪2. תוספות סירופ - קרמל/אגוזי לוז/ וניל/ אייריש קרים - ₪5.">Organic Japanese green tea, milk-based. Oat or soy +₪2. Syrups: caramel, hazelnut, vanilla, Irish cream +₪5.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-subhead" data-he="מיצים">Juices</div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/coconut_water.webp" alt="Flavoured Coconut Water"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="מי קוקוס בטעמים">Flavoured Coconut Water</span>
+            <span class="menu-item-price">₪17</span>
+          </div>
+          <span class="menu-item-desc" data-he="מיוצר מאגוזי קוקוס טריים, ללא חומר משמר, ללא צבעי מאכל. מנגו / גויאבה ורודה / ליצ'י.">Made from fresh coconuts, no preservatives, no food colouring. Mango / Pink guava / Lychee.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/real_juice.webp" alt="Real Juice"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="מיץ ריאל">Real Juice</span>
+            <span class="menu-item-price">₪15</span>
+          </div>
+          <span class="menu-item-desc" data-he="ללא חומר משמר, ללא צבע מאכל. תפוזים / ג'ינג'ר-תפוח עץ.">No preservatives, no food colouring. Orange / Ginger-Apple.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/apple_juice.webp" alt="Organic Apple Juice"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="מיץ תפוח עץ אורגני">Organic Apple Juice</span>
+            <span class="menu-item-price">₪17</span>
+          </div>
+          <span class="menu-item-desc" data-he="ללא תוספת סוכר, ללא חומרים משמרים, ללא צבעי מאכל, ללא תוספת מים, אינו עשוי מרכז. COLD PRESSED.">No added sugar, no preservatives, no food colouring, not from concentrate. Cold pressed.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/pomegranate_juice.webp" alt="Organic Pomegranate Juice"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="מיץ רימון אורגני">Organic Pomegranate Juice</span>
+            <span class="menu-item-price">₪17</span>
+          </div>
+          <span class="menu-item-desc" data-he="ללא תוספת סוכר, ללא חומרים משמרים, ללא צבעי מאכל, ללא תוספת מים, אינו עשוי מרכז. COLD PRESSED.">No added sugar, no preservatives, no food colouring, not from concentrate. Cold pressed.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/apricot_juice.webp" alt="Organic Apricot Juice"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="מיץ משמש אורגני">Organic Apricot Juice</span>
+            <span class="menu-item-price">₪17</span>
+          </div>
+          <span class="menu-item-desc" data-he="ללא תוספת סוכר, ללא חומרים משמרים, ללא צבעי מאכל, ללא תוספת מים, אינו עשוי מרכז. COLD PRESSED.">No added sugar, no preservatives, no food colouring, not from concentrate. Cold pressed.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/pear_juice.webp" alt="Organic Pear Juice"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="מיץ אגס אורגני">Organic Pear Juice</span>
+            <span class="menu-item-price">₪17</span>
+          </div>
+          <span class="menu-item-desc" data-he="ללא תוספת סוכר, ללא חומרים משמרים, ללא צבעי מאכל, ללא תוספת מים, אינו עשוי מרכז. COLD PRESSED.">No added sugar, no preservatives, no food colouring, not from concentrate. Cold pressed.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/mulberry_juice.webp" alt="Organic Mulberry Juice"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="מיץ תות עץ אורגני">Organic Mulberry Juice</span>
+            <span class="menu-item-price">₪17</span>
+          </div>
+          <span class="menu-item-desc" data-he="ללא תוספת סוכר, ללא חומרים משמרים, ללא צבעי מאכל, ללא תוספת מים, אינו עשוי מרכז. COLD PRESSED.">No added sugar, no preservatives, no food colouring, not from concentrate. Cold pressed.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/juice_mix_yellow.webp" alt="Fruit &amp; Veg Blend — Yellow"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="מיץ מיקס פירות וירקות - צהוב">Fruit &amp; Veg Blend — Yellow</span>
+            <span class="menu-item-price">₪17</span>
+          </div>
+          <span class="menu-item-desc" data-he="תפוז, תפוח, מנגו, דלעת, גזר, אגס.">Lettuce, apple, pumpkin, pear, fresh herbs.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/juice_mix_pink.webp" alt="Fruit &amp; Veg Blend — Purple"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="מיץ מיקס פירות וירקות - ורוד">Fruit &amp; Veg Blend — Purple</span>
+            <span class="menu-item-price">₪17</span>
+          </div>
+          <span class="menu-item-desc" data-he="דובדבן קורנליה, רימון, תפוח, תות שדה, אגס, גזר שחור.">Dragon fruit, cornelian cherry, pomegranate, apple, strawberry, pear.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/juice_mix_red.webp" alt="Fruit &amp; Veg Blend — Red"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="מיץ מיקס פירות וירקות - אדום">Fruit &amp; Veg Blend — Red</span>
+            <span class="menu-item-price">₪17</span>
+          </div>
+          <span class="menu-item-desc" data-he="רימון, סלק, אגס, תפוח, גזר שחור.">Pomegranate, beetroot, apple, pear, strawberry.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-subhead" data-he="קומבוצ'ה">Kombucha</div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/cucumber_coriander.webp" alt="Cucumber &amp; Coriander"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="מלפפון כוסברה">Cucumber &amp; Coriander</span>
+            <span class="menu-item-price">₪19</span>
+          </div>
+          <span class="menu-item-desc" data-he="שילוב של ירק (מלפפון) ועשב תיבול (כוסברה) מאפשר לשמור על ערך גליקמי נמוך יותר במשקה הסופי, מה שהופך אותו למתאים יותר לאנשים המקפידים על צריכת סוכר. הכוסברה עשירה בקוורצטין ופלבנואידים אחרים, אשר בשילוב עם נוגדי החמצון מהתה, יוצרים הגנה חזקה על תאי הגוף מפני נזקי חמצון ודלקות.">Low glycemic, rich in quercetin and antioxidants from coriander and tea base. Gentle on blood sugar.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/ginger_acerolla.webp" alt="Acerola &amp; Ginger"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="אסרולה-ג'ינג'ר">Acerola &amp; Ginger</span>
+            <span class="menu-item-price">₪19</span>
+          </div>
+          <span class="menu-item-desc" data-he="אסרולה (Acerola), הידועה גם בשמות &quot;דובדבן בורדוס&quot; או &quot;מלפיגיה גלברה&quot;, היא שיח טרופי המניב פירות אדומים קטנים הדומים לדובדבנים. היא הידועה בזכות היותה אחת מהמקורות העשירים ביותר בטבע לוויטמין C.">Barbados cherry (Acerola) and ginger. One of nature's richest sources of vitamin C.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/mango_paciflora.webp" alt="Mango &amp; Passionfruit"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="מנגו-פסיפלורה">Mango &amp; Passionfruit</span>
+            <span class="menu-item-price">₪19</span>
+          </div>
+          <span class="menu-item-desc" data-he="שילוב של מנגו ופסיפלורה נחשב לאחד השילובים ה&quot;טרופיים&quot; המצוינים בעולם. המנגו עשיר בוויטמין A (בטא-קרוטן) התורם לבריאות העור והעיניים, בעוד הפסיפלורה מספקת כמות נכבדה של ויטמין C וסיבים תזונתיים.">A tropical classic. Mango for vitamin A, passionfruit for vitamin C and dietary fibre.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/matte_caffeine.webp" alt="Maté &amp; Caffeine"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="מאטה-קופאין">Maté &amp; Caffeine</span>
+            <span class="menu-item-price">₪19</span>
+          </div>
+          <span class="menu-item-desc" data-he="המאטה הוא הרבה יותר ממשקה — הוא סמל חברתי ותרבותי. הצמח מגיע ממשפחת הציפורניים הגדל בדרום אמריקה. עשיר בקפאין (המכונה לעיתים &quot;מאטאין&quot;), ומספק אנרגיה מתמשכת הדומה לקפה.">South America's iconic social drink, rich in mateine. Clean, sustained energy similar to coffee.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/cold drinks/rose.webp" alt="Rose Hips"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="ורדים">Rose Hips</span>
+            <span class="menu-item-price">₪19</span>
+          </div>
+          <span class="menu-item-desc" data-he="&quot;Rose hips&quot; — בעברית: פקעות ורדים. פרי הורד (בעיקר מהזן Rosa canina), הידועים כמקור טבעי ועשיר במיוחד של ויטמין C.">Edible rose fruits (Rosa canina). An exceptionally rich natural source of vitamin C.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ─── SANDWICHES & SALADS ──────────────────────────────── -->
+<div class="menu-category" id="sandwiches">
+  <div class="menu-category-inner">
+    <div class="menu-category-header">
+      <h2 class="menu-category-title" data-he="כריכים<br><em>וסלטים</em>">Sandwiches &amp;<br><em>salads</em></h2>
+      <div class="menu-category-meta">
+        <div class="menu-category-count">16</div>
+        <p class="menu-category-desc" data-he="הכנה במקום- כך שהירקות עוד לא יודעים שאנחנו עומדים לפרוס אותם.">Prepared on-place — so the vegetables don't yet know they're about to be sliced.</p>
+      </div>
+    </div>
+    <hr class="menu-divider">
+    <div class="menu-items">
+
+      <div class="menu-subhead" data-he="כריכים">Sandwiches</div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/sandwiches/sanswich_salmon.webp" alt="Smoked Salmon"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="כריך סלמון מעושן">Smoked Salmon</span>
+            <span class="menu-item-price">₪41</span>
+          </div>
+          <span class="menu-item-desc" data-he="גבינת שמנת, בצל סגול, סלמון מעושן, מיץ לימון טרי, מלפפון, חסה קיסר. תוספת: פרוסות אבוקדו ₪8 / ביצה קשה ₪3.">Cream cheese, red onion, smoked salmon, fresh lemon, cucumber, romaine. Avocado +₪8, hard-boiled egg +₪3.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/sandwiches/croissant_salmon.webp" alt="Croissant Salmon"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קרואסון סלמון מעושן">Croissant Salmon</span>
+            <span class="menu-item-price">₪45</span>
+          </div>
+          <span class="menu-item-desc" data-he="גבינת שמנת, בצל סגול, סלמון מעושן, מיץ לימון טרי, מלפפון, חסה קיסר. תוספת: פרוסות אבוקדו ₪8 / ביצה קשה ₪3.">Cream cheese, red onion, smoked salmon, fresh lemon, cucumber, romaine — in a croissant. Avocado +₪8, hard-boiled egg +₪3.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/sandwiches/sandwich_tuna.webp" alt="Tuna Sandwich"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="כריך טונה">Tuna Sandwich</span>
+            <span class="menu-item-price">₪41</span>
+          </div>
+          <span class="menu-item-desc" data-he="מיונז, ביצה קשה, טונה, עגבניה, מלפפון, חסה קיסר. תוספת: פרוסות אבוקדו ₪8.">Mayo, hard-boiled egg, tuna, tomato, cucumber, romaine. Avocado +₪8.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/sandwiches/croissant_tuna.webp" alt="Croissant Tuna"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קרואסון טונה">Croissant Tuna</span>
+            <span class="menu-item-price">₪45</span>
+          </div>
+          <span class="menu-item-desc" data-he="מיונז, ביצה קשה, טונה, עגבניה, מלפפון, חסה קיסר. תוספת: פרוסות אבוקדו ₪8.">Mayo, hard-boiled egg, tuna, tomato, cucumber, romaine — in a croissant. Avocado +₪8.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/sandwiches/sandwich_avocado.webp" alt="Avocado Sandwich"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="כריך אבוקדו">Avocado Sandwich</span>
+            <span class="menu-item-price">₪41</span>
+          </div>
+          <span class="menu-item-desc" data-he="גבינת שמנת, ביצה קשה, פרוסות אבוקדו, מלח, פלפל שחור גרוס, מיץ לימון טרי, עגבניה, מלפפון, חסה קיסר. תוספת: לא צריך להוסיף כלום, הוא גם ככה מושלם.">Cream cheese, hard-boiled egg, avocado, salt, black pepper, fresh lemon, tomato, cucumber, romaine. No need to add anything — it's perfect as is.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/sandwiches/croissant_avocado.webp" alt="Croissant Avocado"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קרואסון אבוקדו">Croissant Avocado</span>
+            <span class="menu-item-price">₪45</span>
+          </div>
+          <span class="menu-item-desc" data-he="גבינת שמנת, ביצה קשה, פרוסות אבוקדו, מלח, פלפל שחור גרוס, מיץ לימון טרי, עגבניה, מלפפון, חסה קיסר. תוספת: לא צריך להוסיף כלום, הוא גם ככה מושלם.">Cream cheese, hard-boiled egg, avocado, salt, black pepper, fresh lemon, tomato, cucumber, romaine. No need to add anything — it's perfect as is.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/sandwiches/sandwich_vegan.webp" alt="Vegan Sandwich Avocado"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="רוסטיק אבוקדו VEGAN <span class=&quot;menu-item-veg&quot;>◦</span>">Vegan Sandwich Avocado <span class="menu-item-veg">◦</span></span>
+            <span class="menu-item-price">₪41</span>
+          </div>
+          <span class="menu-item-desc" data-he="פסטו צנוברים, פרוסות אבוקדו, מלח, פלפל שחור גרוס, מיץ לימון טרי, עגבניה, מלפפון, חסה קיסר.">Pine nut pesto, avocado, salt, black pepper, fresh lemon, tomato, cucumber, romaine.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/sandwiches/croissant_antipasti.webp" alt="Croissant Antipasti"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קרואסון אנטיפסטי">Croissant Antipasti</span>
+            <span class="menu-item-price">₪42</span>
+          </div>
+          <span class="menu-item-desc" data-he="ממרח צ'אטני מנגו, ירקות אפויים (בטטה, זוקיני, גמבה), בולגרית מעודנת, חסה קיסר.">Mango chutney, roasted sweet potato, zucchini and bell pepper, Bulgarian cheese, romaine.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/sandwiches/croissant_pesto.webp" alt="Croissant Pesto"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קרואסון פסטו">Croissant Pesto</span>
+            <span class="menu-item-price">₪42</span>
+          </div>
+          <span class="menu-item-desc" data-he="גבינת שמנת, פסטו צנוברים, בולגרית מעודנת, מלפפון, חסה קיסר.">Cream cheese, pine nut pesto, Bulgarian cheese, cucumber, romaine.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/sandwiches/tost_5_cheese.webp" alt="Five Cheese Toast"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="טוסט חמש גבינות">Five Cheese Toast</span>
+            <span class="menu-item-price">₪46 / ₪48</span>
+          </div>
+          <span class="menu-item-desc" data-he="גבינת שמנת, צ'דר, מוצרלה, גאודה, סקנדינבית. מגיע עם סלט קצוץ אישי. לחם קסטן לבן ₪46 / לחם קסטן דגנים ₪48. תוספות: טונה ₪8 / קוביות אבוקדו (לסלט) ₪8 / ביצה קשה ₪3 / עגבניה ₪3 / תירס ₪3.">Cream cheese, cheddar, mozzarella, gouda, Scandinavian cheese. Served with chopped salad. White / grain bread. Tuna +₪8, avocado +₪8, egg +₪6, tomato +₪3, corn +₪3, red onion +₪3, kalamata +₪4.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-subhead" data-he="סלטים">Salads</div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/salads/salad_tuna.webp" alt="Tuna Salad"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="סלט טונה">Tuna Salad</span>
+            <span class="menu-item-price">₪44</span>
+          </div>
+          <span class="menu-item-desc" data-he="מלפפון, עגבניה, חסה קיסר, טונה, זיתי קלמטה, תירס, ביצה קשה, בצל סגול. תוספות: קוביות אבוקדו ₪8 / לחם מלא ₪8 / בולגרית ₪8 / ביצה קשה ₪6.">Cucumber, tomato, romaine, tuna, kalamata olives, hard-boiled egg, red onion. Avocado +₪8, Bulgarian cheese +₪8, whole wheat +₪8, egg +₪6.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/salads/salad_white_cheese.webp" alt="White cheese Salad"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="סלט בולגרית">White cheese Salad</span>
+            <span class="menu-item-price">₪44</span>
+          </div>
+          <span class="menu-item-desc" data-he="עגבניה, מלפפון, חסה קיסר, בולגרית מעודנת, בצל סגול, ביצה קשה, תירס, זיתי קלמטה. תוספות: קוביות אבוקדו ₪8 / לחם מלא ₪8 / טונה ₪8 / ביצה קשה ₪6.">Tomato, cucumber, romaine, Bulgarian cheese, red onion, hard-boiled egg, corn, kalamata olives. Avocado +₪8, tuna +₪8, whole wheat +₪8, egg +₪6.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/salads/choped_salad.webp" alt="Chopped Salad"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="סלט ירקות דק">Chopped Salad</span>
+            <span class="menu-item-price">₪36</span>
+          </div>
+          <span class="menu-item-desc" data-he="מלפפון, עגבניה, בצל סגול, חסה קיסר, נענע, שמן זית, מיץ לימון טרי, מלח, פלפל שחור גרוס. תוספות: בולגרית מעודנת ₪8 / טונה ₪8 / קוביות אבוקדו ₪8 / ביצה קשה ₪6 / לחם מלא ₪8.">Cucumber, tomato, red onion, romaine, mint, olive oil, fresh lemon, salt, black pepper. Bulgarian cheese +₪8, tuna +₪8, avocado +₪8, egg +₪6, whole wheat +₪8.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-subhead" data-he="קערות">Bowls</div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/small bites/musli.webp" alt="Muesli"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="מוזלי">Muesli</span>
+            <span class="menu-item-price">₪35</span>
+          </div>
+          <span class="menu-item-desc" data-he="יוגורט בקר, פירות העונה, גרנולה.">Yogurt, seasonal fruit, granola.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/small bites/quiche_mushrooms_with_small_salad.webp" alt="Mushroom Quiche"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קיש פיטריות עם סלט אישי <span class=&quot;menu-item-veg&quot;>◦</span>">Mushroom Quiche + Salad <span class="menu-item-veg">◦</span></span>
+            <span class="menu-item-price">₪37</span>
+          </div>
+          <span class="menu-item-desc" data-he="קיש - פטריות שמפיניון ופורטובלו, בצל לבן, רוטב אלפרדו, מיקס ארבע גבינות. סלט - מלפפון, עגבניה, בצל סגול, חסה קיסר, שמן זית, מיץ לימון טרי, מלח, פלפל שחור גרוס.">Champignon &amp; portobello, white onion, Alfredo sauce, four-cheese blend. With cucumber, tomato, red onion, romaine, mint, olive oil, fresh lemon.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/small bites/quiche_antipasti_with_small_salad.webp" alt="Antipasti Quiche"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קיש אנטיפסטי עם סלט אישי <span class=&quot;menu-item-veg&quot;>◦</span>">Antipasti Quiche + Salad <span class="menu-item-veg">◦</span></span>
+            <span class="menu-item-price">₪37</span>
+          </div>
+          <span class="menu-item-desc" data-he="קיש - ירקות אפויים (בטטה, זוקיני, גמבה), רוטב רוזה, מיקס ארבע גבינות. סלט - מלפפון, עגבניה, בצל סגול, חסה קיסר, שמן זית, מיץ לימון טרי, מלח, פלפל שחור גרוס.">Roasted sweet potato, zucchini and bell pepper, rose sauce, four-cheese blend. With cucumber, tomato, red onion, romaine, mint, olive oil, fresh lemon.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ─── PASTRIES ────────────────────────────────────────── -->
+<div class="menu-category" id="pastries">
+  <div class="menu-category-inner">
+    <div class="menu-category-header">
+      <h2 class="menu-category-title" data-he="הקרואסונים<br><em>הרדודים</em>">The<br><em>laminated</em> ones</h2>
+      <div class="menu-category-meta">
+        <div class="menu-category-count">10</div>
+        <p class="menu-category-desc" data-he="מרובדים על פני שלושה ימים עם חמאה צרפתית. אנחנו מוציאים ב-7:30, 10:00 ו-14:00.">Laminated over three days with French butter. We pull them at 7:30, 10:00 and 14:00.</p>
+      </div>
+    </div>
+    <hr class="menu-divider">
+    <div class="menu-items">
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/pastries/croissant_classic_big.webp" alt="Classic French Croissant"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קרואסון צרפתי קלאסי">Classic French Croissant</span>
+            <span class="menu-item-price">₪15</span>
+          </div>
+          <span class="menu-item-desc">Laminated butter dough.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/pastries/chocolate_big.webp" alt="Pain au Chocolat"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קרואסון שוקולד">Pain au Chocolat</span>
+            <span class="menu-item-price">₪16</span>
+          </div>
+          <span class="menu-item-desc">Chocolate sealed inside crisp laminated pastry.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/pastries/croissant_classic_small.webp" alt="Small French Croissant"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קרואסון צרפתי קטן">Small French Croissant</span>
+            <span class="menu-item-price">₪7</span>
+          </div>
+          <span class="menu-item-desc">Fits in one hand.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/pastries/chocolate_small.webp" alt="Small Chocolate Croissant"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קרואסון שוקולד קטן">Small Chocolate Croissant</span>
+            <span class="menu-item-price">₪8</span>
+          </div>
+          <span class="menu-item-desc">One baton of chocolate, pocket-sized.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/pastries/big_apple.webp" alt="Apple Turnover"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="שסון תפוח עץ">Apple Turnover</span>
+            <span class="menu-item-price">₪18</span>
+          </div>
+          <span class="menu-item-desc">Chausson aux pommes. Caramelised apple in crisp butter pastry.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/pastries/cinnamon_roll.webp" alt="Cinnamon Roll"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="רול קינמון">Cinnamon Roll</span>
+            <span class="menu-item-price">₪16</span>
+          </div>
+          <span class="menu-item-desc">Rolled tight, glazed with cinnamon sugar.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/pastries/reisins_vanilla_roll.webp" alt="Vanilla &amp; Raisin Roll"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="רול וניל צימוקים">Vanilla &amp; Raisin Roll</span>
+            <span class="menu-item-price">₪16</span>
+          </div>
+          <span class="menu-item-desc">Vanilla cream, plump raisins, soft baked dough.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/pastries/filo.webp" alt="Phyllo Fingers"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="אצבעות פילו">Phyllo Fingers</span>
+            <span class="menu-item-price">₪8</span>
+          </div>
+          <span class="menu-item-desc" data-he="בולגרית-תרד / פיטריות-תפוח אדמה / בולגרית-קשקבל / תפוח עץ-אגוזים-צימוקים / פרג.">Crisp filo, four fillings: Bulgarian cheese · Mushroom &amp; potato · Kashkaval · Apple, walnut &amp; raisin.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/pastries/quiche_mushroom.webp" alt="Mushroom Quiche"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קיש פטריות">Mushroom Quiche</span>
+            <span class="menu-item-price">₪19</span>
+          </div>
+          <span class="menu-item-desc" data-he="פטריות שמפיניון ופורטובלו, בצל לבן, רוטב אלפרדו, מיקס ארבע גבינות.">Champignon &amp; portobello, white onion, Alfredo sauce, four-cheese mix.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/pastries/quiche_antipasti.webp" alt="Antipasti Quiche"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קיש אנטיפסטי">Antipasti Quiche</span>
+            <span class="menu-item-price">₪19</span>
+          </div>
+          <span class="menu-item-desc" data-he="ירקות אפויים (בטטה, זוקיני, גמבה), רוטב רוזה, מיקס ארבע גבינות.">Roasted sweet potato, zucchini &amp; bell pepper, rose sauce, four-cheese mix.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FILLED CROISSANTS ────────────────────────────────── -->
+<div class="menu-category" id="filled">
+  <div class="menu-category-inner">
+    <div class="menu-category-header">
+      <h2 class="menu-category-title" data-he="ממולאים<br><em>וחמים</em>">Filled &amp;<br><em>warmed</em></h2>
+      <div class="menu-category-meta">
+        <div class="menu-category-count">07</div>
+        <p class="menu-category-desc" data-he="חתוכים, מחוממים ומוכנים להזמנה. אפשרויות צמחוניות מסומנות ב-◦.">Split, warmed, and dressed to order. Vegetarian options marked ◦.</p>
+      </div>
+    </div>
+    <hr class="menu-divider">
+    <div class="menu-items">
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_wildberies_vanilla.webp" alt="Vanilla Cream & Forest Berries"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קרואסון קרם וניל-פירות יער">Vanilla Cream &amp; Forest Berries</span>
+            <span class="menu-item-price">₪25</span>
+          </div>
+          <span class="menu-item-desc">Vanilla pastry cream, fresh mixed berries.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_raspberry_lemon.jpg" alt="Lemon Cream & Raspberry"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קרואסון קרם לימון-פטל אדום">Lemon Cream &amp; Raspberry</span>
+            <span class="menu-item-price">₪25</span>
+          </div>
+          <span class="menu-item-desc">Tangy lemon curd, fresh red raspberries.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_halva_pistachio.webp" alt="Halva & Pistachio Cream"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קרואסון קרם חלבה-קרם פיסטוק">Halva &amp; Pistachio Cream</span>
+            <span class="menu-item-price">₪25</span>
+          </div>
+          <span class="menu-item-desc">Sesame halva cream meets pistachio paste.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_caramel_baigle.webp" alt="Bagel Cream & Salted Caramel"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קרואסון קרם בייגל-קרמל מלוח">Bagel Cream &amp; Salted Caramel</span>
+            <span class="menu-item-price">₪25</span>
+          </div>
+          <span class="menu-item-desc">Toasted sesame cream, ribbons of salted caramel.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_nutella_banana.webp" alt="Nutella, Banana & Almonds"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קרואסון נוטלה-בננה-שקדים">Nutella, Banana &amp; Almonds</span>
+            <span class="menu-item-price">₪25</span>
+          </div>
+          <span class="menu-item-desc">Chocolate hazelnut spread, fresh banana, toasted almonds.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_pistachio.webp" alt="Pistachio Cream & Pistachio Nuts"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קרואסון קרם פיסטוק-אגוזי פיסטוק">Pistachio Cream &amp; Pistachio Nuts</span>
+            <span class="menu-item-price">₪25</span>
+          </div>
+          <span class="menu-item-desc">Double pistachio: cream and crushed nuts.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_lemon_apples.webp" alt="Apple & Lemon Cream"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קרואסון תפוח עץ-קרם לימון">Apple &amp; Lemon Cream</span>
+            <span class="menu-item-price">₪25</span>
+          </div>
+          <span class="menu-item-desc">Caramelised apple, bright lemon pastry cream.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── TARTLETS ─────────────────────────────────────────── -->
+<div class="menu-category" id="tartlets">
+  <div class="menu-category-inner">
+    <div class="menu-category-header">
+      <h2 class="menu-category-title" data-he="טארטלטים <em>טריים</em>">Fresh <em>tartlets</em></h2>
+      <div class="menu-category-meta">
+        <div class="menu-category-count">06</div>
+        <p class="menu-category-desc" data-he="נאפים טרי מדי יום בבסיס פריך וחמאתי.">Baked fresh daily in a buttery shortcrust shell.</p>
+      </div>
+    </div>
+    <hr class="menu-divider">
+    <div class="menu-items">
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/tarts/tart_mango.webp" alt="Mascarpone & Mango"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="טארטלט מסקרפונה - מנגו">Mascarpone &amp; Mango</span>
+            <span class="menu-item-price">₪18</span>
+          </div>
+          <span class="menu-item-desc">Mascarpone cream, fresh mango, buttery shortcrust.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/tarts/tart_strawberry.webp" alt="Mascarpone & Strawberry"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="טארטלט מסקרפונה - תות שדה">Mascarpone &amp; Strawberry</span>
+            <span class="menu-item-price">₪18</span>
+          </div>
+          <span class="menu-item-desc">Mascarpone cream, ripe strawberries, buttery shortcrust.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/tarts/tart_wildberries.webp" alt="Mascarpone, Vanilla Cream & Forest Berries"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="טארטלט מסקרפונה - קרם וניל - פירות יער">Mascarpone, Vanilla &amp; Forest Berries</span>
+            <span class="menu-item-price">₪18</span>
+          </div>
+          <span class="menu-item-desc">Mascarpone cream, vanilla, wild berries.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/tarts/tart_raspberry.webp" alt="Mascarpone, Pistachio Cream & Raspberry"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="טארטלט מסקרפונה - קרם פיסטוק-פטל">Mascarpone, Pistachio &amp; Raspberry</span>
+            <span class="menu-item-price">₪18</span>
+          </div>
+          <span class="menu-item-desc">Mascarpone cream, pistachio paste, fresh raspberries.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/Main page/menu_placeholder.jpg" alt=""></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="לימון מרנג ופרנג'יפן שקדים">Lemon Meringue &amp; Almond Frangipane</span>
+            <span class="menu-item-price">₪18</span>
+          </div>
+          <span class="menu-item-desc" data-he="בסיס פרנג'יפן שקדים, קרם לימון חמצמץ, מרנג שרוף.">Almond frangipane base, tangy lemon cream, torched meringue.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/Main page/menu_placeholder.jpg" alt=""></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="בראוניז, שוקולד חלב וקרמל אגוזי לוז">Brownie, Milk Chocolate &amp; Hazelnut Caramel</span>
+            <span class="menu-item-price">₪18</span>
+          </div>
+          <span class="menu-item-desc" data-he="בראוניז עשיר, קרם שוקולד חלב, קרמל מלוח, אגוזי לוז קלויים.">Fudgy brownie inside, milk chocolate cream, salted caramel, toasted hazelnuts.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── CAKES & DESSERTS ─────────────────────────────────── -->
+<div class="menu-category" id="cakes">
+  <div class="menu-category-inner">
+    <div class="menu-category-header">
+      <h2 class="menu-category-title" data-he="עוגות<br><em>וקינוחים</em>">Cakes &amp;<br><em>desserts</em></h2>
+      <div class="menu-category-meta">
+        <div class="menu-category-count">04</div>
+        <p class="menu-category-desc" data-he="עוגות שלמות בהזמנה מראש (48 שעות). פרוסות מוכנות מ-9 בבוקר.">Whole cakes by pre-order (48 hours). Slices ready in the case from 9am.</p>
+      </div>
+    </div>
+    <hr class="menu-divider">
+    <div class="menu-items">
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/Cakes/Cheesecake.jpg" alt="Baked Cheesecake"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="עוגת גבינה אפויה">Baked Cheesecake</span>
+            <span class="menu-item-price">₪39</span>
+          </div>
+          <span class="menu-item-desc" data-he="יציבה ועשירה בדיוק כמו שעוגת גבינה צריכה להיות. הולכת מצויין עם קפה, רק אל תגידו לייין שאמרנו את זה.">Rich and dense, exactly as a cheesecake should be. Goes perfectly with coffee. Just don't tell the wine we said that.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/Main page/menu_placeholder.jpg" alt=""></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="טירמיסו">Tiramisu</span>
+            <span class="menu-item-price">₪35</span>
+          </div>
+          <span class="menu-item-desc" data-he="שכבות ספוגות אספרסו, קרם מסקרפונה, מפוזר עם קקאו.">Espresso-soaked layers, mascarpone cream, dusted with cocoa.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/Cakes/creme_brule.webp" alt="Crème Brûlée"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קרם ברולה">Crème Brûlée</span>
+            <span class="menu-item-price">₪31</span>
+          </div>
+          <span class="menu-item-desc">Classic vanilla custard, caramelised sugar crust cracked at the table.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/Main page/menu_placeholder.jpg" alt=""></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="עוגת הבית (משתנה)">House Cake <em>(rotating)</em></span>
+            <span class="menu-item-price">₪45</span>
+          </div>
+          <span class="menu-item-desc" data-he="משתנה מדי יום. שאלו בדלפק מה יש היום.">Changes daily. Ask at the counter what's in today.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ─── ICE CREAM ────────────────────────────────────────── -->
+<div class="menu-category" id="ice-cream">
+  <div class="menu-category-inner">
+    <div class="menu-category-header">
+      <h2 class="menu-category-title" data-he="<em>גלידה</em>">Ice <em>cream</em></h2>
+      <div class="menu-category-meta">
+        <div class="menu-category-count">03</div>
+        <p class="menu-category-desc" data-he="שלושה שילובים של שלושה כדורי גלידה.">Three combinations of three scoops of ice cream.</p>
+      </div>
+    </div>
+    <hr class="menu-divider">
+    <div class="menu-items">
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/ice_cream/classic.webp" alt="The Classics"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="הקלאסית">The Classics</span>
+            <span class="menu-item-price">₪39</span>
+          </div>
+          <span class="menu-item-desc" data-he="שוקולד בלגי, וניל מקלות, וניל עוגיות.">Belgian chocolate, classic vanilla, cookies &amp; cream.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/ice_cream/tropical.webp" alt="The Tropical"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="הטרופית">The Tropical</span>
+            <span class="menu-item-price">₪39</span>
+          </div>
+          <span class="menu-item-desc" data-he="סורבה מנגו, סורבה פסיפלורה, סורבה קוקוס.">Mango sorbet, passionfruit sorbet, coconut sorbet.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/ice_cream/black_forest.webp" alt="The Black Forest"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="היער השחור">The Black Forest</span>
+            <span class="menu-item-price">₪39</span>
+          </div>
+          <span class="menu-item-desc" data-he="פירות יער, תות בר, סורבה לימון.">Forest berries, wild strawberry, lemon sorbet.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ─── ALCOHOL ───────────────────────────────────────────── -->
+<div class="menu-category" id="alcohol">
+  <div class="menu-category-inner">
+    <div class="menu-category-header">
+      <h2 class="menu-category-title" data-he="יין, בירה<br><em>ורוחות</em>">Wine, beer<br><em>&amp; spirits</em></h2>
+      <div class="menu-category-meta">
+        <div class="menu-category-count">12</div>
+        <p class="menu-category-desc" data-he="יין בכוס או בקבוק. בירה קרה, רוחות ישירות.">Wine by the glass or bottle. Beer cold, spirits straight.</p>
+      </div>
+    </div>
+    <hr class="menu-divider">
+    <div class="menu-list">
+
+      <div class="menu-list-subhead" data-he="יין לבן">Wine — White</div>
+
+      <div class="menu-list-item">
+        <div class="menu-list-main">
+          <span class="menu-list-name" data-he="שרדונה — &quot;לה קוטי&quot;, דומיין רו, צרפת">Chardonnay — "La Côte", Domaine R, France</span>
+          <span class="menu-list-price">₪41 / ₪145</span>
+        </div>
+        <span class="menu-list-desc" data-he="יבש, אלגנטי, עם רמזים של פרי בשל וסיזמות חמאתיות עדינה. כוס - 41 ₪ | בקבוק - 145 ₪.">Dry, elegant. Hints of ripe fruit and a delicate buttery note. Glass ₪41 | Bottle ₪145.</span>
+      </div>
+
+      <div class="menu-list-item">
+        <div class="menu-list-main">
+          <span class="menu-list-name" data-he="גורצטרמינר — &quot;ולה וולף&quot;, פפאלץ, גרמניה">Gewürztraminer — "Villa Wolf", Pfalz, Germany</span>
+          <span class="menu-list-price">₪39 / ₪135</span>
+        </div>
+        <span class="menu-list-desc" data-he="חצי מתוק, ארומטי, שופע טעמים של פירות סרופים ותבלינים. כוס 39 ₪ | בקבוק 135 ₪.">Semi-sweet, aromatic. Rich in tropical fruit and spice. Glass ₪39 | Bottle ₪135.</span>
+      </div>
+
+      <div class="menu-list-subhead" data-he="יין אדום ורוזה">Wine — Red &amp; Rosé</div>
+
+      <div class="menu-list-item">
+        <div class="menu-list-main">
+          <span class="menu-list-name" data-he="בלנד אדום פריין — &quot;לה ויה פארם&quot;, עמק הרון, צרפת">Red Blend, Perrin — "La Vieille Ferme", Rhône Valley, France</span>
+          <span class="menu-list-price">₪39 / ₪135</span>
+        </div>
+        <span class="menu-list-desc" data-he="יבש, שופע בטעמי פטל שחור, דובדבנים ותבלינים חמים. כוס - 39 ₪ | בקבוק 135 ₪.">Dry. Blackcurrant, cherry, warm spice. Glass ₪39 | Bottle ₪135.</span>
+      </div>
+
+      <div class="menu-list-item">
+        <div class="menu-list-main">
+          <span class="menu-list-name" data-he="רוזה פריין — &quot;לה ויה פארם&quot;, עמק הרון, צרפת">Rosé, Perrin — "La Vieille Ferme", Rhône Valley, France</span>
+          <span class="menu-list-price">₪72</span>
+        </div>
+        <span class="menu-list-desc" data-he="יבש, בלנד של סנסו-גרנאש-סירה, קליל ורדרד ומרענן מאוד. 375 מל.">Dry. Cinsault–Grenache–Syrah blend. Light, pink, very refreshing. 375 ml.</span>
+      </div>
+
+      <div class="menu-list-item">
+        <div class="menu-list-main">
+          <span class="menu-list-name" data-he="ואלפוליצ'לה — &quot;טומאסי&quot;, ונטו, איטליה">Valpolicella — "Tommasi", Veneto, Italy</span>
+          <span class="menu-list-price">₪77</span>
+        </div>
+        <span class="menu-list-desc" data-he="בלנד אדום קליל, פירותי ושובה לב. 375 מל.">Light, fruity red blend. 375 ml.</span>
+      </div>
+
+      <div class="menu-list-subhead" data-he="בירה">Beer</div>
+
+      <div class="menu-list-item">
+        <div class="menu-list-main">
+          <span class="menu-list-name" data-he="גולדסטאר">Goldstar</span>
+          <span class="menu-list-price">₪19</span>
+        </div>
+        <span class="menu-list-desc" data-he="אין צורך להציג אף בכל זאת, לאגר כהה המוביל בישראל. 330 מל.">No need to introduce it — Israel's leading dark lager. 330 ml.</span>
+      </div>
+
+      <div class="menu-list-item">
+        <div class="menu-list-main">
+          <span class="menu-list-name">The Red Knight – Irish Ale</span>
+          <span class="menu-list-price">₪24</span>
+        </div>
+        <span class="menu-list-desc" data-he="אדמונית בעלת טעם מתקתק של לחת קלוי.">Reddish, with a gentle sweetness of roasted malt.</span>
+      </div>
+
+      <div class="menu-list-item">
+        <div class="menu-list-main">
+          <span class="menu-list-name">The Hope Guru – IPA</span>
+          <span class="menu-list-price">₪24</span>
+        </div>
+        <span class="menu-list-desc" data-he="בעלת ארומה של פירות טרופים והדרים במרירות מעודנת.">Tropical fruit and citrus aromas with a refined bitterness.</span>
+      </div>
+
+      <div class="menu-list-subhead" data-he="רוחות ולקרים">Spirits &amp; Liqueurs</div>
+
+      <div class="menu-list-item">
+        <div class="menu-list-main">
+          <span class="menu-list-name" data-he="ויסקי ג'ימסון">Whiskey Jameson</span>
+          <span class="menu-list-price">₪22 / ₪39</span>
+        </div>
+        <span class="menu-list-desc" data-he="מנה - 39 ₪ | צ'ייסר - 22 ₪.">Shot / Chaser.</span>
+      </div>
+
+      <div class="menu-list-item">
+        <div class="menu-list-main">
+          <span class="menu-list-name" data-he="ג'ין בומביי סמפייר">Gin Bombay Sapphire</span>
+          <span class="menu-list-price">₪33 / ₪39</span>
+        </div>
+        <span class="menu-list-desc" data-he="תוספת מי טוניק - 6 ₪.">Neat / With tonic water.</span>
+      </div>
+
+      <div class="menu-list-item">
+        <div class="menu-list-main">
+          <span class="menu-list-name" data-he="עראק עלית">Arak Elite</span>
+          <span class="menu-list-price">₪15 / ₪28</span>
+        </div>
+        <span class="menu-list-desc" data-he="מנה - 28 ₪ | צ'ייסר - 15 ₪.">Shot / Chaser.</span>
+      </div>
+
+      <div class="menu-list-item">
+        <div class="menu-list-main">
+          <span class="menu-list-name" data-he="ביילים">Baileys</span>
+          <span class="menu-list-price">₪15 / ₪28</span>
+        </div>
+        <span class="menu-list-desc" data-he="מנה - 28 ₪ | צ'ייסר - 15 ₪.">Shot / Chaser.</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ─── FRIDAY SPECIAL ───────────────────────────────────── -->
+<div class="menu-category" id="friday">
+  <div class="menu-category-inner">
+    <div class="menu-category-header">
+      <h2 class="menu-category-title" data-he="אפייה של <em>יום שישי</em>">Friday <em>baking</em></h2>
+      <div class="menu-category-meta">
+        <div class="menu-category-count friday-count">07</div>
+        <p class="menu-category-desc" data-he="כל יום שישי המטבח אופה משהו נוסף. זמין עד אזילת המלאי.">Every Friday the kitchen bakes something extra. Available until it runs out.</p>
+      </div>
+    </div>
+    <hr class="menu-divider">
+    <div class="menu-items">
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/friday special/plushka.webp" alt="Plyushka"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="פליושקה">Plyushka</span>
+            <span class="menu-item-price">₪15</span>
+          </div>
+          <span class="menu-item-desc" data-he="מאפה שמרים מסורתי. בצק עגניים רך שזור בשכבות עדינות של חמאה וסוכר שמתקרמל באפייה. מעוצב בצורת לב, כדי שיהיה לכם קל להתאהב.">Traditional yeast pastry — soft twisted dough layered with butter and sugar that caramelizes in the oven. Shaped like a heart, to make it easier to fall in love.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/friday special/vatrushka.webp" alt="Vatrushka"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="ואטרושקה">Vatrushka</span>
+            <span class="menu-item-price">₪19</span>
+          </div>
+          <span class="menu-item-desc" data-he="מאפה שמרים פתוח במילוי גבינת סבורוג עשיר בליבו, כי למי יש כוח לחפש אותו בתוך הבצק.">Open-faced yeast pastry with a rich farmer's cheese filling right at the centre, because who has the energy to search for it inside the dough.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/Main page/menu_placeholder.jpg" alt="Sochnik"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="סוצ'ניק">Sochnik</span>
+            <span class="menu-item-price">₪18</span>
+          </div>
+          <span class="menu-item-desc" data-he="פריך ורימוך במילוי גבינת סבורוג. מעדן נוסטלגי. ואל תנסו לחלוק אותו, זה נגמר בדמעות.">Crisp and tender, filled with farmer's cheese. A nostalgic treat. Don't try to share it — it ends in tears.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/friday special/korzinochka.webp" alt="Korzinochka"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קארינוצ'קה">Korzinochka</span>
+            <span class="menu-item-price">₪19</span>
+          </div>
+          <span class="menu-item-desc" data-he="בצק פריך ופירות. אפס מקום לטעויות.">Crispy dough and fruit. Zero room for second thoughts.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/Main page/menu_placeholder.jpg" alt="Bulochka"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="בולוצ'קה">Bulochka</span>
+            <span class="menu-item-price">₪18</span>
+          </div>
+          <span class="menu-item-desc" data-he="בצק שמרים רך ממולא בפירות משתנים, אבל החמאה היא זאת שמנהלת את האירוע.">Soft yeast dough filled with rotating seasonal fruit. Warmth is what runs the show.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/friday special/cremobon.webp" alt="Creambon"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="קרמבון">Creambon</span>
+            <span class="menu-item-price">₪25</span>
+          </div>
+          <span class="menu-item-desc" data-he="שבלול של מאפה שמרים במילוי נדיב של קרם (משתנה לפי המצב רוח). מתוק, מושחת וחסר רחמים בדיוק כמו שתכננו.">A generous yeast roll filled with cream that changes with the mood. Sweet, indulgent, and merciless — exactly as planned.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <div class="menu-item-photo"><img src="img/friday special/cinnabon.webp" alt="Cinnamon"></div>
+        <div class="menu-item-body">
+          <div class="menu-item-top">
+            <span class="menu-item-name" data-he="סינבון">Cinnamon</span>
+            <span class="menu-item-price">₪27</span>
+          </div>
+          <span class="menu-item-desc" data-he="שבלול שמרים רך הנאפה עם שכבות נדיבות של חמאה, סוכר חום וקינמון, מצופה בקרם גבינה עשיר. מסורת אירופאית שקיבלה אישור רשמי מהדיאספורה.">Soft yeast roll with generous layers of butter, brown sugar, and cinnamon, coated in rich cream cheese. A European classic, officially approved by the diaspora.</span>
+          <span class="menu-item-action">Add to order →</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER ────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">Bulochka</div>
+        <p data-en='A small bakery, on the corner<br>of your morning.' data-he='מאפייה קטנה, בפינה<br>של הבוקר שלך.'>A small bakery, on the corner<br>of your morning.</p>
+      </div>
+      <div>
+        <div class="footer-col-title" data-en='Visit' data-he='בקרו אותנו'>Visit</div>
+        <div class="footer-links">
+          <span>Petah Tikva, Pinsker 29</span>
+          <span data-en='Sun–Thu, 08:00–20:00' data-he='08:00–20:00 ,א׳–ה׳' dir="ltr">Sun–Thu, 08:00–20:00</span>
+          <a href="tel:+972529662724" dir="ltr">+972 (52) 966-2724</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title" data-en='Stay in touch' data-he='נשארים בקשר'>Stay in touch</div>
+        <div class="footer-links">
+          <a href="careers.html" data-en='Work with us' data-he='דרושים'>Work with us</a>
+          <a href="events.html" data-en='Events' data-he='אירועים'>Events</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title" data-en='Follow' data-he='עקבו אחרינו'>Follow</div>
+        <div class="footer-links">
+          <a href="https://www.instagram.com/bulochka.pt" target="_blank">Instagram</a>
+          <a href="https://www.facebook.com/bulochka.bulochka.2025#" target="_blank">Facebook</a>
+          <a href="https://www.google.com/search?q=Bulochka%2C+Yehuda+Leib+Pinsker+Street%2C+Petah+Tikva&sca_esv=cb0ef06c41fe51d8&rlz=1C1GCEA_enIL1186IL1186&sxsrf=ANbL-n5bMXDD-7O7zs6PrRorMZKNG3hq5g%3A1779431527882&ei=Z_gPasfENciThbIP89mysQY&biw=1920&bih=911&oq=bulochka+yehuda&gs_lp=Egxnd3Mtd2l6LXNlcnAiD2J1bG9jaGthIHllaHVkYSoCCAAyAhAmMggQABiABBiiBDIFEAAY7wUyBRAAGO8FMgUQABjvBTIIEAAYgAQYogRIuy9Q4ghY1BdwAngBkAEAmAF4oAHqBqoBAzAuOLgBA8gBAPgBAZgCCqAChgfCAg0QLhjHARivARiwAxgnwgIKEAAYRxjWBBiwA8ICBhAAGBYYHsICBBAjGCfCAhAQLhiABBiKBRjHARivARgnwgIKEAAYgAQYFBiHAsICBRAAGIAEwgIIEAAYFhgeGAqYAwCIBgGQBgeSBwMyLjigB_cpsgcDMC44uAeBB8IHBDAuMTDIBxOACAE&sclient=gws-wiz-serp" target="_blank">Google</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© Bulochka MMXIX—MMXXVI</span>
+      <span class="footer-tagline" data-en='Made with butter ✦' data-he='עשוי עם חמאה ✦'>Made with butter ✦</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── ADD-ON MODAL ────────────────────────────────────────── -->
+<div class="addon-overlay" id="addonOverlay">
+  <div class="addon-modal">
+    <div class="addon-top">
+      <div class="addon-img" id="addonImg"></div>
+      <div class="addon-info">
+        <div class="addon-item-name" id="addonName"></div>
+        <div class="addon-item-price" id="addonPrice"></div>
+      </div>
+      <button class="addon-x" id="addonClose" aria-label="Close">✕</button>
+    </div>
+    <div class="addon-extras" id="addonExtras">
+      <span class="addon-extras-label">Add extras</span>
+      <div id="addonList"></div>
+    </div>
+    <div class="addon-foot">
+      <div>
+        <span class="addon-total-label">Total</span>
+        <div class="addon-total-num" id="addonTotal"></div>
+      </div>
+      <button class="addon-done-btn" id="addonDone">Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ─── FRIDAY POSITIONING ──────────────────────────────────
+  (function () {
+    const isFriday = new Date().getDay() === 5;
+    const fridaySection = document.getElementById('friday');
+    const fridayPill = document.querySelector('[data-target="friday"]');
+    if (isFriday) {
+      const firstCategory = document.querySelector('.menu-category');
+      firstCategory.parentNode.insertBefore(fridaySection, firstCategory);
+      const firstPill = document.querySelector('.filter-pill');
+      firstPill.parentNode.insertBefore(fridayPill, firstPill);
+    }
+  })();
+
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('mobileMenu');
+  const overlay = document.getElementById('menuOverlay');
+  const close = document.getElementById('menuClose');
+  function openMenu() {
+    menu.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    menu.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  toggle.addEventListener('click', openMenu);
+  close.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  menu.querySelectorAll('a').forEach(l => l.addEventListener('click', closeMenu));
+
+  const langToggle = document.getElementById('mobileLangToggle');
+  const langOptions = document.getElementById('mobileLangOptions');
+  langToggle.addEventListener('click', () => {
+    langToggle.classList.toggle('expanded');
+    langOptions.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const navBtn = document.querySelector(`.lang-btn[data-lang="${btn.dataset.lang}"]`);
+      if (navBtn) navBtn.click();
+      document.querySelectorAll('.mobile-lang-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.lang === btn.dataset.lang);
+      });
+    });
+  });
+
+  let touchStartX = 0;
+  menu.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+    menu.style.transition = 'none';
+  }, { passive: true });
+  menu.addEventListener('touchmove', e => {
+    const dx = e.touches[0].clientX - touchStartX;
+    if (dx < 0) menu.style.transform = `translateX(${dx}px)`;
+  }, { passive: true });
+  menu.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    menu.style.transition = '';
+    if (dx < -80) closeMenu();
+    else menu.style.transform = '';
+  });
+
+  // ─── FILTER BAR ACTIVE STATE ─────────────────────────────
+  const pills = Array.from(document.querySelectorAll('.filter-pill'));
+  const sections = pills.map(p => document.getElementById(p.dataset.target));
+
+  function setActive(id) {
+    pills.forEach(p => p.classList.toggle('active', p.dataset.target === id));
+    const activePill = pills.find(p => p.dataset.target === id);
+    if (activePill) {
+      activePill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+    }
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) setActive(entry.target.id);
+    });
+  }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+
+  sections.forEach(s => s && observer.observe(s));
+
+  // ─── ADD-ON MODAL ─────────────────────────────────────────
+  (function () {
+    const ADDONS = {
+      'Cappuccino': [
+        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', price: 2 },
+        { label: 'Syrup — caramel / hazelnut / vanilla / lavender', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / לבנדר', price: 5 },
+        { label: 'Baileys', labelHe: 'ביילס', price: 10 }
+      ],
+      'Hot Cocoa': [
+        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', price: 2 }
+      ],
+      'Espresso': [
+        { label: 'Baileys', labelHe: 'ביילס', price: 10 }
+      ],
+      'Macchiato': [
+        { label: 'Baileys', labelHe: 'ביילס', price: 10 }
+      ],
+      'Americano': [
+        { label: 'Syrup — caramel / hazelnut / vanilla / lavender', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / לבנדר', price: 5 },
+        { label: 'Baileys', labelHe: 'ביילס', price: 10 }
+      ],
+      'Flat White': [
+        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', price: 2 },
+        { label: 'Syrup — caramel / hazelnut / vanilla / lavender', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / לבנדר', price: 5 },
+        { label: 'Baileys', labelHe: 'ביילס', price: 10 }
+      ],
+      'Latte': [
+        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', price: 2 },
+        { label: 'Syrup — honey / vanilla / lavender / hazelnut', labelHe: 'סירופ — דבש / וניל / לבנדר / אגוזי לוז', price: 5 },
+        { label: 'Baileys', labelHe: 'ביילס', price: 10 }
+      ],
+      'Matcha Latte': [
+        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', price: 2 },
+        { label: 'Syrup — caramel / hazelnut / vanilla / Irish cream', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / אייריש קרים', price: 5 }
+      ],
+      'Iced Coffee': [
+        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', price: 2 },
+        { label: 'Syrup — caramel / hazelnut / vanilla / Irish cream', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / אייריש קרים', price: 5 },
+        { label: 'Baileys', labelHe: 'ביילס', price: 10 }
+      ],
+      'Iced Matcha': [
+        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', price: 2 },
+        { label: 'Syrup — caramel / hazelnut / vanilla / Irish cream', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / אייריש קרים', price: 5 }
+      ],
+      'Fruitshake': [
+        { label: 'Alternative base (oat / soy / orange juice)', labelHe: 'בסיס חלופי (שיבולת / סויה / מיץ תפוזים)', price: 3 }
+      ],
+      'Smoked Salmon': [
+        { label: 'Avocado', labelHe: 'אבוקדו', price: 8 },
+        { label: 'Hard-boiled egg', labelHe: 'ביצה קשה', price: 3 }
+      ],
+      'Croissant Salmon': [
+        { label: 'Avocado', labelHe: 'אבוקדו', price: 8 },
+        { label: 'Hard-boiled egg', labelHe: 'ביצה קשה', price: 3 }
+      ],
+      'Tuna Sandwich': [
+        { label: 'Avocado', labelHe: 'אבוקדו', price: 8 }
+      ],
+      'Croissant Tuna': [
+        { label: 'Avocado', labelHe: 'אבוקדו', price: 8 }
+      ],
+      'Five Cheese Toast': [
+        { label: 'Tuna', labelHe: 'טונה', price: 8 },
+        { label: 'Avocado', labelHe: 'אבוקדו', price: 8 },
+        { label: 'Egg', labelHe: 'ביצה', price: 6 },
+        { label: 'Tomato', labelHe: 'עגבניה', price: 3 },
+        { label: 'Corn', labelHe: 'תירס', price: 3 },
+        { label: 'Red onion', labelHe: 'בצל סגול', price: 3 },
+        { label: 'Kalamata olives', labelHe: 'זיתי קלמטה', price: 4 }
+      ],
+      'Tuna Salad': [
+        { label: 'Avocado', labelHe: 'אבוקדו', price: 8 },
+        { label: 'Bulgarian cheese', labelHe: 'גבינה בולגרית', price: 8 },
+        { label: 'Whole wheat bread', labelHe: 'לחם מלא', price: 8 },
+        { label: 'Extra egg', labelHe: 'ביצה נוספת', price: 6 }
+      ],
+      'White cheese Salad': [
+        { label: 'Avocado', labelHe: 'אבוקדו', price: 8 },
+        { label: 'Tuna', labelHe: 'טונה', price: 8 },
+        { label: 'Whole wheat bread', labelHe: 'לחם מלא', price: 8 },
+        { label: 'Extra egg', labelHe: 'ביצה נוספת', price: 6 }
+      ],
+      'Chopped Salad': [
+        { label: 'Bulgarian cheese', labelHe: 'גבינה בולגרית', price: 8 },
+        { label: 'Tuna', labelHe: 'טונה', price: 8 },
+        { label: 'Avocado', labelHe: 'אבוקדו', price: 8 },
+        { label: 'Egg', labelHe: 'ביצה', price: 6 },
+        { label: 'Whole wheat bread', labelHe: 'לחם מלא', price: 8 }
+      ]
+    };
+
+    const overlay  = document.getElementById('addonOverlay');
+    const nameEl   = document.getElementById('addonName');
+    const priceEl  = document.getElementById('addonPrice');
+    const imgEl    = document.getElementById('addonImg');
+    const extrasEl = document.getElementById('addonExtras');
+    const listEl   = document.getElementById('addonList');
+    const totalEl  = document.getElementById('addonTotal');
+    let basePrice  = 0;
+
+    function firstPrice(str) {
+      const m = str.match(/₪(\d+)/);
+      return m ? +m[1] : 0;
+    }
+
+    function recalc() {
+      let extra = 0;
+      listEl.querySelectorAll('input:checked').forEach(cb => { extra += +cb.dataset.price; });
+      totalEl.textContent = '₪' + (basePrice + extra);
+    }
+
+    function openModal(item) {
+      const nameEl2 = item.querySelector('.menu-item-name');
+      const rawName = (nameEl2.dataset.en || nameEl2.textContent).trim().replace(/\s*◦\s*$/, '');
+      const priceStr = item.querySelector('.menu-item-price').textContent.trim();
+      const src = item.querySelector('.menu-item-photo img');
+      const addons = ADDONS[rawName] || [];
+
+      nameEl.textContent  = rawName;
+      priceEl.textContent = priceStr;
+      basePrice = firstPrice(priceStr);
+
+      imgEl.innerHTML = src ? `<img src="${src.src}" alt="${rawName}">` : '';
+
+      listEl.innerHTML = '';
+      if (addons.length) {
+        extrasEl.style.display = '';
+        addons.forEach(a => {
+          const lbl = document.createElement('label');
+          lbl.className = 'addon-option';
+          const isHe = document.documentElement.lang === 'he';
+          const displayLabel = isHe && a.labelHe ? a.labelHe : a.label;
+          lbl.innerHTML = `<input type="checkbox" data-price="${a.price}"><span class="addon-option-name">${displayLabel}</span><span class="addon-option-price">+₪${a.price}</span>`;
+          lbl.querySelector('input').addEventListener('change', recalc);
+          listEl.appendChild(lbl);
+        });
+      } else {
+        extrasEl.style.display = 'none';
+      }
+
+      recalc();
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.menu-item-action').forEach(btn => {
+      const item = btn.closest('.menu-item');
+      const nameEl = item.querySelector('.menu-item-name');
+      const name = (nameEl.dataset.en || nameEl.textContent).trim().replace(/\s*◦\s*$/, '');
+      if (ADDONS[name]) {
+        btn.textContent = 'Add Ingredients →';
+        btn.addEventListener('click', e => { e.preventDefault(); openModal(item); });
+      } else {
+        btn.remove();
+      }
+    });
+
+    document.getElementById('addonClose').addEventListener('click', closeModal);
+    document.getElementById('addonDone').addEventListener('click', closeModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  })();
+
+  // ─── FILTER BAR DRAG-TO-SCROLL ──────────────────────────
+  (function(){
+    const pills = document.querySelector('.filter-bar-pills');
+    if (!pills) return;
+    pills.querySelectorAll('a').forEach(a => {
+      a.setAttribute('draggable', 'false');
+      a.addEventListener('dragstart', e => e.preventDefault());
+    });
+    let isDown = false, startX, scrollLeft;
+    pills.addEventListener('mousedown', e => {
+      isDown = true;
+      pills.style.cursor = 'grabbing';
+      pills.style.userSelect = 'none';
+      startX = e.pageX - pills.offsetLeft;
+      scrollLeft = pills.scrollLeft;
+    });
+    document.addEventListener('mouseup', () => {
+      isDown = false;
+      pills.style.cursor = '';
+      pills.style.userSelect = '';
+    });
+    document.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - pills.offsetLeft;
+      pills.scrollLeft = scrollLeft - (x - startX);
+    });
+  })();
+
+</script>
+
+<script src="lang.js"></script>
+</body>
+</html>

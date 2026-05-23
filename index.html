@@ -1,0 +1,807 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bulochka — Bakery · Coffee · Cakes</title>
+  <script>(function(){var l=localStorage.getItem('bulochka-lang');if(l==='he'){document.documentElement.dir='rtl';document.documentElement.lang='he';}})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Frank+Ruhl+Libre:wght@300;400;500&family=IBM+Plex+Sans+Hebrew:wght@300;400;500&family=Inter+Tight&family=Varela+Round:wght@400;500&family=JetBrains+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Rubik:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2">
+  <style>
+    /* ─── HERO ─────────────────────────────── */
+    .hero {
+      padding: 72px 24px 0;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .hero-left { padding-bottom: 72px; }
+
+    .hero-eyebrow {
+      font-family: var(--serif);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      transform: scaleY(1.3);
+      text-transform: uppercase;
+      color: var(--brown-mid);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .eyebrow-star { font-size: 9px; color: var(--brown-mid); vertical-align: middle; }
+    [dir="rtl"] .hero-eyebrow,
+    [dir="rtl"] .eyebrow-star,
+    [dir="rtl"] .ticker-inner,
+    [dir="rtl"] .filter-card-label,
+    [dir="rtl"] .visit-detail-label { font-size: 12px; font-family: 'Rubik', sans-serif; }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(42px, 8vw, 104px);
+      font-weight: 300;
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+      max-width: 780px;
+      margin-top: 32px;
+      margin-bottom: 28px;
+      font-optical-sizing: auto;
+    }
+    .hero-body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-style: normal;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 28.9px;
+      color: rgba(42, 31, 24, 0.72);
+      max-width: 480px;
+      margin-bottom: 24px;
+    }
+    a.hero-menu-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+      margin-bottom: 36px;
+      padding: 16px 36px;
+      background: #1a110c;
+      color: #fbf8f2;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 100px;
+      border-bottom: none;
+      transition: background 0.2s;
+    }
+    a.hero-menu-btn:hover {
+      background: #7a5a3f;
+      color: #fbf8f2;
+    }
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 28px;
+    }
+
+    /* ─── BUTTONS ───────────────────────────── */
+    .btn-pill {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--cream);
+      background: var(--brown-dark);
+      padding: 14px 28px;
+      border-radius: 100px;
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+    .btn-pill:hover { opacity: 0.82; }
+    .btn-plain {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--brown-mid);
+      display: inline-block;
+      transition: color 0.2s;
+    }
+    .btn-plain:hover { color: var(--brown-dark); }
+
+    /* ─── HERO RIGHT (photo + filter card) ─── */
+    .hero-right {
+      position: relative;
+      overflow: visible;
+    }
+    .hero-photo {
+      aspect-ratio: 4/5;
+      min-height: 420px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .filter-card {
+      position: absolute;
+      bottom: 40px;
+      right: -28px;
+      background: var(--white);
+      padding: 18px 24px 20px;
+      min-width: 210px;
+      box-shadow: 0 4px 28px rgba(42,31,24,0.10);
+    }
+    .filter-card-label {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+      margin-bottom: 10px;
+    }
+    .filter-card-name {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 400;
+      line-height: 1.18;
+      color: var(--brown-dark);
+      margin-bottom: 8px;
+    }
+    .filter-card-name .origin { color: #5a8ea4; }
+    .filter-card-notes {
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--brown-light);
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── STATS STRIP ───────────────────────── */
+    .stats-strip {
+      border-top: 1px solid var(--brown-faint);
+      padding: 0 24px;
+    }
+    .stats-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      justify-content: start;
+      gap: 0 80px;
+      padding: 28px 0 36px;
+    }
+    .stat-value {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 52px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1;
+      margin-bottom: 6px;
+      font-optical-sizing: auto;
+      color: var(--brown-dark);
+    }
+    .stat-label {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+    }
+
+    /* ─── TICKER STRIP ───────────────────────── */
+    .ticker-strip {
+      background: var(--cream-mid);
+      border-top: 1px solid var(--brown-faint);
+      border-bottom: 1px solid var(--brown-faint);
+      padding: 14px 24px;
+    }
+    .ticker-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0;
+      font-family: var(--serif);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--brown-mid);
+      transform: scaleY(1.3);
+    }
+    .ticker-item { white-space: nowrap; }
+    .ticker-group { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .ticker-sep {
+      margin: 0 4px;
+      color: var(--brown-mid);
+      font-weight: 400;
+    }
+
+    /* ─── THE ROOM ──────────────────────────── */
+    .section {
+      padding: 80px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section h2 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 5vw, 80px);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.018em;
+      margin-bottom: 12px;
+      font-optical-sizing: auto;
+    }
+    .section h2 em { font-style: italic; }
+    .hero h1 em { color: #8a6838; font-style: normal; white-space: nowrap; }
+    [dir="rtl"] .hero-line1 { white-space: nowrap; }
+    [dir="rtl"] .room-sub { text-align: right; font-family: 'IBM Plex Sans Hebrew', sans-serif; }
+
+    .room-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 44px;
+      gap: 24px;
+    }
+    .room-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 400;
+      font-style: normal;
+      line-height: 16.8px;
+      letter-spacing: 1.89px;
+      text-transform: uppercase;
+      color: rgb(156, 137, 120);
+      text-align: right;
+      line-height: 1.6;
+      white-space: nowrap;
+      padding-bottom: 6px;
+    }
+    .room-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 12px;
+    }
+    .room-photo { border-radius: 10px; overflow: hidden; position: relative; }
+    .room-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .room-photo-1 { grid-column: 1; grid-row: 1 / 3; }
+    .room-photo-2 { grid-column: 2; grid-row: 1; aspect-ratio: 1; }
+    .room-photo-3 { grid-column: 3; grid-row: 1; aspect-ratio: 1; }
+    .room-photo-4 { grid-column: 2; grid-row: 2; aspect-ratio: 1; }
+    .room-photo-5 { grid-column: 3; grid-row: 2; aspect-ratio: 1; }
+    .room-caption {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--cream);
+      background: rgba(42,31,24,0.68);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      padding: 6px 13px;
+      border-radius: 100px;
+    }
+
+    /* ─── MEDOVIK ────────────────────────────── */
+    .medovik-section {
+      background: var(--white);
+      border-top: 1px solid var(--brown-faint);
+      border-bottom: 1px solid var(--brown-faint);
+      padding: 0 24px;
+    }
+    .medovik-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .medovik-text .section-eyebrow { margin-bottom: 16px; }
+    .medovik-text h2 {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.016em;
+      margin-bottom: 20px;
+      font-optical-sizing: auto;
+    }
+    .medovik-story {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 16.5px;
+      font-weight: 300;
+      font-style: normal;
+      line-height: 29.7px;
+      color: rgba(42, 31, 24, 0.78);
+      margin-bottom: 32px;
+    }
+    [dir="rtl"] .medovik-story { font-family: 'IBM Plex Sans Hebrew', sans-serif; }
+    [dir="rtl"] .visit-directions { font-family: 'IBM Plex Sans Hebrew', sans-serif; }
+    .medovik-stats {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    .medovik-stat-val {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 28px;
+      font-weight: 300;
+      font-style: normal;
+      line-height: 44.8px;
+      letter-spacing: -0.56px;
+      color: rgb(42, 31, 24);
+      margin-bottom: 4px;
+    }
+    .medovik-stat-key {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 400;
+      font-style: normal;
+      line-height: 16.8px;
+      letter-spacing: 1.89px;
+      color: rgb(156, 137, 120);
+      text-transform: uppercase;
+      color: var(--brown-light);
+    }
+    .medovik-pricing { display: flex; align-items: center; gap: 14px; flex-wrap: nowrap; }
+    .medovik-pricing .hero-menu-btn { margin-bottom: 0; margin-top: 0; }
+    .medovik-price-item { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: rgb(156, 137, 120); line-height: 20px; white-space: nowrap; }
+    .medovik-price-item strong { font-weight: 400; color: rgb(156, 137, 120); }
+    .medovik-photo { aspect-ratio: 4/5; border-radius: 10px; overflow: hidden; position: relative; }
+    .medovik-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+    /* ─── VISIT ──────────────────────────────── */
+    .visit-section {
+      padding: 0 24px;
+      border-top: 1px solid var(--brown-faint);
+    }
+    .visit-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+    .visit-text h2 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 72px);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.018em;
+      margin-bottom: 20px;
+      font-optical-sizing: auto;
+    }
+    .visit-directions {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 16.5px;
+      font-weight: 300;
+      font-style: normal;
+      line-height: 28.875px;
+      color: rgba(42, 31, 24, 0.78);
+      margin-bottom: 36px;
+    }
+    .visit-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      padding-top: 8px;
+    }
+    .visit-details-left { display: flex; flex-direction: column; gap: 6px; }
+    .visit-details-right { display: flex; flex-direction: column; gap: 12px; }
+    .visit-detail-group { display: flex; flex-direction: column; gap: 4px; }
+    .visit-detail-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .visit-detail-value {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(18px, 2vw, 24px);
+      font-weight: 500;
+      line-height: 1.3;
+      color: var(--brown-dark);
+    }
+    .visit-phone {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: var(--brown-mid);
+      margin-top: 4px;
+      display: inline-block;
+      transition: color 0.2s;
+      letter-spacing: 0.04em;
+    }
+    .visit-phone:hover { color: var(--brown-dark); }
+    .visit-hours { display: flex; flex-direction: column; gap: 8px; }
+    .visit-hours-row {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--brown-faint);
+    }
+    .visit-hours-row span:first-child {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(15px, 1.3vw, 17px);
+      font-weight: 500;
+      color: var(--brown-dark);
+    }
+    .visit-hours-row span:last-child {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--brown-mid);
+      letter-spacing: 0.04em;
+      align-self: center;
+    }
+    .visit-hours-row:last-child { border-bottom: none; }
+    .visit-map { border-radius: 2px; overflow: hidden; margin-top: -48px; margin-bottom: -48px; }
+    .visit-mobile-photo { display: none; }
+    .visit-map .photo-placeholder { height: 100%; min-height: 280px; }
+
+    /* ─── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding-top: 56px;
+      }
+      .hero-left { padding-bottom: 0; }
+      .hero-right { margin-bottom: 0; }
+      .filter-card { right: 0; }
+      .stats-inner { gap: 0 48px; }
+      .medovik-inner { grid-template-columns: 1fr; gap: 40px; }
+      .medovik-photo { aspect-ratio: 3/2; }
+      .visit-inner { grid-template-columns: 1fr; gap: 0; }
+      .visit-details { grid-template-columns: 1fr; }
+      .visit-map { display: none; }
+      .visit-mobile-photo { display: block; border-radius: 10px; overflow: hidden; margin: 24px 0; }
+      .visit-mobile-photo img { width: 100%; height: 220px; object-fit: cover; display: block; }
+      .room-grid { grid-template-columns: 1fr 1fr; }
+      .room-photo-1 { grid-column: 1 / 3; grid-row: 1; aspect-ratio: 16/7; }
+      .room-photo-2, .room-photo-3,
+      .room-photo-4, .room-photo-5 { grid-column: auto; grid-row: auto; aspect-ratio: 1; }
+    }
+    @media (max-width: 640px) {
+      .visit-map { display: none; }
+      .visit-mobile-photo { display: block; border-radius: 10px; overflow: hidden; margin: 24px 0; }
+      .visit-mobile-photo img { width: 100%; height: 220px; object-fit: cover; display: block; }
+      .hero { padding: 48px 20px 0; }
+      .stats-inner {
+        grid-template-columns: repeat(3, auto);
+        gap: 0 50px;
+        padding: 32px 0 40px;
+      }
+      .filter-card { position: static; margin-top: 16px; box-shadow: none; border: 1px solid var(--brown-faint); }
+      .ticker-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; font-size: 7.5px; }
+      .ticker-group { width: 100%; }
+      .ticker-item { white-space: normal; }
+      .ticker-sep { margin: 0 12px; }
+      .room-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .room-sub { align-self: flex-end; text-align: right; }
+      [dir="rtl"] .room-sub { align-self: flex-end; text-align: right; }
+      .room-sub { text-align: right; }
+      [dir="rtl"] .room-sub { text-align: right; }
+      .section { padding: 56px 20px; }
+      .medovik-stats { grid-template-columns: repeat(3, auto); gap: 16px; }
+      .room-grid { grid-template-columns: 1fr 1fr; }
+      .room-photo-1 { grid-column: 1 / 3; grid-row: 1; aspect-ratio: 16/7; }
+      .room-photo-2, .room-photo-3,
+      .room-photo-4, .room-photo-5 { grid-column: auto; grid-row: auto; aspect-ratio: 1; }
+    }
+    @media (max-width: 400px) {
+      .stats-inner { grid-template-columns: repeat(3, auto); gap: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ──────────────────────────────────────────────── -->
+<nav class="nav">
+  <ul class="nav-links">
+    <li><a href="index.html" data-en='Home' data-he='ראשי'>Home</a></li>
+    <li><a href="menu.html" data-en='Menu' data-he='תפריט'>Menu</a></li>
+    <li><a href="#story" data-en='Our story' data-he='הסיפור שלנו'>Our story</a></li>
+    <li><a href="careers.html" data-en='Work with us' data-he='עבוד איתנו'>Work with us</a></li>
+    <li><a href="events.html" data-en='Events' data-he='אירועים'>Events</a></li>
+  </ul>
+  <a href="index.html" class="nav-logo">Bulochka</a>
+  <div class="nav-right">
+    <div class="nav-social">
+      <a href="https://wa.me/972529662724" target="_blank" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      <a href="https://www.instagram.com/bulochka.pt" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+      <a href="https://www.facebook.com/bulochka.bulochka.2025" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+    </div>
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="he">עב</button>
+    </div>
+    <span class="nav-hours" data-en='Open until 20:00' data-he='פתוח עד 20:00' dir="ltr">Open until 20:00</span>
+    <a href="tel:+972529662724" class="btn-reserve" data-en='Reserve a table' data-he='הזמנת שולחן'>Reserve a table</a>
+  </div>
+  <div class="nav-toggle" id="navToggle" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ─── MOBILE MENU ──────────────────────────────────────── -->
+<div class="mobile-menu-overlay" id="menuOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-menu-close" id="menuClose" data-en="Close" data-he="סגור">Close</span>
+  <a href="index.html" data-en='Home' data-he='ראשי'>Home</a>
+  <a href="menu.html" data-en='Menu' data-he='תפריט'>Menu</a>
+  <a href="#story" data-en='Our story' data-he='הסיפור שלנו'>Our story</a>
+  <a href="careers.html" data-en='Work with us' data-he='עבוד איתנו'>Work with us</a>
+  <a href="events.html" data-en='Events' data-he='אירועים'>Events</a>
+  <a href="tel:+972529662724" class="mobile-menu-reserve" data-en='Reserve a table →' data-he='הזמן שולחן →'>Reserve a table →</a>
+  <div class="mobile-menu-secondary">
+    <a href="https://www.instagram.com/bulochka.pt" target="_blank" class="mobile-menu-secondary-link">Instagram</a>
+    <a href="https://www.facebook.com/bulochka.bulochka.2025" target="_blank" class="mobile-menu-secondary-link">Facebook</a>
+    <a href="https://www.google.com/search?q=Bulochka+Petah+Tikva" target="_blank" class="mobile-menu-secondary-link" data-en='Google Reviews' data-he='ביקורות גוגל'>Google Reviews</a>
+    <div class="mobile-menu-lang" id="mobileLangToggle">
+      <span data-en='Language' data-he='שפה'>Language</span>
+      <span class="mobile-menu-lang-arrow">›</span>
+    </div>
+    <div class="mobile-menu-lang-options" id="mobileLangOptions">
+      <button class="mobile-lang-btn" data-lang="en">English</button>
+      <button class="mobile-lang-btn" data-lang="he">עברית</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── HERO ──────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-left">
+<p class="hero-eyebrow"><span class="eyebrow-star">✦</span> <span data-en='Bakery · Coffee · Cakes' data-he='מאפייה · קפה · עוגות'>Bakery · Coffee · Cakes</span></p>
+<h1><span data-en='Slow mornings,' data-he='בקרים שקטים,' class="hero-line1">Slow mornings,</span><br><em class="hero-accent" data-en='warm butter.' data-he='חמאה חמה.'>warm butter.</em></h1>
+    <p class="hero-body" data-en="A small, charming neighborhood café with on-site baking, premium jams and spreads from 'Bustan' in the Galilee, wonderful cookies, unique pastries, handmade sourdough breads (available on Fridays or by pre-order), excellent coffee, and many more delicious things. Definitely worth a visit!" data-he="בית קפה שכונתי קטן וקסום עם אפייה במקום, ריבות וממרחים מ'בוסתן' בגליל, עוגיות נפלאות, מאפים ייחודיים, לחמי מחמצת עבודת יד (זמינים בימי שישי או בהזמנה מראש), קפה מעולה ועוד המון דברים טעימים. בהחלט שווה ביקור!">A small, charming neighborhood café with on-site baking, premium jams and spreads from &lsquo;Bustan&rsquo; in the Galilee, wonderful cookies, unique pastries, handmade sourdough breads (available on Fridays or by pre-order), excellent coffee, and many more delicious things. Definitely worth a visit!</p>
+    <a href="menu.html" class="hero-menu-btn" data-en='See the Menu →' data-he='לתפריט →'>See the Menu →</a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo"><img src="img/Main page/croissant_main.jfif" alt="Fresh croissants at the counter"></div>
+  </div>
+</section>
+
+<!-- ─── STATS STRIP ───────────────────────────────────────── -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-value">08:00</div>
+      <div class="stat-label" data-en="morning ritual" data-he="טקס הבוקר">morning ritual</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" data-en="three" data-he="שלוש">three</div>
+      <div class="stat-label" data-en="pulls a day" data-he="הכנות ביום">pulls a day</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" data-en="since" data-he="מאז">since</div>
+      <div class="stat-label">2021</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── TICKER STRIP ─────────────────────────────────────── -->
+<div class="ticker-strip">
+  <div class="ticker-inner">
+    <span class="ticker-group"><span class="ticker-sep">✦</span><span class="ticker-item" data-en='Freshly baked croissant every day' data-he='קרואסון טרי אפוי כל יום'>Freshly baked croissant every day</span></span>
+    <span class="ticker-group"><span class="ticker-sep">✦</span><span class="ticker-item" data-en='Whole bread by 24-hour pre-order' data-he='לחם שלם בהזמנה מראש 24 שעות'>Whole bread by 24-hour pre-order</span></span>
+    <span class="ticker-group"><span class="ticker-sep">✦</span><span class="ticker-item" data-en='Homemade cakes' data-he='עוגות ביתיות'>Homemade cakes</span></span>
+    <span class="ticker-group"><span class="ticker-sep">✦</span><span class="ticker-item" data-en='Pet friendly' data-he='ידידותי לחיות מחמד'>Pet friendly</span></span>
+  </div>
+</div>
+
+<!-- ─── THE ROOM ──────────────────────────────────────────── -->
+<div id="story" style="background: var(--cream-mid); border-top: 1px solid var(--brown-faint);">
+  <section class="section">
+    <div class="room-header">
+      <div>
+        <p class="section-eyebrow" data-en='The room' data-he='החדר'>The room</p>
+        <h2><span data-en='The kind of place' data-he='סוג המקום'>The kind of place</span><br><em data-en='you don&apos;t explain.' data-he='שלא מסבירים.'>you don't explain.</em></h2>
+      </div>
+      <p class="room-sub"><span data-en='You just' data-he='פשוט'>You just</span><br><span data-en='bring someone' data-he='מביאים מישהו'>bring someone</span></p>
+    </div>
+    <div class="room-grid">
+      <div class="room-photo room-photo-1">
+        <img src="img/Main page/barista.webp" alt="The counter">
+        <div class="room-caption" data-en='the counter' data-he='הדלפק'>the counter</div>
+      </div>
+      <div class="room-photo room-photo-2">
+        <img src="img/Main page/clients.jpg" alt="Served with care">
+        <div class="room-caption" data-en='served with care' data-he='מוגש באהבה'>served with care</div>
+      </div>
+      <div class="room-photo room-photo-3">
+        <img src="img/Main page/tables.webp" alt="The terrace">
+        <div class="room-caption" data-en='the terrace' data-he='המרפסת'>the terrace</div>
+      </div>
+      <div class="room-photo room-photo-4">
+        <img src="img/Main page/clients2.jpg" alt="Flat white, 09:14">
+        <div class="room-caption" data-en='flat white, 09:14' data-he='פלט וייט, 09:14'>flat white, 09:14</div>
+      </div>
+      <div class="room-photo room-photo-5">
+        <img src="img/Main page/creambon.jpg" alt="Morning ritual">
+        <div class="room-caption" data-en='morning ritual' data-he='טקס הבוקר'>morning ritual</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ─── MEDOVIK FEATURE ───────────────────────────────────── -->
+<section class="medovik-section">
+  <div class="medovik-inner">
+    <div class="medovik-text">
+      <p class="section-eyebrow" data-en='The reason we opened' data-he='הסיבה שפתחנו'>The reason we opened</p>
+      <h2>Medovik</h2>
+      <p class="medovik-story" data-en='Eight paper-thin sheets of honey sponge, baked one at a time and stacked with sour-cream cream. Rested overnight in the fridge so the layers go tender and the cream sets enough to slice clean. Honey from a beekeeper named Igor, by the river. We&apos;ve never adjusted the recipe.' data-he='שמונה שכבות דקות כנייר של בצק דבש, אפויות אחת אחת ומוערמות עם קרם שמנת חמוצה. נח לילה שלם במקרר כדי שהשכבות יתרככו והקרם יתייצב לפרוסה נקייה. דבש מגדלן דבורים בשם איגור, ליד הנהר. מעולם לא שינינו את המתכון.'>Eight paper-thin sheets of honey sponge, baked one at a time and stacked with sour-cream cream. Rested overnight in the fridge so the layers go tender and the cream sets enough to slice clean. Honey from a beekeeper named Igor, by the river. We've never adjusted the recipe.</p>
+      <div class="medovik-stats">
+        <div>
+          <div class="medovik-stat-key" data-en='Layers' data-he='שכבות'>Layers</div>
+          <div class="medovik-stat-val">8</div>
+        </div>
+        <div>
+          <div class="medovik-stat-key" data-en='Rests' data-he='מנוחה'>Rests</div>
+          <div class="medovik-stat-val" data-en="12 hrs" data-he="12 שעות">12 hrs</div>
+        </div>
+        <div>
+          <div class="medovik-stat-key" data-en='Honey' data-he='דבש'>Honey</div>
+          <div class="medovik-stat-val" data-en='Local' data-he='מקומי'>Local</div>
+        </div>
+      </div>
+      <div class="medovik-pricing">
+        <a href="menu.html#cakes" class="hero-menu-btn" data-en='Slice 45&#8362; →' data-he='פרוסה 45&#8362; →'>Slice 45&#8362; →</a>
+        <span class="medovik-price-item" data-he-html='הזמנה מראש עוגה שלמה · <strong>270&#8362;</strong>'>Pre-order whole · <strong>270&#8362;</strong></span>
+      </div>
+    </div>
+    <div class="medovik-photo">
+      <img src="img/Main page/honeycake.jpg" alt="Medovik honey cake">
+    </div>
+  </div>
+</section>
+
+<!-- ─── VISIT ─────────────────────────────────────────────── -->
+<section class="visit-section" id="visit">
+  <div class="visit-inner">
+    <div class="visit-map">
+      <img src="img/Main page/street_view.jfif" alt="Bulochka exterior" style="width:100%; height:100%; object-fit:cover; display:block;">
+    </div>
+    <div class="visit-text">
+      <p class="section-eyebrow" data-en='Visit' data-he='ביקור'>Visit</p>
+      <h2><span data-en='The glass door,' data-he='הדלת הזכוכית,'>The glass door,</span><br><span data-en='under the awning.' data-he='מתחת לאוהל.'>under the awning.</span></h2>
+      <p class="visit-directions" data-en='On the corner of the building, between the glass veranda and the wall with coffee sacks — you won&apos;t miss it!' data-he='בפינת הבניין, בין הוורנדה הזכוכית לקיר עם שקי קפה — אי אפשר לפספס!'>On the corner of the building, between the glass veranda and the wall with coffee sacks — you won't miss it!</p>
+      <div class="visit-mobile-photo"><img src="img/Main page/street_view.jfif" alt="Bulochka exterior"></div>
+      <div class="visit-details">
+        <div class="visit-details-left">
+          <div class="visit-detail-group">
+            <span class="visit-detail-label" data-en='Address' data-he='כתובת'>Address</span>
+            <span class="visit-detail-value" data-he-html='פינסקר 29<br>פתח תקווה'>Pinsker 29<br>Petah Tikva</span>
+          </div>
+          <a href="tel:+972529662724" class="visit-phone" dir="ltr">+972 (52) 966-2724</a>
+        </div>
+        <div class="visit-details-right">
+          <span class="visit-detail-label" data-en='Hours' data-he='שעות'>Hours</span>
+          <div class="visit-hours">
+            <div class="visit-hours-row"><span data-en='Sun — Thu' data-he='א׳ — ה׳'>Sun — Thu</span><span dir="ltr">08:00 — 20:00</span></div>
+            <div class="visit-hours-row"><span data-en='Friday' data-he='שישי'>Friday</span><span dir="ltr">08:00 — 15:00</span></div>
+            <div class="visit-hours-row"><span data-en='Saturday' data-he='שבת'>Saturday</span><span data-en='Closed' data-he='סגור'>Closed</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">Bulochka</div>
+        <p data-en='A small bakery, on the corner of your morning.' data-he='מאפייה קטנה, בפינת הבוקר שלך.'>A small bakery, on the corner<br>of your morning.</p>
+      </div>
+      <div>
+        <div class="footer-col-title" data-en='Visit' data-he='ביקור'>Visit</div>
+        <div class="footer-links">
+          <span data-en='Petah Tikva, Pinsker 29' data-he='פתח תקווה, פינסקר 29'>Petah Tikva, Pinsker 29</span>
+          <span data-en='Sun–Thu, 08:00–20:00' data-he='08:00–20:00 ,א׳–ה׳' dir="ltr">Sun–Thu, 08:00–20:00</span>
+          <span data-en='Fri, 08:00–15:00' data-he='08:00–15:00 ,ו׳' dir="ltr">Fri, 08:00–15:00</span>
+          <a href="tel:+972529662724" dir="ltr">+972 (52) 966-2724</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title" data-en='Stay in touch' data-he='צרו קשר'>Stay in touch</div>
+        <div class="footer-links">
+          <a href="careers.html" data-en='Work with us' data-he='עבוד איתנו'>Work with us</a>
+          <a href="events.html" data-en='Events' data-he='אירועים'>Events</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title" data-en='Follow' data-he='עקבו אחרינו'>Follow</div>
+        <div class="footer-links">
+          <a href="https://www.instagram.com/bulochka.pt" target="_blank">Instagram</a>
+          <a href="https://www.facebook.com/bulochka.bulochka.2025#" target="_blank">Facebook</a>
+          <a href="https://www.google.com/search?q=Bulochka%2C+Yehuda+Leib+Pinsker+Street%2C+Petah+Tikva&rlz=1C1GCEA_enIL1186IL1186&oq=bu&gs_lcrp=EgZjaHJvbWUqCAgAEEUYJxg7MggIABBFGCcYOzIICAEQRRgnGDsyBggCEEUYOzIGCAMQRRg5MgYIBBBFGDsyBggFEEUYPDIGCAYQRRg8MgYIBxBFGDzSAQgxMzg2ajBqNKgCALACAQ&sourceid=chrome&ie=UTF-8#lrd=0x151d3713a80831a3:0x956fbd3c3adf20a3,3,,,," target="_blank" data-en='Google Reviews' data-he='ביקורות גוגל'>Google Reviews</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© Bulochka MMXIX—MMXXVI</span>
+      <span class="footer-tagline" data-en='✦ Made with butter' data-he='✦ עשוי עם חמאה'>✦ Made with butter</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('mobileMenu');
+  const overlay = document.getElementById('menuOverlay');
+  const close = document.getElementById('menuClose');
+  function openMenu() {
+    menu.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    menu.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  toggle.addEventListener('click', openMenu);
+  close.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  menu.querySelectorAll('a').forEach(l => l.addEventListener('click', closeMenu));
+
+  const langToggle = document.getElementById('mobileLangToggle');
+  const langOptions = document.getElementById('mobileLangOptions');
+  langToggle.addEventListener('click', () => {
+    langToggle.classList.toggle('expanded');
+    langOptions.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const navBtn = document.querySelector(`.lang-btn[data-lang="${btn.dataset.lang}"]`);
+      if (navBtn) navBtn.click();
+      document.querySelectorAll('.mobile-lang-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.lang === btn.dataset.lang);
+      });
+    });
+  });
+
+  let touchStartX = 0;
+  menu.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+    menu.style.transition = 'none';
+  }, { passive: true });
+  menu.addEventListener('touchmove', e => {
+    const dx = e.touches[0].clientX - touchStartX;
+    if (dx < 0) menu.style.transform = `translateX(${dx}px)`;
+  }, { passive: true });
+  menu.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    menu.style.transition = '';
+    if (dx < -80) closeMenu();
+    else menu.style.transform = '';
+  });
+</script>
+
+<script src="lang.js"></script>
+</body>
+</html>

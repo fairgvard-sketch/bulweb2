@@ -1,0 +1,492 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Events — Bulochka</title>
+  <script>(function(){var l=localStorage.getItem('bulochka-lang');if(l==='he'){document.documentElement.dir='rtl';document.documentElement.lang='he';}})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Inter+Tight:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Rubik:wght@300;400;500&family=Varela+Round&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ─── HERO ─── */
+    .events-hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 24px 72px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: end;
+      border-bottom: 1px solid var(--brown-faint);
+    }
+    .events-hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(42px, 7vw, 96px);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      font-optical-sizing: auto;
+      margin-top: 20px;
+    }
+    .events-hero h1 em { font-style: italic; color: var(--brown-mid); }
+    .events-hero-right {
+      padding-bottom: 8px;
+    }
+    .events-hero-desc {
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--brown-mid);
+      margin-bottom: 32px;
+    }
+
+    /* ─── FEATURES ─── */
+    .events-features {
+      border-bottom: 1px solid var(--brown-faint);
+      padding: 0 24px;
+    }
+    .events-features-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding: 56px 0;
+      gap: 0;
+    }
+    .events-feature {
+      padding: 0 40px 0 0;
+      border-left: 1px solid var(--brown-faint);
+      padding-right: 0;
+      padding-left: 40px;
+    }
+    .events-feature:last-child { border-left: none; padding-left: 0; }
+    .events-feature-num {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+      margin-bottom: 16px;
+    }
+    .events-feature h3 {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 300;
+      font-style: italic;
+      margin-bottom: 10px;
+      font-optical-sizing: auto;
+    }
+    .events-feature p {
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--brown-mid);
+    }
+
+    /* ─── FORM SECTION ─── */
+    .events-form-section {
+      padding: 72px 24px 80px;
+    }
+    .events-form-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .events-form-aside h2 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-top: 8px;
+      margin-bottom: 20px;
+      font-optical-sizing: auto;
+    }
+    .events-form-aside h2 em { font-style: italic; color: var(--brown-mid); }
+    .events-form-aside p {
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--brown-mid);
+      margin-bottom: 32px;
+    }
+    .events-contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-bottom: 18px;
+    }
+    .events-contact-label {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+    }
+    .events-contact-value {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--brown-dark);
+    }
+
+    /* ─── FORM ─── */
+    .events-form {
+      background: var(--white);
+      border: 1px solid var(--brown-faint);
+      border-radius: 2px;
+      padding: 40px;
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block;
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+      margin-bottom: 8px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: var(--cream);
+      border: 1px solid var(--brown-faint);
+      border-radius: 2px;
+      padding: 13px 16px;
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--brown-dark);
+      outline: none;
+      transition: border-color 0.15s;
+      box-sizing: border-box;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--brown-light); opacity: 0.7; }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--brown-light); }
+    .form-group select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239c8978' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: left 16px center;
+      cursor: pointer;
+      background-color: var(--cream);
+    }
+    .form-group textarea { resize: vertical; min-height: 88px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .form-divider {
+      height: 1px;
+      background: var(--brown-faint);
+      margin: 24px 0;
+    }
+
+    .form-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .form-check input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      margin-top: 3px;
+      accent-color: var(--brown-dark);
+      cursor: pointer;
+    }
+    .form-check label {
+      font-family: var(--sans);
+      font-size: 12px;
+      line-height: 1.65;
+      color: var(--brown-mid);
+      cursor: pointer;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 24px;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      background: var(--brown-dark);
+      color: var(--cream);
+      padding: 16px 36px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-submit:hover { opacity: 0.82; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .events-hero { grid-template-columns: 1fr; gap: 24px; padding: 56px 24px 56px; }
+      .events-features-inner { grid-template-columns: 1fr; gap: 32px; }
+      .events-feature { border-left: none; padding-left: 0; border-top: 1px solid var(--brown-faint); padding-top: 32px; }
+      .events-feature:first-child { border-top: none; padding-top: 0; }
+      .events-form-inner { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 640px) {
+      .events-hero { padding: 48px 20px 48px; }
+      .events-form-section { padding: 48px 20px 64px; }
+      .events-features { padding: 0 20px; }
+      .events-form { padding: 24px 20px; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav class="nav">
+  <ul class="nav-links">
+    <li><a href="index.html" data-en='Home' data-he='ראשי'>Home</a></li>
+    <li><a href="menu.html" data-en='Menu' data-he='תפריט'>Menu</a></li>
+    <li><a href="index.html#story" data-en='Our story' data-he='הסיפור שלנו'>Our story</a></li>
+    <li><a href="careers.html" data-en='Work with us' data-he='עבוד איתנו'>Work with us</a></li>
+    <li><a href="events.html" class="active" data-en='Events' data-he='אירועים'>Events</a></li>
+  </ul>
+  <a href="index.html" class="nav-logo">Bulochka</a>
+  <div class="nav-right">
+    <div class="nav-social">
+      <a href="https://wa.me/972529662724" target="_blank" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      <a href="https://www.instagram.com/bulochka.pt" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+      <a href="https://www.facebook.com/bulochka.bulochka.2025" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+    </div>
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="he">עב</button>
+    </div>
+    <span class="nav-hours" data-en='Open until 20:00' data-he='פתוח עד 20:00' dir="ltr">Open until 20:00</span>
+    <a href="tel:+972529662724" class="btn-reserve" data-en='Reserve' data-he='הזמנה'>Reserve</a>
+  </div>
+  <div class="nav-toggle" id="navToggle" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ─── MOBILE MENU ─── -->
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-menu-close" id="menuClose" data-en='Close ✕' data-he='סגור ✕'>Close ✕</span>
+  <a href="index.html" data-en='Home' data-he='ראשי'>Home</a>
+  <a href="menu.html" data-en='Menu' data-he='תפריט'>Menu</a>
+  <a href="index.html#story" data-en='Our story' data-he='הסיפור שלנו'>Our story</a>
+  <a href="careers.html" data-en='Work with us' data-he='עבוד איתנו'>Work with us</a>
+  <a href="events.html" data-en='Events' data-he='אירועים'>Events</a>
+  <a href="tel:+972529662724" class="mobile-menu-reserve" data-en='Reserve a table →' data-he='הזמן שולחן →'>Reserve a table →</a>
+</div>
+
+<!-- ─── HERO ─── -->
+<div class="events-hero">
+  <div>
+    <p class="section-eyebrow" data-en='Events' data-he='אירועים'>Events</p>
+    <h1><span data-en='Let's make' data-he='בואו ליצור'>Let's make</span><br><em data-en='it special.' data-he='רגע מיוחד.'>it special.</em></h1>
+  </div>
+  <div class="events-hero-right">
+    <p class="events-hero-desc" data-en='Fill in the details and we&apos;ll be in touch soon — birthdays, brunches, corporate gatherings, or any other reason to celebrate.' data-he='מלאו את הפרטים ונחזור אליכם בקרוב — ימי הולדת, ברנצ׳ים, כנסים ארגוניים, או כל סיבה טובה אחרת לחגוג.'>Fill in the details and we'll be in touch soon — birthdays, brunches, corporate gatherings, or any other reason to celebrate.</p>
+    <a href="#form" class="btn-pill" data-en='Get in touch →' data-he='← צרו קשר'>Get in touch →</a>
+  </div>
+</div>
+
+<!-- ─── FEATURES ─── -->
+<div class="events-features">
+  <div class="events-features-inner">
+    <div class="events-feature">
+      <div class="events-feature-num">01</div>
+      <h3 data-en='Intimate space' data-he='חלל אינטימי'>Intimate space</h3>
+      <p data-en='Up to 40 guests in a warm setting that suits any occasion.' data-he='עד 40 אורחים באווירה חמה שמתאימה לכל אירוע.'>Up to 40 guests in a warm setting that suits any occasion.</p>
+    </div>
+    <div class="events-feature">
+      <div class="events-feature-num">02</div>
+      <h3 data-en='Bakery catering' data-he='קייטרינג מהמאפייה'>Bakery catering</h3>
+      <p data-en='Pastries, cakes, and quality coffee — everything fresh from our kitchen.' data-he='מאפים, עוגות וקפה איכותי — הכל טרי מהמטבח שלנו.'>Pastries, cakes, and quality coffee — everything fresh from our kitchen.</p>
+    </div>
+    <div class="events-feature">
+      <div class="events-feature-num">03</div>
+      <h3>Personal & tailored</h3>
+      <p data-en='We&apos;ll build a menu and atmosphere that speaks exactly to your event.' data-he='נבנה תפריט ואווירה שמדברים בדיוק על האירוע שלכם.'>We'll build a menu and atmosphere that speaks exactly to your event.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FORM SECTION ─── -->
+<div class="events-form-section" id="form">
+  <div class="events-form-inner">
+    <div class="events-form-aside">
+      <p class="section-eyebrow" data-en='Get in touch' data-he='צרו קשר'>Get in touch</p>
+      <h2><span data-en='We&apos;d love' data-he='נשמח'>We'd love</span><br><em data-en='to hear.' data-he='לשמוע.'>to hear.</em></h2>
+      <p data-en='Fill in the form and we&apos;ll get back to you soon to work out all the details.' data-he='מלאו את הטופס ונחזור אליכם בקרוב לסגור את כל הפרטים.'>Fill in the form and we'll get back to you soon to work out all the details.</p>
+      <div class="events-contact-item">
+        <span class="events-contact-label" data-en='Phone' data-he='טלפון'>Phone</span>
+        <a href="tel:+972529662724" class="events-contact-value" dir="ltr">+972 (52) 966-2724</a>
+      </div>
+      <div class="events-contact-item">
+        <span class="events-contact-label" data-en='Address' data-he='כתובת'>Address</span>
+        <span class="events-contact-value" data-en='Pinsker 29, Petah Tikva' data-he='פינסקר 29, פתח תקווה'>Pinsker 29, Petah Tikva</span>
+      </div>
+    </div>
+
+    <form class="events-form" id="eventsForm">
+      <div class="form-group">
+        <label for="fullname" id="lblFullname">Full name</label>
+        <input type="text" id="fullname" name="fullname" placeholder="First and last name" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone" id="lblPhone">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="+972 5X-XXXXXXX" dir="ltr" required>
+        </div>
+        <div class="form-group">
+          <label for="guests" id="lblGuests">Guest count</label>
+          <input type="number" id="guests" name="guests" placeholder="How many people?" min="1">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="event_type" id="lblEventType">Event type</label>
+        <select id="event_type" name="event_type">
+          <option value="" disabled selected id="evtDefault">Select event type</option>
+          <option value="birthday" id="evtBirthday">Birthday</option>
+          <option value="brunch" id="evtBrunch">Brunch / gathering</option>
+          <option value="corporate" id="evtCorporate">Corporate event</option>
+          <option value="private" id="evtPrivate">Private event</option>
+          <option value="other" id="evtOther">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message" id="lblMessage">Additional notes</label>
+        <textarea id="message" name="message" placeholder="Preferred date, special requests, questions…"></textarea>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <div class="form-check">
+        <input type="checkbox" id="consent1" name="consent1" required>
+        <label for="consent1" id="lblConsent1">I agree to the use of my details for the purpose of handling this enquiry, in accordance with the privacy policy.</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" id="consent2" name="consent2">
+        <label for="consent2" id="lblConsent2">I'd like to receive updates and offers from Bulochka. I can unsubscribe at any time.</label>
+      </div>
+
+      <button type="submit" class="btn-submit" id="evtSubmit">Send →</button>
+    </form>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">Bulochka</div>
+        <p data-en='A small bakery, on the corner of your morning.' data-he='מאפייה קטנה, בפינת הבוקר שלך.'>A small bakery, on the corner<br>of your morning.</p>
+      </div>
+      <div>
+        <div class="footer-col-title" data-en='Visit' data-he='ביקור'>Visit</div>
+        <div class="footer-links">
+          <span data-en='Petah Tikva, Pinsker 29' data-he='פתח תקווה, פינסקר 29'>Petah Tikva, Pinsker 29</span>
+          <span data-en='Mon–Thu, 08:00–20:00' data-he='08:00–20:00 ,א׳–ה׳' dir="ltr">Mon–Thu, 08:00–20:00</span>
+          <a href="tel:+972529662724" dir="ltr">+972 (52) 966-2724</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title" data-en='Stay in touch' data-he='צרו קשר'>Stay in touch</div>
+        <div class="footer-links">
+          <a href="careers.html" data-en='Work with us' data-he='עבוד איתנו'>Work with us</a>
+          <a href="events.html" data-en='Events' data-he='אירועים'>Events</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title" data-en='Follow' data-he='עקבו אחרינו'>Follow</div>
+        <div class="footer-links">
+          <a href="https://www.instagram.com/bulochka.pt" target="_blank">Instagram</a>
+          <a href="https://www.facebook.com/bulochka.bulochka.2025#" target="_blank">Facebook</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© Bulochka MMXIX—MMXXVI</span>
+      <span class="footer-tagline" data-en='Made with butter ✦' data-he='עשוי עם חמאה ✦'>Made with butter ✦</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('mobileMenu');
+  const close = document.getElementById('menuClose');
+  toggle.addEventListener('click', () => menu.classList.add('open'));
+  close.addEventListener('click', () => menu.classList.remove('open'));
+  menu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => menu.classList.remove('open')));
+
+  document.getElementById('eventsForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const lang = localStorage.getItem('bulochka-lang') || 'en';
+    const btn = this.querySelector('.btn-submit');
+    btn.textContent = lang === 'he' ? 'תודה — נחזור אליכם בקרוב ✓' : 'Thank you — we\'ll be in touch soon ✓';
+    btn.disabled = true;
+  });
+</script>
+<script src="lang.js"></script>
+<script>
+  (function () {
+    var s = {
+      en: {
+        lblFullname: 'Full name', phFullname: 'First and last name',
+        lblPhone: 'Phone', lblGuests: 'Guest count', phGuests: 'How many people?',
+        lblEventType: 'Event type',
+        evtDefault: 'Select event type', evtBirthday: 'Birthday',
+        evtBrunch: 'Brunch / gathering', evtCorporate: 'Corporate event',
+        evtPrivate: 'Private event', evtOther: 'Other',
+        lblMessage: 'Additional notes', phMessage: 'Preferred date, special requests, questions…',
+        lblConsent1: 'I agree to the use of my details for the purpose of handling this enquiry, in accordance with the privacy policy.',
+        lblConsent2: 'I’d like to receive updates and offers from Bulochka. I can unsubscribe at any time.',
+        evtSubmit: 'Send →'
+      },
+      he: {
+        lblFullname: 'שם מלא', phFullname: 'שם פרטי ושם משפחה',
+        lblPhone: 'טלפון', lblGuests: 'מספר אורחים', phGuests: 'כמה אנשים?',
+        lblEventType: 'סוג האירוע',
+        evtDefault: 'בחרו סוג אירוע', evtBirthday: 'יום הולדת',
+        evtBrunch: 'ברנץ׳ / כינוס', evtCorporate: 'אירוע ארגוני',
+        evtPrivate: 'אירוע פרטי', evtOther: 'אחר',
+        lblMessage: 'הערות נוספות', phMessage: 'תאריך מועדף, בקשות מיוחדות, שאלות…',
+        lblConsent1: 'אני מסכים/ה לשימוש בפרטיי לצורך טיפול בפנייה זו, בהתאם למדיניות הפרטיות.',
+        lblConsent2: 'אני רוצה לקבל עדכונים והצעות מבולוצ׳קה. אוכל להסיר את עצמי בכל עת.',
+        evtSubmit: '← שלח'
+      }
+    };
+    function applyEventsLang(lang) {
+      var t = s[lang] || s.en;
+      ['lblFullname','lblPhone','lblGuests','lblEventType','lblMessage','lblConsent1','lblConsent2',
+       'evtDefault','evtBirthday','evtBrunch','evtCorporate','evtPrivate','evtOther','evtSubmit'
+      ].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = t[id];
+      });
+      document.getElementById('fullname').placeholder = t.phFullname;
+      document.getElementById('guests').placeholder = t.phGuests;
+      document.getElementById('message').placeholder = t.phMessage;
+    }
+    applyEventsLang(localStorage.getItem('bulochka-lang') || 'en');
+    document.querySelectorAll('.lang-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { applyEventsLang(btn.dataset.lang); });
+    });
+  })();
+</script>
+</body>
+</html>
