@@ -277,6 +277,19 @@
   <a href="careers.html" data-en='Work with us' data-he='עבוד איתנו'>Work with us</a>
   <a href="events.html" data-en='Events' data-he='אירועים'>Events</a>
   <a href="tel:+972529662724" class="mobile-menu-reserve" data-en='Reserve a table →' data-he='הזמן שולחן →'>Reserve a table →</a>
+  <div class="mobile-menu-secondary">
+    <a href="https://www.instagram.com/bulochka.pt" target="_blank" class="mobile-menu-secondary-link">Instagram</a>
+    <a href="https://www.facebook.com/bulochka.bulochka.2025" target="_blank" class="mobile-menu-secondary-link">Facebook</a>
+    <a href="https://www.google.com/search?q=Bulochka+Petah+Tikva" target="_blank" class="mobile-menu-secondary-link" data-en='Google Reviews' data-he='ביקורות גוגל'>Google Reviews</a>
+    <div class="mobile-menu-lang" id="mobileLangToggle">
+      <span data-en='Language' data-he='שפה'>Language</span>
+      <span class="mobile-menu-lang-arrow">›</span>
+    </div>
+    <div class="mobile-menu-lang-options" id="mobileLangOptions">
+      <button class="mobile-lang-btn" data-lang="en">English</button>
+      <button class="mobile-lang-btn" data-lang="he">עברית</button>
+    </div>
+  </div>
 </div>
 
 <!-- ─── HERO ──────────────────────────────────────────────── -->
@@ -370,6 +383,22 @@
   toggle.addEventListener('click', () => menu.classList.add('open'));
   close.addEventListener('click', () => menu.classList.remove('open'));
   menu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => menu.classList.remove('open')));
+
+  const langToggle = document.getElementById('mobileLangToggle');
+  const langOptions = document.getElementById('mobileLangOptions');
+  langToggle.addEventListener('click', () => {
+    langToggle.classList.toggle('expanded');
+    langOptions.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const navBtn = document.querySelector(`.lang-btn[data-lang="${btn.dataset.lang}"]`);
+      if (navBtn) navBtn.click();
+      document.querySelectorAll('.mobile-lang-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.lang === btn.dataset.lang);
+      });
+    });
+  });
 
   // Select color fix
   const sel = document.getElementById('positionSelect');
