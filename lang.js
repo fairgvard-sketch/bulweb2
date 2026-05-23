@@ -12,11 +12,7 @@
       if (!el.dataset.en) el.dataset.en = el.innerHTML;
       var enVal = el.dataset.en;
       var hasMarkup = /<[a-z]/i.test(heVal) || /<[a-z]/i.test(enVal);
-      if (hasMarkup) {
-        el.innerHTML = isHe ? heVal : enVal;
-      } else {
-        el.textContent = isHe ? heVal : enVal;
-      }
+      el.innerHTML = isHe ? heVal : enVal;
     });
 
     document.querySelectorAll('[data-he-html]').forEach(function (el) {
