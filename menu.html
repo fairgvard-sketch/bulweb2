@@ -179,6 +179,8 @@
       transition: box-shadow 0.2s;
     }
     .menu-item:hover { box-shadow: 0 4px 20px rgba(42,31,24,0.08); }
+    .menu-item.item-unavailable { opacity: 0.45; pointer-events: none; }
+    .menu-item.item-unavailable .menu-item-name::after { content: ' — sold out'; font-size: 11px; color: #999; font-style: italic; }
 
     /* photo */
     .menu-item-photo {
@@ -2182,5 +2184,78 @@
 </script>
 
 <script src="lang.js"></script>
+
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getFirestore, collection, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+  const app = initializeApp({
+    apiKey: "AIzaSyC_zaNtYW8wnS7nhoOzEvkNhbJeJPHWmaI",
+    authDomain: "bulweb2.firebaseapp.com",
+    projectId: "bulweb2",
+    storageBucket: "bulweb2.firebasestorage.app",
+    messagingSenderId: "260150671022",
+    appId: "1:260150671022:web:6dfa58bd50a9725cec9f3f"
+  });
+  const db = getFirestore(app);
+
+  const CAT_IDS = ['hot-drinks','cold-drinks','sandwiches','pastries','filled','tartlets','cakes','ice-cream','alcohol','friday'];
+
+  function buildItemMap() {
+    const map = {};
+    document.querySelectorAll('.menu-item').forEach(el => {
+      const nameEl = el.querySelector('.menu-item-name');
+      if (!nameEl) return;
+      const key = (nameEl.dataset.en || nameEl.textContent).trim().toLowerCase();
+      map[key] = el;
+    });
+    return map;
+  }
+
+  function applyItem(data, itemMap) {
+    if (!data.name) return;
+    const key = data.name.trim().toLowerCase();
+    const el = itemMap[key];
+    if (!el) return;
+    const isHe = document.documentElement.lang === 'he';
+
+    const nameEl = el.querySelector('.menu-item-name');
+    if (nameEl) {
+      nameEl.dataset.en = data.name;
+      if (data.nameHe) nameEl.dataset.he = data.nameHe;
+      nameEl.textContent = isHe && data.nameHe ? data.nameHe : data.name;
+    }
+
+    const descEl = el.querySelector('.menu-item-desc');
+    if (descEl && (data.desc || data.descHe)) {
+      if (data.desc)   { descEl.dataset.en = data.desc; }
+      if (data.descHe) { descEl.dataset.he = data.descHe; }
+      descEl.textContent = isHe && data.descHe ? data.descHe : (data.desc || descEl.textContent);
+    }
+
+    const priceEl = el.querySelector('.menu-item-price');
+    if (priceEl && data.price) priceEl.textContent = data.price;
+
+    if (data.available === false) {
+      el.classList.add('item-unavailable');
+    } else {
+      el.classList.remove('item-unavailable');
+    }
+  }
+
+  const itemMap = buildItemMap();
+  console.log('[Menu sync] itemMap keys:', Object.keys(itemMap));
+
+  CAT_IDS.forEach(catId => {
+    onSnapshot(collection(db, catId), snap => {
+      console.log(`[Menu sync] ${catId}: ${snap.size} docs`);
+      snap.forEach(d => {
+        const data = d.data();
+        console.log(`[Menu sync] item: "${data.name}" → found in DOM:`, !!itemMap[data.name?.trim().toLowerCase()]);
+        applyItem(data, itemMap);
+      });
+    });
+  });
+</script>
 </body>
 </html>
