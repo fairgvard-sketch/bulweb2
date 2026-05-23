@@ -345,12 +345,20 @@
     const list = document.getElementById('catList');
     list.innerHTML = '<div class="empty">Loading...</div>';
     const counts = {};
-    await Promise.all(CATEGORIES.map(async cat => {
-      const snap = await getDocs(collection(db, cat.id));
-      counts[cat.id] = snap.size;
-    }));
+    const meta = {};
+    await Promise.all([
+      ...CATEGORIES.map(async cat => {
+        const snap = await getDocs(collection(db, cat.id));
+        counts[cat.id] = snap.size;
+      }),
+      (async () => {
+        const snap = await getDocs(collection(db, '_categories'));
+        snap.forEach(d => { meta[d.id] = d.data(); });
+      })(),
+    ]);
     list.innerHTML = '';
-    CATEGORIES.forEach(cat => {
+    CATEGORIES.forEach(baseCat => {
+      const cat = { ...baseCat, ...meta[baseCat.id] };
       const row = document.createElement('div');
       row.className = 'cat-row';
       row.innerHTML = `
@@ -371,6 +379,16 @@
           </button>
         </div>`;
       row.querySelector('.icon-btn.green').onclick = () => openCategory(cat.id, cat.label);
+      row.querySelector('.edit-cat-btn').onclick   = (e) => { e.stopPropagation(); openCatModal(cat); };
+      row.querySelector('.del-cat-btn').onclick    = async (e) => {
+        e.stopPropagation();
+        if (confirm(`Delete all items in "${cat.label}"? This cannot be undone.`)) {
+          const snap = await getDocs(collection(db, cat.id));
+          await Promise.all(snap.docs.map(d => deleteDoc(d.ref)));
+          toast('Deleted');
+          loadCategories();
+        }
+      };
       row.onclick = (e) => { if (!e.target.closest('.icon-btn')) openCategory(cat.id, cat.label); };
       list.appendChild(row);
     });
@@ -527,12 +545,28 @@
   }
 
   // ── CATEGORY MODAL ──
+  let editingCatId = null;
+
   document.getElementById('addCatBtn').onclick   = () => { openCatModal(null); };
   document.getElementById('catModalCancel').onclick = () => closeModal('catModal');
   document.getElementById('catModalClose').onclick  = () => closeModal('catModal');
-  document.getElementById('catModalSave').onclick   = () => { closeModal('catModal'); toast('Saved ✓'); loadCategories(); };
+  document.getElementById('catModalSave').onclick   = async () => {
+    if (!editingCatId) { closeModal('catModal'); return; }
+    const data = {
+      labelHe: document.getElementById('cNameHe').value.trim(),
+      desc:    document.getElementById('cDesc').value.trim(),
+      descHe:  document.getElementById('cDescHe').value.trim(),
+      comment: document.getElementById('cComment').value.trim(),
+      visible: document.getElementById('cVisible').checked,
+    };
+    await setDoc(doc(db, '_categories', editingCatId), data, { merge: true });
+    closeModal('catModal');
+    toast('Saved ✓');
+    loadCategories();
+  };
 
   function openCatModal(cat) {
+    editingCatId = cat?.id || null;
     document.getElementById('catModalTitle').textContent = cat ? 'Edit Category' : 'Add Category';
     document.getElementById('cName').value    = cat?.label  || '';
     document.getElementById('cNameHe').value  = cat?.labelHe || '';
