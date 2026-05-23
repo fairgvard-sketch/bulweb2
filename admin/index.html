@@ -82,18 +82,52 @@
     .btn-add-item:hover{opacity:.85}
 
     /* MODAL */
-    .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:200;align-items:center;justify-content:center;padding:24px}
+    .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:200;align-items:center;justify-content:center;padding:24px;overflow-y:auto}
     .overlay.open{display:flex}
-    .modal{background:var(--white);border-radius:18px;padding:28px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto}
-    .modal-title{font-size:18px;font-weight:600;margin-bottom:20px}
+    .modal{background:var(--white);border-radius:18px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;display:flex;flex-direction:column}
+    .modal-wide{max-width:620px}
+    .modal-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px 0}
+    .modal-title{font-size:17px;font-weight:600}
+    .modal-close{width:32px;height:32px;border:none;background:var(--bg);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+    .modal-close svg{width:16px;height:16px;color:var(--brown-light)}
+
+    /* TABS */
+    .tabs{display:flex;gap:0;border-bottom:1.5px solid var(--faint);margin:12px 24px 0;padding-bottom:0}
+    .tab{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--brown-light);background:none;border:none;padding:10px 16px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1.5px;transition:all .2s}
+    .tab.active{color:var(--purple);border-bottom-color:var(--purple)}
+    .tab-content{display:none;padding:20px 24px}
+    .tab-content.active{display:block}
+    .modal-section-title{font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--brown-light);margin:16px 0 10px}
+    .modal-section-title:first-child{margin-top:0}
+
+    /* UPLOAD */
+    .upload-area{border:2px dashed var(--faint);border-radius:12px;min-height:160px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;margin-bottom:16px;transition:border-color .2s}
+    .upload-area:hover{border-color:var(--brown-light)}
+    .upload-placeholder{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--brown-light);font-size:13px}
+    .upload-placeholder svg{opacity:.5}
+    .upload-area img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+    .upload-remove{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.6);color:#fff;border:none;border-radius:100px;padding:6px 14px;font-size:12px;cursor:pointer;font-family:var(--sans)}
+
+    /* TEXTAREA */
+    .field textarea{padding:11px 14px;border:1.5px solid var(--faint);border-radius:10px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--brown);outline:none;transition:border .2s;resize:vertical;width:100%}
+    .field textarea:focus{border-color:var(--brown-mid)}
+
+    /* TOGGLE */
+    .avail-row{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1.5px solid var(--faint);font-size:14px;font-weight:500}
+    .toggle{position:relative;display:inline-block;width:44px;height:24px}
+    .toggle input{opacity:0;width:0;height:0}
+    .toggle-slider{position:absolute;inset:0;background:var(--faint);border-radius:100px;transition:.2s;cursor:pointer}
+    .toggle-slider:before{content:'';position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}
+    .toggle input:checked+.toggle-slider{background:var(--sage)}
+    .toggle input:checked+.toggle-slider:before{transform:translateX(20px)}
+
     .modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     .modal-grid .field{margin-bottom:0}
-    .modal-grid .field.full{grid-column:1/-1}
-    .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
+    .modal-actions{display:flex;gap:10px;justify-content:flex-end;padding:16px 24px;border-top:1.5px solid var(--faint);margin-top:auto}
     .btn-cancel{padding:10px 20px;border:1.5px solid var(--faint);border-radius:10px;background:none;font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--brown-light);transition:all .2s}
     .btn-cancel:hover{border-color:var(--brown);color:var(--brown)}
-    .btn-save{padding:10px 24px;background:var(--brown);color:#fff;border:none;border-radius:10px;font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;transition:background .2s}
-    .btn-save:hover{background:var(--brown-mid)}
+    .btn-save{padding:10px 24px;background:var(--purple);color:#fff;border:none;border-radius:10px;font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;transition:background .2s}
+    .btn-save:hover{opacity:.9}
 
     /* TOAST */
     .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(12px);background:var(--brown);color:#fff;padding:12px 24px;border-radius:100px;font-size:13px;font-weight:500;opacity:0;transition:all .3s;pointer-events:none;z-index:400;white-space:nowrap}
@@ -150,17 +184,49 @@
   </div>
 </div>
 
-<!-- MODALS -->
+<!-- ITEM MODAL -->
 <div class="overlay" id="itemModal">
-  <div class="modal">
-    <div class="modal-title" id="itemModalTitle">Add item</div>
-    <div class="modal-grid">
-      <div class="field"><label>Name (EN)</label><input type="text" id="iName" placeholder="Espresso"></div>
-      <div class="field"><label>Name (HE)</label><input type="text" id="iNameHe" placeholder="אספרסו" dir="rtl"></div>
-      <div class="field full"><label>Description (EN)</label><input type="text" id="iDesc" placeholder="Short or long..."></div>
-      <div class="field full"><label>Description (HE)</label><input type="text" id="iDescHe" placeholder="קצר או ארוך..." dir="rtl"></div>
-      <div class="field"><label>Price</label><input type="text" id="iPrice" placeholder="₪10 / ₪13"></div>
-      <div class="field"><label>Image path</label><input type="text" id="iImg" placeholder="img/hot drinks/espresso.webp"></div>
+  <div class="modal modal-wide">
+    <div class="modal-header">
+      <div class="modal-title" id="itemModalTitle">Add item</div>
+      <button class="modal-close" id="itemModalClose">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="tabs">
+      <button class="tab active" data-tab="iBasic">Basic Info</button>
+      <button class="tab" data-tab="iAvail">Availability</button>
+    </div>
+    <div class="tab-content active" id="iBasic">
+      <div class="upload-area" id="iUploadArea">
+        <img id="iImgPreview" style="display:none">
+        <div class="upload-placeholder" id="iUploadPlaceholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Upload Image</span>
+        </div>
+        <button class="upload-remove" id="iImgRemove" style="display:none">🗑 Remove</button>
+        <input type="file" id="iImgFile" accept="image/*" style="display:none">
+      </div>
+      <div class="modal-section-title">Item name</div>
+      <div class="modal-grid">
+        <div class="field"><label>Name in English</label><input type="text" id="iName" placeholder="Espresso"></div>
+        <div class="field"><label>Name in Hebrew</label><input type="text" id="iNameHe" placeholder="אספרסו" dir="rtl"></div>
+      </div>
+      <div class="modal-section-title">Description</div>
+      <div class="modal-grid">
+        <div class="field"><label>Description in English</label><textarea id="iDesc" placeholder="Short or long..." rows="2"></textarea></div>
+        <div class="field"><label>Description in Hebrew</label><textarea id="iDescHe" placeholder="קצר או ארוך..." dir="rtl" rows="2"></textarea></div>
+      </div>
+      <div class="modal-grid">
+        <div class="field"><label>Price</label><input type="text" id="iPrice" placeholder="₪10 / ₪13"></div>
+        <div class="field"><label>Comment</label><input type="text" id="iComment" placeholder="Optional note"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="iAvail">
+      <div class="avail-row">
+        <span>Available</span>
+        <label class="toggle"><input type="checkbox" id="iAvailable" checked><span class="toggle-slider"></span></label>
+      </div>
     </div>
     <div class="modal-actions">
       <button class="btn-cancel" id="itemModalCancel">Cancel</button>
@@ -169,13 +235,46 @@
   </div>
 </div>
 
+<!-- CATEGORY MODAL -->
 <div class="overlay" id="catModal">
-  <div class="modal">
-    <div class="modal-title" id="catModalTitle">Add category</div>
-    <div class="modal-grid">
-      <div class="field full"><label>Category name (EN)</label><input type="text" id="cName" placeholder="Hot Drinks"></div>
-      <div class="field full"><label>Category name (HE)</label><input type="text" id="cNameHe" placeholder="משקאות חמים" dir="rtl"></div>
-      <div class="field full"><label>Category ID (slug)</label><input type="text" id="cId" placeholder="hot-drinks"></div>
+  <div class="modal modal-wide">
+    <div class="modal-header">
+      <div class="modal-title" id="catModalTitle">Edit Category</div>
+      <button class="modal-close" id="catModalClose">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="tabs">
+      <button class="tab active" data-tab="cBasic">Basic Info</button>
+      <button class="tab" data-tab="cSettings">Settings</button>
+    </div>
+    <div class="tab-content active" id="cBasic">
+      <div class="upload-area" id="cUploadArea">
+        <img id="cImgPreview" style="display:none">
+        <div class="upload-placeholder" id="cUploadPlaceholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Upload Image</span>
+        </div>
+        <button class="upload-remove" id="cImgRemove" style="display:none">🗑 Remove</button>
+        <input type="file" id="cImgFile" accept="image/*" style="display:none">
+      </div>
+      <div class="modal-section-title">Category name</div>
+      <div class="modal-grid">
+        <div class="field"><label>Name in English</label><input type="text" id="cName" placeholder="Hot Drinks"></div>
+        <div class="field"><label>Name in Hebrew</label><input type="text" id="cNameHe" placeholder="משקאות חמים" dir="rtl"></div>
+      </div>
+      <div class="modal-section-title">Description</div>
+      <div class="modal-grid">
+        <div class="field"><label>Description in English</label><textarea id="cDesc" placeholder="Fresh brewed..." rows="2"></textarea></div>
+        <div class="field"><label>Description in Hebrew</label><textarea id="cDescHe" placeholder="..." dir="rtl" rows="2"></textarea></div>
+      </div>
+      <div class="field"><label>Comment</label><input type="text" id="cComment" placeholder="Optional note"></div>
+    </div>
+    <div class="tab-content" id="cSettings">
+      <div class="avail-row">
+        <span>Visible on menu</span>
+        <label class="toggle"><input type="checkbox" id="cVisible" checked><span class="toggle-slider"></span></label>
+      </div>
     </div>
     <div class="modal-actions">
       <button class="btn-cancel" id="catModalCancel">Cancel</button>
@@ -329,31 +428,91 @@
     });
   }
 
+  // ── TABS ──
+  document.querySelectorAll('.tabs').forEach(tabGroup => {
+    tabGroup.querySelectorAll('.tab').forEach(tab => {
+      tab.onclick = () => {
+        const modal = tab.closest('.modal');
+        tabGroup.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        modal.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        modal.querySelector('#' + tab.dataset.tab).classList.add('active');
+      };
+    });
+  });
+
+  // ── UPLOAD HELPERS ──
+  function setupUpload(areaId, fileId, previewId, placeholderId, removeId) {
+    const area = document.getElementById(areaId);
+    const file = document.getElementById(fileId);
+    const preview = document.getElementById(previewId);
+    const placeholder = document.getElementById(placeholderId);
+    const remove = document.getElementById(removeId);
+    area.onclick = (e) => { if (e.target !== remove) file.click(); };
+    file.onchange = () => {
+      const f = file.files[0];
+      if (!f) return;
+      const url = URL.createObjectURL(f);
+      preview.src = url;
+      preview.style.display = 'block';
+      placeholder.style.display = 'none';
+      remove.style.display = 'block';
+    };
+    remove.onclick = (e) => {
+      e.stopPropagation();
+      preview.src = '';
+      preview.style.display = 'none';
+      placeholder.style.display = 'flex';
+      remove.style.display = 'none';
+      file.value = '';
+    };
+  }
+  setupUpload('iUploadArea','iImgFile','iImgPreview','iUploadPlaceholder','iImgRemove');
+  setupUpload('cUploadArea','cImgFile','cImgPreview','cUploadPlaceholder','cImgRemove');
+
   // ── ITEM MODAL ──
   document.getElementById('addItemBtn').onclick = () => openItemModal(null);
   document.getElementById('itemModalCancel').onclick = () => closeModal('itemModal');
-  document.getElementById('itemModalSave').onclick = saveItem;
+  document.getElementById('itemModalClose').onclick  = () => closeModal('itemModal');
+  document.getElementById('itemModalSave').onclick   = saveItem;
 
   function openItemModal(item) {
     editingItemId = item ? item.id : null;
     document.getElementById('itemModalTitle').textContent = item ? 'Edit item' : 'Add item';
-    document.getElementById('iName').value    = item?.name    || '';
-    document.getElementById('iNameHe').value  = item?.nameHe  || '';
-    document.getElementById('iDesc').value    = item?.desc    || '';
-    document.getElementById('iDescHe').value  = item?.descHe  || '';
-    document.getElementById('iPrice').value   = item?.price   || '';
-    document.getElementById('iImg').value     = item?.img     || '';
+    document.getElementById('iName').value      = item?.name    || '';
+    document.getElementById('iNameHe').value    = item?.nameHe  || '';
+    document.getElementById('iDesc').value      = item?.desc    || '';
+    document.getElementById('iDescHe').value    = item?.descHe  || '';
+    document.getElementById('iPrice').value     = item?.price   || '';
+    document.getElementById('iComment').value   = item?.comment || '';
+    document.getElementById('iAvailable').checked = item?.available !== false;
+    const preview = document.getElementById('iImgPreview');
+    const placeholder = document.getElementById('iUploadPlaceholder');
+    const removeBtn = document.getElementById('iImgRemove');
+    if (item?.img) {
+      preview.src = '../' + item.img;
+      preview.style.display = 'block';
+      placeholder.style.display = 'none';
+      removeBtn.style.display = 'block';
+    } else {
+      preview.style.display = 'none';
+      placeholder.style.display = 'flex';
+      removeBtn.style.display = 'none';
+    }
+    // reset tabs
+    document.querySelector('#itemModal .tab').click();
     openModal('itemModal');
   }
 
   async function saveItem() {
     const data = {
-      name:   document.getElementById('iName').value,
-      nameHe: document.getElementById('iNameHe').value,
-      desc:   document.getElementById('iDesc').value,
-      descHe: document.getElementById('iDescHe').value,
-      price:  document.getElementById('iPrice').value,
-      img:    document.getElementById('iImg').value,
+      name:      document.getElementById('iName').value,
+      nameHe:    document.getElementById('iNameHe').value,
+      desc:      document.getElementById('iDesc').value,
+      descHe:    document.getElementById('iDescHe').value,
+      price:     document.getElementById('iPrice').value,
+      comment:   document.getElementById('iComment').value,
+      available: document.getElementById('iAvailable').checked,
     };
     if (!data.name) return;
     if (editingItemId) {
@@ -368,19 +527,22 @@
   }
 
   // ── CATEGORY MODAL ──
-  document.getElementById('addCatBtn').onclick = () => {
-    document.getElementById('catModalTitle').textContent = 'Add category';
-    document.getElementById('cName').value = '';
-    document.getElementById('cNameHe').value = '';
-    document.getElementById('cId').value = '';
-    openModal('catModal');
-  };
+  document.getElementById('addCatBtn').onclick   = () => { openCatModal(null); };
   document.getElementById('catModalCancel').onclick = () => closeModal('catModal');
-  document.getElementById('catModalSave').onclick = () => {
-    closeModal('catModal');
-    toast('Category saved ✓');
-    loadCategories();
-  };
+  document.getElementById('catModalClose').onclick  = () => closeModal('catModal');
+  document.getElementById('catModalSave').onclick   = () => { closeModal('catModal'); toast('Saved ✓'); loadCategories(); };
+
+  function openCatModal(cat) {
+    document.getElementById('catModalTitle').textContent = cat ? 'Edit Category' : 'Add Category';
+    document.getElementById('cName').value    = cat?.label  || '';
+    document.getElementById('cNameHe').value  = cat?.labelHe || '';
+    document.getElementById('cDesc').value    = cat?.desc   || '';
+    document.getElementById('cDescHe').value  = cat?.descHe || '';
+    document.getElementById('cComment').value = cat?.comment || '';
+    document.getElementById('cVisible').checked = cat?.visible !== false;
+    document.querySelector('#catModal .tab').click();
+    openModal('catModal');
+  }
 
   // ── HELPERS ──
   function showView(id) {
