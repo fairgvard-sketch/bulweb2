@@ -2244,16 +2244,9 @@
   }
 
   const itemMap = buildItemMap();
-  console.log('[Menu sync] itemMap keys:', Object.keys(itemMap));
-
   CAT_IDS.forEach(catId => {
     onSnapshot(collection(db, catId), snap => {
-      console.log(`[Menu sync] ${catId}: ${snap.size} docs`);
-      snap.forEach(d => {
-        const data = d.data();
-        console.log(`[Menu sync] item: "${data.name}" → found in DOM:`, !!itemMap[data.name?.trim().toLowerCase()]);
-        applyItem(data, itemMap);
-      });
+      snap.forEach(d => applyItem(d.data(), itemMap));
     });
   });
 </script>
