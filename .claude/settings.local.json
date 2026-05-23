@@ -38,7 +38,8 @@
       "Bash(git config *)",
       "Bash(git remote *)",
       "Bash(git branch *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(start \"\" \"C:\\\\Users\\\\Hub\\\\bulweb2\\\\admin\\\\index.html\")"
     ]
   }
 }

@@ -151,6 +151,7 @@
 
     /* MENU ACTIONS PANEL */
     .menu-actions-panel{position:fixed;top:64px;right:0;bottom:0;width:340px;background:var(--surface);border-left:1px solid var(--line);padding:24px 20px;transform:translateX(100%);transition:transform .25s ease;z-index:150;overflow-y:auto;box-shadow:var(--shadowLg)}
+    @media(max-width:640px){.menu-actions-panel{top:0;left:0;right:0;bottom:60px;width:100%;border-left:none;border-bottom:1px solid var(--line)}}
     .menu-actions-panel.open{transform:translateX(0)}
     .menu-actions-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
     .menu-actions-title{font-size:15px;font-weight:600;color:var(--ink)}
@@ -261,7 +262,9 @@
     .bottom-nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 16px;border:none;background:none;font-family:var(--sans);font-size:10px;font-weight:500;color:var(--muted);cursor:pointer;border-top:2px solid transparent;transition:color .15s}
     .bottom-nav-item.active{color:var(--accent);border-top-color:var(--accent)}
     .bottom-nav-item svg{width:20px;height:20px}
-    @media(max-width:640px){.bottom-nav{display:block}.admin-content{padding-bottom:60px}}
+    .bottom-nav{display:block}
+    .admin-content{padding-bottom:60px}
+    @media(min-width:641px){.bottom-nav{display:none}.admin-content{padding-bottom:0}}
   </style>
 </head>
 <body>
@@ -414,14 +417,14 @@
               <div class="panel-toggle-label">Show descriptions</div>
               <div class="panel-toggle-desc">Display item descriptions on the menu</div>
             </div>
-            <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            <label class="toggle"><input type="checkbox" id="toggleDesc" checked><span class="toggle-slider"></span></label>
           </div>
           <div class="panel-toggle-row">
             <div class="panel-toggle-info">
               <div class="panel-toggle-label">Show photos</div>
               <div class="panel-toggle-desc">Display item photos on the menu</div>
             </div>
-            <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            <label class="toggle"><input type="checkbox" id="togglePhotos" checked><span class="toggle-slider"></span></label>
           </div>
         </div>
       </div>
@@ -1095,6 +1098,154 @@
   });
   document.getElementById('navMenu').onclick = () => { setActiveNav('Menu'); loadCategories(); };
   document.getElementById('navDashboard').onclick = () => { setActiveNav('Dashboard'); showView('viewDash'); };
+
+  // ── DOWNLOAD / UPLOAD MENU ──
+  document.getElementById('actDownloadMenu').onclick = async () => {
+    toast('Exporting…');
+    const menu = {};
+    await Promise.all(CATEGORIES.map(async cat => {
+      const snap = await getDocs(collection(db, cat.id));
+      menu[cat.id] = { label: cat.label, items: [] };
+      snap.forEach(d => menu[cat.id].items.push({ id: d.id, ...d.data() }));
+    }));
+    const blob = new Blob([JSON.stringify(menu, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `bulochka-menu-${new Date().toISOString().slice(0,10)}.json`;
+    a.click();
+    toast('Downloaded ✓');
+  };
+
+  const uploadInput = document.createElement('input');
+  uploadInput.type = 'file';
+  uploadInput.accept = '.json,application/json';
+  uploadInput.style.display = 'none';
+  document.body.appendChild(uploadInput);
+
+  document.getElementById('actUploadMenu').onclick = () => uploadInput.click();
+
+  uploadInput.onchange = async () => {
+    const file = uploadInput.files[0];
+    if (!file) return;
+    uploadInput.value = '';
+    const text = await file.text();
+    let menu;
+    try { menu = JSON.parse(text); }
+    catch { toast('Invalid JSON'); return; }
+    if (!confirm(`This will overwrite ALL menu data. Continue?`)) return;
+    toast('Uploading…');
+    let count = 0;
+    for (const catId of Object.keys(menu)) {
+      const cat = menu[catId];
+      if (!Array.isArray(cat.items)) continue;
+      for (const item of cat.items) {
+        const { id, ...data } = item;
+        if (id) await setDoc(doc(db, catId, id), data);
+        else await addDoc(collection(db, catId), data);
+        count++;
+      }
+    }
+    toast(`Uploaded ${count} items ✓`);
+    loadCategories();
+  };
+
+  // ── DOWNLOAD PDF ──
+  document.getElementById('actDownloadPDF').onclick = async () => {
+    toast('Preparing PDF…');
+    const menu = {};
+    await Promise.all(CATEGORIES.map(async cat => {
+      const snap = await getDocs(collection(db, cat.id));
+      const items = [];
+      snap.forEach(d => items.push({ id: d.id, ...d.data() }));
+      if (items.length) menu[cat.id] = { label: cat.label, items };
+    }));
+
+    const showDesc   = document.getElementById('toggleDesc').checked;
+    const showPhotos = document.getElementById('togglePhotos').checked;
+
+    const win = window.open('', '_blank');
+    win.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8">
+      <title>Bulochka Menu</title>
+      <style>
+        body{font-family:'Georgia',serif;max-width:720px;margin:40px auto;padding:0 24px;color:#2a1f18}
+        h1{font-size:32px;margin-bottom:4px}
+        .sub{color:#7a5a3f;margin-bottom:40px;font-size:14px}
+        h2{font-size:18px;border-bottom:1px solid #e0d8cc;padding-bottom:8px;margin:32px 0 16px}
+        .item{display:flex;gap:16px;margin-bottom:16px;align-items:flex-start}
+        .item img{width:64px;height:64px;border-radius:8px;object-fit:cover;flex-shrink:0}
+        .item-name{font-weight:600;font-size:15px}
+        .item-desc{font-size:13px;color:#7a5a3f;margin-top:2px}
+        .item-price{font-size:14px;font-weight:600;margin-top:4px}
+        @media print{body{margin:20px}}
+      </style></head><body>
+      <h1>Bulochka</h1>
+      <div class="sub">14 Pekarnaya Lane, Old Town · +1 (415) 555-0179</div>`);
+
+    for (const catId of Object.keys(menu)) {
+      const cat = menu[catId];
+      win.document.write(`<h2>${cat.label}</h2>`);
+      for (const item of cat.items) {
+        win.document.write(`<div class="item">`);
+        if (showPhotos && item.img) win.document.write(`<img src="../${item.img}">`);
+        win.document.write(`<div><div class="item-name">${item.name || '—'}</div>`);
+        if (showDesc && item.desc) win.document.write(`<div class="item-desc">${item.desc}</div>`);
+        if (item.price) win.document.write(`<div class="item-price">${item.price}</div>`);
+        win.document.write(`</div></div>`);
+      }
+    }
+    win.document.write(`</body></html>`);
+    win.document.close();
+    win.onload = () => { win.print(); };
+    toast('PDF ready ✓');
+  };
+
+  // ── DOWNLOAD TEMPLATE ──
+  document.getElementById('actDownloadTemplate').onclick = () => {
+    const template = {
+      "category-id": {
+        "label": "Category Name",
+        "items": [
+          {
+            "name": "Item Name",
+            "nameHe": "שם הפריט",
+            "desc": "Description in English",
+            "descHe": "תיאור בעברית",
+            "price": "₪00",
+            "comment": "",
+            "available": true
+          }
+        ]
+      }
+    };
+    const blob = new Blob([JSON.stringify(template, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'bulochka-menu-template.json';
+    a.click();
+    toast('Template downloaded ✓');
+  };
+
+  // ── DISPLAY TOGGLES ──
+  async function saveDisplaySettings() {
+    const data = {
+      showDescriptions: document.getElementById('toggleDesc').checked,
+      showPhotos: document.getElementById('togglePhotos').checked,
+    };
+    await setDoc(doc(db, '_settings', 'display'), data);
+    toast('Settings saved ✓');
+  }
+  document.getElementById('toggleDesc').onchange   = saveDisplaySettings;
+  document.getElementById('togglePhotos').onchange = saveDisplaySettings;
+
+  // load saved display settings
+  (async () => {
+    const snap = await getDoc(doc(db, '_settings', 'display'));
+    if (snap.exists()) {
+      const d = snap.data();
+      document.getElementById('toggleDesc').checked   = d.showDescriptions !== false;
+      document.getElementById('togglePhotos').checked = d.showPhotos !== false;
+    }
+  })();
 
   // ── MENU ACTIONS PANEL ──
   document.getElementById('menuActionsToggle').onclick = () => {
