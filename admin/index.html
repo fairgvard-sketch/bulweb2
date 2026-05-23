@@ -265,6 +265,7 @@
     .bottom-nav{display:block}
     .admin-content{padding-bottom:60px}
     @media(min-width:641px){.bottom-nav{display:none}.admin-content{padding-bottom:0}}
+    @media(max-width:640px){.dash-iframe{height:calc(100vh - 64px - 60px)}}
   </style>
 </head>
 <body>
@@ -354,6 +355,7 @@
             src="https://datastudio.google.com/embed/reporting/ca254b26-a51e-44ea-8eaf-4209c24d2433/page/irAzF"
             sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
             style="width:100%;height:calc(100vh - 64px);border:none;display:block"
+            class="dash-iframe"
             allowfullscreen
           ></iframe>
         </div>
