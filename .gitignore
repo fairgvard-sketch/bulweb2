@@ -1,0 +1,7 @@
+node_modules/
+.firebase/
+package-lock.json
+package.json
+*.png
+test-drag.js
+verify-drag.js
