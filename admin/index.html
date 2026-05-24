@@ -266,6 +266,84 @@
     .admin-content{padding-bottom:60px}
     @media(min-width:641px){.bottom-nav{display:none}.admin-content{padding-bottom:0}}
     @media(max-width:640px){.dash-iframe{height:calc(100vh - 64px - 60px)}}
+
+    /* DASHBOARD */
+    .dash-body{max-width:900px;margin:0 auto;padding:28px 24px 100px;position:relative}
+    .dash-date{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+    .dash-title{font-size:26px;font-weight:700;color:var(--ink);margin-bottom:20px;line-height:1.2}
+    .dash-title-period{color:var(--muted);font-weight:400}
+    .dash-filter-bar{display:flex;align-items:center;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+    .dash-range{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:3px;gap:2px}
+    .dash-range-btn{padding:5px 12px;border-radius:6px;border:none;background:none;font-family:var(--sans);font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;transition:all .15s;white-space:nowrap}
+    .dash-range-btn.active{background:var(--accent);color:#fff}
+    .btn-export{margin-left:auto;display:flex;align-items:center;gap:6px;padding:7px 14px;border:1.5px solid var(--line);border-radius:8px;background:var(--surface);font-family:var(--sans);font-size:13px;font-weight:500;color:var(--text);cursor:pointer;transition:all .15s;white-space:nowrap}
+    .btn-export:hover{border-color:var(--faint);background:var(--lineSoft)}
+    .dash-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}
+    @media(max-width:700px){.dash-metrics{grid-template-columns:1fr}}
+    .dash-metric-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 22px 0;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;min-height:170px}
+    .dash-metric-card.dark{background:var(--ink);border-color:var(--ink)}
+    .dash-metric-label{font-size:13px;font-weight:500;color:var(--muted);margin-bottom:10px}
+    .dash-metric-card.dark .dash-metric-label{color:rgba(255,255,255,0.55)}
+    .dash-metric-val{font-size:38px;font-weight:700;color:var(--ink);line-height:1;letter-spacing:-1px}
+    .dash-metric-card.dark .dash-metric-val{color:#fff}
+    .dash-metric-footer{display:flex;align-items:center;gap:8px;margin-top:8px}
+    .dash-delta{display:inline-flex;align-items:center;font-size:12px;font-weight:600;padding:2px 7px;border-radius:100px}
+    .dash-delta.up{background:#dcfce7;color:#16a34a}
+    .dash-delta.up::before{content:'↑ '}
+    .dash-delta.down{background:#fee2e2;color:#dc2626}
+    .dash-delta.down::before{content:'↓ '}
+    .dash-delta.neutral{background:var(--lineSoft);color:var(--muted)}
+    .dash-metric-card.dark .dash-delta.up{background:rgba(22,163,74,.3);color:#86efac}
+    .dash-metric-card.dark .dash-delta.down{background:rgba(220,38,38,.3);color:#fca5a5}
+    .dash-vs{font-size:12px;color:var(--subtle)}
+    .dash-metric-card.dark .dash-vs{color:rgba(255,255,255,.4)}
+    .dash-sparkline{margin-top:auto;line-height:0}
+    .dash-sparkline svg{width:100%;height:44px;display:block}
+    .dash-row2{display:grid;grid-template-columns:300px 1fr;gap:12px;margin-bottom:12px;align-items:start}
+    @media(max-width:700px){.dash-row2{grid-template-columns:1fr}}
+    .dash-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+    @media(max-width:700px){.dash-cols{grid-template-columns:1fr}}
+    .dash-card-box{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+    .dash-card-box-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
+    .dash-card-box-title{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:2px}
+    .dash-card-box-sub{font-size:12px;color:var(--muted)}
+    .dash-top-table{width:100%;border-collapse:collapse;font-size:13px}
+    .dash-top-table th{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:0 0 8px;text-align:left;border-bottom:1px solid var(--line)}
+    .dash-top-table th:not(:first-child){text-align:right}
+    .dash-top-table td{padding:10px 0;border-bottom:1px solid var(--lineSoft);vertical-align:middle}
+    .dash-top-table tr:last-child td{border-bottom:none}
+    .dash-top-table td:not(:first-child){text-align:right}
+    .dash-page-name{font-size:13px;font-weight:600;color:var(--ink)}
+    .dash-page-path{font-size:11px;color:var(--muted);margin-top:1px}
+    .dash-bounce-good{color:#16a34a;font-weight:500}
+    .dash-bounce-bad{color:#dc2626;font-weight:500}
+    .dash-source-bar-track{display:flex;height:8px;border-radius:100px;overflow:hidden;margin-bottom:16px;gap:2px}
+    .dash-source-bar-seg{height:100%}
+    .dash-source-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--lineSoft)}
+    .dash-source-row:last-child{border-bottom:none}
+    .dash-source-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+    .dash-source-name{flex:1;font-size:13px;color:var(--text)}
+    .dash-source-count{font-size:13px;font-weight:600;color:var(--ink)}
+    .dash-source-pct{font-size:12px;color:var(--muted);min-width:40px;text-align:right}
+    .dash-device-row{display:flex;align-items:center;gap:12px;padding:8px 0}
+    .dash-device-icon{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;background:var(--accentSoft);flex-shrink:0}
+    .dash-device-icon svg{width:15px;height:15px;color:var(--accent)}
+    .dash-device-info{flex:1}
+    .dash-device-label{font-size:13px;font-weight:500;color:var(--ink)}
+    .dash-device-count{font-size:11px;color:var(--muted)}
+    .dash-device-bar-track{height:4px;background:var(--lineSoft);border-radius:100px;margin-top:4px;overflow:hidden}
+    .dash-device-bar-fill{height:100%;background:var(--accent);border-radius:100px}
+    .dash-device-pct{font-size:15px;font-weight:700;color:var(--ink)}
+    .dash-live{position:fixed;bottom:24px;right:24px;background:#0F1115;color:#fff;border-radius:16px;padding:16px 20px;min-width:200px;box-shadow:0 20px 40px rgba(0,0,0,.35);z-index:50;transition:opacity .3s}
+    .dash-live.hidden{opacity:0;pointer-events:none}
+    @media(max-width:640px){.dash-live{bottom:80px;right:12px;left:12px}}
+    .dash-live-header{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:rgba(255,255,255,.6);margin-bottom:6px}
+    .dash-live-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:livepulse 2s infinite}
+    @keyframes livepulse{0%,100%{opacity:1}50%{opacity:.3}}
+    .dash-live-updated{margin-left:auto;font-size:10px;color:rgba(255,255,255,.35)}
+    .dash-live-count{font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-2px}
+    .dash-live-label{font-size:12px;color:rgba(255,255,255,.45);margin-top:4px}
+    .dash-empty{text-align:center;padding:24px;color:var(--muted);font-size:13px}
   </style>
 </head>
 <body>
@@ -350,14 +428,113 @@
 
       <!-- DASHBOARD VIEW -->
       <div class="view" id="viewDash">
-        <div class="page-body" style="max-width:100%;padding:0">
-          <iframe
-            src="https://datastudio.google.com/embed/reporting/ca254b26-a51e-44ea-8eaf-4209c24d2433/page/irAzF"
-            sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-            style="width:100%;height:calc(100vh - 64px);border:none;display:block"
-            class="dash-iframe"
-            allowfullscreen
-          ></iframe>
+        <div class="dash-body">
+          <!-- Header -->
+          <div class="dash-date" id="dashDate"></div>
+          <div class="dash-title">Site analytics <span class="dash-title-period" id="dashPeriodLabel"></span></div>
+
+          <!-- Filter bar -->
+          <div class="dash-filter-bar">
+            <div class="dash-range">
+              <button class="dash-range-btn" data-days="1">Today</button>
+              <button class="dash-range-btn active" data-days="7">7 days</button>
+              <button class="dash-range-btn" data-days="14">14 days</button>
+              <button class="dash-range-btn" data-days="30">30 days</button>
+            </div>
+            <button class="btn-export" id="dashExportCSV">⬇ Export CSV</button>
+          </div>
+
+          <!-- Top 3 metric cards -->
+          <div class="dash-metrics">
+            <div class="dash-metric-card dark">
+              <div class="dash-metric-label">Unique visitors</div>
+              <div class="dash-metric-val" id="dcVisitors">—</div>
+              <div class="dash-metric-footer">
+                <span class="dash-delta neutral" id="dcVisitorsDelta">—</span>
+                <span class="dash-vs">vs prev period</span>
+              </div>
+              <div class="dash-sparkline" id="spVisitors"></div>
+            </div>
+            <div class="dash-metric-card">
+              <div class="dash-metric-label">Page views</div>
+              <div class="dash-metric-val" id="dcPageviews">—</div>
+              <div class="dash-metric-footer">
+                <span class="dash-delta neutral" id="dcPageviewsDelta">—</span>
+                <span class="dash-vs">vs prev period</span>
+              </div>
+              <div class="dash-sparkline" id="spPageviews"></div>
+            </div>
+            <div class="dash-metric-card">
+              <div class="dash-metric-label">Avg session</div>
+              <div class="dash-metric-val" id="dcAvgSession">—</div>
+              <div class="dash-metric-footer">
+                <span class="dash-delta neutral" id="dcAvgSessionDelta">—</span>
+                <span class="dash-vs">vs prev period</span>
+              </div>
+              <div class="dash-sparkline" id="spAvgSession"></div>
+            </div>
+          </div>
+
+          <!-- Bounce rate -->
+          <div class="dash-row2">
+            <div class="dash-metric-card">
+              <div class="dash-metric-label">Bounce rate</div>
+              <div class="dash-metric-val" id="dcBounce">—</div>
+              <div class="dash-metric-footer">
+                <span class="dash-delta neutral" id="dcBounceDelta">—</span>
+                <span class="dash-vs">vs prev period</span>
+              </div>
+              <div class="dash-sparkline" id="spBounce"></div>
+            </div>
+          </div>
+
+          <!-- Top pages + Traffic sources -->
+          <div class="dash-cols">
+            <div class="dash-card-box">
+              <div class="dash-card-box-header">
+                <div>
+                  <div class="dash-card-box-title">Top pages</div>
+                  <div class="dash-card-box-sub">Most visited in period</div>
+                </div>
+              </div>
+              <table class="dash-top-table">
+                <thead><tr><th>PAGE</th><th>VISITORS</th><th>AVG TIME</th><th>BOUNCE</th></tr></thead>
+                <tbody id="dashTopPages"><tr><td colspan="4" class="dash-empty">Loading…</td></tr></tbody>
+              </table>
+            </div>
+            <div class="dash-card-box">
+              <div class="dash-card-box-header">
+                <div>
+                  <div class="dash-card-box-title">Traffic sources</div>
+                  <div class="dash-card-box-sub">Where visitors come from</div>
+                </div>
+              </div>
+              <div class="dash-source-bar-track" id="dashSourceBar"></div>
+              <div id="dashSources"><div class="dash-empty">Loading…</div></div>
+            </div>
+          </div>
+
+          <!-- Devices -->
+          <div class="dash-card-box">
+            <div class="dash-card-box-header">
+              <div>
+                <div class="dash-card-box-title">Devices</div>
+                <div class="dash-card-box-sub">Visitor device mix</div>
+              </div>
+            </div>
+            <div id="dashDevices"><div class="dash-empty">Loading…</div></div>
+          </div>
+        </div>
+
+        <!-- Live counter (fixed) -->
+        <div class="dash-live hidden" id="dashLive">
+          <div class="dash-live-header">
+            <span class="dash-live-dot"></span>
+            Live · right now
+            <span class="dash-live-updated" id="dashLiveUpdated"></span>
+          </div>
+          <div class="dash-live-count" id="dashLiveCount">0</div>
+          <div class="dash-live-label">visitors on the site</div>
         </div>
       </div>
 
@@ -680,7 +857,7 @@
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
   import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-  import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+  import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, setDoc, getDoc, query, orderBy, where, limit } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
   const app = initializeApp({
     apiKey: "AIzaSyC_zaNtYW8wnS7nhoOzEvkNhbJeJPHWmaI",
@@ -728,7 +905,7 @@
   onAuthStateChanged(auth, user => {
     document.getElementById('loginWrap').style.display  = user ? 'none' : 'flex';
     document.getElementById('adminWrap').className = user ? 'admin-wrap visible' : 'admin-wrap';
-    if (user) { showView('viewDash'); setActiveNav('Dashboard'); }
+    if (user) { showView('viewDash'); setActiveNav('Dashboard'); loadDashboard(); startLiveCounter(); }
   });
 
   // ── CATEGORIES ──
@@ -1089,9 +1266,9 @@
     document.querySelectorAll('.sidebar-item,.bottom-nav-item').forEach(b => b.classList.remove('active'));
     document.querySelectorAll(`#nav${id},#bn${id}`).forEach(b => b.classList.add('active'));
   }
-  document.getElementById('bnMenu').onclick = () => { setActiveNav('Menu'); loadCategories(); };
-  document.getElementById('bnDashboard').onclick = () => { setActiveNav('Dashboard'); showView('viewDash'); };
-  document.getElementById('bnChanges').onclick = () => setActiveNav('Changes');
+  document.getElementById('bnMenu').onclick = () => { setActiveNav('Menu'); loadCategories(); stopLiveCounter(); };
+  document.getElementById('bnDashboard').onclick = () => { setActiveNav('Dashboard'); showView('viewDash'); loadDashboard(); startLiveCounter(); };
+  document.getElementById('bnChanges').onclick = () => { setActiveNav('Changes'); stopLiveCounter(); };
   document.getElementById('bnMore').onclick = () => {
     setActiveNav('More');
     document.getElementById('menuActionsPanel').classList.toggle('open');
@@ -1104,8 +1281,8 @@
       btn.classList.add('active');
     };
   });
-  document.getElementById('navMenu').onclick = () => { setActiveNav('Menu'); loadCategories(); };
-  document.getElementById('navDashboard').onclick = () => { setActiveNav('Dashboard'); showView('viewDash'); };
+  document.getElementById('navMenu').onclick = () => { setActiveNav('Menu'); loadCategories(); stopLiveCounter(); };
+  document.getElementById('navDashboard').onclick = () => { setActiveNav('Dashboard'); showView('viewDash'); loadDashboard(); startLiveCounter(); };
 
   // ── DOWNLOAD / UPLOAD MENU ──
   document.getElementById('actDownloadMenu').onclick = async () => {
@@ -1435,6 +1612,213 @@
     if (deleteCallback) await deleteCallback();
     deleteCallback = null;
   };
+
+  // ── DASHBOARD ──
+  let dashDays = 7;
+  let liveInterval = null;
+
+  const PAGE_NAMES = { '/': 'Home', '/menu': 'Menu', '/careers': 'Careers', '/events': 'Events' };
+  const SRC_COLORS = { direct:'#6E56CF', google:'#3B82F6', instagram:'#EC4899', facebook:'#1D4ED8', tripadvisor:'#16A34A', twitter:'#1DA1F2', other:'#9CA3AF' };
+  const SRC_LABELS = { direct:'Direct', google:'Google', instagram:'Instagram', facebook:'Facebook', tripadvisor:'TripAdvisor', twitter:'Twitter / X', other:'Other' };
+
+  function fmtNum(n) { return n >= 1000 ? (n/1000).toFixed(1)+'k' : String(n); }
+  function fmtDur(s) {
+    if (!s || s <= 0) return '—';
+    if (s < 60) return s+'s';
+    return Math.floor(s/60)+'m '+(s%60)+'s';
+  }
+
+  function sparkline(data, dark=false) {
+    if (!data || data.length < 2 || data.every(v=>v===0)) return '';
+    const W=200, H=44, max=Math.max(...data,1), min=Math.min(...data,0), rng=max-min||1;
+    const pts = data.map((v,i)=>[ +(i/(data.length-1)*W).toFixed(1), +(H*.9-((v-min)/rng)*H*.8).toFixed(1) ]);
+    const line = pts.map((p,i)=>`${i?'L':'M'}${p[0]} ${p[1]}`).join(' ');
+    const area = line+` L${W} ${H} L0 ${H} Z`;
+    const lc = dark ? 'rgba(255,255,255,0.85)' : '#6E56CF';
+    const fc = dark ? 'rgba(255,255,255,0.12)' : 'rgba(110,86,207,0.1)';
+    return `<svg viewBox="0 0 ${W} ${H}" fill="none" preserveAspectRatio="none"><path d="${area}" fill="${fc}"/><path d="${line}" stroke="${lc}" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>`;
+  }
+
+  function dailyBuckets(visits, days, fn) {
+    const now = Date.now();
+    const bkts = Array(days).fill(null).map(()=>[]);
+    visits.forEach(v => {
+      const d = Math.floor((now - v.ts) / 86400000);
+      if (d >= 0 && d < days) bkts[days-1-d].push(v);
+    });
+    return bkts.map(fn);
+  }
+
+  function renderDelta(id, cur, prev, inverse=false) {
+    const el = document.getElementById(id);
+    if (!prev) { el.className='dash-delta neutral'; el.textContent='—'; return; }
+    const pct = Math.round((cur-prev)/(prev||1)*100);
+    const good = inverse ? pct<=0 : pct>=0;
+    el.className = 'dash-delta '+(good?'up':'down');
+    el.textContent = (pct>=0?'+':'')+pct+'%';
+  }
+
+  async function loadDashboard() {
+    // date header
+    const now = new Date();
+    const DAYS = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
+    document.getElementById('dashDate').textContent = DAYS[now.getDay()]+', '+now.toLocaleDateString('en-US',{month:'long',day:'numeric'});
+    const PERIOD = {1:'· today',7:'· the last 7 days',14:'· the last 14 days',30:'· the last 30 days'};
+    document.getElementById('dashPeriodLabel').textContent = PERIOD[dashDays]||'';
+
+    // fetch current + previous period
+    const cutCur  = Date.now() - dashDays * 86400000;
+    const cutPrev = Date.now() - dashDays * 2 * 86400000;
+    const snap = await getDocs(query(collection(db,'_visits'), where('ts','>=',cutPrev), orderBy('ts','desc'), limit(2000)));
+    const all = []; snap.forEach(d=>all.push(d.data()));
+    const cur  = all.filter(v=>v.ts >= cutCur);
+    const prev = all.filter(v=>v.ts >= cutPrev && v.ts < cutCur);
+
+    // ── UNIQUE VISITORS ──
+    const uniqCur  = new Set(cur.map(v=>v.sessionId||v.ts+'_'+v.page)).size;
+    const uniqPrev = new Set(prev.map(v=>v.sessionId||v.ts+'_'+v.page)).size;
+    document.getElementById('dcVisitors').textContent = fmtNum(uniqCur);
+    renderDelta('dcVisitorsDelta', uniqCur, uniqPrev);
+
+    // ── PAGE VIEWS ──
+    document.getElementById('dcPageviews').textContent = fmtNum(cur.length);
+    renderDelta('dcPageviewsDelta', cur.length, prev.length);
+
+    // ── AVG SESSION ──
+    const dursCur  = cur.filter(v=>v.duration>0).map(v=>v.duration);
+    const dursPrev = prev.filter(v=>v.duration>0).map(v=>v.duration);
+    const avgCur   = dursCur.length  ? Math.round(dursCur.reduce((a,b)=>a+b,0)/dursCur.length)   : 0;
+    const avgPrev  = dursPrev.length ? Math.round(dursPrev.reduce((a,b)=>a+b,0)/dursPrev.length) : 0;
+    document.getElementById('dcAvgSession').textContent = fmtDur(avgCur);
+    renderDelta('dcAvgSessionDelta', avgCur, avgPrev);
+
+    // ── BOUNCE RATE (duration < 15s or 0) ──
+    const bncCur  = cur.filter(v=>!v.duration||v.duration<15).length;
+    const bncPrev = prev.filter(v=>!v.duration||v.duration<15).length;
+    const bpCur   = cur.length  ? Math.round(bncCur/cur.length*100)   : 0;
+    const bpPrev  = prev.length ? Math.round(bncPrev/prev.length*100) : 0;
+    document.getElementById('dcBounce').textContent = cur.length ? bpCur+'%' : '—';
+    renderDelta('dcBounceDelta', bpCur, bpPrev, true);
+
+    // ── SPARKLINES ──
+    const days = dashDays;
+    document.getElementById('spVisitors').innerHTML   = sparkline(dailyBuckets(cur,days,b=>new Set(b.map(v=>v.sessionId||v.ts)).size), true);
+    document.getElementById('spPageviews').innerHTML  = sparkline(dailyBuckets(cur,days,b=>b.length));
+    document.getElementById('spAvgSession').innerHTML = sparkline(dailyBuckets(cur,days,b=>{ const d=b.filter(v=>v.duration>0).map(v=>v.duration); return d.length?Math.round(d.reduce((a,c)=>a+c,0)/d.length):0; }));
+    document.getElementById('spBounce').innerHTML     = sparkline(dailyBuckets(cur,days,b=>b.length?Math.round(b.filter(v=>!v.duration||v.duration<15).length/b.length*100):0));
+
+    // ── TOP PAGES ──
+    const pageMap = {};
+    cur.forEach(v=>{
+      if (!pageMap[v.page]) pageMap[v.page]={sess:new Set(),durs:[],bounces:0,total:0};
+      pageMap[v.page].sess.add(v.sessionId||v.ts);
+      pageMap[v.page].total++;
+      if (v.duration>0) pageMap[v.page].durs.push(v.duration);
+      if (!v.duration||v.duration<15) pageMap[v.page].bounces++;
+    });
+    const topPages = Object.entries(pageMap).sort((a,b)=>b[1].sess.size-a[1].sess.size).slice(0,6);
+    document.getElementById('dashTopPages').innerHTML = topPages.length
+      ? topPages.map(([p,d])=>{
+          const avg = d.durs.length ? Math.round(d.durs.reduce((a,b)=>a+b,0)/d.durs.length) : 0;
+          const bp  = d.total ? Math.round(d.bounces/d.total*100) : 0;
+          return `<tr>
+            <td><div class="dash-page-name">${PAGE_NAMES[p]||p}</div><div class="dash-page-path">${p}</div></td>
+            <td><b>${d.sess.size}</b></td>
+            <td style="color:var(--muted)">${fmtDur(avg)}</td>
+            <td><span class="${bp<40?'dash-bounce-good':'dash-bounce-bad'}">${bp}%</span></td>
+          </tr>`;
+        }).join('')
+      : '<tr><td colspan="4" class="dash-empty">No data yet</td></tr>';
+
+    // ── TRAFFIC SOURCES ──
+    const srcMap = {};
+    cur.forEach(v=>{ const s=v.source||'direct'; srcMap[s]=(srcMap[s]||0)+1; });
+    const total = cur.length||1;
+    const srcs  = Object.entries(srcMap).sort((a,b)=>b[1]-a[1]);
+    document.getElementById('dashSourceBar').innerHTML = srcs.map(([s,c])=>
+      `<div class="dash-source-bar-seg" style="width:${(c/total*100).toFixed(1)}%;background:${SRC_COLORS[s]||'#9CA3AF'}"></div>`
+    ).join('');
+    document.getElementById('dashSources').innerHTML = srcs.length
+      ? srcs.map(([s,c])=>`
+          <div class="dash-source-row">
+            <div class="dash-source-dot" style="background:${SRC_COLORS[s]||'#9CA3AF'}"></div>
+            <div class="dash-source-name">${SRC_LABELS[s]||s}</div>
+            <div class="dash-source-count">${c}</div>
+            <div class="dash-source-pct">${(c/total*100).toFixed(1)}%</div>
+          </div>`).join('')
+      : '<div class="dash-empty">No data yet</div>';
+
+    // ── DEVICES ──
+    const devMap = {};
+    cur.forEach(v=>{ const d=v.device||'desktop'; devMap[d]=(devMap[d]||0)+1; });
+    const devIcons = {
+      mobile: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><circle cx="12" cy="18" r="1"/></svg>`,
+      desktop:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`,
+    };
+    const devs = Object.entries(devMap).sort((a,b)=>b[1]-a[1]);
+    document.getElementById('dashDevices').innerHTML = devs.length
+      ? devs.map(([d,c])=>{
+          const pct = Math.round(c/total*100);
+          return `<div class="dash-device-row">
+            <div class="dash-device-icon">${devIcons[d]||devIcons.desktop}</div>
+            <div class="dash-device-info">
+              <div class="dash-device-label">${d.charAt(0).toUpperCase()+d.slice(1)}</div>
+              <div class="dash-device-count">${c} visitors</div>
+              <div class="dash-device-bar-track"><div class="dash-device-bar-fill" style="width:${pct}%"></div></div>
+            </div>
+            <div class="dash-device-pct">${pct}%</div>
+          </div>`;
+        }).join('')
+      : '<div class="dash-empty">No data yet</div>';
+  }
+
+  // ── LIVE COUNTER ──
+  async function updateLive() {
+    try {
+      const snap = await getDocs(query(collection(db,'_visits'), where('ts','>=',Date.now()-5*60*1000), limit(100)));
+      document.getElementById('dashLiveCount').textContent = snap.size;
+      document.getElementById('dashLiveUpdated').textContent = 'updated '+new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+      document.getElementById('dashLive').classList.remove('hidden');
+    } catch(e) {}
+  }
+
+  function startLiveCounter() {
+    updateLive();
+    if (liveInterval) clearInterval(liveInterval);
+    liveInterval = setInterval(updateLive, 30000);
+  }
+
+  function stopLiveCounter() {
+    if (liveInterval) { clearInterval(liveInterval); liveInterval = null; }
+    document.getElementById('dashLive').classList.add('hidden');
+  }
+
+  // ── EXPORT CSV ──
+  document.getElementById('dashExportCSV').onclick = async () => {
+    toast('Exporting…');
+    const snap = await getDocs(query(collection(db,'_visits'), orderBy('ts','desc'), limit(5000)));
+    const rows = [['Page','Date','Time','Device','Browser','Language','Source','Duration (s)','Session ID']];
+    snap.forEach(d=>{
+      const v=d.data(), dt=new Date(v.ts);
+      rows.push([v.page||'',dt.toLocaleDateString('en-GB'),dt.toLocaleTimeString('en-GB'),v.device||'',v.browser||'',v.lang||'',v.source||'direct',v.duration||0,v.sessionId||'']);
+    });
+    const csv = rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+    a.download = `analytics-${new Date().toISOString().slice(0,10)}.csv`;
+    a.click();
+    toast('Exported ✓');
+  };
+
+  // ── RANGE BUTTONS ──
+  document.querySelectorAll('.dash-range-btn').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('.dash-range-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      dashDays = parseInt(btn.dataset.days);
+      loadDashboard();
+    };
+  });
 
   // ── HELPERS ──
   function showView(id) {
