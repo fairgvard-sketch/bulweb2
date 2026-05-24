@@ -283,7 +283,7 @@ a.hero-menu-btn:hover {
   display: flex;
   flex-direction: column;
   padding-top: 20px;
-  margin-top: 32px;
+  margin-top: auto;
   border-top: 1px solid var(--brown-faint);
   gap: 0;
 }

@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Inter+Tight:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Rubik:wght@300;400;500&family=Varela+Round&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=7">
+  <link rel="stylesheet" href="style.css?v=8">
   <style>
     /* ─── MENU HEADER ───────────────────────── */
     .menu-hero {
@@ -484,29 +484,6 @@
   </div>
 </nav>
 
-<!-- ─── MOBILE MENU ──────────────────────────────────────── -->
-<div class="mobile-menu" id="mobileMenu">
-  <span class="mobile-menu-close" id="menuClose" data-en="Close ✕" data-he="סגור ✕">Close ✕</span>
-  <a href="index.html" class="mobile-link" data-en='Home' data-he='ראשי'>Home</a>
-  <a href="menu.html" class="mobile-link" data-en='Menu' data-he='תפריט'>Menu</a>
-  <a href="index.html#story" class="mobile-link" data-en='Our story' data-he='הסיפור שלנו'>Our story</a>
-  <a href="careers.html" class="mobile-link" data-en='Work with us' data-he='דרושים'>Work with us</a>
-  <a href="events.html" class="mobile-link" data-en='Events' data-he='אירועים'>Events</a>
-  <a href="index.html#visit" class="mobile-menu-reserve" data-en='Reserve a table →' data-he='הזמנת שולחן ←'>Reserve a table →</a>
-  <div class="mobile-menu-secondary">
-    <a href="https://www.instagram.com/bulochka.pt" target="_blank" class="mobile-menu-secondary-link">Instagram</a>
-    <a href="https://www.facebook.com/bulochka.bulochka.2025" target="_blank" class="mobile-menu-secondary-link">Facebook</a>
-    <a href="https://www.google.com/search?q=Bulochka+Petah+Tikva" target="_blank" class="mobile-menu-secondary-link" data-en='Google Reviews' data-he='ביקורות גוגל'>Google Reviews</a>
-    <div class="mobile-menu-lang" id="mobileLangToggle">
-      <span data-en='Language' data-he='שפה'>Language</span>
-      <span class="mobile-menu-lang-arrow">›</span>
-    </div>
-    <div class="mobile-menu-lang-options" id="mobileLangOptions">
-      <button class="mobile-lang-btn" data-lang="en">English</button>
-      <button class="mobile-lang-btn" data-lang="he">עברית</button>
-    </div>
-  </div>
-</div>
 
 <!-- ─── MENU HERO ────────────────────────────────────────── -->
 <div class="menu-hero">
@@ -1913,30 +1890,6 @@
     }
   })();
 
-  const toggle = document.getElementById('navToggle');
-  const menu = document.getElementById('mobileMenu');
-  const close = document.getElementById('menuClose');
-  toggle.addEventListener('click', () => menu.classList.add('open'));
-  close.addEventListener('click', () => menu.classList.remove('open'));
-  menu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => menu.classList.remove('open')));
-
-  const langToggle = document.getElementById('mobileLangToggle');
-  const langOptions = document.getElementById('mobileLangOptions');
-  langToggle.addEventListener('click', () => {
-    langToggle.classList.toggle('expanded');
-    langOptions.classList.toggle('open');
-  });
-  document.querySelectorAll('.mobile-lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const navBtn = document.querySelector(`.lang-btn[data-lang="${btn.dataset.lang}"]`);
-      if (navBtn) navBtn.click();
-      document.querySelectorAll('.mobile-lang-btn').forEach(b => {
-        b.classList.toggle('active', b.dataset.lang === btn.dataset.lang);
-      });
-    });
-  });
-
-
   // ─── FILTER BAR ACTIVE STATE ─────────────────────────────
   const pills = Array.from(document.querySelectorAll('.filter-pill'));
   const sections = pills.map(p => document.getElementById(p.dataset.target));
@@ -2156,6 +2109,7 @@
 
 </script>
 
+<script src="mobile-menu.js"></script>
 <script src="lang.js"></script>
 
 <script type="module">
