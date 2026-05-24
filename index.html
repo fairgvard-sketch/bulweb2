@@ -9,10 +9,10 @@
   <title>Bulochka — Bakery · Coffee · Cakes</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1X6T5CVR62"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-1X6T5CVR62');</script>
-  <script>(function(){var l=localStorage.getItem('bulochka-lang');if(l==='he'){document.documentElement.dir='rtl';document.documentElement.lang='he';}})();</script>
+  <script>(function(){var l=localStorage.getItem('bulochka-lang');if(l==='he'){document.documentElement.dir='rtl';document.documentElement.lang='he';}else if(l){document.documentElement.lang=l;}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Frank+Ruhl+Libre:wght@300;400;500&family=IBM+Plex+Sans+Hebrew:wght@300;400;500&family=Inter+Tight&family=Varela+Round:wght@400;500&family=JetBrains+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Rubik:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Frank+Ruhl+Libre:wght@300;400;500&family=IBM+Plex+Sans+Hebrew:wght@300;400;500&family=Inter+Tight&family=Manrope:wght@300;400;500&family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Varela+Round:wght@400;500&family=JetBrains+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Rubik:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=8">
   <style>
     /* ─── HERO ─────────────────────────────── */
@@ -250,6 +250,9 @@
     .section h2 em { font-style: italic; }
     .hero h1 em { color: #8a6838; font-style: normal; white-space: nowrap; }
     [dir="rtl"] .hero-line1 { white-space: nowrap; }
+    html:lang(ru) .hero-line1 { white-space: nowrap; }
+    html:lang(ru) .hero h1 { font-size: clamp(30px, 5vw, 72px); }
+    html:lang(ru) .medovik-stat-val { font-family: 'Rubik', sans-serif; font-weight: 300; }
     [dir="rtl"] .room-sub { text-align: right; font-family: 'IBM Plex Sans Hebrew', sans-serif; }
 
     .room-header {
@@ -454,7 +457,7 @@
     }
     .visit-hours-row span:last-child {
       font-family: 'Space Mono', monospace;
-      font-size: 10px;
+      font-size: 12px;
       color: var(--brown-mid);
       letter-spacing: 0.04em;
       align-self: center;
@@ -524,11 +527,11 @@
 <!-- ─── NAV ──────────────────────────────────────────────── -->
 <nav class="nav">
   <ul class="nav-links">
-    <li><a href="index.html" data-en='Home' data-he='ראשי'>Home</a></li>
-    <li><a href="menu.html" data-en='Menu' data-he='תפריט'>Menu</a></li>
-    <li><a href="#story" data-en='Our story' data-he='הסיפור שלנו'>Our story</a></li>
-    <li><a href="careers.html" data-en='Work with us' data-he='עבוד איתנו'>Work with us</a></li>
-    <li><a href="events.html" data-en='Events' data-he='אירועים'>Events</a></li>
+    <li><a href="index.html" data-en='Home' data-he='ראשי' data-ru='Главная'>Home</a></li>
+    <li><a href="menu.html" data-en='Menu' data-he='תפריט' data-ru='Меню'>Menu</a></li>
+    <li><a href="#story" data-en='Our story' data-he='הסיפור שלנו' data-ru='О нас'>Our story</a></li>
+    <li><a href="careers.html" data-en='Work with us' data-he='עבוד איתנו' data-ru='Работа у нас'>Work with us</a></li>
+    <li><a href="events.html" data-en='Events' data-he='אירועים' data-ru='Мероприятия'>Events</a></li>
   </ul>
   <a href="index.html" class="nav-logo">Bulochka</a>
   <div class="nav-right">
@@ -540,9 +543,10 @@
     <div class="lang-switch">
       <button class="lang-btn active" data-lang="en">EN</button>
       <button class="lang-btn" data-lang="he">עב</button>
+      <button class="lang-btn" data-lang="ru">RU</button>
     </div>
-    <span class="nav-hours" data-en='Open until 20:00' data-he='פתוח עד 20:00' dir="ltr">Open until 20:00</span>
-    <a href="tel:+972529662724" class="btn-reserve" data-en='Reserve a table' data-he='הזמנת שולחן'>Reserve a table</a>
+    <span class="nav-hours" data-en='Open until 20:00' data-he='פתוח עד 20:00' data-ru='Открыто до 20:00' dir="ltr">Open until 20:00</span>
+    <a href="tel:+972529662724" class="btn-reserve" data-en='Reserve a table' data-he='הזמנת שולחן' data-ru='Забронировать'>Reserve a table</a>
   </div>
   <div class="nav-toggle" id="navToggle" aria-label="Open menu">
     <span></span><span></span><span></span>
@@ -553,10 +557,10 @@
 <!-- ─── HERO ──────────────────────────────────────────────── -->
 <section class="hero">
   <div class="hero-left">
-<p class="hero-eyebrow"><span class="eyebrow-star">✦</span> <span data-en='Bakery · Coffee · Cakes' data-he='מאפייה · קפה · עוגות'>Bakery · Coffee · Cakes</span></p>
-<h1><span data-en='Slow mornings,' data-he='בקרים שקטים,' class="hero-line1">Slow mornings,</span><br><em class="hero-accent" data-en='warm butter.' data-he='חמאה חמה.'>warm butter.</em></h1>
-    <p class="hero-body" data-en="A small, charming neighborhood café with on-site baking, premium jams and spreads from 'Bustan' in the Galilee, wonderful cookies, unique pastries, handmade sourdough breads (available on Fridays or by pre-order), excellent coffee, and many more delicious things. Definitely worth a visit!" data-he="בית קפה שכונתי קטן וקסום עם אפייה במקום, ריבות וממרחים מ'בוסתן' בגליל, עוגיות נפלאות, מאפים ייחודיים, לחמי מחמצת עבודת יד (זמינים בימי שישי או בהזמנה מראש), קפה מעולה ועוד המון דברים טעימים. בהחלט שווה ביקור!">A small, charming neighborhood café with on-site baking, premium jams and spreads from &lsquo;Bustan&rsquo; in the Galilee, wonderful cookies, unique pastries, handmade sourdough breads (available on Fridays or by pre-order), excellent coffee, and many more delicious things. Definitely worth a visit!</p>
-    <a href="menu.html" class="hero-menu-btn" data-en='See the Menu →' data-he='לתפריט →'>See the Menu →</a>
+<p class="hero-eyebrow"><span class="eyebrow-star">✦</span> <span data-en='Bakery · Coffee · Cakes' data-he='מאפייה · קפה · עוגות' data-ru='Пекарня · Кофе · Торты'>Bakery · Coffee · Cakes</span></p>
+<h1><span data-en='Slow mornings,' data-he='בקרים שקטים,' data-ru='Неспешное утро,' class="hero-line1">Slow mornings,</span><br><em class="hero-accent" data-en='warm butter.' data-he='חמאה חמה.' data-ru='тёплое масло.'>warm butter.</em></h1>
+    <p class="hero-body" data-en="A small, charming neighborhood café with on-site baking, premium jams and spreads from 'Bustan' in the Galilee, wonderful cookies, unique pastries, handmade sourdough breads (available on Fridays or by pre-order), excellent coffee, and many more delicious things. Definitely worth a visit!" data-he="בית קפה שכונתי קטן וקסום עם אפייה במקום, ריבות וממרחים מ'בוסתן' בגליל, עוגיות נפלאות, מאפים ייחודיים, לחמי מחמצת עבודת יד (זמינים בימי שישי או בהזמנה מראש), קפה מעולה ועוד המון דברים טעימים. בהחלט שווה ביקור!" data-ru="Небольшое уютное кафе-пекарня со свежей выпечкой, отборными джемами и намазками от «Бустан» из Галилеи, чудесным печеньем, авторскими пирожными, хлебом на закваске ручной работы (по пятницам или под заказ), отличным кофе — и ещё множеством вкусностей. Обязательно загляните!">A small, charming neighborhood café with on-site baking, premium jams and spreads from &lsquo;Bustan&rsquo; in the Galilee, wonderful cookies, unique pastries, handmade sourdough breads (available on Fridays or by pre-order), excellent coffee, and many more delicious things. Definitely worth a visit!</p>
+    <a href="menu.html" class="hero-menu-btn" data-en='See the Menu →' data-he='לתפריט →' data-ru='Меню →'>See the Menu →</a>
   </div>
   <div class="hero-right">
     <div class="hero-photo"><img src="img/Main page/croissant_main.jfif" alt="Fresh croissants at the counter"></div>
@@ -568,14 +572,14 @@
   <div class="stats-inner">
     <div class="stat">
       <div class="stat-value">08:00</div>
-      <div class="stat-label" data-en="morning ritual" data-he="טקס הבוקר">morning ritual</div>
+      <div class="stat-label" data-en="morning ritual" data-he="טקס הבוקר" data-ru="утренний ритуал">morning ritual</div>
     </div>
     <div class="stat">
-      <div class="stat-value" data-en="three" data-he="שלוש">three</div>
-      <div class="stat-label" data-en="pulls a day" data-he="הכנות ביום">pulls a day</div>
+      <div class="stat-value" data-en="three" data-he="שלוש" data-ru="три">three</div>
+      <div class="stat-label" data-en="pulls a day" data-he="הכנות ביום" data-ru="заварки в день">pulls a day</div>
     </div>
     <div class="stat">
-      <div class="stat-value" data-en="since" data-he="מאז">since</div>
+      <div class="stat-value" data-en="since" data-he="מאז" data-ru="с">since</div>
       <div class="stat-label">2021</div>
     </div>
   </div>
@@ -584,10 +588,10 @@
 <!-- ─── TICKER STRIP ─────────────────────────────────────── -->
 <div class="ticker-strip">
   <div class="ticker-inner">
-    <span class="ticker-group"><span class="ticker-sep">✦</span><span class="ticker-item" data-en='Freshly baked croissant every day' data-he='קרואסון טרי אפוי כל יום'>Freshly baked croissant every day</span></span>
-    <span class="ticker-group"><span class="ticker-sep">✦</span><span class="ticker-item" data-en='Whole bread by 24-hour pre-order' data-he='לחם שלם בהזמנה מראש 24 שעות'>Whole bread by 24-hour pre-order</span></span>
-    <span class="ticker-group"><span class="ticker-sep">✦</span><span class="ticker-item" data-en='Homemade cakes' data-he='עוגות ביתיות'>Homemade cakes</span></span>
-    <span class="ticker-group"><span class="ticker-sep">✦</span><span class="ticker-item" data-en='Pet friendly' data-he='ידידותי לחיות מחמד'>Pet friendly</span></span>
+    <span class="ticker-group"><span class="ticker-sep">✦</span><span class="ticker-item" data-en='Freshly baked croissant every day' data-he='קרואסון טרי אפוי כל יום' data-ru='Свежие круассаны каждый день'>Freshly baked croissant every day</span></span>
+    <span class="ticker-group"><span class="ticker-sep">✦</span><span class="ticker-item" data-en='Whole bread by 24-hour pre-order' data-he='לחם שלם בהזמנה מראש 24 שעות' data-ru='Цельнозерновой хлеб под заказ'>Whole bread by 24-hour pre-order</span></span>
+    <span class="ticker-group"><span class="ticker-sep">✦</span><span class="ticker-item" data-en='Homemade cakes' data-he='עוגות ביתיות' data-ru='Домашние торты'>Homemade cakes</span></span>
+    <span class="ticker-group"><span class="ticker-sep">✦</span><span class="ticker-item" data-en='Pet friendly' data-he='ידידותי לחיות מחמד' data-ru='Можно с питомцами'>Pet friendly</span></span>
   </div>
 </div>
 
@@ -596,31 +600,31 @@
   <section class="section">
     <div class="room-header">
       <div>
-        <p class="section-eyebrow" data-en='The room' data-he='החדר'>The room</p>
-        <h2><span data-en='The kind of place' data-he='סוג המקום'>The kind of place</span><br><em data-en='you don&apos;t explain.' data-he='שלא מסבירים.'>you don't explain.</em></h2>
+        <p class="section-eyebrow" data-en='The room' data-he='החדר' data-ru='Пространство'>The room</p>
+        <h2><span data-en='The kind of place' data-he='סוג המקום' data-ru='Место,'>The kind of place</span><br><em data-en='you don&apos;t explain.' data-he='שלא מסבירים.' data-ru='не нуждающееся в объяснении.'>you don't explain.</em></h2>
       </div>
-      <p class="room-sub"><span data-en='You just' data-he='פשוט'>You just</span><br><span data-en='bring someone' data-he='מביאים מישהו'>bring someone</span></p>
+      <p class="room-sub"><span data-en='You just' data-he='פשוט' data-ru='Просто'>You just</span><br><span data-en='bring someone' data-he='מביאים מישהו' data-ru='приводят кого-то'>bring someone</span></p>
     </div>
     <div class="room-grid">
       <div class="room-photo room-photo-1">
         <img src="img/Main page/barista.webp" alt="The counter">
-        <div class="room-caption" data-en='the counter' data-he='הדלפק'>the counter</div>
+        <div class="room-caption" data-en='the counter' data-he='הדלפק' data-ru='стойка'>the counter</div>
       </div>
       <div class="room-photo room-photo-2">
         <img src="img/Main page/clients.jpg" alt="Served with care">
-        <div class="room-caption" data-en='served with care' data-he='מוגש באהבה'>served with care</div>
+        <div class="room-caption" data-en='served with care' data-he='מוגש באהבה' data-ru='с заботой'>served with care</div>
       </div>
       <div class="room-photo room-photo-3">
         <img src="img/Main page/tables.webp" alt="The terrace">
-        <div class="room-caption" data-en='the terrace' data-he='המרפסת'>the terrace</div>
+        <div class="room-caption" data-en='the terrace' data-he='המרפסת' data-ru='терраса'>the terrace</div>
       </div>
       <div class="room-photo room-photo-4">
         <img src="img/Main page/clients2.jpg" alt="Flat white, 09:14">
-        <div class="room-caption" data-en='flat white, 09:14' data-he='פלט וייט, 09:14'>flat white, 09:14</div>
+        <div class="room-caption" data-en='flat white, 09:14' data-he='פלט וייט, 09:14' data-ru='флэт уайт, 09:14'>flat white, 09:14</div>
       </div>
       <div class="room-photo room-photo-5">
         <img src="img/Main page/creambon.jpg" alt="Morning ritual">
-        <div class="room-caption" data-en='morning ritual' data-he='טקס הבוקר'>morning ritual</div>
+        <div class="room-caption" data-en='morning ritual' data-he='טקס הבוקר' data-ru='утренний ритуал'>morning ritual</div>
       </div>
     </div>
   </section>
@@ -630,26 +634,26 @@
 <section class="medovik-section">
   <div class="medovik-inner">
     <div class="medovik-text">
-      <p class="section-eyebrow" data-en='The reason we opened' data-he='הסיבה שפתחנו'>The reason we opened</p>
-      <h2>Medovik</h2>
-      <p class="medovik-story" data-en='Eight paper-thin sheets of honey sponge, baked one at a time and stacked with sour-cream cream. Rested overnight in the fridge so the layers go tender and the cream sets enough to slice clean.' data-he='שמונה שכבות דקות כנייר של בצק דבש, אפויות אחת אחת ומוערמות עם קרם שמנת חמוצה. נח לילה שלם במקרר כדי שהשכבות יתרככו והקרם יתייצב לפרוסה נקייה.'>Eight paper-thin sheets of honey sponge, baked one at a time and stacked with sour-cream cream. Rested overnight in the fridge so the layers go tender and the cream sets enough to slice clean.</p>
+      <p class="section-eyebrow" data-en='The reason we opened' data-he='הסיבה שפתחנו' data-ru='Ради чего мы открылись'>The reason we opened</p>
+      <h2 data-en="Medovik" data-he="מדוביק" data-ru="Медовик">Medovik</h2>
+      <p class="medovik-story" data-en='Eight paper-thin sheets of honey sponge, baked one at a time and stacked with sour-cream cream. Rested overnight in the fridge so the layers go tender and the cream sets enough to slice clean.' data-he='שמונה שכבות דקות כנייר של בצק דבש, אפויות אחת אחת ומוערמות עם קרם שמנת חמוצה. נח לילה שלם במקרר כדי שהשכבות יתרככו והקרם יתייצב לפרוסה נקייה.' data-ru='Восемь тончайших коржей медового бисквита, испечённых по одному и переложенных на смазанных сметанным кремом. Ночь в холодильнике — чтобы коржи пропитались, а крем схватился до идеального среза.'>Eight paper-thin sheets of honey sponge, baked one at a time and stacked with sour-cream cream. Rested overnight in the fridge so the layers go tender and the cream sets enough to slice clean.</p>
       <div class="medovik-stats">
         <div>
-          <div class="medovik-stat-key" data-en='Layers' data-he='שכבות'>Layers</div>
+          <div class="medovik-stat-key" data-en='Layers' data-he='שכבות' data-ru='Коржей'>Layers</div>
           <div class="medovik-stat-val">8</div>
         </div>
         <div>
-          <div class="medovik-stat-key" data-en='Rests' data-he='מנוחה'>Rests</div>
-          <div class="medovik-stat-val" data-en="12 hrs" data-he="12 שעות">12 hrs</div>
+          <div class="medovik-stat-key" data-en='Rests' data-he='מנוחה' data-ru='Пропитка'>Rests</div>
+          <div class="medovik-stat-val" data-en="12 hrs" data-he="12 שעות" data-ru="12 ч">12 hrs</div>
         </div>
         <div>
-          <div class="medovik-stat-key" data-en='Honey' data-he='דבש'>Honey</div>
-          <div class="medovik-stat-val" data-en='Local' data-he='מקומי'>Local</div>
+          <div class="medovik-stat-key" data-en='Honey' data-he='דבש' data-ru='Мёд'>Honey</div>
+          <div class="medovik-stat-val" data-en='Local' data-he='מקומי' data-ru='Местный'>Local</div>
         </div>
       </div>
       <div class="medovik-pricing">
-        <a href="menu.html#cakes" class="hero-menu-btn" data-en='Slice 45&#8362; →' data-he='פרוסה 45&#8362; →'>Slice 45&#8362; →</a>
-        <span class="medovik-price-item" data-he-html='הזמנה מראש עוגה שלמה · <strong>270&#8362;</strong>'>Pre-order whole · <strong>270&#8362;</strong></span>
+        <a href="menu.html#cakes" class="hero-menu-btn" data-en='Slice 45&#8362; →' data-he='פרוסה 45&#8362; →' data-ru='Кусочек 45&#8362; →'>Slice 45&#8362; →</a>
+        <span class="medovik-price-item" data-he-html='הזמנה מראש עוגה שלמה · <strong>270&#8362;</strong>' data-ru-html='Торт целиком под заказ · <strong>270&#8362;</strong>'>Pre-order whole · <strong>270&#8362;</strong></span>
       </div>
     </div>
     <div class="medovik-photo">
@@ -665,24 +669,24 @@
       <img src="img/Main page/street_view.jfif" alt="Bulochka exterior" style="width:100%; height:100%; object-fit:cover; display:block;">
     </div>
     <div class="visit-text">
-      <p class="section-eyebrow" data-en='Visit' data-he='ביקור'>Visit</p>
-      <h2><span data-en='The glass door,' data-he='הדלת הזכוכית,'>The glass door,</span><br><span data-en='under the awning.' data-he='מתחת לאוהל.'>under the awning.</span></h2>
-      <p class="visit-directions" data-en='On the corner of the building, between the glass veranda and the wall with coffee sacks — you won&apos;t miss it!' data-he='בפינת הבניין, בין הוורנדה הזכוכית לקיר עם שקי קפה — אי אפשר לפספס!'>On the corner of the building, between the glass veranda and the wall with coffee sacks — you won't miss it!</p>
+      <p class="section-eyebrow" data-en='Visit' data-he='ביקור' data-ru='Как нас найти'>Visit</p>
+      <h2><span data-en='The glass door,' data-he='הדלת הזכוכית,' data-ru='Стеклянная дверь,'>The glass door,</span><br><span data-en='under the awning.' data-he='מתחת לאוהל.' data-ru='под навесом.'>under the awning.</span></h2>
+      <p class="visit-directions" data-en='On the corner of the building, between the glass veranda and the coffee sacks — you won&apos;t miss it!' data-he='בפינת הבניין, בין הוורנדה הזכוכית לשקי קפה — אי אפשר לפספס!' data-ru='На углу здания, между стеклянной верандой и мешками кофе — не пропустите!'>On the corner of the building, between the glass veranda and the coffee sacks — you won't miss it!</p>
       <div class="visit-mobile-photo"><img src="img/Main page/street_view.jfif" alt="Bulochka exterior"></div>
       <div class="visit-details">
         <div class="visit-details-left">
           <div class="visit-detail-group">
-            <span class="visit-detail-label" data-en='Address' data-he='כתובת'>Address</span>
-            <span class="visit-detail-value" data-he-html='פינסקר 29<br>פתח תקווה'>Pinsker 29<br>Petah Tikva</span>
+            <span class="visit-detail-label" data-en='Address' data-he='כתובת' data-ru='Адрес'>Address</span>
+            <span class="visit-detail-value" data-he-html='פינסקר 29<br>פתח תקווה' data-ru-html='Пинскер 29<br>Петах-Тиква'>Pinsker 29<br>Petah Tikva</span>
           </div>
           <a href="tel:+972529662724" class="visit-phone" dir="ltr">+972 (52) 966-2724</a>
         </div>
         <div class="visit-details-right">
-          <span class="visit-detail-label" data-en='Hours' data-he='שעות'>Hours</span>
+          <span class="visit-detail-label" data-en='Hours' data-he='שעות' data-ru='Часы работы'>Hours</span>
           <div class="visit-hours">
-            <div class="visit-hours-row"><span data-en='Sun — Thu' data-he='א׳ — ה׳'>Sun — Thu</span><span dir="ltr">08:00 — 20:00</span></div>
-            <div class="visit-hours-row"><span data-en='Friday' data-he='שישי'>Friday</span><span dir="ltr">08:00 — 15:00</span></div>
-            <div class="visit-hours-row"><span data-en='Saturday' data-he='שבת'>Saturday</span><span data-en='Closed' data-he='סגור'>Closed</span></div>
+            <div class="visit-hours-row"><span data-en='Sun — Thu' data-he='א׳ — ה׳' data-ru='Вс — Чт'>Sun — Thu</span><span dir="ltr">08:00 — 20:00</span></div>
+            <div class="visit-hours-row"><span data-en='Friday' data-he='שישי' data-ru='Пятница'>Friday</span><span dir="ltr">08:00 — 15:00</span></div>
+            <div class="visit-hours-row"><span data-en='Saturday' data-he='שבת' data-ru='Суббота'>Saturday</span><span data-en='Closed' data-he='סגור' data-ru='Закрыто'>Closed</span></div>
           </div>
         </div>
       </div>
@@ -696,36 +700,36 @@
     <div class="footer-top">
       <div class="footer-brand">
         <div class="footer-logo">Bulochka</div>
-        <p data-en='A small bakery, on the corner of your morning.' data-he='מאפייה קטנה, בפינת הבוקר שלך.'>A small bakery, on the corner<br>of your morning.</p>
+        <p data-en='A small bakery, on the corner of your morning.' data-he='מאפייה קטנה, בפינת הבוקר שלך.' data-ru='Маленькая пекарня на углу вашего утра.'>A small bakery, on the corner<br>of your morning.</p>
       </div>
       <div>
-        <div class="footer-col-title" data-en='Visit' data-he='ביקור'>Visit</div>
+        <div class="footer-col-title" data-en='Visit' data-he='ביקור' data-ru='Адрес'>Visit</div>
         <div class="footer-links">
-          <span data-en='Petah Tikva, Pinsker 29' data-he='פתח תקווה, פינסקר 29'>Petah Tikva, Pinsker 29</span>
-          <span data-en='Sun–Thu, 08:00–20:00' data-he='08:00–20:00 ,א׳–ה׳' dir="ltr">Sun–Thu, 08:00–20:00</span>
-          <span data-en='Fri, 08:00–15:00' data-he='08:00–15:00 ,ו׳' dir="ltr">Fri, 08:00–15:00</span>
+          <span data-en='Petah Tikva, Pinsker 29' data-he='פתח תקווה, פינסקר 29' data-ru='Петах-Тиква, Пинскер 29'>Petah Tikva, Pinsker 29</span>
+          <span data-en='Sun–Thu, 08:00–20:00' data-he='08:00–20:00 ,א׳–ה׳' data-ru='Вс–Чт, 08:00–20:00' dir="ltr">Sun–Thu, 08:00–20:00</span>
+          <span data-en='Fri, 08:00–15:00' data-he='08:00–15:00 ,ו׳' data-ru='Пт, 08:00–15:00' dir="ltr">Fri, 08:00–15:00</span>
           <a href="tel:+972529662724" dir="ltr">+972 (52) 966-2724</a>
         </div>
       </div>
       <div>
-        <div class="footer-col-title" data-en='Stay in touch' data-he='צרו קשר'>Stay in touch</div>
+        <div class="footer-col-title" data-en='Stay in touch' data-he='צרו קשר' data-ru='Контакты'>Stay in touch</div>
         <div class="footer-links">
-          <a href="careers.html" data-en='Work with us' data-he='עבוד איתנו'>Work with us</a>
-          <a href="events.html" data-en='Events' data-he='אירועים'>Events</a>
+          <a href="careers.html" data-en='Work with us' data-he='עבוד איתנו' data-ru='Работа у нас'>Work with us</a>
+          <a href="events.html" data-en='Events' data-he='אירועים' data-ru='Мероприятия'>Events</a>
         </div>
       </div>
       <div>
-        <div class="footer-col-title" data-en='Follow' data-he='עקבו אחרינו'>Follow</div>
+        <div class="footer-col-title" data-en='Follow' data-he='עקבו אחרינו' data-ru='Соцсети'>Follow</div>
         <div class="footer-links">
           <a href="https://www.instagram.com/bulochka.pt" target="_blank">Instagram</a>
           <a href="https://www.facebook.com/bulochka.bulochka.2025#" target="_blank">Facebook</a>
-          <a href="https://www.google.com/search?q=Bulochka%2C+Yehuda+Leib+Pinsker+Street%2C+Petah+Tikva&rlz=1C1GCEA_enIL1186IL1186&oq=bu&gs_lcrp=EgZjaHJvbWUqCAgAEEUYJxg7MggIABBFGCcYOzIICAEQRRgnGDsyBggCEEUYOzIGCAMQRRg5MgYIBBBFGDsyBggFEEUYPDIGCAYQRRg8MgYIBxBFGDzSAQgxMzg2ajBqNKgCALACAQ&sourceid=chrome&ie=UTF-8#lrd=0x151d3713a80831a3:0x956fbd3c3adf20a3,3,,,," target="_blank" data-en='Google Reviews' data-he='ביקורות גוגל'>Google Reviews</a>
+          <a href="https://www.google.com/search?q=Bulochka%2C+Yehuda+Leib+Pinsker+Street%2C+Petah+Tikva&rlz=1C1GCEA_enIL1186IL1186&oq=bu&gs_lcrp=EgZjaHJvbWUqCAgAEEUYJxg7MggIABBFGCcYOzIICAEQRRgnGDsyBggCEEUYOzIGCAMQRRg5MgYIBBBFGDsyBggFEEUYPDIGCAYQRRg8MgYIBxBFGDzSAQgxMzg2ajBqNKgCALACAQ&sourceid=chrome&ie=UTF-8#lrd=0x151d3713a80831a3:0x956fbd3c3adf20a3,3,,,," target="_blank" data-en='Google Reviews' data-he='ביקורות גוגל' data-ru='Отзывы на Google'>Google Reviews</a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© Bulochka MMXIX—MMXXVI</span>
-      <span class="footer-tagline" data-en='✦ Made with butter' data-he='✦ עשוי עם חמאה'>✦ Made with butter</span>
+      <span class="footer-tagline" data-en='✦ Made with butter' data-he='✦ עשוי עם חמאה' data-ru='✦ Сделано с маслом'>✦ Made with butter</span>
     </div>
   </div>
 </footer>
@@ -733,5 +737,17 @@
 <script src="mobile-menu.js"></script>
 <script src="lang.js"></script>
 <script type="module" src="/analytics.js"></script>
+<button class="scroll-top-btn" id="scrollTopBtn" aria-label="Back to top">↑</button>
+<script>
+  (function(){
+    var btn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', function(){
+      btn.classList.toggle('visible', window.scrollY > 300);
+    }, {passive: true});
+    btn.addEventListener('click', function(){
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+  })();
+</script>
 </body>
 </html>

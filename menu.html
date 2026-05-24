@@ -7,11 +7,11 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1X6T5CVR62"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-1X6T5CVR62');</script>
 <script>
-    (function(){var l=localStorage.getItem('bulochka-lang');if(l==='he'){document.documentElement.dir='rtl';document.documentElement.lang='he';}})();
+    (function(){var l=localStorage.getItem('bulochka-lang');if(l==='he'){document.documentElement.dir='rtl';document.documentElement.lang='he';}else if(l){document.documentElement.lang=l;}})();
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Inter+Tight:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Rubik:wght@300;400;500&family=Varela+Round&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Playfair+Display:ital,wght@0,400;1,400&family=Rubik:wght@300;400;500&family=Varela+Round&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=8">
   <style>
     /* ─── MENU HEADER ───────────────────────── */
@@ -280,6 +280,7 @@
       padding-bottom: 8px;
       border-top: 1px solid var(--brown-faint);
       margin-top: 8px;
+      text-align: right;
     }
     .menu-subhead:first-child { border-top: none; padding-top: 0; margin-top: 0; }
 
@@ -459,11 +460,11 @@
 <!-- ─── NAV ──────────────────────────────────────────────── -->
 <nav class="nav">
   <ul class="nav-links">
-    <li><a href="index.html" data-en='Home' data-he='ראשי'>Home</a></li>
-    <li><a href="menu.html" class="active" data-en='Menu' data-he='תפריט'>Menu</a></li>
-    <li><a href="index.html#story" data-en='Our story' data-he='הסיפור שלנו'>Our story</a></li>
-    <li><a href="careers.html" data-en='Work with us' data-he='דרושים'>Work with us</a></li>
-    <li><a href="events.html" data-en='Events' data-he='אירועים'>Events</a></li>
+    <li><a href="index.html" data-en='Home' data-he='ראשי' data-ru='Главная'>Home</a></li>
+    <li><a href="menu.html" class="active" data-en='Menu' data-he='תפריט' data-ru='Меню'>Menu</a></li>
+    <li><a href="index.html#story" data-en='Our story' data-he='הסיפור שלנו' data-ru='О нас'>Our story</a></li>
+    <li><a href="careers.html" data-en='Work with us' data-he='דרושים' data-ru='Работа у нас'>Work with us</a></li>
+    <li><a href="events.html" data-en='Events' data-he='אירועים' data-ru='Мероприятия'>Events</a></li>
   </ul>
   <a href="index.html" class="nav-logo">Bulochka</a>
   <div class="nav-right">
@@ -472,12 +473,13 @@
       <a href="https://www.instagram.com/bulochka.pt" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
       <a href="https://www.facebook.com/bulochka.bulochka.2025" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
     </div>
-    <span class="nav-hours" data-en='Open until 20:00' data-he='פתוח עד 20:00' dir="ltr">Open until 20:00</span>
+    <span class="nav-hours" data-en='Open until 20:00' data-he='פתוח עד 20:00' data-ru='Открыто до 20:00' dir="ltr">Open until 20:00</span>
     <div class="lang-switch">
       <button class="lang-btn" data-lang="en">EN</button>
       <button class="lang-btn" data-lang="he">עב</button>
+      <button class="lang-btn" data-lang="ru">RU</button>
     </div>
-    <a href="index.html#visit" class="btn-reserve" data-en='Reserve' data-he='הזמנה'>Reserve</a>
+    <a href="index.html#visit" class="btn-reserve" data-en='Reserve a table' data-he='הזמנת שולחן' data-ru='Забронировать'>Reserve a table</a>
   </div>
   <div class="nav-toggle" id="navToggle" aria-label="Open menu">
     <span></span><span></span><span></span>
@@ -488,28 +490,28 @@
 <!-- ─── MENU HERO ────────────────────────────────────────── -->
 <div class="menu-hero">
   <div class="menu-hero-inner">
-    <p class="section-eyebrow" data-he="התפריט">The menu</p>
-    <h1 data-he="כל מה שאפינו ומזגנו<br><span style='color: var(--sage)'>הבוקר.</span>">Everything we baked<br>& poured<br><span style="color: var(--sage)">this morning.</span></h1>
+    <p class="section-eyebrow" data-he="התפריט" data-ru="Меню">The menu</p>
+    <h1 data-he="כל מה שאפינו ומזגנו<br><span style='color: var(--sage)'>הבוקר.</span>" data-ru="Всё, что мы испекли<br>и заварили<br><span style='color: var(--sage)'>сегодня утром.</span>">Everything we baked<br>& poured<br><span style="color: var(--sage)">this morning.</span></h1>
   </div>
 </div>
 
 <!-- ─── FILTER BAR ──────────────────────────────────────── -->
 <div class="filter-bar" id="filterBar">
   <div class="filter-bar-inner">
-    <span class="filter-bar-label" data-he="עבור ל ↓">Jump to ↓</span>
+    <span class="filter-bar-label" data-he="עבור ל ↓" data-ru="Перейти ↓">Jump to ↓</span>
     <div class="filter-bar-pills">
-      <a href="#hot-drinks" class="filter-pill active" data-target="hot-drinks" data-he="משקאות חמים <span>14</span>">Hot Drinks <span>14</span></a>
-      <a href="#cold-drinks" class="filter-pill" data-target="cold-drinks" data-he="משקאות קרים <span>22</span>">Cold Drinks <span>22</span></a>
-      <a href="#sandwiches" class="filter-pill" data-target="sandwiches" data-he="כריכים וסלטים <span>16</span>">Sandwiches & Salads <span>16</span></a>
-      <a href="#pastries" class="filter-pill" data-target="pastries" data-he="מאפים <span>10</span>">Pastries <span>10</span></a>
-      <a href="#filled"   class="filter-pill" data-target="filled" data-he="קרואסונים ממולאים <span>07</span>">Filled croissants <span>07</span></a>
-      <a href="#tartlets" class="filter-pill" data-target="tartlets" data-he="טארטלטים <span>06</span>">Tartlets <span>06</span></a>
-      <a href="#cakes"    class="filter-pill" data-target="cakes" data-he="עוגות וקינוחים <span>04</span>">Cakes & Desserts <span>04</span></a>
-      <a href="#ice-cream" class="filter-pill" data-target="ice-cream" data-he="גלידה <span>03</span>">Ice Cream <span>03</span></a>
-      <a href="#alcohol"   class="filter-pill" data-target="alcohol" data-he="אלכוהול <span>12</span>">Alcohol <span>12</span></a>
-      <a href="#friday" class="filter-pill filter-pill-friday" data-target="friday" data-he="מיוחד שישי <span>07</span>">Friday Special <span>07</span></a>
+      <a href="#hot-drinks" class="filter-pill active" data-target="hot-drinks" data-he="משקאות חמים <span>14</span>" data-ru="Горячие напитки <span>14</span>">Hot Drinks <span>14</span></a>
+      <a href="#cold-drinks" class="filter-pill" data-target="cold-drinks" data-he="משקאות קרים <span>22</span>" data-ru="Холодные напитки <span>22</span>">Cold Drinks <span>22</span></a>
+      <a href="#sandwiches" class="filter-pill" data-target="sandwiches" data-he="כריכים וסלטים <span>16</span>" data-ru="Сэндвичи и салаты <span>16</span>">Sandwiches & Salads <span>16</span></a>
+      <a href="#pastries" class="filter-pill" data-target="pastries" data-he="מאפים <span>10</span>" data-ru="Выпечка <span>10</span>">Pastries <span>10</span></a>
+      <a href="#filled"   class="filter-pill" data-target="filled" data-he="קרואסונים ממולאים <span>07</span>" data-ru="Круассаны с начинкой <span>07</span>">Filled croissants <span>07</span></a>
+      <a href="#tartlets" class="filter-pill" data-target="tartlets" data-he="טארטלטים <span>06</span>" data-ru="Тарталетки <span>06</span>">Tartlets <span>06</span></a>
+      <a href="#cakes"    class="filter-pill" data-target="cakes" data-he="עוגות וקינוחים <span>04</span>" data-ru="Торты и десерты <span>04</span>">Cakes & Desserts <span>04</span></a>
+      <a href="#ice-cream" class="filter-pill" data-target="ice-cream" data-he="גלידה <span>03</span>" data-ru="Мороженое <span>03</span>">Ice Cream <span>03</span></a>
+      <a href="#alcohol"   class="filter-pill" data-target="alcohol" data-he="אלכוהול <span>12</span>" data-ru="Алкоголь <span>12</span>">Alcohol <span>12</span></a>
+      <a href="#friday" class="filter-pill filter-pill-friday" data-target="friday" data-he="מיוחד שישי <span>07</span>" data-ru="Пятничное спецпредложение <span>07</span>">Friday Special <span>07</span></a>
     </div>
-    <span class="filter-bar-total" data-he="98 פריטים">98 items total</span>
+    <span class="filter-bar-total" data-he="98 פריטים" data-ru="98 позиций">98 items total</span>
   </div>
 </div>
 
@@ -517,10 +519,10 @@
 <div class="menu-category" id="hot-drinks">
   <div class="menu-category-inner">
     <div class="menu-category-header">
-      <h2 class="menu-category-title" data-he="משקאות <em>חמים</em>">Hot <em>drinks</em></h2>
+      <h2 class="menu-category-title" data-he="משקאות <em>חמים</em>" data-ru="Горячие <em>напитки</em>">Hot <em>drinks</em></h2>
       <div class="menu-category-meta">
         <div class="menu-category-count">14</div>
-        <p class="menu-category-desc" data-he="קפה קלוי בכמויות קטנות, בתוספת תה ומשקאות חמים. חלב מלא, שיבולת שועל או שקד — ללא תוספת.">Coffee roasted small-batch nearby, plus teas and warm drinks. Whole milk, oat, or almond — no surcharge.</p>
+        <p class="menu-category-desc" data-he="קפה בקלייה בינונית, בתוספת תה ומשקאות חמים. שיבולת שועל וסויה בתוספת בחלק מהמשקאות." data-ru="Кофе средней обжарки, чай и тёплые напитки. Овсяное и соевое — с доплатой на некоторых напитках.">Coffee medium-roast, plus teas and warm drinks. Oat and soy at extra charge on selected drinks.</p>
       </div>
     </div>
     <hr class="menu-divider">
@@ -587,7 +589,7 @@
             <span class="menu-item-name" data-he="לאטה">Latte</span>
             <span class="menu-item-price">₪16</span>
           </div>
-          <span class="menu-item-desc" data-he="כוס גדולה עם חלב מוקצף היטב ואספרסו מעל. על בסיס סויה/שיבולת - ₪2. תוספות סירופ - קרמל/אגוזי לוז/וניל/אייריש קרים - ₪5.">Honey, vanilla, lavender, hazelnut.</span>
+          <span class="menu-item-desc" data-he="כוס גדולה עם חלב מוקצף היטב ואספרסו מעל. על בסיס סויה/שיבולת - ₪2. תוספות סירופ - קרמל/אגוזי לוז/וניל/אייריש קרים - ₪5.">Caramel, vanilla, Irish cream, hazelnut.</span>
           <span class="menu-item-action">Add to order →</span>
         </div>
       </div>
@@ -687,10 +689,10 @@
 <div class="menu-category" id="cold-drinks">
   <div class="menu-category-inner">
     <div class="menu-category-header">
-      <h2 class="menu-category-title" data-he="משקאות <em>קרים</em>">Cold <em>drinks</em></h2>
+      <h2 class="menu-category-title" data-he="משקאות <em>קרים</em>" data-ru="Холодные <em>напитки</em>">Cold <em>drinks</em></h2>
       <div class="menu-category-meta">
         <div class="menu-category-count">22</div>
-        <p class="menu-category-desc" data-he="עם קרח, מנוער או מוקצף. שיבולת שועל וסויה בתוספת בחלק מהמשקאות.">Iced, shaken, or blended. Oat and soy at extra charge on selected drinks.</p>
+        <p class="menu-category-desc" data-he="עם קרח, מנוער או מוקצף. שיבולת שועל וסויה בתוספת בחלק מהמשקאות." data-ru="На льду, взбитые или блендированные. Овсяное и соевое — с доплатой на некоторых напитках.">Iced, shaken, or blended. Oat and soy at extra charge on selected drinks.</p>
       </div>
     </div>
     <hr class="menu-divider">
@@ -780,7 +782,7 @@
         </div>
       </div>
 
-      <div class="menu-subhead" data-he="מיצים">Juices</div>
+      <div class="menu-subhead" data-he="מיצים" data-ru="Соки">Juices</div>
 
       <div class="menu-item">
         <div class="menu-item-photo"><img src="img/cold drinks/coconut_water.webp" alt="Flavoured Coconut Water"></div>
@@ -902,7 +904,7 @@
         </div>
       </div>
 
-      <div class="menu-subhead" data-he="קומבוצ'ה">Kombucha</div>
+      <div class="menu-subhead" data-he="קומבוצ'ה" data-ru="Комбуча">Kombucha</div>
 
       <div class="menu-item">
         <div class="menu-item-photo"><img src="img/cold drinks/cucumber_coriander.webp" alt="Cucumber &amp; Coriander"></div>
@@ -972,25 +974,25 @@
 <div class="menu-category" id="sandwiches">
   <div class="menu-category-inner">
     <div class="menu-category-header">
-      <h2 class="menu-category-title" data-he="כריכים<br><em>וסלטים</em>">Sandwiches &<br><em>salads</em></h2>
+      <h2 class="menu-category-title" data-he="כריכים<br><em>וסלטים</em>" data-ru="Сэндвичи &<br><em>салаты</em>">Sandwiches &<br><em>salads</em></h2>
       <div class="menu-category-meta">
         <div class="menu-category-count">16</div>
-        <p class="menu-category-desc" data-he="הכנה במקום- כך שהירקות עוד לא יודעים שאנחנו עומדים לפרוס אותם.">Prepared on-place — so the vegetables don't yet know they're about to be sliced.</p>
+        <p class="menu-category-desc" data-he="הכנה במקום- כך שהירקות עוד לא יודעים שאנחנו עומדים לפרוס אותם." data-ru="Готовим на месте — чтобы овощи ещё не знали, что их сейчас нарежут.">Prepared on-place — so the vegetables don't yet know they're about to be sliced.</p>
       </div>
     </div>
     <hr class="menu-divider">
     <div class="menu-items">
 
-      <div class="menu-subhead" data-he="כריכים">Sandwiches</div>
+      <div class="menu-subhead" data-he="כריכים" data-ru="Сэндвичи">Sandwiches</div>
 
       <div class="menu-item">
         <div class="menu-item-photo"><img src="img/sandwiches/sanswich_salmon.webp" alt="Smoked Salmon"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
-            <span class="menu-item-name" data-he="כריך סלמון מעושן">Smoked Salmon</span>
+            <span class="menu-item-name" data-he="כריך סלמון מעושן" data-ru="Сэндвич с копчёным лососем">Smoked Salmon</span>
             <span class="menu-item-price">₪41</span>
           </div>
-          <span class="menu-item-desc" data-he="גבינת שמנת, בצל סגול, סלמון מעושן, מיץ לימון טרי, מלפפון, חסה קיסר. תוספת: פרוסות אבוקדו ₪8 / ביצה קשה ₪3.">Cream cheese, red onion, smoked salmon, fresh lemon, cucumber, romaine. Avocado +₪8, hard-boiled egg +₪3.</span>
+          <span class="menu-item-desc" data-he="גבינת שמנת, בצל סגול, סלמון מעושן, מיץ לימון טרי, מלפפון, חסה קיסר. תוספת: פרוסות אבוקדו ₪8 / ביצה קשה ₪3." data-ru="Сливочный сыр, красный лук, копчёный лосось, свежий лимонный сок, огурец, листья салата «Кейсар». Доп.: авокадо +₪8, яйцо вкрутую +₪3.">Cream cheese, red onion, smoked salmon, fresh lemon, cucumber, romaine. Avocado +₪8, hard-boiled egg +₪3.</span>
           <span class="menu-item-action">Add to order →</span>
         </div>
       </div>
@@ -998,10 +1000,10 @@
         <div class="menu-item-photo"><img src="img/sandwiches/croissant_salmon.webp" alt="Croissant Salmon"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
-            <span class="menu-item-name" data-he="קרואסון סלמון מעושן">Croissant Salmon</span>
+            <span class="menu-item-name" data-he="קרואסון סלמון מעושן" data-ru="Круассан с копчёным лососем">Croissant Salmon</span>
             <span class="menu-item-price">₪45</span>
           </div>
-          <span class="menu-item-desc" data-he="גבינת שמנת, בצל סגול, סלמון מעושן, מיץ לימון טרי, מלפפון, חסה קיסר. תוספת: פרוסות אבוקדו ₪8 / ביצה קשה ₪3.">Cream cheese, red onion, smoked salmon, fresh lemon, cucumber, romaine — in a croissant. Avocado +₪8, hard-boiled egg +₪3.</span>
+          <span class="menu-item-desc" data-he="גבינת שמנת, בצל סגול, סלמון מעושן, מיץ לימון טרי, מלפפון, חסה קיסר. תוספת: פרוסות אבוקדו ₪8 / ביצה קשה ₪3." data-ru="Сливочный сыр, красный лук, копчёный лосось, свежий лимонный сок, огурец, листья салата «Кейсар». Доп.: авокадо +₪8, яйцо вкрутую +₪3.">Cream cheese, red onion, smoked salmon, fresh lemon, cucumber, romaine — in a croissant. Avocado +₪8, hard-boiled egg +₪3.</span>
           <span class="menu-item-action">Add to order →</span>
         </div>
       </div>
@@ -1010,10 +1012,10 @@
         <div class="menu-item-photo"><img src="img/sandwiches/sandwich_tuna.webp" alt="Tuna Sandwich"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
-            <span class="menu-item-name" data-he="כריך טונה">Tuna Sandwich</span>
+            <span class="menu-item-name" data-he="כריך טונה" data-ru="Сэндвич с тунцом">Tuna Sandwich</span>
             <span class="menu-item-price">₪41</span>
           </div>
-          <span class="menu-item-desc" data-he="מיונז, ביצה קשה, טונה, עגבניה, מלפפון, חסה קיסר. תוספת: פרוסות אבוקדו ₪8.">Mayo, hard-boiled egg, tuna, tomato, cucumber, romaine. Avocado +₪8.</span>
+          <span class="menu-item-desc" data-he="מיונז, ביצה קשה, טונה, עגבניה, מלפפון, חסה קיסר. תוספת: פרוסות אבוקדו ₪8." data-ru="Майонез, яйцо вкрутую, тунец, помидор, огурец, листья салата «Кейсар». Доп.: авокадо +₪8.">Mayo, hard-boiled egg, tuna, tomato, cucumber, romaine. Avocado +₪8.</span>
           <span class="menu-item-action">Add to order →</span>
         </div>
       </div>
@@ -1021,10 +1023,10 @@
         <div class="menu-item-photo"><img src="img/sandwiches/croissant_tuna.webp" alt="Croissant Tuna"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
-            <span class="menu-item-name" data-he="קרואסון טונה">Croissant Tuna</span>
+            <span class="menu-item-name" data-he="קרואסון טונה" data-ru="Круассан с тунцом">Croissant Tuna</span>
             <span class="menu-item-price">₪45</span>
           </div>
-          <span class="menu-item-desc" data-he="מיונז, ביצה קשה, טונה, עגבניה, מלפפון, חסה קיסר. תוספת: פרוסות אבוקדו ₪8.">Mayo, hard-boiled egg, tuna, tomato, cucumber, romaine — in a croissant. Avocado +₪8.</span>
+          <span class="menu-item-desc" data-he="מיונז, ביצה קשה, טונה, עגבניה, מלפפון, חסה קיסר. תוספת: פרוסות אבוקדו ₪8." data-ru="Майонез, яйцо вкрутую, тунец, помидор, огурец, листья салата «Кейсар». Доп.: авокадо +₪8.">Mayo, hard-boiled egg, tuna, tomato, cucumber, romaine — in a croissant. Avocado +₪8.</span>
           <span class="menu-item-action">Add to order →</span>
         </div>
       </div>
@@ -1032,10 +1034,10 @@
         <div class="menu-item-photo"><img src="img/sandwiches/sandwich_avocado.webp" alt="Avocado Sandwich"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
-            <span class="menu-item-name" data-he="כריך אבוקדו">Avocado Sandwich</span>
+            <span class="menu-item-name" data-he="כריך אבוקדו" data-ru="Сэндвич с авокадо">Avocado Sandwich</span>
             <span class="menu-item-price">₪41</span>
           </div>
-          <span class="menu-item-desc" data-he="גבינת שמנת, ביצה קשה, פרוסות אבוקדו, מלח, פלפל שחור גרוס, מיץ לימון טרי, עגבניה, מלפפון, חסה קיסר. תוספת: לא צריך להוסיף כלום, הוא גם ככה מושלם.">Cream cheese, hard-boiled egg, avocado, salt, black pepper, fresh lemon, tomato, cucumber, romaine. No need to add anything — it's perfect as is.</span>
+          <span class="menu-item-desc" data-he="גבינת שמנת, ביצה קשה, פרוסות אבוקדו, מלח, פלפל שחור גרוס, מיץ לימון טרי, עגבניה, מלפפון, חסה קיסר. תוספת: לא צריך להוסיף כלום, הוא גם ככה מושלם." data-ru="Сливочный сыр, яйцо вкрутую, авокадо, соль, свежемолотый чёрный перец, свежий лимонный сок, помидор, огурец, листья салата «Кейсар». Ничего добавлять не нужно — и так идеален.">Cream cheese, hard-boiled egg, avocado, salt, black pepper, fresh lemon, tomato, cucumber, romaine. No need to add anything — it's perfect as is.</span>
           <span class="menu-item-action">Add to order →</span>
         </div>
       </div>
@@ -1043,10 +1045,10 @@
         <div class="menu-item-photo"><img src="img/sandwiches/croissant_avocado.webp" alt="Croissant Avocado"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
-            <span class="menu-item-name" data-he="קרואסון אבוקדו">Croissant Avocado</span>
+            <span class="menu-item-name" data-he="קרואסון אבוקדו" data-ru="Круассан с авокадо">Croissant Avocado</span>
             <span class="menu-item-price">₪45</span>
           </div>
-          <span class="menu-item-desc" data-he="גבינת שמנת, ביצה קשה, פרוסות אבוקדו, מלח, פלפל שחור גרוס, מיץ לימון טרי, עגבניה, מלפפון, חסה קיסר. תוספת: לא צריך להוסיף כלום, הוא גם ככה מושלם.">Cream cheese, hard-boiled egg, avocado, salt, black pepper, fresh lemon, tomato, cucumber, romaine. No need to add anything — it's perfect as is.</span>
+          <span class="menu-item-desc" data-he="גבינת שמנת, ביצה קשה, פרוסות אבוקדו, מלח, פלפל שחור גרוס, מיץ לימון טרי, עגבניה, מלפפון, חסה קיסר. תוספת: לא צריך להוסיף כלום, הוא גם ככה מושלם." data-ru="Сливочный сыр, яйцо вкрутую, авокадо, соль, свежемолотый чёрный перец, свежий лимонный сок, помидор, огурец, листья салата «Кейсар». Ничего добавлять не нужно — и так идеален.">Cream cheese, hard-boiled egg, avocado, salt, black pepper, fresh lemon, tomato, cucumber, romaine. No need to add anything — it's perfect as is.</span>
           <span class="menu-item-action">Add to order →</span>
         </div>
       </div>
@@ -1054,10 +1056,10 @@
         <div class="menu-item-photo"><img src="img/sandwiches/sandwich_vegan.webp" alt="Vegan Sandwich Avocado"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
-            <span class="menu-item-name" data-he="רוסטיק אבוקדו VEGAN <span class=&quot;menu-item-veg&quot;>◦</span>">Vegan Sandwich Avocado <span class="menu-item-veg">◦</span></span>
+            <span class="menu-item-name" data-he="רוסטיק אבוקדו VEGAN <span class=&quot;menu-item-veg&quot;>◦</span>" data-ru="VEGAN — сэндвич с авокадо <span class=&quot;menu-item-veg&quot;>◦</span>">Vegan Sandwich Avocado <span class="menu-item-veg">◦</span></span>
             <span class="menu-item-price">₪41</span>
           </div>
-          <span class="menu-item-desc" data-he="פסטו צנוברים, פרוסות אבוקדו, מלח, פלפל שחור גרוס, מיץ לימון טרי, עגבניה, מלפפון, חסה קיסר.">Pine nut pesto, avocado, salt, black pepper, fresh lemon, tomato, cucumber, romaine.</span>
+          <span class="menu-item-desc" data-he="פסטו צנוברים, פרוסות אבוקדו, מלח, פלפל שחור גרוס, מיץ לימון טרי, עגבניה, מלפפון, חסה קיסר." data-ru="Песто с кедровыми орешками, авокадо, соль, чёрный перец, свежий лимонный сок, помидор, огурец, листья салата «Кейсар».">Pine nut pesto, avocado, salt, black pepper, fresh lemon, tomato, cucumber, romaine.</span>
           <span class="menu-item-action">Add to order →</span>
         </div>
       </div>
@@ -1066,10 +1068,10 @@
         <div class="menu-item-photo"><img src="img/sandwiches/croissant_antipasti.webp" alt="Croissant Antipasti"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
-            <span class="menu-item-name" data-he="קרואסון אנטיפסטי">Croissant Antipasti</span>
+            <span class="menu-item-name" data-he="קרואסון אנטיפסטי" data-ru="Круассан антипасти">Croissant Antipasti</span>
             <span class="menu-item-price">₪42</span>
           </div>
-          <span class="menu-item-desc" data-he="ממרח צ'אטני מנגו, ירקות אפויים (בטטה, זוקיני, גמבה), בולגרית מעודנת, חסה קיסר.">Mango chutney, roasted sweet potato, zucchini and bell pepper, Bulgarian cheese, romaine.</span>
+          <span class="menu-item-desc" data-he="ממרח צ'אטני מנגו, ירקות אפויים (בטטה, זוקיני, גמבה), בולגרית מעודנת, חסה קיסר." data-ru="Соус манго-чатни, запечённые овощи (батат, цукини, болгарский перец), нежный болгарский сыр, листья салата «Кейсар».">Mango chutney, roasted sweet potato, zucchini and bell pepper, Bulgarian cheese, romaine.</span>
           <span class="menu-item-action">Add to order →</span>
         </div>
       </div>
@@ -1077,10 +1079,10 @@
         <div class="menu-item-photo"><img src="img/sandwiches/croissant_pesto.webp" alt="Croissant Pesto"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
-            <span class="menu-item-name" data-he="קרואסון פסטו">Croissant Pesto</span>
+            <span class="menu-item-name" data-he="קרואסון פסטו" data-ru="Круассан с песто">Croissant Pesto</span>
             <span class="menu-item-price">₪42</span>
           </div>
-          <span class="menu-item-desc" data-he="גבינת שמנת, פסטו צנוברים, בולגרית מעודנת, מלפפון, חסה קיסר.">Cream cheese, pine nut pesto, Bulgarian cheese, cucumber, romaine.</span>
+          <span class="menu-item-desc" data-he="גבינת שמנת, פסטו צנוברים, בולגרית מעודנת, מלפפון, חסה קיסר." data-ru="Сливочный сыр, песто с кедровыми орешками, нежный болгарский сыр, огурец, листья салата «Кейсар».">Cream cheese, pine nut pesto, Bulgarian cheese, cucumber, romaine.</span>
           <span class="menu-item-action">Add to order →</span>
         </div>
       </div>
@@ -1088,24 +1090,24 @@
         <div class="menu-item-photo"><img src="img/sandwiches/tost_5_cheese.webp" alt="Five Cheese Toast"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
-            <span class="menu-item-name" data-he="טוסט חמש גבינות">Five Cheese Toast</span>
+            <span class="menu-item-name" data-he="טוסט חמש גבינות" data-ru="Тост с пятью сырами">Five Cheese Toast</span>
             <span class="menu-item-price">₪46 / ₪48</span>
           </div>
-          <span class="menu-item-desc" data-he="גבינת שמנת, צ'דר, מוצרלה, גאודה, סקנדינבית. מגיע עם סלט קצוץ אישי. לחם קסטן לבן ₪46 / לחם קסטן דגנים ₪48. תוספות: טונה ₪8 / קוביות אבוקדו (לסלט) ₪8 / ביצה קשה ₪3 / עגבניה ₪3 / תירס ₪3.">Cream cheese, cheddar, mozzarella, gouda, Scandinavian cheese. Served with chopped salad. White / grain bread. Tuna +₪8, avocado +₪8, egg +₪6, tomato +₪3, corn +₪3, red onion +₪3, kalamata +₪4.</span>
+          <span class="menu-item-desc" data-he="גבינת שמנת, צ'דר, מוצרלה, גאודה, סקנדינבית. מגיע עם סלט קצוץ אישי. לחם קסטן לבן ₪46 / לחם קסטן דגנים ₪48. תוספות: טונה ₪8 / קוביות אבוקדו (לסלט) ₪8 / ביצה קשה ₪3 / עגבניה ₪3 / תירס ₪3." data-ru="Сливочный сыр, чеддер, моцарелла, гауда, скандинавский. Подаётся с индивидуальным нарезанным салатом. Белый хлеб «Кастен» ₪46 / Цельнозерновой ₪48. Доп.: тунец +₪8, авокадо +₪8, яйцо вкрутую +₪6, помидор +₪3, кукуруза +₪3, красный лук +₪3, маслины Каламата +₪4.">Cream cheese, cheddar, mozzarella, gouda, Scandinavian cheese. Served with chopped salad. White / grain bread. Tuna +₪8, avocado +₪8, egg +₪6, tomato +₪3, corn +₪3, red onion +₪3, kalamata +₪4.</span>
           <span class="menu-item-action">Add to order →</span>
         </div>
       </div>
 
-      <div class="menu-subhead" data-he="סלטים">Salads</div>
+      <div class="menu-subhead" data-he="סלטים" data-ru="Салаты">Salads</div>
 
       <div class="menu-item">
         <div class="menu-item-photo"><img src="img/salads/salad_tuna.webp" alt="Tuna Salad"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
-            <span class="menu-item-name" data-he="סלט טונה">Tuna Salad</span>
+            <span class="menu-item-name" data-he="סלט טונה" data-ru="Салат с тунцом">Tuna Salad</span>
             <span class="menu-item-price">₪44</span>
           </div>
-          <span class="menu-item-desc" data-he="מלפפון, עגבניה, חסה קיסר, טונה, זיתי קלמטה, תירס, ביצה קשה, בצל סגול. תוספות: קוביות אבוקדו ₪8 / לחם מלא ₪8 / בולגרית ₪8 / ביצה קשה ₪6.">Cucumber, tomato, romaine, tuna, kalamata olives, hard-boiled egg, red onion. Avocado +₪8, Bulgarian cheese +₪8, whole wheat +₪8, egg +₪6.</span>
+          <span class="menu-item-desc" data-he="מלפפון, עגבניה, חסה קיסר, טונה, זיתי קלמטה, תירס, ביצה קשה, בצל סגול. תוספות: קוביות אבוקדו ₪8 / לחם מלא ₪8 / בולגרית ₪8 / ביצה קשה ₪6." data-ru="Огурец, помидор, листья салата «Кейсар», тунец, оливки каламата, кукуруза, яйцо вкрутую, красный лук. Доп.: нежный болгарский сыр +₪8, кубики авокадо +₪8, яйцо вкрутую +₪6, цельнозерновой хлеб +₪8.">Cucumber, tomato, romaine, tuna, kalamata olives, hard-boiled egg, red onion. Avocado +₪8, Bulgarian cheese +₪8, whole wheat +₪8, egg +₪6.</span>
           <span class="menu-item-action">Add to order →</span>
         </div>
       </div>
@@ -1113,10 +1115,10 @@
         <div class="menu-item-photo"><img src="img/salads/salad_white_cheese.webp" alt="White cheese Salad"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
-            <span class="menu-item-name" data-he="סלט בולגרית">White cheese Salad</span>
+            <span class="menu-item-name" data-he="סלט בולגרית" data-ru="Салат с брынзой">White cheese Salad</span>
             <span class="menu-item-price">₪44</span>
           </div>
-          <span class="menu-item-desc" data-he="עגבניה, מלפפון, חסה קיסר, בולגרית מעודנת, בצל סגול, ביצה קשה, תירס, זיתי קלמטה. תוספות: קוביות אבוקדו ₪8 / לחם מלא ₪8 / טונה ₪8 / ביצה קשה ₪6.">Tomato, cucumber, romaine, Bulgarian cheese, red onion, hard-boiled egg, corn, kalamata olives. Avocado +₪8, tuna +₪8, whole wheat +₪8, egg +₪6.</span>
+          <span class="menu-item-desc" data-he="עגבניה, מלפפון, חסה קיסר, בולגרית מעודנת, בצל סגול, ביצה קשה, תירס, זיתי קלמטה. תוספות: קוביות אבוקדו ₪8 / לחם מלא ₪8 / טונה ₪8 / ביצה קשה ₪6." data-ru="Помидор, огурец, листья салата «Кейсар», нежный болгарский сыр, красный лук, яйцо вкрутую, кукуруза, оливки каламата. Доп.: кубики авокадо +₪8, тунец +₪8, яйцо вкрутую +₪6, цельнозерновой хлеб +₪8.">Tomato, cucumber, romaine, Bulgarian cheese, red onion, hard-boiled egg, corn, kalamata olives. Avocado +₪8, tuna +₪8, whole wheat +₪8, egg +₪6.</span>
           <span class="menu-item-action">Add to order →</span>
         </div>
       </div>
@@ -1124,24 +1126,24 @@
         <div class="menu-item-photo"><img src="img/salads/choped_salad.webp" alt="Chopped Salad"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
-            <span class="menu-item-name" data-he="סלט ירקות דק">Chopped Salad</span>
+            <span class="menu-item-name" data-he="סלט ירקות דק" data-ru="Мелко нарезанный салат">Chopped Salad</span>
             <span class="menu-item-price">₪36</span>
           </div>
-          <span class="menu-item-desc" data-he="מלפפון, עגבניה, בצל סגול, חסה קיסר, נענע, שמן זית, מיץ לימון טרי, מלח, פלפל שחור גרוס. תוספות: בולגרית מעודנת ₪8 / טונה ₪8 / קוביות אבוקדו ₪8 / ביצה קשה ₪6 / לחם מלא ₪8.">Cucumber, tomato, red onion, romaine, mint, olive oil, fresh lemon, salt, black pepper. Bulgarian cheese +₪8, tuna +₪8, avocado +₪8, egg +₪6, whole wheat +₪8.</span>
+          <span class="menu-item-desc" data-he="מלפפון, עגבניה, בצל סגול, חסה קיסר, נענע, שמן זית, מיץ לימון טרי, מלח, פלפל שחור גרוס. תוספות: בולגרית מעודנת ₪8 / טונה ₪8 / קוביות אבוקדו ₪8 / ביצה קשה ₪6 / לחם מלא ₪8." data-ru="Огурец, помидор, красный лук, листья салата «Кейсар», мята, оливковое масло, свежий лимонный сок, соль, чёрный молотый перец. Доп.: нежный болгарский сыр +₪8, тунец +₪8, кубики авокадо +₪8, яйцо вкрутую +₪6, цельнозерновой хлеб +₪8.">Cucumber, tomato, red onion, romaine, mint, olive oil, fresh lemon, salt, black pepper. Bulgarian cheese +₪8, tuna +₪8, avocado +₪8, egg +₪6, whole wheat +₪8.</span>
           <span class="menu-item-action">Add to order →</span>
         </div>
       </div>
 
-      <div class="menu-subhead" data-he="קערות">Bowls</div>
+      <div class="menu-subhead" data-he="קערות" data-ru="Боулы">Bowls</div>
 
       <div class="menu-item">
         <div class="menu-item-photo"><img src="img/small bites/musli.webp" alt="Muesli"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
-            <span class="menu-item-name" data-he="מוזלי">Muesli</span>
+            <span class="menu-item-name" data-he="מוזלי" data-ru="Мюсли">Muesli</span>
             <span class="menu-item-price">₪35</span>
           </div>
-          <span class="menu-item-desc" data-he="יוגורט בקר, פירות העונה, גרנולה.">Yogurt, seasonal fruit, granola.</span>
+          <span class="menu-item-desc" data-he="יוגורט בקר, פירות העונה, גרנולה." data-ru="Йогурт, гранола, мёд и сезонные фрукты.">Yogurt, seasonal fruit, granola.</span>
           <span class="menu-item-action">Add to order →</span>
         </div>
       </div>
@@ -1149,10 +1151,10 @@
         <div class="menu-item-photo"><img src="img/small bites/quiche_mushrooms_with_small_salad.webp" alt="Mushroom Quiche"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
-            <span class="menu-item-name" data-he="קיש פיטריות עם סלט אישי <span class=&quot;menu-item-veg&quot;>◦</span>">Mushroom Quiche + Salad <span class="menu-item-veg">◦</span></span>
+            <span class="menu-item-name" data-he="קיש פיטריות עם סלט אישי <span class=&quot;menu-item-veg&quot;>◦</span>" data-ru="Киш с грибами и личным салатом <span class=&quot;menu-item-veg&quot;>◦</span>">Mushroom Quiche + Salad <span class="menu-item-veg">◦</span></span>
             <span class="menu-item-price">₪37</span>
           </div>
-          <span class="menu-item-desc" data-he="קיש - פטריות שמפיניון ופורטובלו, בצל לבן, רוטב אלפרדו, מיקס ארבע גבינות. סלט - מלפפון, עגבניה, בצל סגול, חסה קיסר, שמן זית, מיץ לימון טרי, מלח, פלפל שחור גרוס.">Champignon & portobello, white onion, Alfredo sauce, four-cheese blend. With cucumber, tomato, red onion, romaine, mint, olive oil, fresh lemon.</span>
+          <span class="menu-item-desc" data-he="קיש - פטריות שמפיניון ופורטובלו, בצל לבן, רוטב אלפרדו, מיקס ארבע גבינות. סלט - מלפפון, עגבניה, בצל סגול, חסה קיסר, שמן זית, מיץ לימון טרי, מלח, פלפל שחור גרוס." data-ru="Киш — грибы шампиньоны и портобелло, белый лук, соус альфредо, микс из четырёх сыров. Салат — огурец, помидор, фиолетовый лук, листья салата «Кейсар», мята, оливковое масло, свежий лимонный сок, соль, чёрный молотый перец.">Champignon & portobello, white onion, Alfredo sauce, four-cheese blend. With cucumber, tomato, red onion, romaine, mint, olive oil, fresh lemon.</span>
           <span class="menu-item-action">Add to order →</span>
         </div>
       </div>
@@ -1160,10 +1162,10 @@
         <div class="menu-item-photo"><img src="img/small bites/quiche_antipasti_with_small_salad.webp" alt="Antipasti Quiche"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
-            <span class="menu-item-name" data-he="קיש אנטיפסטי עם סלט אישי <span class=&quot;menu-item-veg&quot;>◦</span>">Antipasti Quiche + Salad <span class="menu-item-veg">◦</span></span>
+            <span class="menu-item-name" data-he="קיש אנטיפסטי עם סלט אישי <span class=&quot;menu-item-veg&quot;>◦</span>" data-ru="Киш антипасти и личный салат <span class=&quot;menu-item-veg&quot;>◦</span>">Antipasti Quiche + Salad <span class="menu-item-veg">◦</span></span>
             <span class="menu-item-price">₪37</span>
           </div>
-          <span class="menu-item-desc" data-he="קיש - ירקות אפויים (בטטה, זוקיני, גמבה), רוטב רוזה, מיקס ארבע גבינות. סלט - מלפפון, עגבניה, בצל סגול, חסה קיסר, שמן זית, מיץ לימון טרי, מלח, פלפל שחור גרוס.">Roasted sweet potato, zucchini and bell pepper, rose sauce, four-cheese blend. With cucumber, tomato, red onion, romaine, mint, olive oil, fresh lemon.</span>
+          <span class="menu-item-desc" data-he="קיש - ירקות אפויים (בטטה, זוקיני, גמבה), רוטב רוזה, מיקס ארבע גבינות. סלט - מלפפון, עגבניה, בצל סגול, חסה קיסר, שמן זית, מיץ לימון טרי, מלח, פלפל שחור גרוס." data-ru="Киш — запечённые овощи (батат, цукини, болгарский перец), соус «роза», микс из четырёх сыров. Салат — огурец, помидор, фиолетовый лук, листья салата «Кейсар», мята, оливковое масло, свежий лимонный сок, соль, чёрный молотый перец.">Roasted sweet potato, zucchini and bell pepper, rose sauce, four-cheese blend. With cucumber, tomato, red onion, romaine, mint, olive oil, fresh lemon.</span>
           <span class="menu-item-action">Add to order →</span>
         </div>
       </div>
@@ -1176,10 +1178,10 @@
 <div class="menu-category" id="pastries">
   <div class="menu-category-inner">
     <div class="menu-category-header">
-      <h2 class="menu-category-title" data-he="הקרואסונים<br><em>הרדודים</em>">The<br><em>laminated</em> ones</h2>
+      <h2 class="menu-category-title" data-he="הקרואסונים<br><em>הרדודים</em>" data-ru="Слоёная<br><em>выпечка</em>">The<br><em>laminated</em> ones</h2>
       <div class="menu-category-meta">
         <div class="menu-category-count">10</div>
-        <p class="menu-category-desc" data-he="מרובדים על פני שלושה ימים עם חמאה צרפתית. אנחנו מוציאים ב-7:30, 10:00 ו-14:00.">Laminated over three days with French butter. We pull them at 7:30, 10:00 and 14:00.</p>
+        <p class="menu-category-desc" data-he="מרובדים על פני שלושה ימים עם חמאה צרפתית. אנחנו מוציאים ב-7:30, 10:00 ו-14:00." data-ru="Слоятся три дня на французском масле. Выносим в 7:30, 10:00 и 14:00.">Laminated over three days with French butter. We pull them at 7:30, 10:00 and 14:00.</p>
       </div>
     </div>
     <hr class="menu-divider">
@@ -1302,10 +1304,10 @@
 <div class="menu-category" id="filled">
   <div class="menu-category-inner">
     <div class="menu-category-header">
-      <h2 class="menu-category-title" data-he="ממולאים<br><em>וחמים</em>">Filled &<br><em>warmed</em></h2>
+      <h2 class="menu-category-title" data-he="ממולאים<br><em>וחמים</em>" data-ru="С начинкой,<br><em>тёплые</em>">Filled &<br><em>warmed</em></h2>
       <div class="menu-category-meta">
         <div class="menu-category-count">07</div>
-        <p class="menu-category-desc" data-he="חתוכים, מחוממים ומוכנים להזמנה. אפשרויות צמחוניות מסומנות ב-◦.">Split, warmed, and dressed to order. Vegetarian options marked ◦.</p>
+        <p class="menu-category-desc" data-he="חתוכים, מחוממים ומוכנים להזמנה." data-ru="Разрезаем, разогреваем и заправляем.">Split, warmed and dressed.</p>
       </div>
     </div>
     <hr class="menu-divider">
@@ -1395,10 +1397,10 @@
 <div class="menu-category" id="tartlets">
   <div class="menu-category-inner">
     <div class="menu-category-header">
-      <h2 class="menu-category-title" data-he="טארטלטים <em>טריים</em>">Fresh <em>tartlets</em></h2>
+      <h2 class="menu-category-title" data-he="טארטלטים <em>טריים</em>" data-ru="Свежие <em>тарталетки</em>">Fresh <em>tartlets</em></h2>
       <div class="menu-category-meta">
         <div class="menu-category-count">06</div>
-        <p class="menu-category-desc" data-he="נאפים טרי מדי יום בבסיס פריך וחמאתי.">Baked fresh daily in a buttery shortcrust shell.</p>
+        <p class="menu-category-desc" data-he="נאפים טרי מדי יום בבסיס פריך וחמאתי." data-ru="Выпекаем каждый день на хрустящем сливочном основании.">Baked fresh daily in a buttery shortcrust shell.</p>
       </div>
     </div>
     <hr class="menu-divider">
@@ -1477,10 +1479,10 @@
 <div class="menu-category" id="cakes">
   <div class="menu-category-inner">
     <div class="menu-category-header">
-      <h2 class="menu-category-title" data-he="עוגות<br><em>וקינוחים</em>">Cakes &<br><em>desserts</em></h2>
+      <h2 class="menu-category-title" data-he="עוגות<br><em>וקינוחים</em>" data-ru="Торты &<br><em>десерты</em>">Cakes &<br><em>desserts</em></h2>
       <div class="menu-category-meta">
         <div class="menu-category-count">04</div>
-        <p class="menu-category-desc" data-he="עוגות שלמות בהזמנה מראש (48 שעות). פרוסות מוכנות מ-9 בבוקר.">Whole cakes by pre-order (48 hours). Slices ready in the case from 9am.</p>
+        <p class="menu-category-desc" data-he="עוגות שלמות בהזמנה מראש (48 שעות). פרוסות מוכנות מ-9 בבוקר." data-ru="Целые торты на заказ (48 часов). Куски готовы с 9 утра.">Whole cakes by pre-order (48 hours). Slices ready in the case from 9am.</p>
       </div>
     </div>
     <hr class="menu-divider">
@@ -1539,10 +1541,10 @@
 <div class="menu-category" id="ice-cream">
   <div class="menu-category-inner">
     <div class="menu-category-header">
-      <h2 class="menu-category-title" data-he="<em>גלידה</em>">Ice <em>cream</em></h2>
+      <h2 class="menu-category-title" data-he="<em>גלידה</em>" data-ru="Мороженое">Ice <em>cream</em></h2>
       <div class="menu-category-meta">
         <div class="menu-category-count">03</div>
-        <p class="menu-category-desc" data-he="שלושה שילובים של שלושה כדורי גלידה.">Three combinations of three scoops of ice cream.</p>
+        <p class="menu-category-desc" data-he="שלושה שילובים של שלושה כדורי גלידה." data-ru="Три комбо из трёх шариков мороженого.">Three combinations of three scoops of ice cream.</p>
       </div>
     </div>
     <hr class="menu-divider">
@@ -1594,16 +1596,16 @@
 <div class="menu-category" id="alcohol">
   <div class="menu-category-inner">
     <div class="menu-category-header">
-      <h2 class="menu-category-title" data-he="יין, בירה<br><em>ורוחות</em>">Wine, beer<br><em>& spirits</em></h2>
+      <h2 class="menu-category-title" data-he="יין, בירה<br><em>ורוחות</em>" data-ru="Вино, пиво<br><em>и крепкое</em>">Wine, beer<br><em>& spirits</em></h2>
       <div class="menu-category-meta">
         <div class="menu-category-count">12</div>
-        <p class="menu-category-desc" data-he="יין בכוס או בקבוק. בירה קרה, רוחות ישירות.">Wine by the glass or bottle. Beer cold, spirits straight.</p>
+        <p class="menu-category-desc" data-he="יין בכוס או בקבוק. בירה קרה, רוחות ישירות." data-ru="Вино бокалом или бутылкой. Пиво холодным, крепкое чистым.">Wine by the glass or bottle. Beer cold, spirits straight.</p>
       </div>
     </div>
     <hr class="menu-divider">
     <div class="menu-list">
 
-      <div class="menu-list-subhead" data-he="יין לבן">Wine — White</div>
+      <div class="menu-list-subhead" data-he="יין לבן" data-ru="Вино — белое">Wine — White</div>
 
       <div class="menu-list-item">
         <div class="menu-list-main">
@@ -1621,7 +1623,7 @@
         <span class="menu-list-desc" data-he="חצי מתוק, ארומטי, שופע טעמים של פירות סרופים ותבלינים. כוס 39 ₪ | בקבוק 135 ₪.">Semi-sweet, aromatic. Rich in tropical fruit and spice. Glass ₪39 | Bottle ₪135.</span>
       </div>
 
-      <div class="menu-list-subhead" data-he="יין אדום ורוזה">Wine — Red & Rosé</div>
+      <div class="menu-list-subhead" data-he="יין אדום ורוזה" data-ru="Вино — красное и розе">Wine — Red & Rosé</div>
 
       <div class="menu-list-item">
         <div class="menu-list-main">
@@ -1647,7 +1649,7 @@
         <span class="menu-list-desc" data-he="בלנד אדום קליל, פירותי ושובה לב. 375 מל.">Light, fruity red blend. 375 ml.</span>
       </div>
 
-      <div class="menu-list-subhead" data-he="בירה">Beer</div>
+      <div class="menu-list-subhead" data-he="בירה" data-ru="Пиво">Beer</div>
 
       <div class="menu-list-item">
         <div class="menu-list-main">
@@ -1673,7 +1675,7 @@
         <span class="menu-list-desc" data-he="בעלת ארומה של פירות טרופים והדרים במרירות מעודנת.">Tropical fruit and citrus aromas with a refined bitterness.</span>
       </div>
 
-      <div class="menu-list-subhead" data-he="רוחות ולקרים">Spirits & Liqueurs</div>
+      <div class="menu-list-subhead" data-he="רוחות ולקרים" data-ru="Крепкое и ликёры">Spirits & Liqueurs</div>
 
       <div class="menu-list-item">
         <div class="menu-list-main">
@@ -1715,10 +1717,10 @@
 <div class="menu-category" id="friday">
   <div class="menu-category-inner">
     <div class="menu-category-header">
-      <h2 class="menu-category-title" data-he="אפייה של <em>יום שישי</em>">Friday <em>baking</em></h2>
+      <h2 class="menu-category-title" data-he="אפייה של <em>יום שישי</em>" data-ru="Пятничная <em>выпечка</em>">Friday <em>baking</em></h2>
       <div class="menu-category-meta">
         <div class="menu-category-count friday-count">07</div>
-        <p class="menu-category-desc" data-he="כל יום שישי המטבח אופה משהו נוסף. זמין עד אזילת המלאי.">Every Friday the kitchen bakes something extra. Available until it runs out.</p>
+        <p class="menu-category-desc" data-he="כל יום שישי המטבח אופה משהו נוסף. זמין עד אזילת המלאי." data-ru="Каждую пятницу кухня выпекает что-то особенное. До последнего кусочка.">Every Friday the kitchen bakes something extra. Available until it runs out.</p>
       </div>
     </div>
     <hr class="menu-divider">
@@ -1818,25 +1820,25 @@
     <div class="footer-top">
       <div class="footer-brand">
         <div class="footer-logo">Bulochka</div>
-        <p data-en='A small bakery, on the corner<br>of your morning.' data-he='מאפייה קטנה, בפינה<br>של הבוקר שלך.'>A small bakery, on the corner<br>of your morning.</p>
+        <p data-en='A small bakery, on the corner<br>of your morning.' data-he='מאפייה קטנה, בפינה<br>של הבוקר שלך.' data-ru='Маленькая пекарня, на углу<br>вашего утра.'>A small bakery, on the corner<br>of your morning.</p>
       </div>
       <div>
-        <div class="footer-col-title" data-en='Visit' data-he='בקרו אותנו'>Visit</div>
+        <div class="footer-col-title" data-en='Visit' data-he='בקרו אותנו' data-ru='Приходите'>Visit</div>
         <div class="footer-links">
           <span>Petah Tikva, Pinsker 29</span>
-          <span data-en='Sun–Thu, 08:00–20:00' data-he='08:00–20:00 ,א׳–ה׳' dir="ltr">Sun–Thu, 08:00–20:00</span>
+          <span data-en='Sun–Thu, 08:00–20:00' data-he='08:00–20:00 ,א׳–ה׳' data-ru='Вс–Чт, 08:00–20:00' dir="ltr">Sun–Thu, 08:00–20:00</span>
           <a href="tel:+972529662724" dir="ltr">+972 (52) 966-2724</a>
         </div>
       </div>
       <div>
-        <div class="footer-col-title" data-en='Stay in touch' data-he='נשארים בקשר'>Stay in touch</div>
+        <div class="footer-col-title" data-en='Stay in touch' data-he='נשארים בקשר' data-ru='Оставайтесь на связи'>Stay in touch</div>
         <div class="footer-links">
-          <a href="careers.html" data-en='Work with us' data-he='דרושים'>Work with us</a>
-          <a href="events.html" data-en='Events' data-he='אירועים'>Events</a>
+          <a href="careers.html" data-en='Work with us' data-he='דרושים' data-ru='Работа у нас'>Work with us</a>
+          <a href="events.html" data-en='Events' data-he='אירועים' data-ru='Мероприятия'>Events</a>
         </div>
       </div>
       <div>
-        <div class="footer-col-title" data-en='Follow' data-he='עקבו אחרינו'>Follow</div>
+        <div class="footer-col-title" data-en='Follow' data-he='עקבו אחרינו' data-ru='Следите за нами'>Follow</div>
         <div class="footer-links">
           <a href="https://www.instagram.com/bulochka.pt" target="_blank">Instagram</a>
           <a href="https://www.facebook.com/bulochka.bulochka.2025#" target="_blank">Facebook</a>
@@ -1846,7 +1848,7 @@
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© Bulochka MMXIX—MMXXVI</span>
-      <span class="footer-tagline" data-en='Made with butter ✦' data-he='עשוי עם חמאה ✦'>Made with butter ✦</span>
+      <span class="footer-tagline" data-en='Made with butter ✦' data-he='עשוי עם חמאה ✦' data-ru='Сделано с маслом ✦'>Made with butter ✦</span>
     </div>
   </div>
 </footer>
@@ -1898,7 +1900,8 @@
     pills.forEach(p => p.classList.toggle('active', p.dataset.target === id));
     const activePill = pills.find(p => p.dataset.target === id);
     if (activePill) {
-      activePill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+      const bar = activePill.closest('.filter-bar-pills');
+      if (bar) bar.scrollLeft = activePill.offsetLeft - bar.offsetLeft - 16;
     }
   }
 
@@ -1914,90 +1917,90 @@
   (function () {
     const ADDONS = {
       'Cappuccino': [
-        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', price: 2 },
-        { label: 'Syrup — caramel / hazelnut / vanilla / lavender', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / לבנדר', price: 5 },
-        { label: 'Baileys', labelHe: 'ביילס', price: 10 }
+        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', labelRu: 'Основа (овсяное / соевое)', price: 2 },
+        { label: 'Syrup — caramel / hazelnut / vanilla / lavender', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / אייריש קרים', labelRu: 'Сироп — карамель / фундук / ваниль / лаванда', price: 5 },
+        { label: 'Baileys', labelHe: 'ביילס', labelRu: 'Бейлис', price: 10 }
       ],
       'Hot Cocoa': [
-        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', price: 2 }
+        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', labelRu: 'Основа (овсяное / соевое)', price: 2 }
       ],
       'Espresso': [
-        { label: 'Baileys', labelHe: 'ביילס', price: 10 }
+        { label: 'Baileys', labelHe: 'ביילס', labelRu: 'Бейлис', price: 10 }
       ],
       'Macchiato': [
-        { label: 'Baileys', labelHe: 'ביילס', price: 10 }
+        { label: 'Baileys', labelHe: 'ביילס', labelRu: 'Бейлис', price: 10 }
       ],
       'Americano': [
-        { label: 'Syrup — caramel / hazelnut / vanilla / lavender', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / לבנדר', price: 5 },
-        { label: 'Baileys', labelHe: 'ביילס', price: 10 }
+        { label: 'Syrup — caramel / hazelnut / vanilla / lavender', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / אייריש קרים', labelRu: 'Сироп — карамель / фундук / ваниль / лаванда', price: 5 },
+        { label: 'Baileys', labelHe: 'ביילס', labelRu: 'Бейлис', price: 10 }
       ],
       'Flat White': [
-        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', price: 2 },
-        { label: 'Syrup — caramel / hazelnut / vanilla / lavender', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / לבנדר', price: 5 },
-        { label: 'Baileys', labelHe: 'ביילס', price: 10 }
+        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', labelRu: 'Основа (овсяное / соевое)', price: 2 },
+        { label: 'Syrup — caramel / hazelnut / vanilla / lavender', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / אייריש קרים', labelRu: 'Сироп — карамель / фундук / ваниль / лаванда', price: 5 },
+        { label: 'Baileys', labelHe: 'ביילס', labelRu: 'Бейлис', price: 10 }
       ],
       'Latte': [
-        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', price: 2 },
-        { label: 'Syrup — honey / vanilla / lavender / hazelnut', labelHe: 'סירופ — דבש / וניל / לבנדר / אגוזי לוז', price: 5 },
-        { label: 'Baileys', labelHe: 'ביילס', price: 10 }
+        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', labelRu: 'Основа (овсяное / соевое)', price: 2 },
+        { label: 'Syrup — caramel / vanilla / Irish cream / hazelnut', labelHe: 'סירופ — קרמל / וניל / אייריש קרים / אגוזי לוז', labelRu: 'Сироп — карамель / ваниль / айриш крим / фундук', price: 5 },
+        { label: 'Baileys', labelHe: 'ביילס', labelRu: 'Бейлис', price: 10 }
       ],
       'Matcha Latte': [
-        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', price: 2 },
-        { label: 'Syrup — caramel / hazelnut / vanilla / Irish cream', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / אייריש קרים', price: 5 }
+        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', labelRu: 'Основа (овсяное / соевое)', price: 2 },
+        { label: 'Syrup — caramel / hazelnut / vanilla / Irish cream', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / אייריש קרים', labelRu: 'Сироп — карамель / фундук / ваниль / айриш крим', price: 5 }
       ],
       'Iced Coffee': [
-        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', price: 2 },
-        { label: 'Syrup — caramel / hazelnut / vanilla / Irish cream', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / אייריש קרים', price: 5 },
-        { label: 'Baileys', labelHe: 'ביילס', price: 10 }
+        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', labelRu: 'Основа (овсяное / соевое)', price: 2 },
+        { label: 'Syrup — caramel / hazelnut / vanilla / Irish cream', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / אייריש קרים', labelRu: 'Сироп — карамель / фундук / ваниль / айриш крим', price: 5 },
+        { label: 'Baileys', labelHe: 'ביילס', labelRu: 'Бейлис', price: 10 }
       ],
       'Iced Matcha': [
-        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', price: 2 },
-        { label: 'Syrup — caramel / hazelnut / vanilla / Irish cream', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / אייריש קרים', price: 5 }
+        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', labelRu: 'Основа (овсяное / соевое)', price: 2 },
+        { label: 'Syrup — caramel / hazelnut / vanilla / Irish cream', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / אייריש קרים', labelRu: 'Сироп — карамель / фундук / ваниль / айриш крим', price: 5 }
       ],
       'Fruitshake': [
-        { label: 'Alternative base (oat / soy / orange juice)', labelHe: 'בסיס חלופי (שיבולת / סויה / מיץ תפוזים)', price: 3 }
+        { label: 'Alternative base (oat / soy / orange juice)', labelHe: 'בסיס חלופי (שיבולת / סויה / מיץ תפוזים)', labelRu: 'Альтернативная основа (овсяное / соевое / апельсиновый сок)', price: 3 }
       ],
       'Smoked Salmon': [
-        { label: 'Avocado', labelHe: 'אבוקדו', price: 8 },
-        { label: 'Hard-boiled egg', labelHe: 'ביצה קשה', price: 3 }
+        { label: 'Avocado', labelHe: 'אבוקדו', labelRu: 'Авокадо', price: 8 },
+        { label: 'Hard-boiled egg', labelHe: 'ביצה קשה', labelRu: 'Варёное яйцо', price: 3 }
       ],
       'Croissant Salmon': [
-        { label: 'Avocado', labelHe: 'אבוקדו', price: 8 },
-        { label: 'Hard-boiled egg', labelHe: 'ביצה קשה', price: 3 }
+        { label: 'Avocado', labelHe: 'אבוקדו', labelRu: 'Авокадо', price: 8 },
+        { label: 'Hard-boiled egg', labelHe: 'ביצה קשה', labelRu: 'Варёное яйцо', price: 3 }
       ],
       'Tuna Sandwich': [
-        { label: 'Avocado', labelHe: 'אבוקדו', price: 8 }
+        { label: 'Avocado', labelHe: 'אבוקדו', labelRu: 'Авокадо', price: 8 }
       ],
       'Croissant Tuna': [
-        { label: 'Avocado', labelHe: 'אבוקדו', price: 8 }
+        { label: 'Avocado', labelHe: 'אבוקדו', labelRu: 'Авокадо', price: 8 }
       ],
       'Five Cheese Toast': [
-        { label: 'Tuna', labelHe: 'טונה', price: 8 },
-        { label: 'Avocado', labelHe: 'אבוקדו', price: 8 },
-        { label: 'Egg', labelHe: 'ביצה', price: 6 },
-        { label: 'Tomato', labelHe: 'עגבניה', price: 3 },
-        { label: 'Corn', labelHe: 'תירס', price: 3 },
-        { label: 'Red onion', labelHe: 'בצל סגול', price: 3 },
-        { label: 'Kalamata olives', labelHe: 'זיתי קלמטה', price: 4 }
+        { label: 'Tuna', labelHe: 'טונה', labelRu: 'Тунец', price: 8 },
+        { label: 'Avocado', labelHe: 'אבוקדו', labelRu: 'Авокадо', price: 8 },
+        { label: 'Egg', labelHe: 'ביצה', labelRu: 'Яйцо', price: 6 },
+        { label: 'Tomato', labelHe: 'עגבניה', labelRu: 'Томат', price: 3 },
+        { label: 'Corn', labelHe: 'תירס', labelRu: 'Кукуруза', price: 3 },
+        { label: 'Red onion', labelHe: 'בצל סגול', labelRu: 'Красный лук', price: 3 },
+        { label: 'Kalamata olives', labelHe: 'זיתי קלמטה', labelRu: 'Оливки каламата', price: 4 }
       ],
       'Tuna Salad': [
-        { label: 'Avocado', labelHe: 'אבוקדו', price: 8 },
-        { label: 'Bulgarian cheese', labelHe: 'גבינה בולגרית', price: 8 },
-        { label: 'Whole wheat bread', labelHe: 'לחם מלא', price: 8 },
-        { label: 'Extra egg', labelHe: 'ביצה נוספת', price: 6 }
+        { label: 'Avocado', labelHe: 'אבוקדו', labelRu: 'Авокадо', price: 8 },
+        { label: 'Bulgarian cheese', labelHe: 'גבינה בולגרית', labelRu: 'Болгарский сыр', price: 8 },
+        { label: 'Whole wheat bread', labelHe: 'לחם מלא', labelRu: 'Цельнозерновой хлеб', price: 8 },
+        { label: 'Extra egg', labelHe: 'ביצה נוספת', labelRu: 'Дополнительное яйцо', price: 6 }
       ],
       'White cheese Salad': [
-        { label: 'Avocado', labelHe: 'אבוקדו', price: 8 },
-        { label: 'Tuna', labelHe: 'טונה', price: 8 },
-        { label: 'Whole wheat bread', labelHe: 'לחם מלא', price: 8 },
-        { label: 'Extra egg', labelHe: 'ביצה נוספת', price: 6 }
+        { label: 'Avocado', labelHe: 'אבוקדו', labelRu: 'Авокадо', price: 8 },
+        { label: 'Tuna', labelHe: 'טונה', labelRu: 'Тунец', price: 8 },
+        { label: 'Whole wheat bread', labelHe: 'לחם מלא', labelRu: 'Цельнозерновой хлеб', price: 8 },
+        { label: 'Extra egg', labelHe: 'ביצה נוספת', labelRu: 'Дополнительное яйцо', price: 6 }
       ],
       'Chopped Salad': [
-        { label: 'Bulgarian cheese', labelHe: 'גבינה בולגרית', price: 8 },
-        { label: 'Tuna', labelHe: 'טונה', price: 8 },
-        { label: 'Avocado', labelHe: 'אבוקדו', price: 8 },
-        { label: 'Egg', labelHe: 'ביצה', price: 6 },
-        { label: 'Whole wheat bread', labelHe: 'לחם מלא', price: 8 }
+        { label: 'Bulgarian cheese', labelHe: 'גבינה בולגרית', labelRu: 'Болгарский сыр', price: 8 },
+        { label: 'Tuna', labelHe: 'טונה', labelRu: 'Тунец', price: 8 },
+        { label: 'Avocado', labelHe: 'אבוקדו', labelRu: 'Авокадо', price: 8 },
+        { label: 'Egg', labelHe: 'ביצה', labelRu: 'Яйцо', price: 6 },
+        { label: 'Whole wheat bread', labelHe: 'לחם מלא', labelRu: 'Цельнозерновой хлеб', price: 8 }
       ]
     };
 
@@ -2034,14 +2037,36 @@
 
       imgEl.innerHTML = src ? `<img src="${src.src}" alt="${rawName}">` : '';
 
+      const lang = document.documentElement.lang;
+      const totalLabelEl = overlay.querySelector('.addon-total-label');
+      const doneBtnEl = overlay.querySelector('.addon-done-btn');
+      if (totalLabelEl) {
+        if (lang === 'he') totalLabelEl.textContent = 'סה״כ';
+        else if (lang === 'ru') totalLabelEl.textContent = 'Итого';
+        else totalLabelEl.textContent = 'Total';
+      }
+      if (doneBtnEl) {
+        if (lang === 'he') doneBtnEl.textContent = 'סיום';
+        else if (lang === 'ru') doneBtnEl.textContent = 'Готово';
+        else doneBtnEl.textContent = 'Done';
+      }
+
       listEl.innerHTML = '';
       if (addons.length) {
         extrasEl.style.display = '';
+        const lang = document.documentElement.lang;
+        const extrasLabelEl = extrasEl.querySelector('.addon-extras-label');
+        if (extrasLabelEl) {
+          if (lang === 'he') extrasLabelEl.textContent = 'הוסף תוספות';
+          else if (lang === 'ru') extrasLabelEl.textContent = 'Добавить опции';
+          else extrasLabelEl.textContent = 'Add extras';
+        }
         addons.forEach(a => {
           const lbl = document.createElement('label');
           lbl.className = 'addon-option';
-          const isHe = document.documentElement.lang === 'he';
-          const displayLabel = isHe && a.labelHe ? a.labelHe : a.label;
+          const isHe = lang === 'he';
+          const isRu = lang === 'ru';
+          const displayLabel = (isHe && a.labelHe) ? a.labelHe : (isRu && a.labelRu) ? a.labelRu : a.label;
           lbl.innerHTML = `<input type="checkbox" data-price="${a.price}"><span class="addon-option-name">${displayLabel}</span><span class="addon-option-price">+₪${a.price}</span>`;
           lbl.querySelector('input').addEventListener('change', recalc);
           listEl.appendChild(lbl);
@@ -2060,17 +2085,9 @@
       document.body.style.overflow = '';
     }
 
-    document.querySelectorAll('.menu-item-action').forEach(btn => {
-      const item = btn.closest('.menu-item');
-      const nameEl = item.querySelector('.menu-item-name');
-      const name = (nameEl.dataset.en || nameEl.textContent).trim().replace(/\s*◦\s*$/, '');
-      if (ADDONS[name]) {
-        btn.textContent = 'Add Ingredients →';
-        btn.addEventListener('click', e => { e.preventDefault(); openModal(item); });
-      } else {
-        btn.remove();
-      }
-    });
+    // expose for wireAddons (called after Firebase renders new items)
+    window.__ADDONS__ = ADDONS;
+    window.__openAddonModal__ = openModal;
 
     document.getElementById('addonClose').addEventListener('click', closeModal);
     document.getElementById('addonDone').addEventListener('click', closeModal);
@@ -2114,7 +2131,7 @@
 
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-  import { getFirestore, collection, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+  import { getFirestore, collection, onSnapshot, getDocs } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
   const app = initializeApp({
     apiKey: "AIzaSyC_zaNtYW8wnS7nhoOzEvkNhbJeJPHWmaI",
@@ -2128,55 +2145,181 @@
 
   const CAT_IDS = ['hot-drinks','cold-drinks','sandwiches','pastries','filled','tartlets','cakes','ice-cream','alcohol','friday'];
 
-  function buildItemMap() {
-    const map = {};
-    document.querySelectorAll('.menu-item').forEach(el => {
-      const nameEl = el.querySelector('.menu-item-name');
-      if (!nameEl) return;
-      const key = (nameEl.dataset.en || nameEl.textContent).trim().toLowerCase();
-      map[key] = el;
+  // ── build one menu-item card from a Firestore doc ──
+  function buildItemEl(data) {
+    const lang = document.documentElement.lang;
+    const isHe = lang === 'he';
+    const isRu = lang === 'ru';
+    const name  = (isHe && data.nameHe) ? data.nameHe : (isRu && data.nameRu) ? data.nameRu : (data.name || '');
+    const desc  = (isHe && data.descHe) ? data.descHe : (isRu && data.descRu) ? data.descRu : (data.desc || '');
+    const price = data.price || '';
+    const img   = data.img  || '';
+
+    const el = document.createElement('div');
+    el.className = 'menu-item' + (data.available === false ? ' item-unavailable' : '');
+    if (data.order != null) el.dataset.order = data.order;
+
+    const photoHtml = img
+      ? `<div class="menu-item-photo"><img src="${img}" alt="${data.name || ''}" loading="lazy"></div>`
+      : `<div class="menu-item-photo"></div>`;
+
+    const actionLabel = isHe ? 'הוסף להזמנה ←' : isRu ? 'Добавить →' : 'Add to order →';
+
+    el.innerHTML = `
+      ${photoHtml}
+      <div class="menu-item-body">
+        <div class="menu-item-top">
+          <span class="menu-item-name" data-en="${data.name || ''}" ${data.nameHe ? `data-he="${data.nameHe}"` : ''} ${data.nameRu ? `data-ru="${data.nameRu}"` : ''}>${name}</span>
+          <span class="menu-item-price">${price}</span>
+        </div>
+        <span class="menu-item-desc" data-en="${data.desc || ''}" ${data.descHe ? `data-he="${data.descHe}"` : ''} ${data.descRu ? `data-ru="${data.descRu}"` : ''}>${desc}</span>
+        <span class="menu-item-action">${actionLabel}</span>
+      </div>`;
+
+    return el;
+  }
+
+  // ── render all items in a category from Firestore docs ──
+  function renderCategory(catId, docs) {
+    if (!docs.length) return; // keep static HTML if Firestore is empty
+
+    const section = document.getElementById(catId);
+    if (!section) return;
+    const grid = section.querySelector('.menu-items, .menu-list');
+    if (!grid) return;
+
+    // sort docs by order field
+    const sorted = [...docs].sort((a, b) => {
+      const oa = a.order != null ? +a.order : 9999;
+      const ob = b.order != null ? +b.order : 9999;
+      return oa - ob;
     });
-    return map;
+
+    grid.innerHTML = '';
+
+    let lastSubhead = null;
+    sorted.forEach(data => {
+      if (data.subhead && data.subhead !== lastSubhead) {
+        const sh = document.createElement('div');
+        sh.className = 'menu-subhead';
+        const lang = document.documentElement.lang;
+        if (lang === 'he' && data.subheadHe) sh.textContent = data.subheadHe;
+        else if (lang === 'ru' && data.subheadRu) sh.textContent = data.subheadRu;
+        else sh.textContent = data.subhead;
+        grid.appendChild(sh);
+        lastSubhead = data.subhead;
+      }
+      grid.appendChild(buildItemEl(data));
+    });
+
+    // update count in category header
+    const countEl = section.querySelector('.menu-category-count');
+    if (countEl) countEl.textContent = sorted.length;
+
+    // update filter pill count
+    const pill = document.querySelector(`.filter-pill[data-target="${catId}"]`);
+    if (pill) {
+      const span = pill.querySelector('span');
+      if (span) span.textContent = String(sorted.length).padStart(2, '0');
+    }
+
+    // update total count in filter bar
+    updateTotalCount();
+
+    // re-wire add-on buttons for newly rendered items
+    wireAddons(grid);
   }
 
-  function applyItem(data, itemMap) {
-    if (!data.name) return;
-    const key = data.name.trim().toLowerCase();
-    const el = itemMap[key];
-    if (!el) return;
-    const isHe = document.documentElement.lang === 'he';
-
-    const nameEl = el.querySelector('.menu-item-name');
-    if (nameEl) {
-      nameEl.dataset.en = data.name;
-      if (data.nameHe) nameEl.dataset.he = data.nameHe;
-      nameEl.textContent = isHe && data.nameHe ? data.nameHe : data.name;
-    }
-
-    const descEl = el.querySelector('.menu-item-desc');
-    if (descEl && (data.desc || data.descHe)) {
-      if (data.desc)   { descEl.dataset.en = data.desc; }
-      if (data.descHe) { descEl.dataset.he = data.descHe; }
-      descEl.textContent = isHe && data.descHe ? data.descHe : (data.desc || descEl.textContent);
-    }
-
-    const priceEl = el.querySelector('.menu-item-price');
-    if (priceEl && data.price) priceEl.textContent = data.price;
-
-    if (data.available === false) {
-      el.classList.add('item-unavailable');
-    } else {
-      el.classList.remove('item-unavailable');
+  // ── total items counter ──
+  function updateTotalCount() {
+    let total = 0;
+    CAT_IDS.forEach(id => {
+      const pill = document.querySelector(`.filter-pill[data-target="${id}"]`);
+      if (pill) {
+        const span = pill.querySelector('span');
+        if (span) total += parseInt(span.textContent) || 0;
+      }
+    });
+    const totalEl = document.querySelector('.filter-bar-total');
+    if (totalEl) {
+      const lang = document.documentElement.lang;
+      if (lang === 'he') totalEl.textContent = `${total} פריטים`;
+      else if (lang === 'ru') totalEl.textContent = `${total} позиций`;
+      else totalEl.textContent = `${total} items total`;
     }
   }
 
-  const itemMap = buildItemMap();
+  // ── re-wire add-on modal for newly rendered items ──
+  function wireAddons(grid) {
+    if (!window.__ADDONS__) return;
+    grid.querySelectorAll('.menu-item-action').forEach(btn => {
+      const item = btn.closest('.menu-item');
+      if (!item) return;
+      const nameEl = item.querySelector('.menu-item-name');
+      const name = (nameEl?.dataset.en || nameEl?.textContent || '').trim().replace(/\s*◦\s*$/, '');
+      if (window.__ADDONS__[name]) {
+        const _lang = document.documentElement.lang;
+        btn.textContent = _lang === 'he' ? 'הוסף להזמנה ←' : _lang === 'ru' ? 'Добавить →' : 'Add to order →';
+        btn.addEventListener('click', e => { e.preventDefault(); window.__openAddonModal__(item); });
+      } else {
+        btn.remove();
+      }
+    });
+  }
+
+  // ── reorder category sections ──
+  function reorderCategories(catMeta) {
+    const footer = document.querySelector('.footer');
+    if (!footer) return;
+
+    const sorted = CAT_IDS
+      .map((id, idx) => ({ id, order: catMeta[id]?.order ?? idx * 100 }))
+      .sort((a, b) => a.order - b.order);
+
+    // collect sections in sorted order, then insert all before footer at once
+    const sections = sorted.map(({ id }) => document.getElementById(id)).filter(Boolean);
+    const anchor = document.createComment('');
+    footer.parentNode.insertBefore(anchor, footer);
+    sections.forEach(el => footer.parentNode.insertBefore(el, footer));
+
+    const pillsBar = document.querySelector('.filter-bar-pills');
+    if (pillsBar) {
+      const pillMap = {};
+      pillsBar.querySelectorAll('.filter-pill').forEach(p => { pillMap[p.dataset.target] = p; });
+      sorted.forEach(({ id }) => { if (pillMap[id]) pillsBar.appendChild(pillMap[id]); });
+    }
+  }
+
+  // ── bootstrap ──
+
+  // 1. load category order
+  const catMeta = {};
+  getDocs(collection(db, '_categories')).then(snap => {
+    snap.forEach(d => { catMeta[d.id] = d.data(); });
+    reorderCategories(catMeta);
+  });
+
+  // 2. live-render full categories on every snapshot
   CAT_IDS.forEach(catId => {
     onSnapshot(collection(db, catId), snap => {
-      snap.forEach(d => applyItem(d.data(), itemMap));
+      const docs = snap.docs.map(d => d.data());
+      console.log('[menu]', catId, docs.length, 'docs:', docs.map(d => d.name));
+      renderCategory(catId, docs);
     });
   });
 </script>
 <script type="module" src="/analytics.js"></script>
+<button class="scroll-top-btn" id="scrollTopBtn" aria-label="Back to top">↑</button>
+<script>
+  (function(){
+    var btn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', function(){
+      btn.classList.toggle('visible', window.scrollY > 300);
+    }, {passive: true});
+    btn.addEventListener('click', function(){
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+  })();
+</script>
 </body>
 </html>

@@ -39,7 +39,29 @@
       "Bash(git remote *)",
       "Bash(git branch *)",
       "Bash(git push *)",
-      "Bash(start \"\" \"C:\\\\Users\\\\Hub\\\\bulweb2\\\\admin\\\\index.html\")"
+      "Bash(start \"\" \"C:\\\\Users\\\\Hub\\\\bulweb2\\\\admin\\\\index.html\")",
+      "Bash(start admin/index.html)",
+      "Bash(start http://localhost:3000/admin/index.html)",
+      "Bash(git pull *)",
+      "Bash(Select-String -Pattern \"background|bg|main\")",
+      "Bash(firebase deploy *)",
+      "Bash(firebase hosting:channel:list)",
+      "PowerShell(npx playwright --version 2>&1)",
+      "PowerShell(node --version)",
+      "PowerShell(npx playwright install chromium 2>&1)",
+      "Bash(Get-Content \"C:\\\\Users\\\\Hub\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-Hub-bulweb2\\\\8cf1b8a7-9993-41b1-bed6-39b5d983f762\\\\tasks\\\\b6lalkhpj.output\" -Wait)",
+      "Bash(Select-String \"Order after|Done\\\\.|ERROR|error|failed|changed:\")",
+      "Bash(node -e \"require\\('playwright'\\)\")",
+      "Bash(npx firebase *)",
+      "Bash(Get-Content \"c:\\\\Users\\\\Hub\\\\bulweb2\\\\menu.html\")",
+      "Bash(Select-Object -Last 20)",
+      "PowerShell(\\(Get-Content \"c:\\\\Users\\\\Hub\\\\bulweb2\\\\style.css\" | Measure-Object -Line\\).Lines)",
+      "PowerShell($lines = Get-Content \"c:\\\\Users\\\\Hub\\\\bulweb2\\\\style.css\"; $lines[542..\\($lines.Length-1\\)] -join \"`n\")",
+      "PowerShell(\\(Get-Content \"c:\\\\Users\\\\Hub\\\\bulweb2\\\\index.html\" | Measure-Object -Line\\).Lines)",
+      "PowerShell(\\(Get-Content \"c:\\\\Users\\\\Hub\\\\bulweb2\\\\careers.html\" | Measure-Object -Line\\).Lines)",
+      "PowerShell(\\(Get-Content \"c:\\\\Users\\\\Hub\\\\bulweb2\\\\events.html\" | Measure-Object -Line\\).Lines)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(git reset *)"
     ]
   }
 }

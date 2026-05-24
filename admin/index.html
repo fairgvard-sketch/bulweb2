@@ -19,6 +19,7 @@
       --shadowLg:0 12px 32px -12px rgba(15,17,21,0.12),0 4px 12px -6px rgba(15,17,21,0.06);
       --sans:'Inter',system-ui,sans-serif;
     }
+    html,body{overflow-x:hidden}
     body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh}
 
     /* LOGIN */
@@ -86,6 +87,11 @@
     .page-body{max-width:820px;margin:0 auto;padding:28px 24px 80px}
     .page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
     .page-title{font-size:18px;font-weight:600;color:var(--ink)}
+    .page-breadcrumb{font-size:11px;color:var(--subtle);margin-bottom:4px;letter-spacing:0.03em}
+    .page-breadcrumb span{color:var(--muted)}
+    .page-meta{display:flex;align-items:center;gap:8px;margin-top:4px;font-size:12px;color:var(--muted)}
+    .page-meta-dot{color:var(--faint)}
+    .page-meta strong{color:var(--text);font-weight:500}
 
     /* FILTER BAR */
     .filter-bar{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
@@ -111,6 +117,9 @@
     .cat-row:hover{box-shadow:var(--shadowLg);border-color:var(--faint)}
     .cat-drag{color:var(--faint);cursor:grab;flex-shrink:0;display:flex;align-items:center}
     .cat-drag svg{width:14px;height:14px}
+    .drag-over-top{border-top:2px solid var(--accent) !important}
+    .drag-over-bot{border-bottom:2px solid var(--accent) !important}
+    .dragging{opacity:.4;pointer-events:none}
     .cat-check{width:18px;height:18px;border:1.5px solid var(--line);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:all .15s}
     .cat-check.checked{background:var(--accent);border-color:var(--accent);color:#fff}
     .cat-thumb{width:44px;height:44px;border-radius:10px;object-fit:cover;flex-shrink:0;background:var(--bg)}
@@ -138,8 +147,12 @@
     .icon-btn.red svg{color:var(--danger)}
 
     /* ITEMS VIEW */
-    .back-btn{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);background:none;border:none;cursor:pointer;font-family:var(--sans);margin-bottom:20px;padding:0;transition:color .15s}
-    .back-btn:hover{color:var(--text)}
+    .back-btn{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;letter-spacing:0.04em;color:var(--subtle);background:none;border:none;cursor:pointer;font-family:var(--sans);padding:0;transition:color .15s;text-transform:uppercase}
+    .back-btn:hover{color:var(--accent)}
+    .back-btn svg{width:14px;height:14px;margin-right:1px}
+    .items-breadcrumb{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--subtle);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:6px}
+    .items-breadcrumb-sep{color:var(--faint)}
+    .items-breadcrumb-current{color:var(--muted);font-weight:500}
     .items-list{display:flex;flex-direction:column;gap:6px}
     .item-row{background:var(--surface);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:12px;border:1px solid var(--line);transition:border .15s,box-shadow .15s;box-shadow:var(--shadow)}
     .item-row:hover{border-color:var(--faint);box-shadow:var(--shadowLg)}
@@ -436,8 +449,8 @@
           <!-- Filter bar -->
           <div class="dash-filter-bar">
             <div class="dash-range">
-              <button class="dash-range-btn" data-days="1">Today</button>
-              <button class="dash-range-btn active" data-days="7">7 days</button>
+              <button class="dash-range-btn active" data-days="1">Today</button>
+              <button class="dash-range-btn" data-days="7">7 days</button>
               <button class="dash-range-btn" data-days="14">14 days</button>
               <button class="dash-range-btn" data-days="30">30 days</button>
             </div>
@@ -464,27 +477,14 @@
               </div>
               <div class="dash-sparkline" id="spPageviews"></div>
             </div>
-            <div class="dash-metric-card">
-              <div class="dash-metric-label">Avg session</div>
-              <div class="dash-metric-val" id="dcAvgSession">—</div>
-              <div class="dash-metric-footer">
-                <span class="dash-delta neutral" id="dcAvgSessionDelta">—</span>
-                <span class="dash-vs">vs prev period</span>
+            <div class="dash-metric-card" style="background:#0F1115;border-color:#0F1115;justify-content:center">
+              <div class="dash-live-header" style="margin-bottom:12px">
+                <span class="dash-live-dot"></span>
+                <span style="font-size:12px;font-weight:500;color:rgba(255,255,255,.6)">Live · right now</span>
+                <span class="dash-live-updated" id="dashLiveUpdated" style="margin-left:auto;font-size:10px;color:rgba(255,255,255,.35)"></span>
               </div>
-              <div class="dash-sparkline" id="spAvgSession"></div>
-            </div>
-          </div>
-
-          <!-- Bounce rate -->
-          <div class="dash-row2">
-            <div class="dash-metric-card">
-              <div class="dash-metric-label">Bounce rate</div>
-              <div class="dash-metric-val" id="dcBounce">—</div>
-              <div class="dash-metric-footer">
-                <span class="dash-delta neutral" id="dcBounceDelta">—</span>
-                <span class="dash-vs">vs prev period</span>
-              </div>
-              <div class="dash-sparkline" id="spBounce"></div>
+              <div class="dash-live-count" id="dashLiveCount" style="font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-2px">0</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.45);margin-top:4px">visitors on the site</div>
             </div>
           </div>
 
@@ -498,7 +498,7 @@
                 </div>
               </div>
               <table class="dash-top-table">
-                <thead><tr><th>PAGE</th><th>VISITORS</th><th>AVG TIME</th><th>BOUNCE</th></tr></thead>
+                <thead><tr><th>PAGE</th><th>VISITORS</th></tr></thead>
                 <tbody id="dashTopPages"><tr><td colspan="4" class="dash-empty">Loading…</td></tr></tbody>
               </table>
             </div>
@@ -526,23 +526,23 @@
           </div>
         </div>
 
-        <!-- Live counter (fixed) -->
-        <div class="dash-live hidden" id="dashLive">
-          <div class="dash-live-header">
-            <span class="dash-live-dot"></span>
-            Live · right now
-            <span class="dash-live-updated" id="dashLiveUpdated"></span>
-          </div>
-          <div class="dash-live-count" id="dashLiveCount">0</div>
-          <div class="dash-live-label">visitors on the site</div>
-        </div>
       </div>
 
       <!-- CATEGORIES VIEW -->
       <div class="view active" id="viewCats">
         <div class="page-body">
           <div class="page-header">
-            <div class="page-title">Menu</div>
+            <div>
+              <div class="page-breadcrumb">BULOCHKA <span>/ MENU</span></div>
+              <div class="page-title">Menu structure</div>
+              <div class="page-meta">
+                <strong id="metaCatCount">—</strong> categories
+                <span class="page-meta-dot">·</span>
+                <strong id="metaDishCount">—</strong> dishes
+                <span class="page-meta-dot">·</span>
+                last edit <strong id="metaLastEdit">—</strong>
+              </div>
+            </div>
             <div style="display:flex;gap:8px">
               <button class="btn-menu-actions" id="menuActionsToggle">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
@@ -617,12 +617,25 @@
       <!-- ITEMS VIEW -->
       <div class="view" id="viewItems">
         <div class="page-body">
-          <button class="back-btn" id="backBtn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-            Menu
-          </button>
+          <div class="items-breadcrumb">
+            <button class="back-btn" id="backBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+              Bulochka
+            </button>
+            <span class="items-breadcrumb-sep">/</span>
+            <button class="back-btn" id="backBtn2">Menu</button>
+            <span class="items-breadcrumb-sep">/</span>
+            <span class="items-breadcrumb-current" id="itemsBreadcrumbCurrent">Category</span>
+          </div>
           <div class="page-header">
-            <div class="page-title" id="itemsTitle">Category</div>
+            <div>
+              <div class="page-title" id="itemsTitle">Category</div>
+              <div class="page-meta">
+                <strong id="metaItemCount">—</strong> items
+                <span class="page-meta-dot">·</span>
+                last edit <strong id="metaItemEdit">—</strong>
+              </div>
+            </div>
             <button class="btn-add-item" id="addItemBtn">+ Add item</button>
           </div>
           <div class="items-list" id="itemsList"></div>
@@ -683,14 +696,27 @@
         <div class="field"><label>Name in English</label><input type="text" id="iName" placeholder="Espresso"></div>
         <div class="field"><label>Name in Hebrew</label><input type="text" id="iNameHe" placeholder="אספרסו" dir="rtl"></div>
       </div>
+      <div class="modal-grid" style="margin-top:8px">
+        <div class="field"><label>Name in Russian</label><input type="text" id="iNameRu" placeholder="Эспрессо"></div>
+      </div>
       <div class="modal-section-title">Description</div>
       <div class="modal-grid">
         <div class="field"><label>Description in English</label><textarea id="iDesc" placeholder="Short or long..." rows="2"></textarea></div>
         <div class="field"><label>Description in Hebrew</label><textarea id="iDescHe" placeholder="קצר או ארוך..." dir="rtl" rows="2"></textarea></div>
       </div>
+      <div class="modal-grid" style="margin-top:8px">
+        <div class="field"><label>Description in Russian</label><textarea id="iDescRu" placeholder="Короткий или длинный..." rows="2"></textarea></div>
+      </div>
       <div class="modal-grid">
         <div class="field"><label>Price</label><input type="text" id="iPrice" placeholder="₪10 / ₪13"></div>
         <div class="field"><label>Comment</label><input type="text" id="iComment" placeholder="Optional note"></div>
+      </div>
+      <div class="modal-grid">
+        <div class="field"><label>Subhead <span style="font-weight:400;color:var(--subtle)">(section divider, e.g. "Juices")</span></label><input type="text" id="iSubhead" placeholder="e.g. Juices"></div>
+        <div class="field"><label>Subhead in Hebrew</label><input type="text" id="iSubheadHe" placeholder="e.g. מיצים" dir="rtl"></div>
+      </div>
+      <div class="modal-grid" style="margin-top:8px">
+        <div class="field"><label>Subhead in Russian</label><input type="text" id="iSubheadRu" placeholder="e.g. Соки"></div>
       </div>
     </div>
     <div class="tab-content" id="iAvail">
@@ -857,7 +883,7 @@
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
   import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-  import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, setDoc, getDoc, query, orderBy, where, limit } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+  import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, setDoc, getDoc, query, orderBy, where, limit, writeBatch, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
   const app = initializeApp({
     apiKey: "AIzaSyC_zaNtYW8wnS7nhoOzEvkNhbJeJPHWmaI",
@@ -908,6 +934,77 @@
     if (user) { showView('viewDash'); setActiveNav('Dashboard'); loadDashboard(); startLiveCounter(); }
   });
 
+  // ── POINTER DRAG ──
+  function setupPointerDrag(row, list, rowSelector, onDone) {
+    const grip = row.querySelector('.cat-drag');
+    grip.style.cursor = 'grab';
+
+    grip.addEventListener('pointerdown', e => {
+      e.preventDefault();
+      grip.style.cursor = 'grabbing';
+
+      const startY = e.clientY;
+      let moved = false;
+      let placeholder = null;
+
+      const allRows = () => [...list.querySelectorAll(rowSelector)];
+
+      const onMove = e => {
+        const dy = e.clientY - startY;
+        if (!moved && Math.abs(dy) < 4) return;
+
+        if (!moved) {
+          moved = true;
+          row.classList.add('dragging');
+          placeholder = document.createElement('div');
+          placeholder.style.cssText = `height:${row.offsetHeight}px;border-radius:10px;background:var(--accentSoft);border:2px dashed var(--accentBorder);margin-bottom:6px;`;
+          row.after(placeholder);
+          row.style.position = 'fixed';
+          row.style.zIndex = '999';
+          row.style.width = list.offsetWidth - 2 + 'px';
+          row.style.pointerEvents = 'none';
+          row.style.boxShadow = 'var(--shadowLg)';
+        }
+
+        row.style.top = (e.clientY - row.offsetHeight / 2) + 'px';
+        row.style.left = list.getBoundingClientRect().left + 'px';
+
+        // find insertion point
+        const siblings = allRows().filter(r => r !== row);
+        let insertBefore = null;
+        for (const sib of siblings) {
+          const rect = sib.getBoundingClientRect();
+          if (e.clientY < rect.top + rect.height / 2) { insertBefore = sib; break; }
+        }
+        if (insertBefore) list.insertBefore(placeholder, insertBefore);
+        else list.appendChild(placeholder);
+      };
+
+      const onUp = () => {
+        document.removeEventListener('pointermove', onMove);
+        document.removeEventListener('pointerup', onUp);
+        grip.style.cursor = 'grab';
+
+        if (!moved) return;
+
+        row.classList.remove('dragging');
+        row.style.position = '';
+        row.style.zIndex = '';
+        row.style.width = '';
+        row.style.pointerEvents = '';
+        row.style.boxShadow = '';
+        row.style.top = '';
+        row.style.left = '';
+
+        placeholder.replaceWith(row);
+        onDone();
+      };
+
+      document.addEventListener('pointermove', onMove);
+      document.addEventListener('pointerup', onUp);
+    });
+  }
+
   // ── CATEGORIES ──
   async function loadCategories() {
     showView('viewCats');
@@ -925,16 +1022,27 @@
         snap.forEach(d => { meta[d.id] = d.data(); });
       })(),
     ]);
+
+    // sort by saved order, fallback to CATEGORIES index
+    const sorted = CATEGORIES
+      .map((baseCat, idx) => ({ ...baseCat, ...meta[baseCat.id], _defaultIdx: idx }))
+      .sort((a, b) => {
+        const oa = a.order != null ? a.order : a._defaultIdx * 100;
+        const ob = b.order != null ? b.order : b._defaultIdx * 100;
+        return oa - ob;
+      });
+
     list.innerHTML = '';
-    CATEGORIES.forEach(baseCat => {
-      const cat = { ...baseCat, ...meta[baseCat.id] };
+
+    sorted.forEach(cat => {
       const row = document.createElement('div');
       row.className = 'cat-row';
+      row.dataset.catId = cat.id;
       const isHidden = cat.visible === false;
       row.innerHTML = `
-        <div class="cat-drag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg></div>
+        <div class="cat-drag" title="Drag to reorder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg></div>
         <div class="cat-check"></div>
-        ${cat.img ? `<img class="cat-thumb" src="${cat.img}" onerror="this.src='../img/Main page/menu_placeholder.jpg'">` : `<img class="cat-thumb" src="../img/Main page/menu_placeholder.jpg">`}
+        ${cat.img ? `<img class="cat-thumb" draggable="false" src="${cat.img}" onerror="this.src='../img/Main page/menu_placeholder.jpg'">` : `<img class="cat-thumb" draggable="false" src="../img/Main page/menu_placeholder.jpg">`}
         <div class="cat-info">
           <div class="cat-name">${cat.label}</div>
           <div class="cat-count">${counts[cat.id]} items</div>
@@ -952,6 +1060,9 @@
           </button>
         </div>
         <span class="cat-open">Open →</span>`;
+
+      setupPointerDrag(row, list, '.cat-row', saveCatOrder);
+
       row.querySelector('.vis-cat-btn').onclick   = (e) => { e.stopPropagation(); openVisModal(cat, row, true); };
       row.querySelector('.edit-cat-btn').onclick  = (e) => { e.stopPropagation(); openCatModal(cat); };
       row.querySelector('.del-cat-btn').onclick   = (e) => {
@@ -963,19 +1074,41 @@
           loadCategories();
         });
       };
-      row.onclick = (e) => { if (!e.target.closest('.icon-btn')) openCategory(cat.id, cat.label); };
+      row.onclick = (e) => { if (!e.target.closest('.icon-btn') && !e.target.closest('.cat-drag')) openCategory(cat.id, cat.label); };
       list.appendChild(row);
     });
+
+    // update meta bar
+    const totalCats  = sorted.length;
+    const totalDishes = Object.values(counts).reduce((s, n) => s + n, 0);
+    const now = new Date();
+    const timeStr = `today, ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+    document.getElementById('metaCatCount').textContent   = totalCats;
+    document.getElementById('metaDishCount').textContent  = totalDishes;
+    document.getElementById('metaLastEdit').textContent   = timeStr;
+  }
+
+  async function saveCatOrder() {
+    const rows = document.querySelectorAll('#catList .cat-row');
+    const batch = writeBatch(db);
+    rows.forEach((row, idx) => {
+      const catId = row.dataset.catId;
+      batch.set(doc(db, '_categories', catId), { order: idx * 10 }, { merge: true });
+    });
+    await batch.commit();
+    toast('Order saved ✓');
   }
 
   function openCategory(catId, catLabel) {
     currentCat = catId;
     document.getElementById('itemsTitle').textContent = catLabel;
+    document.getElementById('itemsBreadcrumbCurrent').textContent = catLabel;
     showView('viewItems');
     loadItems();
   }
 
-  document.getElementById('backBtn').onclick = loadCategories;
+  document.getElementById('backBtn').onclick  = loadCategories;
+  document.getElementById('backBtn2').onclick = loadCategories;
 
   // ── ITEMS ──
   async function loadItems() {
@@ -988,13 +1121,23 @@
       list.innerHTML = '<div class="empty">No items yet</div>';
       return;
     }
+
+    items.sort((a, b) => {
+      const oa = a.order != null ? a.order : 9999;
+      const ob = b.order != null ? b.order : 9999;
+      return oa - ob;
+    });
+
     list.innerHTML = '';
+
     items.forEach(item => {
       const row = document.createElement('div');
       row.className = 'item-row';
+      row.dataset.itemId = item.id;
       const isHidden = item.available === false;
       row.innerHTML = `
-        ${item.img ? `<img class="item-thumb" src="../${item.img}" onerror="this.style.display='none'">` : '<div class="item-thumb"></div>'}
+        <div class="cat-drag" title="Drag to reorder" style="margin-right:4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg></div>
+        ${item.img ? `<img class="item-thumb" draggable="false" src="../${item.img}" onerror="this.style.display='none'">` : '<div class="item-thumb"></div>'}
         <div class="item-info">
           <div class="item-name">${item.name || '—'}</div>
           <div class="item-desc">${item.desc || ''}</div>
@@ -1012,6 +1155,9 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
           </button>
         </div>`;
+
+      setupPointerDrag(row, list, '.item-row', saveItemOrder);
+
       row.querySelector('.vis-btn').onclick = (e) => { e.stopPropagation(); openVisModal(item, row); };
       row.querySelector('.edit-item-btn').onclick = () => openItemModal(item);
       row.querySelector('.del-item-btn').onclick = () => {
@@ -1019,10 +1165,38 @@
           await deleteDoc(doc(db, currentCat, item.id));
           loadItems();
           toast('Deleted');
-        })
+        });
       };
       list.appendChild(row);
     });
+
+    let lastTs = null;
+    items.forEach(item => {
+      if (item.updatedAt?.toDate) {
+        const d = item.updatedAt.toDate();
+        if (!lastTs || d > lastTs) lastTs = d;
+      }
+    });
+    function fmtTime(d) {
+      if (!d) return '—';
+      const now = new Date();
+      const isToday = d.toDateString() === now.toDateString();
+      const hm = `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+      if (isToday) return `today, ${hm}`;
+      return `${d.getDate()} ${d.toLocaleString('en',{month:'short'})}, ${hm}`;
+    }
+    document.getElementById('metaItemCount').textContent = items.length;
+    document.getElementById('metaItemEdit').textContent  = fmtTime(lastTs);
+  }
+
+  async function saveItemOrder() {
+    const rows = document.querySelectorAll('#itemsList .item-row');
+    const batch = writeBatch(db);
+    rows.forEach((row, idx) => {
+      batch.update(doc(db, currentCat, row.dataset.itemId), { order: idx * 10 });
+    });
+    await batch.commit();
+    toast('Order saved ✓');
   }
 
   // ── TABS ──
@@ -1078,10 +1252,15 @@
     document.getElementById('itemModalTitle').textContent = item ? 'Edit item' : 'Add item';
     document.getElementById('iName').value      = item?.name    || '';
     document.getElementById('iNameHe').value    = item?.nameHe  || '';
+    document.getElementById('iNameRu').value    = item?.nameRu  || '';
     document.getElementById('iDesc').value      = item?.desc    || '';
     document.getElementById('iDescHe').value    = item?.descHe  || '';
+    document.getElementById('iDescRu').value    = item?.descRu  || '';
     document.getElementById('iPrice').value     = item?.price   || '';
     document.getElementById('iComment').value   = item?.comment || '';
+    document.getElementById('iSubhead').value   = item?.subhead   || '';
+    document.getElementById('iSubheadHe').value = item?.subheadHe || '';
+    document.getElementById('iSubheadRu').value = item?.subheadRu || '';
     document.getElementById('iAvailable').checked = item?.available !== false;
     const preview = document.getElementById('iImgPreview');
     const placeholder = document.getElementById('iUploadPlaceholder');
@@ -1105,11 +1284,17 @@
     const data = {
       name:      document.getElementById('iName').value,
       nameHe:    document.getElementById('iNameHe').value,
+      nameRu:    document.getElementById('iNameRu').value,
       desc:      document.getElementById('iDesc').value,
       descHe:    document.getElementById('iDescHe').value,
+      descRu:    document.getElementById('iDescRu').value,
       price:     document.getElementById('iPrice').value,
       comment:   document.getElementById('iComment').value,
+      subhead:   document.getElementById('iSubhead').value.trim(),
+      subheadHe: document.getElementById('iSubheadHe').value.trim(),
+      subheadRu: document.getElementById('iSubheadRu').value.trim(),
       available: document.getElementById('iAvailable').checked,
+      updatedAt: serverTimestamp(),
     };
     if (!data.name) return;
     if (editingItemId) {
@@ -1614,7 +1799,7 @@
   };
 
   // ── DASHBOARD ──
-  let dashDays = 7;
+  let dashDays = 1;
   let liveInterval = null;
 
   const PAGE_NAMES = { '/': 'Home', '/menu': 'Menu', '/careers': 'Careers', '/events': 'Events' };
@@ -1675,8 +1860,8 @@
     const prev = all.filter(v=>v.ts >= cutPrev && v.ts < cutCur);
 
     // ── UNIQUE VISITORS ──
-    const uniqCur  = new Set(cur.map(v=>v.sessionId||v.ts+'_'+v.page)).size;
-    const uniqPrev = new Set(prev.map(v=>v.sessionId||v.ts+'_'+v.page)).size;
+    const uniqCur  = new Set(cur.map(v=>v.visitorId||v.sessionId||v.ts+'_'+v.page)).size;
+    const uniqPrev = new Set(prev.map(v=>v.visitorId||v.sessionId||v.ts+'_'+v.page)).size;
     document.getElementById('dcVisitors').textContent = fmtNum(uniqCur);
     renderDelta('dcVisitorsDelta', uniqCur, uniqPrev);
 
@@ -1684,51 +1869,24 @@
     document.getElementById('dcPageviews').textContent = fmtNum(cur.length);
     renderDelta('dcPageviewsDelta', cur.length, prev.length);
 
-    // ── AVG SESSION ──
-    const dursCur  = cur.filter(v=>v.duration>0).map(v=>v.duration);
-    const dursPrev = prev.filter(v=>v.duration>0).map(v=>v.duration);
-    const avgCur   = dursCur.length  ? Math.round(dursCur.reduce((a,b)=>a+b,0)/dursCur.length)   : 0;
-    const avgPrev  = dursPrev.length ? Math.round(dursPrev.reduce((a,b)=>a+b,0)/dursPrev.length) : 0;
-    document.getElementById('dcAvgSession').textContent = fmtDur(avgCur);
-    renderDelta('dcAvgSessionDelta', avgCur, avgPrev);
-
-    // ── BOUNCE RATE (duration < 15s or 0) ──
-    const bncCur  = cur.filter(v=>!v.duration||v.duration<15).length;
-    const bncPrev = prev.filter(v=>!v.duration||v.duration<15).length;
-    const bpCur   = cur.length  ? Math.round(bncCur/cur.length*100)   : 0;
-    const bpPrev  = prev.length ? Math.round(bncPrev/prev.length*100) : 0;
-    document.getElementById('dcBounce').textContent = cur.length ? bpCur+'%' : '—';
-    renderDelta('dcBounceDelta', bpCur, bpPrev, true);
-
     // ── SPARKLINES ──
     const days = dashDays;
-    document.getElementById('spVisitors').innerHTML   = sparkline(dailyBuckets(cur,days,b=>new Set(b.map(v=>v.sessionId||v.ts)).size), true);
+    document.getElementById('spVisitors').innerHTML   = sparkline(dailyBuckets(cur,days,b=>new Set(b.map(v=>v.visitorId||v.sessionId||v.ts)).size), true);
     document.getElementById('spPageviews').innerHTML  = sparkline(dailyBuckets(cur,days,b=>b.length));
-    document.getElementById('spAvgSession').innerHTML = sparkline(dailyBuckets(cur,days,b=>{ const d=b.filter(v=>v.duration>0).map(v=>v.duration); return d.length?Math.round(d.reduce((a,c)=>a+c,0)/d.length):0; }));
-    document.getElementById('spBounce').innerHTML     = sparkline(dailyBuckets(cur,days,b=>b.length?Math.round(b.filter(v=>!v.duration||v.duration<15).length/b.length*100):0));
 
     // ── TOP PAGES ──
     const pageMap = {};
     cur.forEach(v=>{
-      if (!pageMap[v.page]) pageMap[v.page]={sess:new Set(),durs:[],bounces:0,total:0};
-      pageMap[v.page].sess.add(v.sessionId||v.ts);
-      pageMap[v.page].total++;
-      if (v.duration>0) pageMap[v.page].durs.push(v.duration);
-      if (!v.duration||v.duration<15) pageMap[v.page].bounces++;
+      if (!pageMap[v.page]) pageMap[v.page]={sess:new Set()};
+      pageMap[v.page].sess.add(v.visitorId||v.sessionId||v.ts);
     });
     const topPages = Object.entries(pageMap).sort((a,b)=>b[1].sess.size-a[1].sess.size).slice(0,6);
     document.getElementById('dashTopPages').innerHTML = topPages.length
-      ? topPages.map(([p,d])=>{
-          const avg = d.durs.length ? Math.round(d.durs.reduce((a,b)=>a+b,0)/d.durs.length) : 0;
-          const bp  = d.total ? Math.round(d.bounces/d.total*100) : 0;
-          return `<tr>
+      ? topPages.map(([p,d])=>`<tr>
             <td><div class="dash-page-name">${PAGE_NAMES[p]||p}</div><div class="dash-page-path">${p}</div></td>
             <td><b>${d.sess.size}</b></td>
-            <td style="color:var(--muted)">${fmtDur(avg)}</td>
-            <td><span class="${bp<40?'dash-bounce-good':'dash-bounce-bad'}">${bp}%</span></td>
-          </tr>`;
-        }).join('')
-      : '<tr><td colspan="4" class="dash-empty">No data yet</td></tr>';
+          </tr>`).join('')
+      : '<tr><td colspan="2" class="dash-empty">No data yet</td></tr>';
 
     // ── TRAFFIC SOURCES ──
     const srcMap = {};
@@ -1778,7 +1936,6 @@
       const snap = await getDocs(query(collection(db,'_visits'), where('ts','>=',Date.now()-5*60*1000), limit(100)));
       document.getElementById('dashLiveCount').textContent = snap.size;
       document.getElementById('dashLiveUpdated').textContent = 'updated '+new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-      document.getElementById('dashLive').classList.remove('hidden');
     } catch(e) {}
   }
 
@@ -1790,7 +1947,6 @@
 
   function stopLiveCounter() {
     if (liveInterval) { clearInterval(liveInterval); liveInterval = null; }
-    document.getElementById('dashLive').classList.add('hidden');
   }
 
   // ── EXPORT CSV ──

@@ -1,13 +1,13 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Work with us — Bulochka</title>
-  <script>(function(){var l=localStorage.getItem('bulochka-lang');if(l==='he'){document.documentElement.dir='rtl';document.documentElement.lang='he';}})();</script>
+  <script>(function(){var l=localStorage.getItem('bulochka-lang');if(l==='he'){document.documentElement.dir='rtl';document.documentElement.lang='he';}else if(l){document.documentElement.lang=l;}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Inter+Tight:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Rubik:wght@300;400;500&family=Varela+Round&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Playfair+Display:ital,wght@0,400;1,400&family=Rubik:wght@300;400;500&family=Varela+Round&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=8">
   <style>
     /* ─── HERO ─────────────────────────────── */
@@ -30,7 +30,7 @@
       margin-bottom: 28px;
       font-optical-sizing: auto;
     }
-    .careers-hero h1 em { font-style: italic; }
+    .careers-hero h1 em { font-style: italic; color: var(--brown-mid); }
     .careers-lead {
       font-size: clamp(15px, 2vw, 18px);
       color: var(--brown-mid);
@@ -243,11 +243,11 @@
 <!-- ─── NAV ──────────────────────────────────────────────── -->
 <nav class="nav">
   <ul class="nav-links">
-    <li><a href="index.html" data-en='Home' data-he='ראשי'>Home</a></li>
-    <li><a href="menu.html" data-en='Menu' data-he='תפריט'>Menu</a></li>
-    <li><a href="index.html#story" data-en='Our story' data-he='הסיפור שלנו'>Our story</a></li>
-    <li><a href="careers.html" class="active" data-en='Work with us' data-he='עבוד איתנו'>Work with us</a></li>
-    <li><a href="events.html" data-en='Events' data-he='אירועים'>Events</a></li>
+    <li><a href="index.html" data-en='Home' data-he='ראשי' data-ru='Главная'>Home</a></li>
+    <li><a href="menu.html" data-en='Menu' data-he='תפריט' data-ru='Меню'>Menu</a></li>
+    <li><a href="index.html#story" data-en='Our story' data-he='הסיפור שלנו' data-ru='О нас'>Our story</a></li>
+    <li><a href="careers.html" class="active" data-en='Work with us' data-he='עבוד איתנו' data-ru='Работа у нас'>Work with us</a></li>
+    <li><a href="events.html" data-en='Events' data-he='אירועים' data-ru='Мероприятия'>Events</a></li>
   </ul>
   <a href="index.html" class="nav-logo">Bulochka</a>
   <div class="nav-right">
@@ -259,9 +259,10 @@
     <div class="lang-switch">
       <button class="lang-btn active" data-lang="en">EN</button>
       <button class="lang-btn" data-lang="he">עב</button>
+      <button class="lang-btn" data-lang="ru">RU</button>
     </div>
-    <span class="nav-hours" data-en='Open until 20:00' data-he='פתוח עד 20:00' dir="ltr">Open until 20:00</span>
-    <a href="tel:+972529662724" class="btn-reserve" data-en='Reserve' data-he='הזמנה'>Reserve</a>
+    <span class="nav-hours" data-en='Open until 20:00' data-he='פתוח עד 20:00' data-ru='Открыто до 20:00' dir="ltr">Open until 20:00</span>
+    <a href="tel:+972529662724" class="btn-reserve" data-en='Reserve a table' data-he='הזמנת שולחן' data-ru='Забронировать'>Reserve a table</a>
   </div>
   <div class="nav-toggle" id="navToggle" aria-label="Open menu">
     <span></span><span></span><span></span>
@@ -272,9 +273,9 @@
 <!-- ─── HERO ──────────────────────────────────────────────── -->
 <div class="careers-hero">
   <div class="careers-hero-left">
-    <p class="section-eyebrow" data-en='Work with us' data-he='עבודה אצלנו'>Work with us</p>
-    <h1><span data-en='Come bake' data-he='בואו לאפות'>Come bake</span><br><em data-en='with us.' data-he='איתנו.'>with us.</em></h1>
-    <p class="careers-lead" data-en='We&apos;re a small team that takes good bread seriously. If you love early mornings, honest work, and the smell of something just out of the oven — let&apos;s talk.' data-he='אנחנו צוות קטן שלוקח לחם טוב ברצינות. אם אתם אוהבים בקרים מוקדמים, עבודה אמיתית וריח של משהו טרי מהתנור — בואו נדבר.'>We're a small team that takes good bread seriously. If you love
+    <p class="section-eyebrow" data-en='Work with us' data-he='עבודה אצלנו' data-ru='Работа у нас'>Work with us</p>
+    <h1><span data-en='Come bake' data-he='בואו לאפות' data-ru='Приходите печь'>Come bake</span><br><em data-en='with us.' data-he='איתנו.' data-ru='вместе с нами.'>with us.</em></h1>
+    <p class="careers-lead" data-en='We&apos;re a small team that takes good bread seriously. If you love early mornings, honest work, and the smell of something just out of the oven — let&apos;s talk.' data-he='אנחנו צוות קטן שלוקח לחם טוב ברצינות. אם אתם אוהבים בקרים מוקדמים, עבודה אמיתית וריח של משהו טרי מהתנור — בואו נדבר.' data-ru='Мы небольшая команда, которая серьёзно относится к хорошему хлебу. Если вы любите ранние утра, честную работу и запах свежей выпечки — давайте поговорим.'>We're a small team that takes good bread seriously. If you love
       early mornings, honest work, and the smell of something just out
       of the oven — let's talk.
     </p>
@@ -289,9 +290,9 @@
 <div class="apply-section">
   <div class="apply-inner">
     <div class="apply-text">
-      <p class="section-eyebrow" data-en='Apply' data-he='הגישו מועמדות'>Apply</p>
-      <h2><span data-en='Tell us' data-he='ספרו לנו'>Tell us</span><br><em data-en='about yourself.' data-he='על עצמכם.'>about yourself.</em></h2>
-      <p data-en='Fill in your details and we&apos;ll be in touch soon to talk about the role.' data-he='מלאו את הפרטים ונחזור אליכם בקרוב לשוחח על התפקיד.'>Fill in your details and we'll be in touch soon to talk about the role.</p>
+      <p class="section-eyebrow" data-en='Apply' data-he='הגישו מועמדות' data-ru='Анкета'>Apply</p>
+      <h2><span data-en='Tell us' data-he='ספרו לנו' data-ru='Расскажите'>Tell us</span><br><em data-en='about yourself.' data-he='על עצמכם.' data-ru='о себе.'>about yourself.</em></h2>
+      <p data-en='Fill in your details and we&apos;ll be in touch soon to talk about the role.' data-he='מלאו את הפרטים ונחזור אליכם בקרוב לשוחח על התפקיד.' data-ru='Заполните форму, и мы свяжемся с вами в ближайшее время.'>Fill in your details and we'll be in touch soon to talk about the role.</p>
     </div>
     <form class="apply-form" id="applyForm" novalidate>
       <input type="text" name="name" id="inputName" placeholder="Full name" required>
@@ -320,35 +321,35 @@
     <div class="footer-top">
       <div class="footer-brand">
         <div class="footer-logo">Bulochka</div>
-        <p data-en='A small bakery, on the corner of your morning.' data-he='מאפייה קטנה, בפינת הבוקר שלך.'>A small bakery, on the corner<br>of your morning.</p>
+        <p data-en='A small bakery, on the corner of your morning.' data-he='מאפייה קטנה, בפינת הבוקר שלך.' data-ru='Маленькая пекарня на углу вашего утра.'>A small bakery, on the corner<br>of your morning.</p>
       </div>
       <div>
-        <div class="footer-col-title" data-en='Visit' data-he='ביקור'>Visit</div>
+        <div class="footer-col-title" data-en='Visit' data-he='ביקור' data-ru='Адрес'>Visit</div>
         <div class="footer-links">
-          <span data-en='Petah Tikva, Pinsker 29' data-he='פתח תקווה, פינסקר 29'>Petah Tikva, Pinsker 29</span>
-          <span data-en='Mon–Thu, 08:00–20:00' data-he='08:00–20:00 ,א׳–ה׳' dir="ltr">Mon–Thu, 08:00–20:00</span>
+          <span data-en='Petah Tikva, Pinsker 29' data-he='פתח תקווה, פינסקר 29' data-ru='Петах-Тиква, Пинскер 29'>Petah Tikva, Pinsker 29</span>
+          <span data-en='Mon–Thu, 08:00–20:00' data-he='08:00–20:00 ,א׳–ה׳' data-ru='Вс–Чт, 08:00–20:00' dir="ltr">Mon–Thu, 08:00–20:00</span>
           <a href="tel:+972529662724" dir="ltr">+972 (52) 966-2724</a>
         </div>
       </div>
       <div>
-        <div class="footer-col-title" data-en='Stay in touch' data-he='צרו קשר'>Stay in touch</div>
+        <div class="footer-col-title" data-en='Stay in touch' data-he='צרו קשר' data-ru='Контакты'>Stay in touch</div>
         <div class="footer-links">
-          <a href="careers.html" data-en='Work with us' data-he='עבוד איתנו'>Work with us</a>
-          <a href="events.html" data-en='Events' data-he='אירועים'>Events</a>
+          <a href="careers.html" data-en='Work with us' data-he='עבוד איתנו' data-ru='Работа у нас'>Work with us</a>
+          <a href="events.html" data-en='Events' data-he='אירועים' data-ru='Мероприятия'>Events</a>
         </div>
       </div>
       <div>
-        <div class="footer-col-title" data-en='Follow' data-he='עקבו אחרינו'>Follow</div>
+        <div class="footer-col-title" data-en='Follow' data-he='עקבו אחרינו' data-ru='Соцсети'>Follow</div>
         <div class="footer-links">
           <a href="https://www.instagram.com/bulochka.pt" target="_blank">Instagram</a>
           <a href="https://www.facebook.com/bulochka.bulochka.2025#" target="_blank">Facebook</a>
-          <a href="https://www.google.com/search?q=Bulochka%2C+Yehuda+Leib+Pinsker+Street%2C+Petah+Tikva&sca_esv=cb0ef06c41fe51d8&rlz=1C1GCEA_enIL1186IL1186&sxsrf=ANbL-n5bMXDD-7O7zs6PrRorMZKNG3hq5g%3A1779431527882&ei=Z_gPasfENciThbIP89mysQY&biw=1920&bih=911&oq=bulochka+yehuda&gs_lp=Egxnd3Mtd2l6LXNlcnAiD2J1bG9jaGthIHllaHVkYSoCCAAyAhAmMggQABiABBiiBDIFEAAY7wUyBRAAGO8FMgUQABjvBTIIEAAYgAQYogRIuy9Q4ghY1BdwAngBkAEAmAF4oAHqBqoBAzAuOLgBA8gBAPgBAZgCCqAChgfCAg0QLhjHARivARiwAxgnwgIKEAAYRxjWBBiwA8ICBhAAGBYYHsICBBAjGCfCAhAQLhiABBiKBRjHARivARgnwgIKEAAYgAQYFBiHAsICBRAAGIAEwgIIEAAYFhgeGAqYAwCIBgGQBgeSBwMyLjigB_cpsgcDMC44uAeBB8IHBDAuMTDIBxOACAE&sclient=gws-wiz-serp" target="_blank">Google</a>
+          <a href="https://www.google.com/search?q=Bulochka%2C+Yehuda+Leib+Pinsker+Street%2C+Petah+Tikva&sca_esv=cb0ef06c41fe51d8&rlz=1C1GCEA_enIL1186IL1186&sxsrf=ANbL-n5bMXDD-7O7zs6PrRorMZKNG3hq5g%3A1779431527882&ei=Z_gPasfENciThbIP89mysQY&biw=1920&bih=911&oq=bulochka+yehuda&gs_lp=Egxnd3Mtd2l6LXNlcnAiD2J1bG9jaGthIHllaHVkYSoCCAAyAhAmMggQABiABBiiBDIFEAAY7wUyBRAAGO8FMgUQABjvBTIIEAAYgAQYogRIuy9Q4ghY1BdwAngBkAEAmAF4oAHqBqoBAzAuOLgBA8gBAPgBAZgCCqAChgfCAg0QLhjHARivARiwAxgnwgIKEAAYRxjWBBiwA8ICBhAAGBYYHsICBBAjGCfCAhAQLhiABBiKBRjHARivARgnwgIKEAAYgAQYFBiHAsICBRAAGIAEwgIIEAAYFhgeGAqYAwCIBgGQBgeSBwMyLjigB_cpsgcDMC44uAeBB8IHBDAuMTDIBxOACAE&sclient=gws-wiz-serp" target="_blank" data-en='Google Reviews' data-he='ביקורות גוגל' data-ru='Отзывы на Google'>Google</a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© Bulochka MMXIX—MMXXVI</span>
-      <span class="footer-tagline" data-en='Made with butter ✦' data-he='עשוי עם חמאה ✦'>Made with butter ✦</span>
+      <span class="footer-tagline" data-en='Made with butter ✦' data-he='עשוי עם חמאה ✦' data-ru='Сделано с маслом ✦'>Made with butter ✦</span>
     </div>
   </div>
 </footer>
@@ -388,6 +389,13 @@
         optBaker: 'עוזר/ת אופה', optCashier: 'קופה / שירות', optOther: 'אחר',
         consent: 'אני מסכים/ה שהפרטים שלי ישמשו ליצירת קשר בנוגע למועמדות זו, בהתאם למדיניות הפרטיות.',
         submit: '← שלח', success: '✦ תודה! נחזור אליכם בקרוב.'
+      },
+      ru: {
+        name: 'Имя и фамилия', phone: 'Номер телефона', city: 'Город',
+        optDefault: 'Интересующая должность', optBarista: 'Бариста',
+        optBaker: 'Помощник пекаря', optCashier: 'Кассир / Обслуживание', optOther: 'Другое',
+        consent: 'Я согласен(на) на использование моих данных для связи по данной заявке в соответствии с политикой конфиденциальности.',
+        submit: 'Отправить →', success: '✦ Спасибо! Мы свяжемся с вами в ближайшее время.'
       }
     };
     function applyFormLang(lang) {
@@ -412,5 +420,17 @@
   })();
 </script>
 <script type="module" src="/analytics.js"></script>
+<button class="scroll-top-btn" id="scrollTopBtn" aria-label="Back to top">↑</button>
+<script>
+  (function(){
+    var btn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', function(){
+      btn.classList.toggle('visible', window.scrollY > 300);
+    }, {passive: true});
+    btn.addEventListener('click', function(){
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+  })();
+</script>
 </body>
 </html>

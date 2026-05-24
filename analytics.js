@@ -15,6 +15,12 @@ const CFG = {
 const app = getApps().length ? getApps()[0] : initializeApp(CFG);
 const db = getFirestore(app);
 
+let visitorId = localStorage.getItem('_bvid');
+if (!visitorId) {
+  visitorId = Date.now().toString(36) + Math.random().toString(36).slice(2);
+  localStorage.setItem('_bvid', visitorId);
+}
+
 let sessionId = sessionStorage.getItem('_bsid');
 if (!sessionId) {
   sessionId = Date.now().toString(36) + Math.random().toString(36).slice(2);
@@ -56,6 +62,7 @@ addDoc(collection(db, '_visits'), {
   browser:   browser(),
   lang:      (navigator.language || 'und').slice(0, 2),
   source:    source(),
+  visitorId: visitorId,
   sessionId: sessionId,
   duration:  0,
 }).then(r => { ref = r; }).catch(() => {});

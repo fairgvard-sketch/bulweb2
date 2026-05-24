@@ -1,13 +1,13 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Events — Bulochka</title>
-  <script>(function(){var l=localStorage.getItem('bulochka-lang');if(l==='he'){document.documentElement.dir='rtl';document.documentElement.lang='he';}})();</script>
+  <script>(function(){var l=localStorage.getItem('bulochka-lang');if(l==='he'){document.documentElement.dir='rtl';document.documentElement.lang='he';}else if(l){document.documentElement.lang=l;}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Inter+Tight:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Rubik:wght@300;400;500&family=Varela+Round&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Playfair+Display:ital,wght@0,400;1,400&family=Rubik:wght@300;400;500&family=Varela+Round&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=8">
   <style>
     /* ─── HERO ─── */
@@ -254,11 +254,11 @@
 <!-- ─── NAV ─── -->
 <nav class="nav">
   <ul class="nav-links">
-    <li><a href="index.html" data-en='Home' data-he='ראשי'>Home</a></li>
-    <li><a href="menu.html" data-en='Menu' data-he='תפריט'>Menu</a></li>
-    <li><a href="index.html#story" data-en='Our story' data-he='הסיפור שלנו'>Our story</a></li>
-    <li><a href="careers.html" data-en='Work with us' data-he='עבוד איתנו'>Work with us</a></li>
-    <li><a href="events.html" class="active" data-en='Events' data-he='אירועים'>Events</a></li>
+    <li><a href="index.html" data-en='Home' data-he='ראשי' data-ru='Главная'>Home</a></li>
+    <li><a href="menu.html" data-en='Menu' data-he='תפריט' data-ru='Меню'>Menu</a></li>
+    <li><a href="index.html#story" data-en='Our story' data-he='הסיפור שלנו' data-ru='О нас'>Our story</a></li>
+    <li><a href="careers.html" data-en='Work with us' data-he='עבוד איתנו' data-ru='Работа у нас'>Work with us</a></li>
+    <li><a href="events.html" class="active" data-en='Events' data-he='אירועים' data-ru='Мероприятия'>Events</a></li>
   </ul>
   <a href="index.html" class="nav-logo">Bulochka</a>
   <div class="nav-right">
@@ -270,9 +270,10 @@
     <div class="lang-switch">
       <button class="lang-btn active" data-lang="en">EN</button>
       <button class="lang-btn" data-lang="he">עב</button>
+      <button class="lang-btn" data-lang="ru">RU</button>
     </div>
-    <span class="nav-hours" data-en='Open until 20:00' data-he='פתוח עד 20:00' dir="ltr">Open until 20:00</span>
-    <a href="tel:+972529662724" class="btn-reserve" data-en='Reserve' data-he='הזמנה'>Reserve</a>
+    <span class="nav-hours" data-en='Open until 20:00' data-he='פתוח עד 20:00' data-ru='Открыто до 20:00' dir="ltr">Open until 20:00</span>
+    <a href="tel:+972529662724" class="btn-reserve" data-en='Reserve a table' data-he='הזמנת שולחן' data-ru='Забронировать'>Reserve a table</a>
   </div>
   <div class="nav-toggle" id="navToggle" aria-label="Open menu">
     <span></span><span></span><span></span>
@@ -283,12 +284,12 @@
 <!-- ─── HERO ─── -->
 <div class="events-hero">
   <div>
-    <p class="section-eyebrow" data-en='Events' data-he='אירועים'>Events</p>
-    <h1><span data-en='Let's make' data-he='בואו ליצור'>Let's make</span><br><em data-en='it special.' data-he='רגע מיוחד.'>it special.</em></h1>
+    <p class="section-eyebrow" data-en='Events' data-he='אירועים' data-ru='Мероприятия'>Events</p>
+    <h1><span data-en='Let's make' data-he='בואו ליצור' data-ru='Сделаем'>Let's make</span><br><em data-en='it special.' data-he='רגע מיוחד.' data-ru='это особенным.'>it special.</em></h1>
   </div>
   <div class="events-hero-right">
-    <p class="events-hero-desc" data-en='Fill in the details and we&apos;ll be in touch soon — birthdays, brunches, corporate gatherings, or any other reason to celebrate.' data-he='מלאו את הפרטים ונחזור אליכם בקרוב — ימי הולדת, ברנצ׳ים, כנסים ארגוניים, או כל סיבה טובה אחרת לחגוג.'>Fill in the details and we'll be in touch soon — birthdays, brunches, corporate gatherings, or any other reason to celebrate.</p>
-    <a href="#form" class="btn-pill" data-en='Get in touch →' data-he='← צרו קשר'>Get in touch →</a>
+    <p class="events-hero-desc" data-en='Fill in the details and we&apos;ll be in touch soon — birthdays, brunches, corporate gatherings, or any other reason to celebrate.' data-he='מלאו את הפרטים ונחזור אליכם בקרוב — ימי הולדת, ברנצ׳ים, כנסים ארגוניים, או כל סיבה טובה אחרת לחגוג.' data-ru='Заполните форму, и мы свяжемся с вами — дни рождения, бранчи, корпоративы или любой другой повод отпраздновать.'>Fill in the details and we'll be in touch soon — birthdays, brunches, corporate gatherings, or any other reason to celebrate.</p>
+    <a href="#form" class="btn-pill" data-en='Get in touch →' data-he='← צרו קשר' data-ru='Написать нам →'>Get in touch →</a>
   </div>
 </div>
 
@@ -297,18 +298,18 @@
   <div class="events-features-inner">
     <div class="events-feature">
       <div class="events-feature-num">01</div>
-      <h3 data-en='Intimate space' data-he='חלל אינטימי'>Intimate space</h3>
-      <p data-en='Up to 40 guests in a warm setting that suits any occasion.' data-he='עד 40 אורחים באווירה חמה שמתאימה לכל אירוע.'>Up to 40 guests in a warm setting that suits any occasion.</p>
+      <h3 data-en='Intimate space' data-he='חלל אינטימי' data-ru='Уютное пространство'>Intimate space</h3>
+      <p data-en='Up to 40 guests in a warm setting that suits any occasion.' data-he='עד 40 אורחים באווירה חמה שמתאימה לכל אירוע.' data-ru='До 40 гостей в тёплой атмосфере, подходящей для любого случая.'>Up to 40 guests in a warm setting that suits any occasion.</p>
     </div>
     <div class="events-feature">
       <div class="events-feature-num">02</div>
-      <h3 data-en='Bakery catering' data-he='קייטרינג מהמאפייה'>Bakery catering</h3>
-      <p data-en='Pastries, cakes, and quality coffee — everything fresh from our kitchen.' data-he='מאפים, עוגות וקפה איכותי — הכל טרי מהמטבח שלנו.'>Pastries, cakes, and quality coffee — everything fresh from our kitchen.</p>
+      <h3 data-en='Bakery catering' data-he='קייטרינג מהמאפייה' data-ru='Кейтеринг из пекарни'>Bakery catering</h3>
+      <p data-en='Pastries, cakes, and quality coffee — everything fresh from our kitchen.' data-he='מאפים, עוגות וקפה איכותי — הכל טרי מהמטבח שלנו.' data-ru='Выпечка, торты и качественный кофе — всё свежее, прямо из нашей кухни.'>Pastries, cakes, and quality coffee — everything fresh from our kitchen.</p>
     </div>
     <div class="events-feature">
       <div class="events-feature-num">03</div>
-      <h3>Personal & tailored</h3>
-      <p data-en='We&apos;ll build a menu and atmosphere that speaks exactly to your event.' data-he='נבנה תפריט ואווירה שמדברים בדיוק על האירוע שלכם.'>We'll build a menu and atmosphere that speaks exactly to your event.</p>
+      <h3 data-en='Personal &amp; tailored' data-he='אישי ומותאם' data-ru='Индивидуальный подход'>Personal &amp; tailored</h3>
+      <p data-en='We&apos;ll build a menu and atmosphere that speaks exactly to your event.' data-he='נבנה תפריט ואווירה שמדברים בדיוק על האירוע שלכם.' data-ru='Составим меню и создадим атмосферу, которая идеально подойдёт именно вашему мероприятию.'>We'll build a menu and atmosphere that speaks exactly to your event.</p>
     </div>
   </div>
 </div>
@@ -317,16 +318,16 @@
 <div class="events-form-section" id="form">
   <div class="events-form-inner">
     <div class="events-form-aside">
-      <p class="section-eyebrow" data-en='Get in touch' data-he='צרו קשר'>Get in touch</p>
-      <h2><span data-en='We&apos;d love' data-he='נשמח'>We'd love</span><br><em data-en='to hear.' data-he='לשמוע.'>to hear.</em></h2>
-      <p data-en='Fill in the form and we&apos;ll get back to you soon to work out all the details.' data-he='מלאו את הטופס ונחזור אליכם בקרוב לסגור את כל הפרטים.'>Fill in the form and we'll get back to you soon to work out all the details.</p>
+      <p class="section-eyebrow" data-en='Get in touch' data-he='צרו קשר' data-ru='Свяжитесь с нами'>Get in touch</p>
+      <h2><span data-en='We&apos;d love' data-he='נשמח' data-ru='Будем рады'>We'd love</span><br><em data-en='to hear.' data-he='לשמוע.' data-ru='услышать вас.'>to hear.</em></h2>
+      <p data-en='Fill in the form and we&apos;ll get back to you soon to work out all the details.' data-he='מלאו את הטופס ונחזור אליכם בקרוב לסגור את כל הפרטים.' data-ru='Заполните форму, и мы скоро свяжемся с вами, чтобы обсудить все детали.'>Fill in the form and we'll get back to you soon to work out all the details.</p>
       <div class="events-contact-item">
-        <span class="events-contact-label" data-en='Phone' data-he='טלפון'>Phone</span>
+        <span class="events-contact-label" data-en='Phone' data-he='טלפון' data-ru='Телефон'>Phone</span>
         <a href="tel:+972529662724" class="events-contact-value" dir="ltr">+972 (52) 966-2724</a>
       </div>
       <div class="events-contact-item">
-        <span class="events-contact-label" data-en='Address' data-he='כתובת'>Address</span>
-        <span class="events-contact-value" data-en='Pinsker 29, Petah Tikva' data-he='פינסקר 29, פתח תקווה'>Pinsker 29, Petah Tikva</span>
+        <span class="events-contact-label" data-en='Address' data-he='כתובת' data-ru='Адрес'>Address</span>
+        <span class="events-contact-value" data-en='Pinsker 29, Petah Tikva' data-he='פינסקר 29, פתח תקווה' data-ru='Пинскер 29, Петах-Тиква'>Pinsker 29, Petah Tikva</span>
       </div>
     </div>
 
@@ -383,25 +384,25 @@
     <div class="footer-top">
       <div class="footer-brand">
         <div class="footer-logo">Bulochka</div>
-        <p data-en='A small bakery, on the corner of your morning.' data-he='מאפייה קטנה, בפינת הבוקר שלך.'>A small bakery, on the corner<br>of your morning.</p>
+        <p data-en='A small bakery, on the corner of your morning.' data-he='מאפייה קטנה, בפינת הבוקר שלך.' data-ru='Маленькая пекарня на углу вашего утра.'>A small bakery, on the corner<br>of your morning.</p>
       </div>
       <div>
-        <div class="footer-col-title" data-en='Visit' data-he='ביקור'>Visit</div>
+        <div class="footer-col-title" data-en='Visit' data-he='ביקור' data-ru='Адрес'>Visit</div>
         <div class="footer-links">
-          <span data-en='Petah Tikva, Pinsker 29' data-he='פתח תקווה, פינסקר 29'>Petah Tikva, Pinsker 29</span>
-          <span data-en='Mon–Thu, 08:00–20:00' data-he='08:00–20:00 ,א׳–ה׳' dir="ltr">Mon–Thu, 08:00–20:00</span>
+          <span data-en='Petah Tikva, Pinsker 29' data-he='פתח תקווה, פינסקר 29' data-ru='Петах-Тиква, Пинскер 29'>Petah Tikva, Pinsker 29</span>
+          <span data-en='Mon–Thu, 08:00–20:00' data-he='08:00–20:00 ,א׳–ה׳' data-ru='Вс–Чт, 08:00–20:00' dir="ltr">Mon–Thu, 08:00–20:00</span>
           <a href="tel:+972529662724" dir="ltr">+972 (52) 966-2724</a>
         </div>
       </div>
       <div>
-        <div class="footer-col-title" data-en='Stay in touch' data-he='צרו קשר'>Stay in touch</div>
+        <div class="footer-col-title" data-en='Stay in touch' data-he='צרו קשר' data-ru='Контакты'>Stay in touch</div>
         <div class="footer-links">
-          <a href="careers.html" data-en='Work with us' data-he='עבוד איתנו'>Work with us</a>
-          <a href="events.html" data-en='Events' data-he='אירועים'>Events</a>
+          <a href="careers.html" data-en='Work with us' data-he='עבוד איתנו' data-ru='Работа у нас'>Work with us</a>
+          <a href="events.html" data-en='Events' data-he='אירועים' data-ru='Мероприятия'>Events</a>
         </div>
       </div>
       <div>
-        <div class="footer-col-title" data-en='Follow' data-he='עקבו אחרינו'>Follow</div>
+        <div class="footer-col-title" data-en='Follow' data-he='עקבו אחרינו' data-ru='Соцсети'>Follow</div>
         <div class="footer-links">
           <a href="https://www.instagram.com/bulochka.pt" target="_blank">Instagram</a>
           <a href="https://www.facebook.com/bulochka.bulochka.2025#" target="_blank">Facebook</a>
@@ -410,7 +411,7 @@
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© Bulochka MMXIX—MMXXVI</span>
-      <span class="footer-tagline" data-en='Made with butter ✦' data-he='עשוי עם חמאה ✦'>Made with butter ✦</span>
+      <span class="footer-tagline" data-en='Made with butter ✦' data-he='עשוי עם חמאה ✦' data-ru='Сделано с маслом ✦'>Made with butter ✦</span>
     </div>
   </div>
 </footer>
@@ -420,7 +421,7 @@
     e.preventDefault();
     const lang = localStorage.getItem('bulochka-lang') || 'en';
     const btn = this.querySelector('.btn-submit');
-    btn.textContent = lang === 'he' ? 'תודה — נחזור אליכם בקרוב ✓' : 'Thank you — we\'ll be in touch soon ✓';
+    btn.textContent = lang === 'he' ? 'תודה — נחזור אליכם בקרוב ✓' : lang === 'ru' ? 'Спасибо — скоро свяжемся ✓' : 'Thank you — we\'ll be in touch soon ✓';
     btn.disabled = true;
   });
 </script>
@@ -452,6 +453,18 @@
         lblConsent1: 'אני מסכים/ה לשימוש בפרטיי לצורך טיפול בפנייה זו, בהתאם למדיניות הפרטיות.',
         lblConsent2: 'אני רוצה לקבל עדכונים והצעות מבולוצ׳קה. אוכל להסיר את עצמי בכל עת.',
         evtSubmit: '← שלח'
+      },
+      ru: {
+        lblFullname: 'Имя и фамилия', phFullname: 'Имя и фамилия',
+        lblPhone: 'Телефон', lblGuests: 'Количество гостей', phGuests: 'Сколько человек?',
+        lblEventType: 'Тип мероприятия',
+        evtDefault: 'Выберите тип мероприятия', evtBirthday: 'День рождения',
+        evtBrunch: 'Бранч / встреча', evtCorporate: 'Корпоратив',
+        evtPrivate: 'Частное мероприятие', evtOther: 'Другое',
+        lblMessage: 'Дополнительно', phMessage: 'Желаемая дата, особые пожелания, вопросы…',
+        lblConsent1: 'Я согласен(на) на использование моих данных для обработки этого запроса в соответствии с политикой конфиденциальности.',
+        lblConsent2: 'Я хочу получать новости и предложения от Bulochka. Отписаться можно в любое время.',
+        evtSubmit: 'Отправить →'
       }
     };
     function applyEventsLang(lang) {
@@ -473,5 +486,17 @@
   })();
 </script>
 <script type="module" src="/analytics.js"></script>
+<button class="scroll-top-btn" id="scrollTopBtn" aria-label="Back to top">↑</button>
+<script>
+  (function(){
+    var btn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', function(){
+      btn.classList.toggle('visible', window.scrollY > 300);
+    }, {passive: true});
+    btn.addEventListener('click', function(){
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+  })();
+</script>
 </body>
 </html>
