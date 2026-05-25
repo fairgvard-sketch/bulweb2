@@ -417,6 +417,10 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18"/><path d="m8 7-4 4 4 4"/><path d="m16 13 4 4-4 4"/></svg>
           Changes
         </button>
+        <button class="sidebar-item" id="navShop">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Shop
+        </button>
       </div>
       <div class="sidebar-divider"></div>
       <div class="sidebar-section">
@@ -642,6 +646,31 @@
         </div>
       </div>
 
+      <!-- SHOP VIEW -->
+      <div class="view" id="viewShop">
+        <div class="page-body">
+          <div class="page-header">
+            <div>
+              <div class="page-breadcrumb">BULOCHKA <span>/ SHOP</span></div>
+              <div class="page-title">Shop items</div>
+              <div class="page-meta">
+                <strong id="metaShopCount">—</strong> items
+                <span class="page-meta-dot">·</span>
+                last edit <strong id="metaShopEdit">—</strong>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button class="btn-menu-actions" id="loadSamplesBtn" title="Add sample items to get started">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><path d="M12 2v20M2 12h20"/></svg>
+                Load samples
+              </button>
+              <button class="btn-add-item" id="addShopItemBtn">+ Add item</button>
+            </div>
+          </div>
+          <div class="items-list" id="shopItemsList"></div>
+        </div>
+      </div>
+
     </div><!-- /admin-content -->
   </div><!-- /admin-body -->
 
@@ -659,6 +688,10 @@
       <button class="bottom-nav-item" id="bnChanges">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18"/><path d="m8 7-4 4 4 4"/><path d="m16 13 4 4-4 4"/></svg>
         Changes
+      </button>
+      <button class="bottom-nav-item" id="bnShop">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        Shop
       </button>
       <button class="bottom-nav-item" id="bnMore">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg>
@@ -772,6 +805,13 @@
         <span>Visible on menu</span>
         <label class="toggle"><input type="checkbox" id="cVisible" checked><span class="toggle-slider"></span></label>
       </div>
+      <div class="avail-row">
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text)">No photos (list layout)</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">Display this category as a text list without images</div>
+        </div>
+        <label class="toggle"><input type="checkbox" id="cNoPhotos"><span class="toggle-slider"></span></label>
+      </div>
     </div>
     <div class="modal-actions">
       <button class="btn-cancel" id="catModalCancel">Cancel</button>
@@ -874,6 +914,54 @@
     <div class="modal-actions">
       <button class="btn-cancel" id="visConfirmBack">Go Back</button>
       <button class="btn-save btn-danger" id="visConfirmProceed">I understand, hide indefinitely</button>
+    </div>
+  </div>
+</div>
+
+<!-- SHOP ITEM MODAL -->
+<div class="overlay" id="shopModal">
+  <div class="modal modal-wide">
+    <div class="modal-header">
+      <div class="modal-title" id="shopModalTitle">Add item</div>
+      <button class="modal-close" id="shopModalClose">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="tabs">
+      <button class="tab active" data-tab="sBasic">Basic Info</button>
+      <button class="tab" data-tab="sAvail">Availability</button>
+    </div>
+    <div class="tab-content active" id="sBasic">
+      <div class="modal-section-title">Item name</div>
+      <div class="modal-grid">
+        <div class="field"><label>Name in English</label><input type="text" id="sName" placeholder="Sourdough loaf"></div>
+        <div class="field"><label>Name in Hebrew</label><input type="text" id="sNameHe" placeholder="כיכר שאור" dir="rtl"></div>
+      </div>
+      <div class="modal-grid" style="margin-top:8px">
+        <div class="field"><label>Name in Russian</label><input type="text" id="sNameRu" placeholder="Хлеб на закваске"></div>
+      </div>
+      <div class="modal-section-title">Description</div>
+      <div class="modal-grid">
+        <div class="field"><label>Description in English</label><textarea id="sDesc" placeholder="Short description..." rows="2"></textarea></div>
+        <div class="field"><label>Description in Hebrew</label><textarea id="sDescHe" placeholder="תיאור קצר..." dir="rtl" rows="2"></textarea></div>
+      </div>
+      <div class="modal-grid" style="margin-top:8px">
+        <div class="field"><label>Description in Russian</label><textarea id="sDescRu" placeholder="Краткое описание..." rows="2"></textarea></div>
+      </div>
+      <div class="modal-grid">
+        <div class="field"><label>Price</label><input type="text" id="sPrice" placeholder="₪45"></div>
+        <div class="field"><label>Image URL or path</label><input type="text" id="sImg" placeholder="img/shop/loaf.webp or https://..."></div>
+      </div>
+    </div>
+    <div class="tab-content" id="sAvail">
+      <div class="avail-row">
+        <span>Available in shop</span>
+        <label class="toggle"><input type="checkbox" id="sAvailable" checked><span class="toggle-slider"></span></label>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" id="shopModalCancel">Cancel</button>
+      <button class="btn-save" id="shopModalSave">Save</button>
     </div>
   </div>
 </div>
@@ -1317,11 +1405,12 @@
   document.getElementById('catModalSave').onclick   = async () => {
     if (!editingCatId) { closeModal('catModal'); return; }
     const data = {
-      labelHe: document.getElementById('cNameHe').value.trim(),
-      desc:    document.getElementById('cDesc').value.trim(),
-      descHe:  document.getElementById('cDescHe').value.trim(),
-      comment: document.getElementById('cComment').value.trim(),
-      visible: document.getElementById('cVisible').checked,
+      labelHe:  document.getElementById('cNameHe').value.trim(),
+      desc:     document.getElementById('cDesc').value.trim(),
+      descHe:   document.getElementById('cDescHe').value.trim(),
+      comment:  document.getElementById('cComment').value.trim(),
+      visible:  document.getElementById('cVisible').checked,
+      noPhotos: document.getElementById('cNoPhotos').checked,
     };
     await setDoc(doc(db, '_categories', editingCatId), data, { merge: true });
     closeModal('catModal');
@@ -1338,6 +1427,7 @@
     document.getElementById('cDescHe').value  = cat?.descHe || '';
     document.getElementById('cComment').value = cat?.comment || '';
     document.getElementById('cVisible').checked = cat?.visible !== false;
+    document.getElementById('cNoPhotos').checked = cat?.noPhotos === true;
     document.querySelector('#catModal .tab').click();
     openModal('catModal');
   }
@@ -1993,6 +2083,150 @@
     t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 2500);
   }
+
+  // ── SHOP ──
+  let editingShopItemId = null;
+
+  document.getElementById('addShopItemBtn').onclick  = () => openShopModal(null);
+  document.getElementById('shopModalCancel').onclick = () => closeModal('shopModal');
+  document.getElementById('shopModalClose').onclick  = () => closeModal('shopModal');
+  document.getElementById('shopModalSave').onclick   = saveShopItem;
+
+  async function loadShop() {
+    showView('viewShop');
+    const list = document.getElementById('shopItemsList');
+    list.innerHTML = '<div class="empty">Loading...</div>';
+    const snap = await getDocs(collection(db, 'shop'));
+    const items = [];
+    snap.forEach(d => items.push({ id: d.id, ...d.data() }));
+    items.sort((a, b) => (a.order ?? 9999) - (b.order ?? 9999));
+
+    let lastTs = null;
+    items.forEach(item => {
+      if (item.updatedAt?.toDate) {
+        const d = item.updatedAt.toDate();
+        if (!lastTs || d > lastTs) lastTs = d;
+      }
+    });
+    function fmtShopTime(d) {
+      if (!d) return '—';
+      const now = new Date();
+      const hm = `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+      return d.toDateString() === now.toDateString() ? `today, ${hm}` : `${d.getDate()} ${d.toLocaleString('en',{month:'short'})}, ${hm}`;
+    }
+    document.getElementById('metaShopCount').textContent = items.length;
+    document.getElementById('metaShopEdit').textContent  = fmtShopTime(lastTs);
+
+    if (!items.length) { list.innerHTML = '<div class="empty">No shop items yet. Add the first one!</div>'; return; }
+    list.innerHTML = '';
+
+    items.forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'item-row';
+      row.dataset.itemId = item.id;
+      const isHidden = item.available === false;
+      row.innerHTML = `
+        <div class="cat-drag" title="Drag to reorder" style="margin-right:4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg></div>
+        ${item.img ? `<img class="item-thumb" draggable="false" src="${item.img}" onerror="this.style.display='none'">` : '<div class="item-thumb"></div>'}
+        <div class="item-info">
+          <div class="item-name">${item.name || '—'}</div>
+          <div class="item-desc">${item.desc || ''}</div>
+        </div>
+        <div class="item-price">${item.price || ''}</div>
+        <span class="status-badge ${isHidden ? 'status-hidden' : 'status-live'}">${isHidden ? 'Hidden' : 'Live'}</span>
+        <div class="cat-actions">
+          <button class="icon-btn blue edit-shop-btn" title="Edit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+          <button class="icon-btn red del-shop-btn" title="Delete">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+          </button>
+        </div>`;
+
+      setupPointerDrag(row, list, '.item-row', saveShopOrder);
+      row.querySelector('.edit-shop-btn').onclick = () => openShopModal(item);
+      row.querySelector('.del-shop-btn').onclick  = () => {
+        openDeleteModal(async () => {
+          await deleteDoc(doc(db, 'shop', item.id));
+          toast('Deleted');
+          loadShop();
+        });
+      };
+      list.appendChild(row);
+    });
+  }
+
+  async function saveShopOrder() {
+    const rows = document.querySelectorAll('#shopItemsList .item-row');
+    const batch = writeBatch(db);
+    rows.forEach((row, idx) => {
+      batch.update(doc(db, 'shop', row.dataset.itemId), { order: idx * 10 });
+    });
+    await batch.commit();
+    toast('Order saved ✓');
+  }
+
+  function openShopModal(item) {
+    editingShopItemId = item ? item.id : null;
+    document.getElementById('shopModalTitle').textContent = item ? 'Edit item' : 'Add item';
+    document.getElementById('sName').value      = item?.name    || '';
+    document.getElementById('sNameHe').value    = item?.nameHe  || '';
+    document.getElementById('sNameRu').value    = item?.nameRu  || '';
+    document.getElementById('sDesc').value      = item?.desc    || '';
+    document.getElementById('sDescHe').value    = item?.descHe  || '';
+    document.getElementById('sDescRu').value    = item?.descRu  || '';
+    document.getElementById('sPrice').value     = item?.price   || '';
+    document.getElementById('sImg').value       = item?.img     || '';
+    document.getElementById('sAvailable').checked = item?.available !== false;
+    document.querySelector('#shopModal .tab').click();
+    openModal('shopModal');
+  }
+
+  async function saveShopItem() {
+    const data = {
+      name:      document.getElementById('sName').value.trim(),
+      nameHe:    document.getElementById('sNameHe').value.trim(),
+      nameRu:    document.getElementById('sNameRu').value.trim(),
+      desc:      document.getElementById('sDesc').value.trim(),
+      descHe:    document.getElementById('sDescHe').value.trim(),
+      descRu:    document.getElementById('sDescRu').value.trim(),
+      price:     document.getElementById('sPrice').value.trim(),
+      img:       document.getElementById('sImg').value.trim(),
+      available: document.getElementById('sAvailable').checked,
+      updatedAt: serverTimestamp(),
+    };
+    if (!data.name) return;
+    if (editingShopItemId) {
+      await updateDoc(doc(db, 'shop', editingShopItemId), data);
+      toast('Saved ✓');
+    } else {
+      await addDoc(collection(db, 'shop'), data);
+      toast('Added ✓');
+    }
+    closeModal('shopModal');
+    loadShop();
+  }
+
+  document.getElementById('navShop').onclick = () => { setActiveNav('Shop'); loadShop(); stopLiveCounter(); };
+  document.getElementById('bnShop').onclick  = () => { setActiveNav('Shop'); loadShop(); stopLiveCounter(); };
+
+  document.getElementById('loadSamplesBtn').onclick = async () => {
+    const SAMPLES = [
+      { name: 'Sourdough Loaf',      nameHe: 'כיכר שאור',        nameRu: 'Хлеб на закваске',   price: '₪38', desc: 'Naturally leavened, baked in-house every morning.',      descHe: 'על בסיס שאור טבעי, נאפה אצלנו כל בוקר.',  descRu: 'На натуральной закваске, выпекается каждое утро.',  img: 'img/friday special/plushka.webp',           order: 0 },
+      { name: 'Honey Jar — Local',   nameHe: 'צנצנת דבש מקומי',  nameRu: 'Мёд местный',        price: '₪52', desc: 'Raw wildflower honey from a local beekeeper.',           descHe: 'דבש פרחי בר גולמי מגדיל מקומי.',           descRu: 'Сырой цветочный мёд от местного пчеловода.',        img: 'img/friday special/vatrushka.webp',          order: 10 },
+      { name: 'Bulochka Tote Bag',   nameHe: 'תיק טוט בולוצ\'קה', nameRu: 'Сумка-тоут',         price: '₪89', desc: '100% organic cotton. Screen-printed by hand.',           descHe: '100% כותנה אורגנית. הדפסה ידנית.',         descRu: '100% органический хлопок. Ручная трафаретная печать.', img: 'img/Main page/background.webp',             order: 20 },
+      { name: 'Coffee Beans 250g',   nameHe: 'פולי קפה 250 גרם',  nameRu: 'Кофе в зёрнах 250г', price: '₪64', desc: 'The same single-origin beans we pull every morning.',    descHe: 'אותם פולים שאנחנו טוחנים כל בוקר.',        descRu: 'Те же зёрна моносорта, что мы завариваем каждый день.', img: 'img/hot drinks/espresso_short.webp',        order: 30 },
+      { name: 'Medovik Cake Slice',  nameHe: 'פרוסת עוגת מדוביק', nameRu: 'Кусок медовика',     price: '₪45', desc: 'Eight honey layers, cream, to take home in a box.',      descHe: 'שמונה שכבות דבש וקרם, ארוזות לקחת הביתה.', descRu: 'Восемь медовых коржей со сметанным кремом навынос.',  img: 'img/Cakes/creme_brule.webp',                order: 40 },
+    ];
+    const snap = await getDocs(collection(db, 'shop'));
+    if (snap.size > 0 && !confirm(`Shop already has ${snap.size} items. Add samples anyway?`)) return;
+    toast('Adding samples…');
+    for (const item of SAMPLES) {
+      await addDoc(collection(db, 'shop'), { ...item, available: true, updatedAt: serverTimestamp() });
+    }
+    toast('Samples added ✓');
+    loadShop();
+  };
 </script>
 </body>
 </html>

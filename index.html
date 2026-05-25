@@ -376,6 +376,104 @@
     .medovik-photo { aspect-ratio: 4/5; border-radius: 10px; overflow: hidden; position: relative; }
     .medovik-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
+    /* ─── SHOP ───────────────────────────────── */
+    .shop-section {
+      background: var(--cream);
+      border-top: 1px solid var(--brown-faint);
+      padding: 0 24px;
+    }
+    .shop-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 0;
+    }
+    .shop-header { margin-bottom: 48px; }
+    .shop-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.016em;
+      margin-bottom: 12px;
+      font-optical-sizing: auto;
+    }
+    .shop-header-sub {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 16px;
+      font-weight: 300;
+      color: rgba(42,31,24,0.65);
+      line-height: 1.7;
+    }
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px;
+    }
+    .shop-card {
+      background: transparent;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.22s;
+    }
+    .shop-card:hover { transform: translateY(-2px); }
+    .shop-card-photo {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      background: var(--cream-mid);
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .shop-card-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.45s ease;
+    }
+    .shop-card:hover .shop-card-photo img { transform: scale(1.04); }
+    .shop-card-photo-empty {
+      width: 100%; height: 100%;
+      background: var(--cream-mid);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .shop-card-photo-empty svg { opacity: 0.25; }
+    .shop-card-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 3px;
+    }
+    .shop-card-name {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brown-dark);
+      line-height: 1.3;
+    }
+    .shop-card-desc { display: none; }
+    .shop-card-price {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--brown-mid);
+    }
+    .shop-card-btn {
+      display: block;
+      padding: 9px 10px;
+      background: var(--brown-dark);
+      color: var(--cream);
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      border-radius: 3px;
+      text-align: center;
+      transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .shop-card-btn:hover { background: var(--brown-mid); }
+
     /* ─── VISIT ──────────────────────────────── */
     .visit-section {
       padding: 0 24px;
@@ -480,6 +578,7 @@
       .stats-inner { gap: 0 48px; }
       .medovik-inner { grid-template-columns: 1fr; gap: 40px; }
       .medovik-photo { aspect-ratio: 3/2; }
+      .shop-grid { grid-template-columns: repeat(3, 1fr); }
       .visit-inner { grid-template-columns: 1fr; gap: 0; }
       .visit-details { grid-template-columns: 1fr; }
       .visit-map { display: none; }
@@ -511,6 +610,8 @@
       .room-sub { text-align: right; }
       [dir="rtl"] .room-sub { text-align: right; }
       .section { padding: 56px 20px; }
+      .shop-inner { padding: 56px 0; }
+      .shop-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       .medovik-stats { grid-template-columns: repeat(3, auto); gap: 16px; }
       .room-grid { grid-template-columns: 1fr 1fr; }
       .room-photo-1 { grid-column: 1 / 3; grid-row: 1; aspect-ratio: 16/7; }
@@ -662,6 +763,18 @@
   </div>
 </section>
 
+<!-- ─── SHOP ───────────────────────────────────────────────── -->
+<section class="shop-section" id="shop" style="display:none">
+  <div class="shop-inner">
+    <div class="shop-header">
+      <p class="section-eyebrow" data-en="Take home" data-he="קחו הביתה" data-ru="Возьмите домой">Take home</p>
+      <h2><span data-en="Our <em>shop</em>" data-he="<em>החנות</em> שלנו" data-ru="Наш <em>магазин</em>">Our <em>shop</em></span></h2>
+      <p class="shop-header-sub" data-en="Everything we make and love — to take with you." data-he="כל מה שאנחנו עושים ואוהבים — לקחת איתכם." data-ru="Всё, что мы делаем и любим — с собой.">Everything we make and love — to take with you.</p>
+    </div>
+    <div class="shop-grid" id="shopGrid"></div>
+  </div>
+</section>
+
 <!-- ─── VISIT ─────────────────────────────────────────────── -->
 <section class="visit-section" id="visit">
   <div class="visit-inner">
@@ -736,6 +849,65 @@
 
 <script src="mobile-menu.js"></script>
 <script src="lang.js"></script>
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getFirestore, collection, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+  const _app = initializeApp({
+    apiKey: "AIzaSyC_zaNtYW8wnS7nhoOzEvkNhbJeJPHWmaI",
+    authDomain: "bulweb2.firebaseapp.com",
+    projectId: "bulweb2",
+    storageBucket: "bulweb2.firebasestorage.app",
+    messagingSenderId: "260150671022",
+    appId: "1:260150671022:web:6dfa58bd50a9725cec9f3f"
+  });
+  const _db = getFirestore(_app);
+
+  function renderShop(items) {
+    const section = document.getElementById('shop');
+    const grid    = document.getElementById('shopGrid');
+    const visible = items.filter(i => i.available !== false)
+                         .sort((a, b) => (a.order ?? 9999) - (b.order ?? 9999));
+    if (!visible.length) { section.style.display = 'none'; return; }
+    section.style.display = '';
+
+    const lang = document.documentElement.lang;
+    const isHe = lang === 'he';
+    const isRu = lang === 'ru';
+    const btnLabel = isHe ? 'להזמנה ←' : isRu ? 'Заказать →' : 'Order →';
+
+    grid.innerHTML = visible.map(item => {
+      const name = (isHe && item.nameHe) ? item.nameHe : (isRu && item.nameRu) ? item.nameRu : (item.name || '');
+      const desc = (isHe && item.descHe) ? item.descHe : (isRu && item.descRu) ? item.descRu : (item.desc || '');
+      const waText = encodeURIComponent('Hi! I\'d like to order: ' + (item.name || ''));
+      const href = `https://wa.me/972529662724?text=${waText}`;
+      const photoHtml = item.img
+        ? `<img src="${item.img}" alt="${item.name || ''}" loading="lazy">`
+        : `<div class="shop-card-photo-empty"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>`;
+      return `<div class="shop-card">
+        <div class="shop-card-photo">${photoHtml}</div>
+        <div class="shop-card-body">
+          <div class="shop-card-name">${name}</div>
+          ${desc ? `<div class="shop-card-desc">${desc}</div>` : ''}
+          <div class="shop-card-price">${item.price || ''}</div>
+          <a class="shop-card-btn" href="${href}" target="_blank" rel="noopener">${btnLabel}</a>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  let _shopItems = [];
+  onSnapshot(collection(_db, 'shop'), snap => {
+    _shopItems = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderShop(_shopItems);
+  });
+
+  // re-render on language switch
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setTimeout(() => renderShop(_shopItems), 0);
+    });
+  });
+</script>
 <script type="module" src="/analytics.js"></script>
 <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Back to top">↑</button>
 <script>

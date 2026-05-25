@@ -2145,6 +2145,29 @@
 
   const CAT_IDS = ['hot-drinks','cold-drinks','sandwiches','pastries','filled','tartlets','cakes','ice-cream','alcohol','friday'];
 
+  // ── build one menu-list-item (no-photo layout) from a Firestore doc ──
+  function buildListItemEl(data) {
+    const lang = document.documentElement.lang;
+    const isHe = lang === 'he';
+    const isRu = lang === 'ru';
+    const name  = (isHe && data.nameHe) ? data.nameHe : (isRu && data.nameRu) ? data.nameRu : (data.name || '');
+    const desc  = (isHe && data.descHe) ? data.descHe : (isRu && data.descRu) ? data.descRu : (data.desc || '');
+    const price = data.price || '';
+
+    const el = document.createElement('div');
+    el.className = 'menu-list-item' + (data.available === false ? ' item-unavailable' : '');
+    if (data.order != null) el.dataset.order = data.order;
+
+    el.innerHTML = `
+      <div class="menu-list-main">
+        <span class="menu-list-name" data-en="${data.name || ''}" ${data.nameHe ? `data-he="${data.nameHe}"` : ''} ${data.nameRu ? `data-ru="${data.nameRu}"` : ''}>${name}</span>
+        <span class="menu-list-price">${price}</span>
+      </div>
+      ${desc ? `<span class="menu-list-desc" data-en="${data.desc || ''}" ${data.descHe ? `data-he="${data.descHe}"` : ''} ${data.descRu ? `data-ru="${data.descRu}"` : ''}>${desc}</span>` : ''}`;
+
+    return el;
+  }
+
   // ── build one menu-item card from a Firestore doc ──
   function buildItemEl(data) {
     const lang = document.documentElement.lang;
@@ -2188,6 +2211,17 @@
     const grid = section.querySelector('.menu-items, .menu-list');
     if (!grid) return;
 
+    const noPhotos = catMeta[catId]?.noPhotos === true;
+
+    // switch layout class if needed
+    if (noPhotos && grid.classList.contains('menu-items')) {
+      grid.classList.remove('menu-items');
+      grid.classList.add('menu-list');
+    } else if (!noPhotos && grid.classList.contains('menu-list')) {
+      grid.classList.remove('menu-list');
+      grid.classList.add('menu-items');
+    }
+
     // sort docs by order field
     const sorted = [...docs].sort((a, b) => {
       const oa = a.order != null ? +a.order : 9999;
@@ -2201,7 +2235,7 @@
     sorted.forEach(data => {
       if (data.subhead && data.subhead !== lastSubhead) {
         const sh = document.createElement('div');
-        sh.className = 'menu-subhead';
+        sh.className = noPhotos ? 'menu-list-subhead' : 'menu-subhead';
         const lang = document.documentElement.lang;
         if (lang === 'he' && data.subheadHe) sh.textContent = data.subheadHe;
         else if (lang === 'ru' && data.subheadRu) sh.textContent = data.subheadRu;
@@ -2209,7 +2243,7 @@
         grid.appendChild(sh);
         lastSubhead = data.subhead;
       }
-      grid.appendChild(buildItemEl(data));
+      grid.appendChild(noPhotos ? buildListItemEl(data) : buildItemEl(data));
     });
 
     // update count in category header
@@ -2292,11 +2326,19 @@
 
   // ── bootstrap ──
 
-  // 1. load category order
   const catMeta = {};
+  const cachedDocs = {};
+
+  // 1. load category meta (order + noPhotos)
   getDocs(collection(db, '_categories')).then(snap => {
     snap.forEach(d => { catMeta[d.id] = d.data(); });
     reorderCategories(catMeta);
+    // re-render categories whose layout depends on noPhotos (first onSnapshot may have run before catMeta loaded)
+    CAT_IDS.forEach(catId => {
+      if (catMeta[catId]?.noPhotos && cachedDocs[catId]) {
+        renderCategory(catId, cachedDocs[catId]);
+      }
+    });
   });
 
   // 2. live-render full categories on every snapshot
@@ -2304,6 +2346,7 @@
     onSnapshot(collection(db, catId), snap => {
       const docs = snap.docs.map(d => d.data());
       console.log('[menu]', catId, docs.length, 'docs:', docs.map(d => d.name));
+      cachedDocs[catId] = docs;
       renderCategory(catId, docs);
     });
   });
