@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Menu — Bulochka</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1X6T5CVR62"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-1X6T5CVR62');</script>
@@ -180,7 +180,7 @@
     }
     .menu-item:hover { box-shadow: 0 4px 20px rgba(42,31,24,0.08); }
     .menu-item.item-unavailable { opacity: 0.45; pointer-events: none; }
-    .menu-item.item-unavailable .menu-item-name::after { content: ' — sold out'; font-size: 11px; color: #999; font-style: italic; }
+    .menu-item.item-unavailable .menu-item-name::after { content: attr(data-sold-out); font-size: 11px; color: #999; font-style: italic; }
 
     /* photo */
     .menu-item-photo {
@@ -475,7 +475,7 @@
     </div>
     <span class="nav-hours" data-en='Open until 20:00' data-he='פתוח עד 20:00' data-ru='Открыто до 20:00' dir="ltr">Open until 20:00</span>
     <div class="lang-switch">
-      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn active" data-lang="en">EN</button>
       <button class="lang-btn" data-lang="he">עב</button>
       <button class="lang-btn" data-lang="ru">RU</button>
     </div>
@@ -2345,13 +2345,12 @@
   CAT_IDS.forEach(catId => {
     onSnapshot(collection(db, catId), snap => {
       const docs = snap.docs.map(d => d.data());
-      console.log('[menu]', catId, docs.length, 'docs:', docs.map(d => d.name));
       cachedDocs[catId] = docs;
       renderCategory(catId, docs);
     });
   });
 </script>
-<script type="module" src="/analytics.js"></script>
+<script type="module" src="analytics.js"></script>
 <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Back to top">↑</button>
 <script>
   (function(){

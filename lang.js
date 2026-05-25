@@ -40,6 +40,11 @@
       else btn.textContent = 'Add to order →';
     });
 
+    var soldOutText = isHe ? ' — אזל המלאי' : isRu ? ' — нет в наличии' : ' — sold out';
+    document.querySelectorAll('.menu-item-name').forEach(function (el) {
+      el.setAttribute('data-sold-out', soldOutText);
+    });
+
     var extrasLabel = document.querySelector('.addon-extras-label');
     var doneBtn = document.querySelector('.addon-done-btn');
     var totalLabel = document.querySelector('.addon-total-label');

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Work with us — Bulochka</title>
   <script>(function(){var l=localStorage.getItem('bulochka-lang');if(l==='he'){document.documentElement.dir='rtl';document.documentElement.lang='he';}else if(l){document.documentElement.lang=l;}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -127,20 +127,6 @@
       max-width: 480px;
       margin-bottom: 32px;
     }
-    .btn-pill {
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      background: var(--brown-dark);
-      color: var(--cream);
-      padding: 14px 28px;
-      border-radius: 100px;
-      display: inline-block;
-      transition: opacity 0.2s;
-    }
-    .btn-pill:hover { opacity: 0.82; }
 
     /* ─── APPLY FORM ────────────────────────── */
     .apply-section {
@@ -275,7 +261,7 @@
   <div class="careers-hero-left">
     <p class="section-eyebrow" data-en='Work with us' data-he='עבודה אצלנו' data-ru='Работа у нас'>Work with us</p>
     <h1><span data-en='Come bake' data-he='בואו לאפות' data-ru='Приходите печь'>Come bake</span><br><em data-en='with us.' data-he='איתנו.' data-ru='вместе с нами.'>with us.</em></h1>
-    <p class="careers-lead" data-en='We&apos;re a small team that takes good bread seriously. If you love early mornings, honest work, and the smell of something just out of the oven — let&apos;s talk.' data-he='אנחנו צוות קטן שלוקח לחם טוב ברצינות. אם אתם אוהבים בקרים מוקדמים, עבודה אמיתית וריח של משהו טרי מהתנור — בואו נדבר.' data-ru='Мы небольшая команда, которая серьёзно относится к хорошему хлебу. Если вы любите ранние утра, честную работу и запах свежей выпечки — давайте поговорим.'>We're a small team that takes good bread seriously. If you love
+    <p class="careers-lead" data-en='We&apos;re a small team that takes our craft seriously. If you love early mornings, honest work, and the smell of something just out of the oven — let&apos;s talk.' data-he='אנחנו צוות קטן שלוקח את המלאכה ברצינות. אם אתם אוהבים בקרים מוקדמים, עבודה אמיתית וריח של משהו טרי מהתנור — בואו נדבר.' data-ru='Мы небольшая команда, которая серьёзно относится к своему делу. Если вы любите ранние утра, честную работу и запах свежей выпечки — давайте поговорим.'>We're a small team that takes our craft seriously. If you love
       early mornings, honest work, and the smell of something just out
       of the oven — let's talk.
     </p>
@@ -327,7 +313,7 @@
         <div class="footer-col-title" data-en='Visit' data-he='ביקור' data-ru='Адрес'>Visit</div>
         <div class="footer-links">
           <span data-en='Petah Tikva, Pinsker 29' data-he='פתח תקווה, פינסקר 29' data-ru='Петах-Тиква, Пинскер 29'>Petah Tikva, Pinsker 29</span>
-          <span data-en='Mon–Thu, 08:00–20:00' data-he='08:00–20:00 ,א׳–ה׳' data-ru='Вс–Чт, 08:00–20:00' dir="ltr">Mon–Thu, 08:00–20:00</span>
+          <span data-en='Sun–Thu, 08:00–20:00' data-he='08:00–20:00 ,א׳–ה׳' data-ru='Вс–Чт, 08:00–20:00' dir="ltr">Sun–Thu, 08:00–20:00</span>
           <a href="tel:+972529662724" dir="ltr">+972 (52) 966-2724</a>
         </div>
       </div>
@@ -364,8 +350,9 @@
     e.preventDefault();
     const name = this.name.value.trim();
     const phone = this.phone.value.trim();
+    const position = this.position.value;
     const consent = this.consent.checked;
-    if (!name || !phone || !consent) return;
+    if (!name || !phone || !position || !consent) return;
     document.getElementById('applySuccess').style.display = 'block';
     this.reset();
     sel.classList.remove('filled');
@@ -419,7 +406,7 @@
     });
   })();
 </script>
-<script type="module" src="/analytics.js"></script>
+<script type="module" src="analytics.js"></script>
 <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Back to top">↑</button>
 <script>
   (function(){

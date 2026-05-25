@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Events — Bulochka</title>
   <script>(function(){var l=localStorage.getItem('bulochka-lang');if(l==='he'){document.documentElement.dir='rtl';document.documentElement.lang='he';}else if(l){document.documentElement.lang=l;}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -174,7 +174,7 @@
       appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239c8978' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: left 16px center;
+      background-position: right 16px center;
       cursor: pointer;
       background-color: var(--cream);
     }
@@ -331,7 +331,7 @@
       </div>
     </div>
 
-    <form class="events-form" id="eventsForm">
+    <form class="events-form" id="eventsForm" novalidate>
       <div class="form-group">
         <label for="fullname" id="lblFullname">Full name</label>
         <input type="text" id="fullname" name="fullname" placeholder="First and last name" required>
@@ -390,7 +390,7 @@
         <div class="footer-col-title" data-en='Visit' data-he='ביקור' data-ru='Адрес'>Visit</div>
         <div class="footer-links">
           <span data-en='Petah Tikva, Pinsker 29' data-he='פתח תקווה, פינסקר 29' data-ru='Петах-Тиква, Пинскер 29'>Petah Tikva, Pinsker 29</span>
-          <span data-en='Mon–Thu, 08:00–20:00' data-he='08:00–20:00 ,א׳–ה׳' data-ru='Вс–Чт, 08:00–20:00' dir="ltr">Mon–Thu, 08:00–20:00</span>
+          <span data-en='Sun–Thu, 08:00–20:00' data-he='08:00–20:00 ,א׳–ה׳' data-ru='Вс–Чт, 08:00–20:00' dir="ltr">Sun–Thu, 08:00–20:00</span>
           <a href="tel:+972529662724" dir="ltr">+972 (52) 966-2724</a>
         </div>
       </div>
@@ -419,6 +419,10 @@
 <script>
   document.getElementById('eventsForm').addEventListener('submit', function(e) {
     e.preventDefault();
+    const fullname = document.getElementById('fullname').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const consent = document.getElementById('consent1').checked;
+    if (!fullname || !phone || !consent) return;
     const lang = localStorage.getItem('bulochka-lang') || 'en';
     const btn = this.querySelector('.btn-submit');
     btn.textContent = lang === 'he' ? 'תודה — נחזור אליכם בקרוב ✓' : lang === 'ru' ? 'Спасибо — скоро свяжемся ✓' : 'Thank you — we\'ll be in touch soon ✓';
@@ -485,7 +489,7 @@
     });
   })();
 </script>
-<script type="module" src="/analytics.js"></script>
+<script type="module" src="analytics.js"></script>
 <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Back to top">↑</button>
 <script>
   (function(){
