@@ -950,8 +950,18 @@
       </div>
       <div class="modal-grid">
         <div class="field"><label>Price</label><input type="text" id="sPrice" placeholder="₪45"></div>
-        <div class="field"><label>Image URL or path</label><input type="text" id="sImg" placeholder="img/shop/loaf.webp or https://..."></div>
       </div>
+      <div class="modal-section-title">Image</div>
+      <div class="upload-area" id="sUploadArea">
+        <img id="sImgPreview" style="display:none">
+        <div class="upload-placeholder" id="sUploadPlaceholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Upload Image</span>
+        </div>
+        <button class="upload-remove" id="sImgRemove" style="display:none">Remove</button>
+        <input type="file" id="sImgFile" accept="image/*" style="display:none">
+      </div>
+      <div class="field" style="margin-top:8px"><label>Or paste image URL / path</label><input type="text" id="sImg" placeholder="img/shop/loaf.webp or https://..."></div>
     </div>
     <div class="tab-content" id="sAvail">
       <div class="avail-row">
@@ -1328,6 +1338,7 @@
   }
   setupUpload('iUploadArea','iImgFile','iImgPreview','iUploadPlaceholder','iImgRemove');
   setupUpload('cUploadArea','cImgFile','cImgPreview','cUploadPlaceholder','cImgRemove');
+  setupUpload('sUploadArea','sImgFile','sImgPreview','sUploadPlaceholder','sImgRemove');
 
   // ── ITEM MODAL ──
   document.getElementById('addItemBtn').onclick = () => openItemModal(null);
@@ -2177,6 +2188,21 @@
     document.getElementById('sDescRu').value    = item?.descRu  || '';
     document.getElementById('sPrice').value     = item?.price   || '';
     document.getElementById('sImg').value       = item?.img     || '';
+    const sPreview = document.getElementById('sImgPreview');
+    const sPlaceholder = document.getElementById('sUploadPlaceholder');
+    const sRemove = document.getElementById('sImgRemove');
+    document.getElementById('sImgFile').value = '';
+    if (item?.img) {
+      sPreview.src = item.img.startsWith('http') ? item.img : '../' + item.img;
+      sPreview.style.display = 'block';
+      sPlaceholder.style.display = 'none';
+      sRemove.style.display = 'block';
+    } else {
+      sPreview.src = '';
+      sPreview.style.display = 'none';
+      sPlaceholder.style.display = 'flex';
+      sRemove.style.display = 'none';
+    }
     document.getElementById('sAvailable').checked = item?.available !== false;
     document.querySelector('#shopModal .tab').click();
     openModal('shopModal');
