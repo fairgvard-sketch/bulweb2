@@ -1356,12 +1356,7 @@
       preview.style.display = 'block';
       placeholder.style.display = 'none';
       remove.style.display = 'block';
-      toast('Uploading…');
-      const storageRef = ref(storage, 'shop/' + Date.now() + '_' + f.name);
-      await uploadBytes(storageRef, f);
-      const url = await getDownloadURL(storageRef);
-      imgInput.value = url;
-      toast('Uploaded ✓');
+      imgInput.value = 'img/shop/' + f.name;
     };
     remove.onclick = (e) => {
       e.stopPropagation();
