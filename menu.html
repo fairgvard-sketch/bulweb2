@@ -263,6 +263,19 @@
     }
     .menu-item-action:hover { color: var(--brown-dark); }
 
+    /* ─── ITEM BADGES ─────────────────────────────────────── */
+    .menu-item-body { position: relative; }
+    .menu-item-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+    }
+    [dir="rtl"] .menu-item-badges { right: auto; left: 14px; }
+    .menu-item-badges img { width: 28px; height: 28px; object-fit: contain; }
+
     /* ─── FRIDAY PILL ──────────────────────────────────────── */
     .filter-pill-friday { border-color: var(--sage); color: var(--sage); }
     .filter-pill-friday:hover { border-color: var(--sage); color: var(--sage); background: rgba(107,142,90,0.08); }
@@ -452,6 +465,89 @@
     @media (max-width: 640px) {
       .addon-overlay { padding: 0; align-items: flex-end; }
       .addon-modal { border-radius: 16px 16px 0 0; max-height: 82vh; }
+    }
+
+    /* ── MENU POPUP ─────────────────────────────── */
+    .mpop-overlay {
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(42, 31, 24, 0.55);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      opacity: 0; visibility: hidden;
+      transition: opacity .35s ease, visibility .35s ease;
+    }
+    .mpop-overlay.visible {
+      opacity: 1; visibility: visible;
+    }
+    .mpop {
+      background: var(--cream);
+      border-radius: 18px;
+      width: 100%; max-width: 420px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px -10px rgba(42,31,24,0.35), 0 4px 16px -4px rgba(42,31,24,0.12);
+      transform: translateY(20px) scale(0.97);
+      transition: transform .35s cubic-bezier(.22,.68,0,1.2);
+    }
+    .mpop-overlay.visible .mpop {
+      transform: translateY(0) scale(1);
+    }
+    .mpop-img {
+      width: 100%; aspect-ratio: 4/3;
+      object-fit: cover; display: block;
+    }
+    .mpop-body {
+      padding: 28px 28px 24px;
+      text-align: center;
+    }
+    .mpop-name {
+      font-family: var(--serif);
+      font-size: clamp(26px, 6vw, 36px);
+      font-weight: 300;
+      letter-spacing: -0.015em;
+      color: var(--brown-dark);
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+    .mpop-desc {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--brown-mid);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .mpop-btn {
+      display: inline-block;
+      padding: 12px 36px;
+      border: 1.5px solid var(--brown-dark);
+      border-radius: 100px;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--brown-dark);
+      background: transparent;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+    .mpop-btn:hover {
+      background: var(--brown-dark);
+      color: var(--cream);
+    }
+    .mpop-close {
+      position: absolute;
+      top: 14px; right: 14px;
+      width: 32px; height: 32px;
+      background: rgba(42,31,24,0.45);
+      border: none; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: #fff;
+      transition: background .2s;
+    }
+    .mpop-close:hover { background: rgba(42,31,24,0.7); }
+    .mpop-wrap { position: relative; }
+    @media (max-width: 480px) {
+      .mpop { border-radius: 14px; }
+      .mpop-body { padding: 22px 20px 20px; }
     }
   </style>
 </head>
@@ -2143,6 +2239,9 @@
   });
   const db = getFirestore(app);
 
+  // load badges once, keyed by Firestore doc id
+  let badgeMap = {};
+
   const CAT_IDS = ['hot-drinks','cold-drinks','sandwiches','pastries','filled','tartlets','cakes','ice-cream','alcohol','friday'];
 
   // ── build one menu-list-item (no-photo layout) from a Firestore doc ──
@@ -2188,6 +2287,16 @@
 
     const actionLabel = isHe ? 'הוסף להזמנה ←' : isRu ? 'Добавить →' : 'Add to order →';
 
+    if (data.badges?.length) console.log('[badges] item:', data.name, 'badges:', data.badges, 'badgeMap keys:', Object.keys(badgeMap));
+    const badgesHtml = (data.badges?.length)
+      ? `<div class="menu-item-badges">${data.badges.map(id => {
+          const b = badgeMap[id];
+          if (!b) return '';
+          let src = ''; try { src = JSON.parse(b.icon).img; } catch(e) {}
+          return src ? `<img src="${src}" alt="${b.name}" title="${b.name}">` : '';
+        }).join('')}</div>`
+      : '';
+
     el.innerHTML = `
       ${photoHtml}
       <div class="menu-item-body">
@@ -2197,6 +2306,7 @@
         </div>
         <span class="menu-item-desc" data-en="${data.desc || ''}" ${data.descHe ? `data-he="${data.descHe}"` : ''} ${data.descRu ? `data-ru="${data.descRu}"` : ''}>${desc}</span>
         <span class="menu-item-action">${actionLabel}</span>
+        ${badgesHtml}
       </div>`;
 
     return el;
@@ -2324,32 +2434,122 @@
     }
   }
 
+  // ── POPUP ──────────────────────────────────────────────────────────────
+  (async () => {
+    try {
+      const lang = document.documentElement.lang || 'en';
+      const isHe = lang === 'he';
+      const isRu = lang === 'ru';
+
+      const snap = await getDocs(collection(db, 'popups'));
+      if (snap.empty) return;
+
+      const now = new Date().toISOString().slice(0, 10);
+      const candidates = [];
+      snap.forEach(d => {
+        const p = d.data();
+        if (p.active !== true) return;
+        if (p.trigger !== 'page_load') return;
+        if (p.expiry && p.expiry < now) return;
+        candidates.push(p);
+      });
+      if (!candidates.length) return;
+      candidates.sort((a, b) => (a.priority || 1) - (b.priority || 1));
+      const popup = candidates[0];
+      if (!popup) return;
+
+      const overlay  = document.getElementById('mpopOverlay');
+      const nameEl   = document.getElementById('mpopName');
+      const descEl   = document.getElementById('mpopDesc');
+      const imgEl    = document.getElementById('mpopImg');
+      const btnEl    = document.getElementById('mpopBtn');
+      const closeEl  = document.getElementById('mpopClose');
+
+      const name = (isHe && popup.nameHe) ? popup.nameHe : (isRu && popup.nameRu) ? popup.nameRu : (popup.nameEn || popup.nameRu || popup.nameHe || '');
+      const desc = (isHe && popup.descHe) ? popup.descHe : (isRu && popup.descRu) ? popup.descRu : (popup.descEn || popup.descRu || popup.descHe || '');
+
+      nameEl.textContent = name;
+      descEl.textContent = desc;
+      descEl.style.display = desc ? '' : 'none';
+
+      if (popup.imageURL) {
+        imgEl.src = popup.imageURL;
+        imgEl.style.display = 'block';
+      }
+
+      if (popup.imageOnly) {
+        nameEl.style.display = 'none';
+        descEl.style.display = 'none';
+      }
+
+      const closePopup = () => {
+        overlay.classList.remove('visible');
+        overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
+      };
+
+      closeEl.addEventListener('click', closePopup);
+      btnEl.addEventListener('click', closePopup);
+      overlay.addEventListener('click', e => { if (e.target === overlay) closePopup(); });
+
+      // btn label
+      const btnLabel = isHe ? 'הבנתי' : isRu ? 'Понятно' : 'Got it';
+      btnEl.textContent = btnLabel;
+
+      // show after short delay so page renders first
+      setTimeout(() => overlay.classList.add('visible'), 600);
+    } catch(e) {
+      console.warn('Popup load error:', e);
+    }
+  })();
+
   // ── bootstrap ──
 
   const catMeta = {};
   const cachedDocs = {};
 
-  // 1. load category meta (order + noPhotos)
-  getDocs(collection(db, '_categories')).then(snap => {
-    snap.forEach(d => { catMeta[d.id] = d.data(); });
-    reorderCategories(catMeta);
-    // re-render categories whose layout depends on noPhotos (first onSnapshot may have run before catMeta loaded)
-    CAT_IDS.forEach(catId => {
-      if (catMeta[catId]?.noPhotos && cachedDocs[catId]) {
-        renderCategory(catId, cachedDocs[catId]);
-      }
-    });
-  });
+  (async () => {
+    // 1. load badges first so buildItemEl has them ready
+    const bSnap = await getDocs(collection(db, 'badges'));
+    bSnap.forEach(d => { badgeMap[d.id] = d.data(); });
 
-  // 2. live-render full categories on every snapshot
-  CAT_IDS.forEach(catId => {
-    onSnapshot(collection(db, catId), snap => {
-      const docs = snap.docs.map(d => d.data());
-      cachedDocs[catId] = docs;
-      renderCategory(catId, docs);
+    // 2. load category meta (order + noPhotos)
+    getDocs(collection(db, '_categories')).then(snap => {
+      snap.forEach(d => { catMeta[d.id] = d.data(); });
+      reorderCategories(catMeta);
+      CAT_IDS.forEach(catId => {
+        if (catMeta[catId]?.noPhotos && cachedDocs[catId]) {
+          renderCategory(catId, cachedDocs[catId]);
+        }
+      });
     });
-  });
+
+    // 3. live-render full categories on every snapshot
+    CAT_IDS.forEach(catId => {
+      onSnapshot(collection(db, catId), snap => {
+        const docs = snap.docs.map(d => d.data());
+        cachedDocs[catId] = docs;
+        renderCategory(catId, docs);
+      });
+    });
+  })();
 </script>
+<!-- MENU POPUP -->
+<div class="mpop-overlay" id="mpopOverlay">
+  <div class="mpop-wrap">
+    <div class="mpop" id="mpop">
+      <img class="mpop-img" id="mpopImg" src="" alt="" style="display:none">
+      <button class="mpop-close" id="mpopClose" aria-label="Close">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="mpop-body">
+        <div class="mpop-name" id="mpopName"></div>
+        <div class="mpop-desc" id="mpopDesc"></div>
+        <button class="mpop-btn" id="mpopBtn">Got it</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script type="module" src="analytics.js"></script>
 <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Back to top">↑</button>
 <script>

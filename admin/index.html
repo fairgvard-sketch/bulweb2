@@ -162,6 +162,13 @@
     .item-name{font-size:14px;font-weight:500;color:var(--ink)}
     .item-desc{font-size:12px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .item-price{font-size:13px;font-weight:500;color:var(--text);white-space:nowrap;margin-right:4px}
+    .item-badges{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+    .item-badge-img{width:20px;height:20px;object-fit:contain}
+    .badge-picker-cell{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;border:2px solid transparent;border-radius:10px;cursor:pointer;transition:all .12s;background:none;user-select:none}
+    .badge-picker-cell:hover{background:var(--accentSoft);border-color:var(--accentBorder)}
+    .badge-picker-cell.selected{background:var(--accentSoft);border-color:var(--accent)}
+    .badge-picker-cell img{width:40px;height:40px;object-fit:contain}
+    .badge-picker-cell span{font-size:9px;color:var(--muted);text-align:center;line-height:1.2;max-width:64px}
 
     /* MENU ACTIONS PANEL */
     .menu-actions-panel{position:fixed;top:64px;right:0;bottom:0;width:340px;background:var(--surface);border-left:1px solid var(--line);padding:24px 20px;transform:translateX(100%);transition:transform .25s ease;z-index:150;overflow-y:auto;box-shadow:var(--shadowLg)}
@@ -279,6 +286,24 @@
     .bottom-nav{display:block}
     .admin-content{padding-bottom:60px}
     @media(min-width:641px){.bottom-nav{display:none}.admin-content{padding-bottom:0}}
+    @media(max-width:640px){
+      .page-body{padding:16px 12px 80px}
+      .page-header{flex-wrap:wrap;gap:10px}
+      .page-header-left{min-width:0}
+      .page-header > div:last-child{margin-left:auto}
+      .page-title{font-size:16px}
+      .page-meta{flex-wrap:wrap;gap:4px;font-size:11px}
+      .btn-add-cat,.btn-add-item{font-size:12px;padding:7px 12px}
+      .btn-menu-actions{font-size:12px;padding:7px 10px}
+      .topbar-search{display:none}
+      .topbar-brand{min-width:0}
+      .cat-row{padding:10px 10px;gap:8px}
+      .cat-thumb,.cat-thumb-placeholder{width:36px;height:36px;border-radius:8px}
+      .cat-name{font-size:13px}
+      .cat-count{font-size:11px}
+      .cat-open{font-size:11px;padding:0 2px}
+      .cat-actions{gap:1px}
+    }
     @media(max-width:640px){.dash-iframe{height:calc(100vh - 64px - 60px)}}
 
     /* DASHBOARD */
@@ -358,6 +383,84 @@
     .dash-live-count{font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-2px}
     .dash-live-label{font-size:12px;color:rgba(255,255,255,.45);margin-top:4px}
     .dash-empty{text-align:center;padding:24px;color:var(--muted);font-size:13px}
+
+    /* ── POPUP CARDS ── */
+    .popup-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:14px;transition:box-shadow .15s}
+    .popup-card:hover{box-shadow:var(--shadowLg)}
+    .popup-card-img{width:52px;height:52px;border-radius:8px;object-fit:cover;background:var(--lineSoft);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--subtle)}
+    .popup-card-img img{width:52px;height:52px;border-radius:8px;object-fit:cover}
+    .popup-card-body{flex:1;min-width:0}
+    .popup-card-name{font-size:14px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .popup-card-meta{font-size:12px;color:var(--muted);margin-top:2px}
+    .popup-card-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .popup-edit-btn{font-size:12px;font-weight:500;padding:6px 12px;border:1.5px solid var(--line);border-radius:7px;background:none;color:var(--text);cursor:pointer;font-family:var(--sans);transition:all .15s}
+    .popup-edit-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .popup-del-btn{width:30px;height:30px;border:none;background:none;cursor:pointer;color:var(--subtle);display:flex;align-items:center;justify-content:center;border-radius:6px;transition:all .15s}
+    .popup-del-btn:hover{background:var(--dangerSoft);color:var(--danger)}
+
+    /* ── POPUP WIZARD MODAL ── */
+    .pwiz-overlay{position:fixed;inset:0;background:rgba(15,17,21,.45);z-index:500;display:flex;align-items:center;justify-content:center;padding:16px}
+    .pwiz-overlay.hidden{display:none}
+    .pwiz-modal{background:var(--surface);border-radius:18px;width:100%;max-width:640px;max-height:90vh;display:flex;flex-direction:column;box-shadow:var(--shadowLg);overflow:hidden}
+    .pwiz-header{padding:20px 24px 0;flex-shrink:0}
+    .pwiz-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+    .pwiz-title{font-size:16px;font-weight:600;color:var(--ink)}
+    .pwiz-close{width:32px;height:32px;border:none;background:none;cursor:pointer;color:var(--muted);display:flex;align-items:center;justify-content:center;border-radius:8px;transition:background .15s}
+    .pwiz-close:hover{background:var(--lineSoft)}
+    .pwiz-steps{display:flex;align-items:center;gap:0;margin-bottom:20px}
+    .pwiz-step{display:flex;align-items:center;gap:8px;flex:1}
+    .pwiz-step:last-child{flex:0}
+    .pwiz-step-circle{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;transition:all .2s}
+    .pwiz-step-circle.done{background:var(--accent);color:#fff}
+    .pwiz-step-circle.active{background:var(--accent);color:#fff;box-shadow:0 0 0 4px var(--accentSoft)}
+    .pwiz-step-circle.pending{background:var(--lineSoft);color:var(--subtle);border:1.5px solid var(--line)}
+    .pwiz-step-label{font-size:11px;font-weight:500;color:var(--muted);white-space:nowrap}
+    .pwiz-step-label.active{color:var(--accent)}
+    .pwiz-step-line{flex:1;height:2px;background:var(--line);margin:0 6px;border-radius:2px;transition:background .2s}
+    .pwiz-step-line.done{background:var(--accent)}
+    .pwiz-body{flex:1;overflow-y:auto;padding:0 24px 8px}
+    .pwiz-footer{padding:16px 24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+    .pwiz-btn-prev{font-size:13px;font-weight:500;padding:9px 18px;border:1.5px solid var(--line);border-radius:8px;background:none;color:var(--text);cursor:pointer;font-family:var(--sans);transition:all .15s}
+    .pwiz-btn-prev:hover{border-color:var(--faint);background:var(--lineSoft)}
+    .pwiz-btn-next{font-size:13px;font-weight:500;padding:9px 18px;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:var(--sans);transition:background .15s}
+    .pwiz-btn-next:hover{background:var(--accentHover)}
+    .pwiz-btn-save{font-size:13px;font-weight:500;padding:9px 18px;background:var(--success);color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:var(--sans);transition:background .15s}
+    .pwiz-btn-save:hover{background:#15803d}
+
+    /* wizard fields */
+    .wiz-section{margin-bottom:20px}
+    .wiz-label{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+    .wiz-sublabel{font-size:12px;color:var(--muted);margin-bottom:10px}
+    .wiz-input{width:100%;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:13.5px;color:var(--ink);background:var(--bg);outline:none;transition:border .15s;box-sizing:border-box}
+    .wiz-input:focus{border-color:var(--accent)}
+    .wiz-textarea{resize:vertical;min-height:72px}
+    .wiz-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+    .wiz-col{display:flex;flex-direction:column;gap:4px}
+    .wiz-col-label{font-size:11px;color:var(--muted)}
+    .wiz-select{width:100%;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:13.5px;color:var(--ink);background:var(--bg);outline:none;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239CA3AF' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;transition:border .15s;box-sizing:border-box}
+    .wiz-select:focus{border-color:var(--accent)}
+    .wiz-check-row{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1.5px solid var(--line);border-radius:8px;cursor:pointer;transition:border .15s}
+    .wiz-check-row:hover{border-color:var(--accentBorder)}
+    .wiz-check-row input{width:16px;height:16px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
+    .wiz-check-text{font-size:13px;color:var(--text)}
+    .wiz-upload-zone{border:2px dashed var(--line);border-radius:10px;padding:24px;text-align:center;cursor:pointer;transition:border .15s;position:relative}
+    .wiz-upload-zone:hover{border-color:var(--accent)}
+    .wiz-upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer}
+    .wiz-upload-hint{font-size:12px;color:var(--muted);margin-top:4px}
+    .wiz-img-preview{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--lineSoft);border-radius:8px}
+    .wiz-img-preview img{width:48px;height:48px;object-fit:cover;border-radius:6px}
+    .wiz-img-name{font-size:12px;color:var(--text);flex:1}
+    .wiz-img-remove{font-size:12px;color:var(--danger);background:none;border:none;cursor:pointer;font-family:var(--sans);padding:0}
+    .wiz-gallery-thumb{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;cursor:pointer;border:2px solid transparent;transition:border .15s}
+    .wiz-gallery-thumb:hover,.wiz-gallery-thumb.selected{border-color:var(--accent)}
+
+    /* preview summary */
+    .pwiz-summary{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .pwiz-summary-card{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+    .pwiz-summary-card-title{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+    .pwiz-summary-row{display:flex;gap:8px;margin-bottom:6px;font-size:12.5px}
+    .pwiz-summary-key{color:var(--muted);flex-shrink:0;min-width:80px}
+    .pwiz-summary-val{color:var(--ink);font-weight:500}
   </style>
 </head>
 <body>
@@ -414,10 +517,6 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h10M7 17h6"/></svg>
           Menu
         </button>
-        <button class="sidebar-item" id="navChanges">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18"/><path d="m8 7-4 4 4 4"/><path d="m16 13 4 4-4 4"/></svg>
-          Changes
-        </button>
         <button class="sidebar-item" id="navShop">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
           Shop
@@ -432,6 +531,10 @@
         <button class="sidebar-item" id="navPopups">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="14" height="11" rx="1.5"/><rect x="8" y="10" width="13" height="9" rx="1.5"/></svg>
           Popups
+        </button>
+        <button class="sidebar-item" id="navChanges">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18"/><path d="m8 7-4 4 4 4"/><path d="m16 13 4 4-4 4"/></svg>
+          Changes
         </button>
       </div>
       <div class="sidebar-bottom">
@@ -594,11 +697,6 @@
               <div class="menu-action-label">Template</div>
               <div class="menu-action-sub">Download template</div>
             </button>
-            <button class="menu-action-btn" id="actImportHTML" style="grid-column:1/-1">
-              <div class="menu-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="17" x2="12" y2="11"/><polyline points="9 14 12 11 15 14"/></svg></div>
-              <div class="menu-action-label">Import from menu.html</div>
-              <div class="menu-action-sub">Load all items into Firestore</div>
-            </button>
           </div>
           <div id="importProgress" style="display:none;margin-top:12px;font-size:12px;font-family:monospace;background:var(--lineSoft);border-radius:8px;padding:12px;max-height:200px;overflow-y:auto;white-space:pre-wrap;color:var(--text)"></div>
           <div class="menu-actions-section">Display</div>
@@ -672,6 +770,38 @@
         </div>
       </div>
 
+      <!-- POPUPS VIEW -->
+      <div class="view" id="viewPopups">
+        <div class="page-body">
+          <div class="page-header">
+            <div>
+              <div class="page-breadcrumb">BULOCHKA <span>/ POPUPS</span></div>
+              <div class="page-title">Popups</div>
+              <div class="page-meta"><strong id="metaPopupCount">—</strong> popups</div>
+            </div>
+            <button class="btn-add-item" id="addPopupBtn">+ Add Popup</button>
+          </div>
+          <div id="popupList" style="display:flex;flex-direction:column;gap:10px"></div>
+        </div>
+      </div>
+
+      <!-- BADGES VIEW -->
+      <div class="view" id="viewBadges">
+        <div class="page-body">
+          <div class="page-header">
+            <div>
+              <div class="page-breadcrumb">BULOCHKA <span>/ BADGES</span></div>
+              <div class="page-title">Badge List</div>
+              <div class="page-meta"><strong id="metaBadgeCount">—</strong> badges</div>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button class="btn-add-item" id="addBadgeBtn">+ Add Badge</button>
+            </div>
+          </div>
+          <div id="badgeGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px"></div>
+        </div>
+      </div>
+
     </div><!-- /admin-content -->
   </div><!-- /admin-body -->
 
@@ -702,6 +832,189 @@
   </div>
 </div><!-- /admin-wrap -->
 
+<!-- POPUP WIZARD -->
+<div class="pwiz-overlay hidden" id="popupWizard">
+  <div class="pwiz-modal">
+    <div class="pwiz-header">
+      <div class="pwiz-title-row">
+        <div class="pwiz-title" id="pwizTitle">Add Popup</div>
+        <button class="pwiz-close" id="pwizClose">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <!-- Steps -->
+      <div class="pwiz-steps" id="pwizSteps">
+        <div class="pwiz-step">
+          <div class="pwiz-step-circle active" id="pstep1">1</div>
+          <div class="pwiz-step-label active" id="psteplabel1">Basic info</div>
+        </div>
+        <div class="pwiz-step-line" id="pline1"></div>
+        <div class="pwiz-step">
+          <div class="pwiz-step-circle pending" id="pstep2">2</div>
+          <div class="pwiz-step-label" id="psteplabel2">Trigger</div>
+        </div>
+        <div class="pwiz-step-line" id="pline2"></div>
+        <div class="pwiz-step">
+          <div class="pwiz-step-circle pending" id="pstep3">3</div>
+          <div class="pwiz-step-label" id="psteplabel3">Settings</div>
+        </div>
+        <div class="pwiz-step-line" id="pline3"></div>
+        <div class="pwiz-step">
+          <div class="pwiz-step-circle pending" id="pstep4">4</div>
+          <div class="pwiz-step-label" id="psteplabel4">Preview</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pwiz-body">
+
+      <!-- STEP 1: Basic Info -->
+      <div id="pwizStep1">
+        <div class="wiz-section">
+          <div class="wiz-label">Image</div>
+          <div id="pwizImgPreview" style="display:none" class="wiz-img-preview">
+            <img id="pwizImgThumb" src="" alt="" style="width:48px;height:48px;object-fit:cover;border-radius:6px">
+            <span class="wiz-img-name" id="pwizImgName" style="flex:1;font-size:12px;color:var(--muted)"></span>
+            <button class="wiz-img-remove" id="pwizImgRemove">Remove</button>
+          </div>
+          <div class="wiz-upload-zone" id="pwizUploadZone">
+            <input type="file" accept="image/*" id="pwizImgInput">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--subtle);margin-bottom:6px"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
+            <div style="font-size:13px;color:var(--muted)">Click to upload image</div>
+            <div class="wiz-upload-hint">PNG, JPG, WEBP · max 800KB (stored as base64)</div>
+          </div>
+          <label class="wiz-check-row" style="margin-top:10px">
+            <input type="checkbox" id="pwizImageOnly">
+            <span class="wiz-check-text"><strong>Image-only popup</strong> — show only the image, no text</span>
+          </label>
+        </div>
+
+        <div class="wiz-section" id="pwizTextFields">
+          <div class="wiz-label">Name</div>
+          <div class="wiz-row">
+            <div class="wiz-col">
+              <div class="wiz-col-label">Hebrew</div>
+              <input class="wiz-input" id="pwizNameHe" placeholder="שם" dir="rtl">
+            </div>
+            <div class="wiz-col">
+              <div class="wiz-col-label">Russian</div>
+              <input class="wiz-input" id="pwizNameRu" placeholder="Название">
+            </div>
+            <div class="wiz-col">
+              <div class="wiz-col-label">English</div>
+              <input class="wiz-input" id="pwizNameEn" placeholder="Name">
+            </div>
+          </div>
+
+          <div class="wiz-label" style="margin-top:16px">Description</div>
+          <div class="wiz-row">
+            <div class="wiz-col">
+              <div class="wiz-col-label">Hebrew</div>
+              <textarea class="wiz-input wiz-textarea" id="pwizDescHe" placeholder="תיאור" dir="rtl"></textarea>
+            </div>
+            <div class="wiz-col">
+              <div class="wiz-col-label">Russian</div>
+              <textarea class="wiz-input wiz-textarea" id="pwizDescRu" placeholder="Описание"></textarea>
+            </div>
+            <div class="wiz-col">
+              <div class="wiz-col-label">English</div>
+              <textarea class="wiz-input wiz-textarea" id="pwizDescEn" placeholder="Description"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: Trigger -->
+      <div id="pwizStep2" style="display:none">
+        <div class="wiz-section">
+          <div class="wiz-label">When does the popup appear?</div>
+          <div class="wiz-sublabel">Choose the event that triggers this popup</div>
+          <select class="wiz-select" id="pwizTrigger">
+            <option value="page_load">When visiting the menu page</option>
+            <option value="item_added">When an item is added to cart</option>
+            <option value="click_item">When clicking on an item</option>
+          </select>
+        </div>
+        <div class="wiz-section">
+          <div class="wiz-label">What happens when confirmed?</div>
+          <div class="wiz-sublabel">Action performed when the user taps the button</div>
+          <select class="wiz-select" id="pwizAction">
+            <option value="info">Display information only</option>
+            <option value="coupon">Apply coupon code</option>
+            <option value="link">Redirect to link</option>
+          </select>
+          <div id="pwizActionExtra" style="margin-top:10px;display:none">
+            <input class="wiz-input" id="pwizActionValue" placeholder="">
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Settings -->
+      <div id="pwizStep3" style="display:none">
+        <div class="wiz-section">
+          <div class="wiz-label">Times to display</div>
+          <label class="wiz-check-row" style="margin-bottom:8px">
+            <input type="checkbox" id="pwizUnlimited" checked>
+            <span class="wiz-check-text">Unlimited</span>
+          </label>
+          <div id="pwizTimesWrap" style="display:none">
+            <input class="wiz-input" type="number" id="pwizTimes" placeholder="e.g. 3" min="1">
+          </div>
+        </div>
+        <div class="wiz-section">
+          <div class="wiz-label">Expiry date</div>
+          <label class="wiz-check-row" style="margin-bottom:8px">
+            <input type="checkbox" id="pwizNoExpiry" checked>
+            <span class="wiz-check-text">No expiry</span>
+          </label>
+          <div id="pwizExpiryWrap" style="display:none">
+            <input class="wiz-input" type="date" id="pwizExpiry">
+          </div>
+        </div>
+        <div class="wiz-section">
+          <div class="wiz-label">Priority</div>
+          <div class="wiz-sublabel">Lower number = shown first when multiple popups are active</div>
+          <input class="wiz-input" type="number" id="pwizPriority" value="1" min="1" style="max-width:120px">
+        </div>
+      </div>
+
+      <!-- STEP 4: Preview -->
+      <div id="pwizStep4" style="display:none">
+        <div class="wiz-label" style="margin-bottom:12px">Summary — review before saving</div>
+        <div class="pwiz-summary">
+          <div class="pwiz-summary-card">
+            <div class="pwiz-summary-card-title">What will be displayed</div>
+            <div class="pwiz-summary-row"><span class="pwiz-summary-key">Name (RU)</span><span class="pwiz-summary-val" id="sumNameRu">—</span></div>
+            <div class="pwiz-summary-row"><span class="pwiz-summary-key">Name (HE)</span><span class="pwiz-summary-val" id="sumNameHe">—</span></div>
+            <div class="pwiz-summary-row"><span class="pwiz-summary-key">Description</span><span class="pwiz-summary-val" id="sumDesc">—</span></div>
+            <div class="pwiz-summary-row"><span class="pwiz-summary-key">Image</span><span class="pwiz-summary-val" id="sumImg">—</span></div>
+          </div>
+          <div class="pwiz-summary-card">
+            <div class="pwiz-summary-card-title">When will it appear</div>
+            <div class="pwiz-summary-row"><span class="pwiz-summary-key">Trigger</span><span class="pwiz-summary-val" id="sumTrigger">—</span></div>
+            <div class="pwiz-summary-row"><span class="pwiz-summary-key">Action</span><span class="pwiz-summary-val" id="sumAction">—</span></div>
+          </div>
+          <div class="pwiz-summary-card">
+            <div class="pwiz-summary-card-title">Settings</div>
+            <div class="pwiz-summary-row"><span class="pwiz-summary-key">Priority</span><span class="pwiz-summary-val" id="sumPriority">—</span></div>
+            <div class="pwiz-summary-row"><span class="pwiz-summary-key">Times</span><span class="pwiz-summary-val" id="sumTimes">—</span></div>
+            <div class="pwiz-summary-row"><span class="pwiz-summary-key">Expiry</span><span class="pwiz-summary-val" id="sumExpiry">—</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /pwiz-body -->
+
+    <div class="pwiz-footer">
+      <button class="pwiz-btn-prev" id="pwizPrev">Previous</button>
+      <div style="display:flex;gap:8px">
+        <button class="pwiz-btn-next" id="pwizNext">Next →</button>
+        <button class="pwiz-btn-save hidden" id="pwizSave">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ITEM MODAL -->
 <div class="overlay" id="itemModal">
   <div class="modal modal-wide">
@@ -713,6 +1026,7 @@
     </div>
     <div class="tabs">
       <button class="tab active" data-tab="iBasic">Basic Info</button>
+      <button class="tab" data-tab="iBadges">Badges</button>
       <button class="tab" data-tab="iAvail">Availability</button>
     </div>
     <div class="tab-content active" id="iBasic">
@@ -752,6 +1066,10 @@
       <div class="modal-grid" style="margin-top:8px">
         <div class="field"><label>Subhead in Russian</label><input type="text" id="iSubheadRu" placeholder="e.g. Соки"></div>
       </div>
+    </div>
+    <div class="tab-content" id="iBadges">
+      <div class="modal-section-title">Select badges for this item</div>
+      <div id="iBadgeGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:8px;padding:4px 0"></div>
     </div>
     <div class="tab-content" id="iAvail">
       <div class="avail-row">
@@ -972,6 +1290,43 @@
     <div class="modal-actions">
       <button class="btn-cancel" id="shopModalCancel">Cancel</button>
       <button class="btn-save" id="shopModalSave">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- BADGE MODAL -->
+<div class="overlay" id="badgeModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="badgeModalTitle">Add Badge</div>
+      <button class="modal-close" id="badgeModalClose">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div style="padding:20px 24px;display:flex;flex-direction:column;gap:14px">
+      <div class="field">
+        <label>Name</label>
+        <input id="badgeName" placeholder="e.g. Vegetarian" style="width:100%;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--ink);outline:none">
+      </div>
+      <div class="field">
+        <label>Icon</label>
+        <button id="iconPickerBtn" type="button" style="display:flex;align-items:center;gap:10px;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);cursor:pointer;font-family:var(--sans);font-size:14px;color:var(--muted);width:100%;text-align:left;transition:border .18s">
+          <span id="iconPickerPreview" style="display:flex;align-items:center;justify-content:center;width:26px;height:26px;flex-shrink:0"></span>
+          <span id="iconPickerLabel">Click to choose icon</span>
+        </button>
+        <input id="badgeIcon" type="hidden" value="">
+        <!-- ICON PICKER POPUP -->
+        <div id="iconPicker" style="display:none;position:fixed;z-index:9999;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadowLg);width:340px;overflow:hidden;flex-direction:column">
+          <div style="padding:10px 10px 6px">
+            <input id="iconSearch" placeholder="Search: vegan, spicy, fish…" style="width:100%;padding:7px 10px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:13px;background:var(--bg);color:var(--ink);outline:none">
+          </div>
+          <div id="iconGrid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:6px 10px 12px;overflow-y:auto;max-height:300px"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" id="badgeModalCancel">Cancel</button>
+      <button class="btn-save" id="badgeModalSave">Save</button>
     </div>
   </div>
 </div>
@@ -1214,6 +1569,12 @@
   async function loadItems() {
     const list = document.getElementById('itemsList');
     list.innerHTML = '<div class="empty">Loading...</div>';
+    // cache badges for display in rows
+    if (!window.__allBadges) {
+      const bSnap = await getDocs(collection(db, 'badges'));
+      window.__allBadges = [];
+      bSnap.forEach(d => window.__allBadges.push({ id: d.id, ...d.data() }));
+    }
     const snap = await getDocs(collection(db, currentCat));
     const items = [];
     snap.forEach(d => items.push({ id: d.id, ...d.data() }));
@@ -1241,6 +1602,7 @@
         <div class="item-info">
           <div class="item-name">${item.name || '—'}</div>
           <div class="item-desc">${item.desc || ''}</div>
+          ${item.badges?.length ? `<div class="item-badges">${item.badges.map(bid => { const b = window.__allBadges?.find(x => x.id === bid); if (!b) return ''; let src = ''; try { src = JSON.parse(b.icon).img; } catch(e) {} return src ? `<img class="item-badge-img" src="${src}" title="${b.name}" alt="${b.name}">` : ''; }).join('')}</div>` : ''}
         </div>
         <div class="item-price">${item.price || ''}</div>
         <span class="status-badge ${isHidden ? 'status-hidden' : 'status-live'}">${isHidden ? 'Hidden' : 'Live'}</span>
@@ -1376,7 +1738,7 @@
   document.getElementById('itemModalClose').onclick  = () => closeModal('itemModal');
   document.getElementById('itemModalSave').onclick   = saveItem;
 
-  function openItemModal(item) {
+  async function openItemModal(item) {
     editingItemId = item ? item.id : null;
     document.getElementById('itemModalTitle').textContent = item ? 'Edit item' : 'Add item';
     document.getElementById('iName').value      = item?.name    || '';
@@ -1404,12 +1766,39 @@
       placeholder.style.display = 'flex';
       removeBtn.style.display = 'none';
     }
+    // load badges picker
+    const selectedIds = item?.badges || [];
+    const badgeGrid = document.getElementById('iBadgeGrid');
+    badgeGrid.innerHTML = '<div style="color:var(--muted);font-size:13px">Loading…</div>';
+    const bSnap = await getDocs(collection(db, 'badges'));
+    const allBadges = [];
+    bSnap.forEach(d => allBadges.push({ id: d.id, ...d.data() }));
+    allBadges.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+    badgeGrid.innerHTML = '';
+    if (!allBadges.length) {
+      badgeGrid.innerHTML = '<div style="color:var(--muted);font-size:13px">No badges yet. Create them in the Badges section.</div>';
+    } else {
+      allBadges.forEach(b => {
+        let imgSrc = '';
+        try { imgSrc = JSON.parse(b.icon).img; } catch(e) {}
+        const cell = document.createElement('div');
+        cell.className = 'badge-picker-cell' + (selectedIds.includes(b.id) ? ' selected' : '');
+        cell.dataset.badgeId = b.id;
+        cell.innerHTML = imgSrc
+          ? `<img src="${imgSrc}" alt="${b.name}"><span>${b.name}</span>`
+          : `<div style="width:40px;height:40px;border-radius:8px;background:var(--lineSoft)"></div><span>${b.name}</span>`;
+        cell.onclick = () => cell.classList.toggle('selected');
+        badgeGrid.appendChild(cell);
+      });
+    }
     // reset tabs
     document.querySelector('#itemModal .tab').click();
     openModal('itemModal');
   }
 
   async function saveItem() {
+    const selectedBadgeIds = [...document.querySelectorAll('#iBadgeGrid .badge-picker-cell.selected')]
+      .map(c => c.dataset.badgeId);
     const data = {
       name:      document.getElementById('iName').value,
       nameHe:    document.getElementById('iNameHe').value,
@@ -1423,6 +1812,7 @@
       subheadHe: document.getElementById('iSubheadHe').value.trim(),
       subheadRu: document.getElementById('iSubheadRu').value.trim(),
       available: document.getElementById('iAvailable').checked,
+      badges:    selectedBadgeIds,
       updatedAt: serverTimestamp(),
     };
     if (!data.name) return;
@@ -1724,168 +2114,6 @@
     a.download = 'bulochka-menu-template.json';
     a.click();
     toast('Template downloaded ✓');
-  };
-
-  // ── IMPORT FROM HTML ──
-  document.getElementById('actImportHTML').onclick = async () => {
-    const btn = document.getElementById('actImportHTML');
-    const prog = document.getElementById('importProgress');
-    if (!confirm('Загрузить все позиции меню из menu.html в Firestore?\n\nСуществующие позиции с тем же именем обновятся.')) return;
-
-    btn.disabled = true;
-    prog.style.display = 'block';
-    prog.textContent = '';
-
-    const log = (msg) => { prog.textContent += msg + '\n'; prog.scrollTop = prog.scrollHeight; };
-
-    const MENU = {
-      'hot-drinks': [
-        { name: 'Espresso',       nameHe: 'אספרסו',               price: '₪10 / ₪13', desc: 'Short or long. Single / Double.',                                                                     descHe: 'קצר/ארוך. יחיד/כפול.',                                                                                                                                img: 'img/hot drinks/espresso_short.webp' },
-        { name: 'Macchiato',      nameHe: 'מקיאטו',               price: '₪11 / ₪14', desc: 'Espresso with a touch of foamed milk. Short or long. Single / Double.',                              descHe: 'אספרסו עם נגיעה או באהבה של קרמת חלב. קצר/ארוך. יחיד/כפול.',                                                                                        img: 'img/hot drinks/maciatto_short.webp' },
-        { name: 'Americano',      nameHe: 'אמריקנו',              price: '₪12 / ₪14', desc: 'Long and easy. Small / Large.',                                                                       descHe: 'קטן/גדול. על בסיס סויה/שיבולת - ₪2. תוספות סירופ - קרמל/אגוזי לוז/וניל/אייריש קרים - ₪5.',                                                         img: 'img/hot drinks/americano_small.webp' },
-        { name: 'Cappuccino',     nameHe: "קפוצ'ינו",             price: '₪14 / ₪16', desc: 'Thick microfoam. Small / Large. Milk base +₪2, syrups +₪5.',                                        descHe: "הפוך בישראלי. קטן/גדול. על בסיס סויה/שיבולת - ₪2. תוספות סירופ - ₪5.",                                                                               img: 'img/hot drinks/capuchino_small.webp' },
-        { name: 'Flat White',     nameHe: 'פלאט וויס',            price: '₪14',       desc: 'Silky, low foam, two ristretto shots.',                                                              descHe: "קפוצ'ינו חזק: שליש אספרסו, שליש חלב, שליש קרמת חלב.",                                                                                                img: 'img/hot drinks/flat_white.webp' },
-        { name: 'Latte',          nameHe: 'לאטה',                 price: '₪16',       desc: 'Honey, vanilla, lavender, hazelnut.',                                                                descHe: 'כוס גדולה עם חלב מוקצף היטב ואספרסו מעל.',                                                                                                           img: 'img/hot drinks/latte_hot.webp' },
-        { name: 'Raf',            nameHe: 'ראף',                  price: '₪22',       desc: 'Warm cream, vanilla and espresso, whipped together.',                                                descHe: 'משקה חם על בסיס שמנת, וניל ואספרסו.',                                                                                                                img: 'img/hot drinks/raf.webp' },
-        { name: 'Hot Tea',        nameHe: 'תה חם',                price: '₪13',       desc: 'Ginger, peppermint, green cinnamon, apple verbena, chamomile or forest fruits.',                    descHe: "ארל גריי לבנדר ברגמוט / ג'ינג'ר אפרסק / ירוק יסמין / לימונית לואיזה / תפוח קינמון / קמומיל.",                                                       img: 'img/hot drinks/tea_hot.webp' },
-        { name: 'Hot Cocoa',      nameHe: 'שוקו חם עם מרשמלו',   price: '₪15',       desc: 'Milk-based, topped with marshmallow. Syrups +₪5. Baileys +₪10.',                                   descHe: 'על בסיס סויה/שיבולת - ₪2. תוספות סירופ - ₪5. תוספת ביילים - ₪10.',                                                                                   img: 'img/hot drinks/schoko_hot.webp' },
-        { name: 'Black Coffee',   nameHe: 'קפה שחור',             price: '₪11',       desc: 'The Israeli café standard. Black, brewed, no fuss.',                                                descHe: 'הסטנדרט הישראלי. שחור, מבושל, בלי עניינים.',                                                                                                         img: 'img/hot drinks/black_coffee.webp' },
-        { name: 'Affogato',       nameHe: 'אפוגטו',               price: '₪23',       desc: 'Vanilla gelato, double long espresso poured over.',                                                  descHe: 'כדור גלידת וניל ואספרסו כפול ארוך.',                                                                                                                  img: 'img/hot drinks/afogato.webp' },
-        { name: 'Hot Chocolate',  nameHe: 'שוקולטה חמה',         price: '₪22',       desc: 'Dense, thick, properly chocolate.',                                                                  descHe: 'משקה שוקולדי סמיך.',                                                                                                                                  img: 'img/hot drinks/chocolata.webp' },
-        { name: 'Sahlab',         nameHe: 'סחלב חם',              price: '₪24',       desc: 'Warm orchid-root drink topped with nuts, coconut, crumble and cinnamon.',                          descHe: 'עם אגוזים, קוקוס, מי וורדים וקינמון.',                                                                                                               img: 'img/hot drinks/shlav.webp' },
-        { name: 'Matcha Latte',   nameHe: "מאצ'ה לאטה",          price: '₪22',       desc: 'Organic Japanese green tea, milk-based. Syrups +₪5.',                                               descHe: "משקה על בסיס תה יפני אורגני. על בסיס סויה/שיבולת - ₪2. תוספות סירופ - ₪5.",                                                                          img: 'img/hot drinks/matcha_latte_hot.webp' },
-      ],
-      'cold-drinks': [
-        { name: 'Iced Coffee',               nameHe: 'קפה קר',                          price: '₪17', desc: 'Milk-based. Oat or soy +₪2. Syrups +₪5. Baileys +₪10.',                          descHe: 'על בסיס סויה/שיבולת - ₪2. תוספות סירופ - ₪5. תוספת ביילים - ₪10.',           img: 'img/cold drinks/cold_coffee.webp' },
-        { name: 'House Iced Tea',            nameHe: 'תה קר ביתי',                      price: '₪17', desc: 'Black tea extract, peach, lemon, mint.',                                          descHe: 'תמצית תה שחור, אפרסק, לימון, נענע.',                                           img: 'img/cold drinks/cold_tea.webp' },
-        { name: 'Iced Chocolate',            nameHe: 'שוקו קר',                         price: '₪17', desc: 'Milk-based. Oat or soy +₪2.',                                                     descHe: 'על בסיס סויה/ שיבולת - ₪2.',                                                   img: 'img/cold drinks/cold_cocoa.webp' },
-        { name: 'Fruitshake',                nameHe: 'פרישייק',                         price: '₪24', desc: 'Strawberry, banana, date, mango, melon, lychee, peach, soursop or forest berries. Oat, soy or OJ +₪3.', descHe: 'תות, בננה, מנגו, תמר, אפרסק, פירות יער. על בסיס סויה/ שיבולת/ מיץ תפוזים - ₪3.', img: 'img/cold drinks/fruit_shake.webp' },
-        { name: 'Bumble Bee',                nameHe: 'באמבל בי',                        price: '₪17', desc: 'Fresh orange juice over ice, espresso floated on top.',                           descHe: 'מיץ תפוזים על קרח ואספרסו!',                                                   img: 'img/cold drinks/Bumblebee.webp' },
-        { name: 'Black Lara',                nameHe: 'בלאק לארה',                       price: '₪17', desc: 'Tonic water over ice, espresso floated on top.',                                  descHe: 'מי טוניק על קרח ואספרסו.',                                                     img: 'img/cold drinks/black_lara.webp' },
-        { name: 'Iced Matcha',               nameHe: "מאצ'ה קרה",                       price: '₪24', desc: 'Organic Japanese green tea, milk-based. Oat or soy +₪2. Syrups +₪5.',           descHe: "משקה על בסיס תה יפני אורגני. על בסיס סויה/שיבולת - ₪2. תוספות סירופ - ₪5.",  img: 'img/cold drinks/cold_matcha.webp' },
-        { name: 'Flavoured Coconut Water',   nameHe: 'מי קוקוס בטעמים',                price: '₪17', desc: 'From fresh coconuts, no preservatives. Mango / Pink guava / Lychee.',             descHe: "מיוצר מאגוזי קוקוס טריים, ללא חומר משמר. מנגו / גויאבה ורודה / ליצ'י.",       img: 'img/cold drinks/coconut_water.webp' },
-        { name: 'Real Juice',                nameHe: 'מיץ ריאל',                        price: '₪15', desc: 'No preservatives. Orange / Ginger-Apple.',                                        descHe: "ללא חומר משמר. תפוזים / ג'ינג'ר-תפוח עץ.",                                     img: 'img/cold drinks/real_juice.webp' },
-        { name: 'Organic Apple Juice',       nameHe: 'מיץ תפוח עץ אורגני',             price: '₪17', desc: 'No added sugar, no preservatives. Cold pressed.',                                  descHe: 'ללא תוספת סוכר, ללא חומרים משמרים. COLD PRESSED.',                             img: 'img/cold drinks/apple_juice.webp' },
-        { name: 'Organic Pomegranate Juice', nameHe: 'מיץ רימון אורגני',               price: '₪17', desc: 'No added sugar, no preservatives. Cold pressed.',                                  descHe: 'ללא תוספת סוכר, ללא חומרים משמרים. COLD PRESSED.',                             img: 'img/cold drinks/pomegranate_juice.webp' },
-        { name: 'Organic Apricot Juice',     nameHe: 'מיץ משמש אורגני',               price: '₪17', desc: 'No added sugar, no preservatives. Cold pressed.',                                  descHe: 'ללא תוספת סוכר, ללא חומרים משמרים. COLD PRESSED.',                             img: 'img/cold drinks/apricot_juice.webp' },
-        { name: 'Organic Pear Juice',        nameHe: 'מיץ אגס אורגני',                price: '₪17', desc: 'No added sugar, no preservatives. Cold pressed.',                                  descHe: 'ללא תוספת סוכר, ללא חומרים משמרים. COLD PRESSED.',                             img: 'img/cold drinks/pear_juice.webp' },
-        { name: 'Organic Mulberry Juice',    nameHe: 'מיץ תות עץ אורגני',             price: '₪17', desc: 'No added sugar, no preservatives. Cold pressed.',                                  descHe: 'ללא תוספת סוכר, ללא חומרים משמרים. COLD PRESSED.',                             img: 'img/cold drinks/mulberry_juice.webp' },
-        { name: 'Fruit & Veg Blend — Yellow',nameHe: 'מיץ מיקס פירות וירקות - צהוב',  price: '₪17', desc: 'Lettuce, apple, pumpkin, pear, fresh herbs.',                                      descHe: 'תפוז, תפוח, מנגו, דלעת, גזר, אגס.',                                            img: 'img/cold drinks/juice_mix_yellow.webp' },
-        { name: 'Fruit & Veg Blend — Purple',nameHe: 'מיץ מיקס פירות וירקות - ורוד',  price: '₪17', desc: 'Dragon fruit, cornelian cherry, pomegranate, apple, strawberry, pear.',            descHe: 'דובדבן קורנליה, רימון, תפוח, תות שדה, אגס, גזר שחור.',                         img: 'img/cold drinks/juice_mix_pink.webp' },
-        { name: 'Fruit & Veg Blend — Red',   nameHe: 'מיץ מיקס פירות וירקות - אדום',  price: '₪17', desc: 'Pomegranate, beetroot, apple, pear, strawberry.',                                   descHe: 'רימון, סלק, אגס, תפוח, גזר שחור.',                                             img: 'img/cold drinks/juice_mix_red.webp' },
-        { name: 'Cucumber & Coriander',      nameHe: 'מלפפון כוסברה',                  price: '₪19', desc: 'Low glycemic, rich in quercetin and antioxidants. Gentle on blood sugar.',          descHe: 'שילוב מלפפון וכוסברה. ערך גליקמי נמוך, עשיר בקוורצטין.',                       img: 'img/cold drinks/cucumber_coriander.webp' },
-        { name: 'Acerola & Ginger',          nameHe: "אסרולה-ג'ינג'ר",                price: '₪19', desc: "Barbados cherry (Acerola) and ginger. One of nature's richest sources of vitamin C.", descHe: 'אסרולה — אחת מהמקורות העשירים ביותר בטבע לוויטמין C.',                    img: 'img/cold drinks/ginger_acerolla.webp' },
-        { name: 'Mango & Passionfruit',      nameHe: 'מנגו-פסיפלורה',                  price: '₪19', desc: 'A tropical classic. Mango for vitamin A, passionfruit for vitamin C.',             descHe: 'שילוב מנגו ופסיפלורה. ויטמין A וויטמין C.',                                    img: 'img/cold drinks/mango_paciflora.webp' },
-        { name: 'Maté & Caffeine',           nameHe: 'מאטה-קופאין',                    price: '₪19', desc: "South America's iconic social drink. Clean, sustained energy similar to coffee.",  descHe: 'המאטה — סמל חברתי ותרבותי. אנרגיה מתמשכת.',                                   img: 'img/cold drinks/matte_caffeine.webp' },
-        { name: 'Rose Hips',                 nameHe: 'ורדים',                           price: '₪19', desc: 'Edible rose fruits (Rosa canina). Rich natural source of vitamin C.',               descHe: 'פרי הורד (Rosa canina) — מקור עשיר של ויטמין C.',                              img: 'img/cold drinks/rose.webp' },
-      ],
-      'sandwiches': [
-        { name: 'Smoked Salmon',            nameHe: 'כריך סלמון מעושן',       price: '₪41',       desc: 'Cream cheese, red onion, smoked salmon, fresh lemon, cucumber, romaine. Avocado +₪8, egg +₪3.',  descHe: 'גבינת שמנת, בצל סגול, סלמון מעושן, מיץ לימון טרי, מלפפון, חסה קיסר.',        img: 'img/sandwiches/sanswich_salmon.webp' },
-        { name: 'Croissant Salmon',         nameHe: 'קרואסון סלמון מעושן',   price: '₪45',       desc: 'Cream cheese, red onion, smoked salmon, fresh lemon, cucumber, romaine — in a croissant.',        descHe: 'גבינת שמנת, בצל סגול, סלמון מעושן, מיץ לימון טרי, מלפפון, חסה קיסר.',        img: 'img/sandwiches/croissant_salmon.webp' },
-        { name: 'Tuna Sandwich',            nameHe: 'כריך טונה',              price: '₪41',       desc: 'Mayo, hard-boiled egg, tuna, tomato, cucumber, romaine. Avocado +₪8.',                          descHe: 'מיונז, ביצה קשה, טונה, עגבניה, מלפפון, חסה קיסר.',                            img: 'img/sandwiches/sandwich_tuna.webp' },
-        { name: 'Croissant Tuna',           nameHe: 'קרואסון טונה',           price: '₪45',       desc: 'Mayo, hard-boiled egg, tuna, tomato, cucumber, romaine — in a croissant.',                        descHe: 'מיונז, ביצה קשה, טונה, עגבניה, מלפפון, חסה קיסר.',                            img: 'img/sandwiches/croissant_tuna.webp' },
-        { name: 'Avocado Sandwich',         nameHe: 'כריך אבוקדו',            price: '₪41',       desc: 'Cream cheese, hard-boiled egg, avocado, salt, black pepper, fresh lemon, tomato, cucumber, romaine.', descHe: 'גבינת שמנת, ביצה קשה, פרוסות אבוקדו, מלח, פלפל שחור, מיץ לימון.',          img: 'img/sandwiches/sandwich_avocado.webp' },
-        { name: 'Croissant Avocado',        nameHe: 'קרואסון אבוקדו',         price: '₪45',       desc: 'Cream cheese, hard-boiled egg, avocado, salt, black pepper, fresh lemon, tomato, cucumber, romaine.', descHe: 'גבינת שמנת, ביצה קשה, פרוסות אבוקדו, מלח, פלפל שחור, מיץ לימון.',          img: 'img/sandwiches/croissant_avocado.webp' },
-        { name: 'Vegan Sandwich Avocado',   nameHe: 'רוסטיק אבוקדו VEGAN',   price: '₪41',       desc: 'Pine nut pesto, avocado, salt, black pepper, fresh lemon, tomato, cucumber, romaine.',             descHe: 'פסטו צנוברים, פרוסות אבוקדו, מלח, פלפל שחור, מיץ לימון.',                     img: 'img/sandwiches/sandwich_vegan.webp' },
-        { name: 'Croissant Antipasti',      nameHe: 'קרואסון אנטיפסטי',      price: '₪42',       desc: 'Mango chutney, roasted sweet potato, zucchini and bell pepper, Bulgarian cheese, romaine.',        descHe: "ממרח צ'אטני מנגו, ירקות אפויים (בטטה, זוקיני, גמבה), בולגרית מעודנת.",        img: 'img/sandwiches/croissant_antipasti.webp' },
-        { name: 'Croissant Pesto',          nameHe: 'קרואסון פסטו',           price: '₪42',       desc: 'Cream cheese, pine nut pesto, Bulgarian cheese, cucumber, romaine.',                              descHe: 'גבינת שמנת, פסטו צנוברים, בולגרית מעודנת, מלפפון, חסה קיסר.',                 img: 'img/sandwiches/croissant_pesto.webp' },
-        { name: 'Five Cheese Toast',        nameHe: 'טוסט חמש גבינות',       price: '₪46 / ₪48', desc: 'Cream cheese, cheddar, mozzarella, gouda, Scandinavian. With chopped salad.',                      descHe: "גבינת שמנת, צ'דר, מוצרלה, גאודה, סקנדינבית. לחם קסטן לבן ₪46 / דגנים ₪48.", img: 'img/sandwiches/tost_5_cheese.webp' },
-        { name: 'Tuna Salad',               nameHe: 'סלט טונה',               price: '₪44',       desc: 'Cucumber, tomato, romaine, tuna, kalamata olives, hard-boiled egg, red onion.',                    descHe: 'מלפפון, עגבניה, חסה קיסר, טונה, זיתי קלמטה, ביצה קשה, בצל סגול.',            img: 'img/salads/salad_tuna.webp' },
-        { name: 'White cheese Salad',       nameHe: 'סלט בולגרית',            price: '₪44',       desc: 'Tomato, cucumber, romaine, Bulgarian cheese, red onion, egg, corn, kalamata.',                     descHe: 'עגבניה, מלפפון, חסה קיסר, בולגרית מעודנת, בצל סגול, ביצה קשה, תירס.',         img: 'img/salads/salad_white_cheese.webp' },
-        { name: 'Chopped Salad',            nameHe: 'סלט ירקות דק',           price: '₪36',       desc: 'Cucumber, tomato, red onion, romaine, mint, olive oil, fresh lemon, salt, black pepper.',          descHe: 'מלפפון, עגבניה, בצל סגול, חסה קיסר, נענע, שמן זית, מיץ לימון.',               img: 'img/salads/choped_salad.webp' },
-        { name: 'Muesli',                   nameHe: 'מוזלי',                   price: '₪35',       desc: 'Yogurt, seasonal fruit, granola.',                                                                 descHe: 'יוגורט בקר, פירות העונה, גרנולה.',                                             img: 'img/small bites/musli.webp' },
-        { name: 'Mushroom Quiche + Salad',  nameHe: 'קיש פיטריות עם סלט אישי', price: '₪37',     desc: 'Champignon & portobello, white onion, Alfredo sauce, four-cheese blend. With chopped salad.',      descHe: 'פטריות שמפיניון ופורטובלו, בצל לבן, רוטב אלפרדו, מיקס ארבע גבינות.',          img: 'img/small bites/quiche_mushrooms_with_small_salad.webp' },
-        { name: 'Antipasti Quiche + Salad', nameHe: 'קיש אנטיפסטי עם סלט אישי', price: '₪37',   desc: 'Roasted sweet potato, zucchini and bell pepper, rose sauce, four-cheese blend. With chopped salad.', descHe: 'ירקות אפויים (בטטה, זוקיני, גמבה), רוטב רוזה, מיקס ארבע גבינות.',            img: 'img/small bites/quiche_antipasti_with_small_salad.webp' },
-      ],
-      'pastries': [
-        { name: 'Classic French Croissant',  nameHe: 'קרואסון צרפתי קלאסי',  price: '₪15', desc: 'Laminated butter dough.',                                                           descHe: 'בצק חמאה מרובד.',              img: 'img/pastries/croissant_classic_big.webp' },
-        { name: 'Pain au Chocolat',          nameHe: 'קרואסון שוקולד',        price: '₪16', desc: 'Chocolate sealed inside crisp laminated pastry.',                                   descHe: 'שוקולד בתוך מאפה מרובד פריך.', img: 'img/pastries/chocolate_big.webp' },
-        { name: 'Small French Croissant',    nameHe: 'קרואסון צרפתי קטן',    price: '₪7',  desc: 'Fits in one hand.',                                                                 descHe: 'נכנס ביד אחת.',                img: 'img/pastries/croissant_classic_small.webp' },
-        { name: 'Small Chocolate Croissant', nameHe: 'קרואסון שוקולד קטן',   price: '₪8',  desc: 'One baton of chocolate, pocket-sized.',                                             descHe: 'מקל שוקולד אחד, בגודל כיס.',   img: 'img/pastries/chocolate_small.webp' },
-        { name: 'Apple Turnover',            nameHe: 'שסון תפוח עץ',          price: '₪18', desc: 'Caramelised apple in crisp butter pastry.',                                         descHe: 'תפוח מקורמל במאפה חמאתי פריך.', img: 'img/pastries/big_apple.webp' },
-        { name: 'Cinnamon Roll',             nameHe: 'רול קינמון',            price: '₪16', desc: 'Rolled tight, glazed with cinnamon sugar.',                                         descHe: 'גלגול הדוק, מצופה סוכר קינמון.', img: 'img/pastries/cinnamon_roll.webp' },
-        { name: 'Vanilla & Raisin Roll',     nameHe: 'רול וניל צימוקים',     price: '₪16', desc: 'Vanilla cream, plump raisins, soft baked dough.',                                   descHe: 'קרם וניל, צימוקים שמנמנים, בצק אפוי רך.', img: 'img/pastries/reisins_vanilla_roll.webp' },
-        { name: 'Phyllo Fingers',            nameHe: 'אצבעות פילו',           price: '₪8',  desc: 'Crisp filo, four fillings: Bulgarian cheese · Mushroom & potato · Kashkaval · Apple, walnut & raisin.', descHe: 'בולגרית-תרד / פיטריות-תפוח אדמה / בולגרית-קשקבל / תפוח עץ-אגוזים-צימוקים.', img: 'img/pastries/filo.webp' },
-        { name: 'Mushroom Quiche',           nameHe: 'קיש פטריות',            price: '₪19', desc: 'Champignon & portobello, white onion, Alfredo sauce, four-cheese mix.',             descHe: 'פטריות שמפיניון ופורטובלו, בצל לבן, רוטב אלפרדו, מיקס ארבע גבינות.', img: 'img/pastries/quiche_mushroom.webp' },
-        { name: 'Antipasti Quiche',          nameHe: 'קיש אנטיפסטי',          price: '₪19', desc: 'Roasted sweet potato, zucchini & bell pepper, rose sauce, four-cheese mix.',       descHe: 'ירקות אפויים (בטטה, זוקיני, גמבה), רוטב רוזה, מיקס ארבע גבינות.', img: 'img/pastries/quiche_antipasti.webp' },
-      ],
-      'filled': [
-        { name: 'Vanilla Cream & Forest Berries',       nameHe: 'קרואסון קרם וניל-פירות יער',        price: '₪25', desc: 'Vanilla pastry cream, fresh mixed berries.',          descHe: 'קרם פטיסייר וניל, פירות יער טריים.',       img: 'img/Filled Croissants/croissant_wildberies_vanilla.webp' },
-        { name: 'Lemon Cream & Raspberry',              nameHe: 'קרואסון קרם לימון-פטל אדום',        price: '₪25', desc: 'Tangy lemon curd, fresh red raspberries.',            descHe: 'קרד לימון חמצמץ, פטל אדום טרי.',           img: 'img/Filled Croissants/croissant_raspberry_lemon.jpg' },
-        { name: 'Halva & Pistachio Cream',              nameHe: 'קרואסון קרם חלבה-קרם פיסטוק',       price: '₪25', desc: 'Sesame halva cream meets pistachio paste.',           descHe: 'קרם חלבה שומשום פוגש מחית פיסטוק.',        img: 'img/Filled Croissants/croissant_halva_pistachio.webp' },
-        { name: 'Bagel Cream & Salted Caramel',         nameHe: 'קרואסון קרם בייגל-קרמל מלוח',       price: '₪25', desc: 'Toasted sesame cream, ribbons of salted caramel.',    descHe: 'קרם שומשום קלוי, סרטים של קרמל מלוח.',     img: 'img/Filled Croissants/croissant_caramel_baigle.webp' },
-        { name: 'Nutella, Banana & Almonds',            nameHe: 'קרואסון נוטלה-בננה-שקדים',          price: '₪25', desc: 'Chocolate hazelnut spread, fresh banana, toasted almonds.', descHe: 'ממרח שוקולד אגוזי לוז, בננה טרייה, שקדים קלויים.', img: 'img/Filled Croissants/croissant_nutella_banana.webp' },
-        { name: 'Pistachio Cream & Pistachio Nuts',     nameHe: 'קרואסון קרם פיסטוק-אגוזי פיסטוק',  price: '₪25', desc: 'Double pistachio: cream and crushed nuts.',           descHe: 'פיסטוק כפול: קרם ואגוזים כתושים.',         img: 'img/Filled Croissants/croissant_pistachio.webp' },
-        { name: 'Apple & Lemon Cream',                  nameHe: 'קרואסון תפוח עץ-קרם לימון',         price: '₪25', desc: 'Caramelised apple, bright lemon pastry cream.',       descHe: 'תפוח מקורמל, קרם פטיסייר לימון בהיר.',     img: 'img/Filled Croissants/croissant_lemon_apples.webp' },
-      ],
-      'tartlets': [
-        { name: 'Mascarpone & Mango',                        nameHe: 'טארטלט מסקרפונה - מנגו',                   price: '₪18', desc: 'Mascarpone cream, fresh mango, buttery shortcrust.',             descHe: 'קרם מסקרפונה, מנגו טרי, בסיס פריך וחמאתי.',   img: 'img/tarts/tart_mango.webp' },
-        { name: 'Mascarpone & Strawberry',                   nameHe: 'טארטלט מסקרפונה - תות שדה',               price: '₪18', desc: 'Mascarpone cream, ripe strawberries, buttery shortcrust.',       descHe: 'קרם מסקרפונה, תות שדה בשל, בסיס פריך וחמאתי.', img: 'img/tarts/tart_strawberry.webp' },
-        { name: 'Mascarpone, Vanilla & Forest Berries',      nameHe: 'טארטלט מסקרפונה - קרם וניל - פירות יער', price: '₪18', desc: 'Mascarpone cream, vanilla, wild berries.',                        descHe: 'קרם מסקרפונה, וניל, פירות יער.',               img: 'img/tarts/tart_wildberries.webp' },
-        { name: 'Mascarpone, Pistachio & Raspberry',         nameHe: 'טארטלט מסקרפונה - קרם פיסטוק-פטל',      price: '₪18', desc: 'Mascarpone cream, pistachio paste, fresh raspberries.',           descHe: 'קרם מסקרפונה, מחית פיסטוק, פטל טרי.',         img: 'img/tarts/tart_raspberry.webp' },
-        { name: 'Lemon Meringue & Almond Frangipane',        nameHe: "לימון מרנג ופרנג'יפן שקדים",             price: '₪18', desc: 'Almond frangipane base, tangy lemon cream, torched meringue.',    descHe: "בסיס פרנג'יפן שקדים, קרם לימון חמצמץ, מרנג שרוף.", img: 'img/Main page/menu_placeholder.jpg' },
-        { name: 'Brownie, Milk Chocolate & Hazelnut Caramel',nameHe: 'בראוניז, שוקולד חלב וקרמל אגוזי לוז',    price: '₪18', desc: 'Fudgy brownie, milk chocolate cream, salted caramel, toasted hazelnuts.', descHe: 'בראוניז עשיר, קרם שוקולד חלב, קרמל מלוח, אגוזי לוז קלויים.', img: 'img/Main page/menu_placeholder.jpg' },
-      ],
-      'cakes': [
-        { name: 'Baked Cheesecake',      nameHe: 'עוגת גבינה אפויה',    price: '₪39', desc: 'Rich and dense, exactly as a cheesecake should be.',                    descHe: 'יציבה ועשירה בדיוק כמו שעוגת גבינה צריכה להיות.', img: 'img/Cakes/Cheesecake.jpg' },
-        { name: 'Tiramisu',              nameHe: 'טירמיסו',              price: '₪35', desc: 'Espresso-soaked layers, mascarpone cream, dusted with cocoa.',           descHe: 'שכבות ספוגות אספרסו, קרם מסקרפונה, מפוזר עם קקאו.', img: 'img/Main page/menu_placeholder.jpg' },
-        { name: 'Crème Brûlée',          nameHe: 'קרם ברולה',            price: '₪31', desc: 'Classic vanilla custard, caramelised sugar crust.',                      descHe: 'קסטרד וניל קלאסי, קרום סוכר מקורמל.',             img: 'img/Cakes/creme_brule.webp' },
-        { name: 'House Cake (rotating)', nameHe: 'עוגת הבית (משתנה)',   price: '₪45', desc: "Changes daily. Ask at the counter what's in today.",                     descHe: 'משתנה מדי יום. שאלו בדלפק מה יש היום.',            img: 'img/Main page/menu_placeholder.jpg' },
-      ],
-      'ice-cream': [
-        { name: 'The Classics',     nameHe: 'הקלאסית',     price: '₪39', desc: 'Belgian chocolate, classic vanilla, cookies & cream.',    descHe: 'שוקולד בלגי, וניל מקלות, וניל עוגיות.', img: 'img/ice_cream/classic.webp' },
-        { name: 'The Tropical',     nameHe: 'הטרופית',     price: '₪39', desc: 'Mango sorbet, passionfruit sorbet, coconut sorbet.',      descHe: 'סורבה מנגו, סורבה פסיפלורה, סורבה קוקוס.', img: 'img/ice_cream/tropical.webp' },
-        { name: 'The Black Forest', nameHe: 'היער השחור',  price: '₪39', desc: 'Forest berries, wild strawberry, lemon sorbet.',          descHe: 'פירות יער, תות בר, סורבה לימון.',        img: 'img/ice_cream/black_forest.webp' },
-      ],
-      'alcohol': [
-        { name: 'Chardonnay — "La Côte", Domaine R, France',                   nameHe: 'שרדונה — "לה קוטי", דומיין רו, צרפת',            price: '₪41 / ₪145', desc: 'Dry, elegant. Hints of ripe fruit and a delicate buttery note.',        descHe: 'יבש, אלגנטי, עם רמזים של פרי בשל.',            img: '' },
-        { name: 'Gewürztraminer — "Villa Wolf", Pfalz, Germany',               nameHe: 'גורצטרמינר — "ולה וולף", פפאלץ, גרמניה',         price: '₪39 / ₪135', desc: 'Semi-sweet, aromatic. Rich in tropical fruit and spice.',               descHe: 'חצי מתוק, ארומטי, שופע טעמים של פירות סרופים.', img: '' },
-        { name: 'Red Blend, Perrin — "La Vieille Ferme", Rhône Valley, France',nameHe: 'בלנד אדום פריין — "לה ויה פארם", עמק הרון, צרפת', price: '₪39 / ₪135', desc: 'Dry. Blackcurrant, cherry, warm spice.',                                 descHe: 'יבש, פטל שחור, דובדבנים ותבלינים חמים.',        img: '' },
-        { name: 'Rosé, Perrin — "La Vieille Ferme", Rhône Valley, France',    nameHe: 'רוזה פריין — "לה ויה פארם", עמק הרון, צרפת',    price: '₪72',         desc: 'Dry. Cinsault–Grenache–Syrah blend. Light, pink, refreshing. 375 ml.', descHe: 'יבש, בלנד סנסו-גרנאש-סירה, קליל ורדרד. 375 מל.', img: '' },
-        { name: 'Valpolicella — "Tommasi", Veneto, Italy',                     nameHe: "ואלפוליצ'לה — \"טומאסי\", ונטו, איטליה",         price: '₪77',         desc: 'Light, fruity red blend. 375 ml.',                                      descHe: 'בלנד אדום קליל, פירותי. 375 מל.',               img: '' },
-        { name: 'Goldstar',           nameHe: 'גולדסטאר',          price: '₪19',       desc: "Israel's leading dark lager. 330 ml.",         descHe: 'לאגר כהה המוביל בישראל. 330 מל.',  img: '' },
-        { name: 'The Red Knight – Irish Ale', nameHe: 'רד קנייט – אייל אירי', price: '₪24', desc: 'Reddish, gentle sweetness of roasted malt.',   descHe: 'אדמונית בעלת טעם מתקתק של לחת קלוי.', img: '' },
-        { name: 'The Hope Guru – IPA',nameHe: 'הופ גורו – IPA',     price: '₪24',       desc: 'Tropical fruit and citrus aromas, refined bitterness.', descHe: 'ארומה של פירות טרופים והדרים.',    img: '' },
-        { name: 'Whiskey Jameson',    nameHe: "ויסקי ג'ימסון",     price: '₪22 / ₪39', desc: 'Shot / Chaser.',  descHe: "מנה - 39 ₪ | צ'ייסר - 22 ₪.", img: '' },
-        { name: 'Gin Bombay Sapphire',nameHe: "ג'ין בומביי סמפייר", price: '₪33 / ₪39', desc: 'Neat / With tonic water.', descHe: 'תוספת מי טוניק - 6 ₪.', img: '' },
-        { name: 'Arak Elite',         nameHe: 'עראק עלית',          price: '₪15 / ₪28', desc: 'Shot / Chaser.',  descHe: "מנה - 28 ₪ | צ'ייסר - 15 ₪.", img: '' },
-        { name: 'Baileys',            nameHe: 'ביילים',              price: '₪15 / ₪28', desc: 'Shot / Chaser.',  descHe: "מנה - 28 ₪ | צ'ייסר - 15 ₪.", img: '' },
-      ],
-      'friday': [
-        { name: 'Plyushka',    nameHe: 'פליושקה',    price: '₪15', desc: 'Traditional yeast pastry — soft twisted dough layered with butter and sugar. Shaped like a heart.', descHe: 'מאפה שמרים מסורתי. בצק עגניים רך שזור בשכבות של חמאה וסוכר. מעוצב בצורת לב.', img: 'img/friday special/plushka.webp' },
-        { name: 'Vatrushka',   nameHe: 'ואטרושקה',   price: '₪19', desc: "Open-faced yeast pastry with a rich farmer's cheese filling.",                                     descHe: 'מאפה שמרים פתוח במילוי גבינת סבורוג עשיר.',                                    img: 'img/friday special/vatrushka.webp' },
-        { name: 'Sochnik',     nameHe: "סוצ'ניק",    price: '₪18', desc: "Crisp and tender, filled with farmer's cheese. A nostalgic treat.",                               descHe: 'פריך ורימוך במילוי גבינת סבורוג. מעדן נוסטלגי.',                               img: 'img/Main page/menu_placeholder.jpg' },
-        { name: 'Korzinochka', nameHe: "קארינוצ'קה", price: '₪19', desc: 'Crispy dough and fruit.',                                                                          descHe: 'בצק פריך ופירות.',                                                              img: 'img/friday special/korzinochka.webp' },
-        { name: 'Bulochka',    nameHe: "בולוצ'קה",   price: '₪18', desc: 'Soft yeast dough filled with rotating seasonal fruit.',                                            descHe: 'בצק שמרים רך ממולא בפירות משתנים.',                                            img: 'img/Main page/menu_placeholder.jpg' },
-        { name: 'Creambon',    nameHe: 'קרמבון',     price: '₪25', desc: 'A generous yeast roll filled with cream that changes with the mood.',                             descHe: 'שבלול מאפה שמרים במילוי נדיב של קרם (משתנה לפי המצב רוח).',                   img: 'img/friday special/cremobon.webp' },
-        { name: 'Cinnamon',    nameHe: 'סינבון',     price: '₪27', desc: 'Soft yeast roll with butter, brown sugar, and cinnamon, coated in rich cream cheese.',            descHe: 'שבלול שמרים עם חמאה, סוכר חום וקינמון, מצופה בקרם גבינה עשיר.',               img: 'img/friday special/cinnabon.webp' },
-      ],
-    };
-
-    let created = 0, updated = 0, errors = 0;
-    for (const [catId, items] of Object.entries(MENU)) {
-      log(`── ${catId} (${items.length})`);
-      const snap = await getDocs(collection(db, catId));
-      const existingMap = {};
-      snap.forEach(d => { existingMap[d.data().name] = d.id; });
-
-      for (const item of items) {
-        try {
-          const data = { ...item, available: true };
-          if (existingMap[item.name]) {
-            await setDoc(doc(db, catId, existingMap[item.name]), data, { merge: true });
-            log(`  ✓ ${item.name}`); updated++;
-          } else {
-            await addDoc(collection(db, catId), data);
-            log(`  + ${item.name}`); created++;
-          }
-        } catch(e) { log(`  ✗ ${item.name}: ${e.message}`); errors++; }
-      }
-    }
-    log(`\n✅ Done. Created: ${created}, Updated: ${updated}, Errors: ${errors}`);
-    btn.disabled = false;
-    btn.querySelector('.menu-action-label').textContent = 'Import from HTML ✓';
-    loadCategories();
   };
 
   // ── DISPLAY TOGGLES ──
@@ -2285,6 +2513,458 @@
     toast('Samples added ✓');
     loadShop();
   };
+
+  // ── BADGES ──
+  let editingBadgeId = null;
+
+  document.getElementById('navBadges').onclick = () => { setActiveNav('Badges'); loadBadges(); stopLiveCounter(); };
+
+  document.getElementById('addBadgeBtn').onclick = () => openBadgeModal(null);
+  document.getElementById('badgeModalCancel').onclick = () => closeModal('badgeModal');
+  document.getElementById('badgeModalClose').onclick  = () => closeModal('badgeModal');
+  document.getElementById('badgeModalSave').onclick   = saveBadge;
+
+  async function loadBadges() {
+    showView('viewBadges');
+    const grid = document.getElementById('badgeGrid');
+    grid.innerHTML = '<div class="empty">Loading…</div>';
+    const snap = await getDocs(collection(db, 'badges'));
+    const badges = [];
+    snap.forEach(d => badges.push({ id: d.id, ...d.data() }));
+    badges.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+    document.getElementById('metaBadgeCount').textContent = badges.length;
+
+    if (badges.length === 0) {
+      grid.innerHTML = '<div class="empty">No badges yet. Click "+ Add Badge" to create one.</div>';
+      return;
+    }
+
+    grid.innerHTML = '';
+    badges.forEach(badge => {
+      let iconHtml = '<div style="width:40px;height:40px;border-radius:8px;background:var(--lineSoft)"></div>';
+      if (badge.icon) {
+        try { const ic = JSON.parse(badge.icon); iconHtml = `<img src="${ic.img}" style="width:40px;height:40px;object-fit:contain" alt="${ic.label||''}">`; } catch(e) {}
+      }
+      const badgeData = JSON.stringify({ id: badge.id, name: badge.name || '', icon: badge.icon || '' }).replace(/'/g, '&#39;');
+      const card = document.createElement('div');
+      card.style.cssText = 'background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 16px 12px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow)';
+      card.innerHTML = `
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="flex-shrink:0">${iconHtml}</span>
+          <span style="font-size:15px;font-weight:600;color:var(--ink)">${badge.name || '—'}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <button data-id="${badge.id}" class="badge-delete-btn" style="background:none;border:none;cursor:pointer;font-size:13px;color:var(--danger);font-family:var(--sans);display:flex;align-items:center;gap:4px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:14px;height:14px"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+            Delete
+          </button>
+          <button data-id="${badge.id}" data-badge='${badgeData}' class="badge-edit-btn btn-save" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Edit Badge
+          </button>
+        </div>`;
+      grid.appendChild(card);
+    });
+
+    grid.querySelectorAll('.badge-delete-btn').forEach(btn => {
+      btn.onclick = async () => {
+        if (!confirm('Delete this badge?')) return;
+        await deleteDoc(doc(db, 'badges', btn.dataset.id));
+        toast('Deleted ✓');
+        loadBadges();
+      };
+    });
+
+    grid.querySelectorAll('.badge-edit-btn').forEach(btn => {
+      try { btn.onclick = () => openBadgeModal(JSON.parse(btn.dataset.badge)); } catch(e) {}
+    });
+  }
+
+  // ── IMAGE ICON PICKER ──
+  const BADGE_ICONS = [
+    { id: 'vegan',            label: 'Vegan',            img: '../img/Badges/vegan.webp' },
+    { id: 'vegetarian',       label: 'Vegetarian',       img: '../img/Badges/vegetarian.webp' },
+    { id: 'gluten_free',      label: 'Gluten Free',      img: '../img/Badges/gluten_free.webp' },
+    { id: 'dairy_free',       label: 'Dairy Free',       img: '../img/Badges/dairy_free.webp' },
+    { id: 'nut_free',         label: 'Nut Free',         img: '../img/Badges/nut_free.webp' },
+    { id: 'contains_fish',    label: 'Contains Fish',    img: '../img/Badges/contains_fish.webp' },
+    { id: 'light_spicy',      label: 'Light Spicy',      img: '../img/Badges/light_spicy.webp' },
+    { id: 'medium_spicy',     label: 'Medium Spicy',     img: '../img/Badges/medium_spicy.webp' },
+    { id: 'beer',             label: 'Beer',             img: '../img/Badges/beer.webp' },
+    { id: 'beer_bottle',      label: 'Beer Bottle',      img: '../img/Badges/beer_bottle.webp' },
+    { id: 'bottle',           label: 'Bottle',           img: '../img/Badges/bottle.webp' },
+    { id: 'red_wine_glass',   label: 'Red Wine Glass',   img: '../img/Badges/red_wine_glass.webp' },
+    { id: 'rose_wine_glass',  label: 'Rosé Wine Glass',  img: '../img/Badges/rose_wine_glass.webp' },
+    { id: 'white_wine_glass', label: 'White Wine Glass', img: '../img/Badges/white_wine_glass.webp' },
+    { id: 'red_wine_bottle',  label: 'Red Wine Bottle',  img: '../img/Badges/red_wine_bottle.webp' },
+    { id: 'rose_wine_bottle', label: 'Rosé Wine Bottle', img: '../img/Badges/rose_wine_bottle.webp' },
+    { id: 'white_wine_bottle',label: 'White Wine Bottle',img: '../img/Badges/white_wine_bottle.webp' },
+  ];
+
+  let iconPickerOpen = false;
+
+  function renderIconGrid(filter) {
+    const grid = document.getElementById('iconGrid');
+    grid.innerHTML = '';
+    const f = filter ? filter.toLowerCase() : '';
+    const icons = f ? BADGE_ICONS.filter(ic => ic.label.toLowerCase().includes(f) || ic.id.includes(f)) : BADGE_ICONS;
+    icons.forEach(ic => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.title = ic.label;
+      btn.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:5px;padding:8px 4px;border:2px solid transparent;border-radius:10px;background:none;cursor:pointer;transition:all .12s';
+      btn.innerHTML = `<img src="${ic.img}" style="width:44px;height:44px;object-fit:contain" alt="${ic.label}"><span style="font-size:9px;color:var(--muted);font-family:var(--sans);text-align:center;line-height:1.2;max-width:56px">${ic.label}</span>`;
+      btn.onmouseenter = () => { btn.style.background = 'var(--accentSoft)'; btn.style.borderColor = 'var(--accentBorder)'; };
+      btn.onmouseleave = () => { btn.style.background = 'none'; btn.style.borderColor = 'transparent'; };
+      btn.onclick = () => selectIcon(ic);
+      grid.appendChild(btn);
+    });
+    if (!icons.length) grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:20px;font-size:13px;color:var(--muted)">Nothing found</div>';
+  }
+
+  function selectIcon(ic) {
+    document.getElementById('badgeIcon').value = JSON.stringify({ id: ic.id, img: ic.img, label: ic.label });
+    document.getElementById('iconPickerPreview').innerHTML = `<img src="${ic.img}" style="width:26px;height:26px;object-fit:contain">`;
+    document.getElementById('iconPickerLabel').textContent = ic.label + ' — selected';
+    document.getElementById('iconPickerLabel').style.color = 'var(--ink)';
+    closeIconPicker();
+  }
+
+  function closeIconPicker() {
+    document.getElementById('iconPicker').style.display = 'none';
+    iconPickerOpen = false;
+  }
+
+  document.getElementById('iconPickerBtn').onclick = (e) => {
+    e.stopPropagation();
+    if (iconPickerOpen) { closeIconPicker(); return; }
+    const rect = document.getElementById('iconPickerBtn').getBoundingClientRect();
+    const picker = document.getElementById('iconPicker');
+    picker.style.display = 'flex';
+    picker.style.left = rect.left + 'px';
+    picker.style.top = Math.min(rect.bottom + 6, window.innerHeight - 340) + 'px';
+    iconPickerOpen = true;
+    document.getElementById('iconSearch').value = '';
+    renderIconGrid('');
+    document.getElementById('iconSearch').focus();
+  };
+
+  document.getElementById('iconSearch').oninput = e => renderIconGrid(e.target.value.trim());
+  document.getElementById('iconSearch').onclick  = e => e.stopPropagation();
+  document.getElementById('iconGrid').onclick    = e => e.stopPropagation();
+
+  document.addEventListener('click', () => { if (iconPickerOpen) closeIconPicker(); });
+
+  function openBadgeModal(badge) {
+    editingBadgeId = badge ? badge.id : null;
+    document.getElementById('badgeModalTitle').textContent = badge ? 'Edit Badge' : 'Add Badge';
+    document.getElementById('badgeName').value = badge ? badge.name : '';
+    const iconVal = badge ? (badge.icon || '') : '';
+    document.getElementById('badgeIcon').value = iconVal;
+    const preview = document.getElementById('iconPickerPreview');
+    if (iconVal) {
+      try {
+        const ic = JSON.parse(iconVal);
+        preview.innerHTML = `<img src="${ic.img}" style="width:26px;height:26px;object-fit:contain">`;
+        document.getElementById('iconPickerLabel').textContent = ic.label + ' — selected';
+        document.getElementById('iconPickerLabel').style.color = 'var(--ink)';
+      } catch(e) {
+        preview.innerHTML = '';
+        document.getElementById('iconPickerLabel').textContent = 'Click to choose icon';
+        document.getElementById('iconPickerLabel').style.color = 'var(--muted)';
+      }
+    } else {
+      preview.innerHTML = '';
+      document.getElementById('iconPickerLabel').textContent = 'Click to choose icon';
+      document.getElementById('iconPickerLabel').style.color = 'var(--muted)';
+    }
+    closeIconPicker();
+    openModal('badgeModal');
+    document.getElementById('badgeName').focus();
+  }
+
+  async function saveBadge() {
+    const name = document.getElementById('badgeName').value.trim();
+    const icon = document.getElementById('badgeIcon').value.trim();
+    if (!name) { alert('Name is required'); return; }
+    const data = { name, icon };
+    if (editingBadgeId) {
+      await updateDoc(doc(db, 'badges', editingBadgeId), data);
+      toast('Updated ✓');
+    } else {
+      await addDoc(collection(db, 'badges'), data);
+      toast('Added ✓');
+    }
+    window.__allBadges = null;
+    closeModal('badgeModal');
+    loadBadges();
+  }
+
+  // ── POPUPS ──────────────────────────────────────────────────────────────
+  let pwizStep = 1;
+  let pwizEditingId = null;
+
+  async function loadPopups() {
+    showView('viewPopups');
+    const list = document.getElementById('popupList');
+    list.innerHTML = '<div class="empty">Loading…</div>';
+    const snap = await getDocs(collection(db, 'popups'));
+    document.getElementById('metaPopupCount').textContent = snap.size;
+    if (snap.empty) { list.innerHTML = '<div class="empty">No popups yet. Click "+ Add Popup" to create one.</div>'; return; }
+    list.innerHTML = '';
+    snap.forEach(d => {
+      const p = { id: d.id, ...d.data() };
+      const card = document.createElement('div');
+      card.className = 'popup-card';
+      const imgHtml = p.imageURL
+        ? `<div class="popup-card-img"><img src="${p.imageURL}" alt=""></div>`
+        : `<div class="popup-card-img"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg></div>`;
+      const triggerLabel = { page_load: 'On page visit', item_added: 'Item added to cart', click_item: 'On item click' }[p.trigger] || p.trigger;
+      card.innerHTML = `
+        ${imgHtml}
+        <div class="popup-card-body">
+          <div class="popup-card-name">${p.nameRu || p.nameHe || p.nameEn || '(no name)'}</div>
+          <div class="popup-card-meta">${triggerLabel} · Priority ${p.priority || 1}</div>
+        </div>
+        <div class="popup-card-actions">
+          <label class="toggle" title="Enable/disable">
+            <input type="checkbox" ${p.active !== false ? 'checked' : ''} onchange="togglePopup('${p.id}', this.checked)">
+            <span class="toggle-slider"></span>
+          </label>
+          <button class="popup-edit-btn" onclick="openPopupWizard('${p.id}')">Edit</button>
+          <button class="popup-del-btn" onclick="deletePopup('${p.id}')" title="Delete">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+          </button>
+        </div>`;
+      list.appendChild(card);
+    });
+  }
+
+  window.togglePopup = async function(id, active) {
+    await updateDoc(doc(db, 'popups', id), { active });
+    toast(active ? 'Popup enabled ✓' : 'Popup disabled');
+  }
+
+  window.deletePopup = async function(id) {
+    if (!confirm('Delete this popup?')) return;
+    await deleteDoc(doc(db, 'popups', id));
+    toast('Deleted');
+    loadPopups();
+  }
+
+  window.openPopupWizard = function(id) {
+    pwizEditingId = id || null;
+    pwizStep = 1;
+    document.getElementById('pwizTitle').textContent = id ? 'Edit Popup' : 'Add Popup';
+    // reset fields
+    ['pwizNameHe','pwizNameRu','pwizNameEn','pwizDescHe','pwizDescRu','pwizDescEn'].forEach(f => document.getElementById(f).value = '');
+    document.getElementById('pwizImageOnly').checked = false;
+    document.getElementById('pwizTextFields').style.display = '';
+    document.getElementById('pwizTrigger').value = 'page_load';
+    document.getElementById('pwizAction').value = 'info';
+    document.getElementById('pwizActionExtra').style.display = 'none';
+    document.getElementById('pwizUnlimited').checked = true;
+    document.getElementById('pwizTimesWrap').style.display = 'none';
+    document.getElementById('pwizTimes').value = '';
+    document.getElementById('pwizNoExpiry').checked = true;
+    document.getElementById('pwizExpiryWrap').style.display = 'none';
+    document.getElementById('pwizExpiry').value = '';
+    document.getElementById('pwizPriority').value = '1';
+    document.getElementById('pwizUploadZone').dataset.b64 = '';
+    document.getElementById('pwizUploadZone').style.display = 'block';
+    document.getElementById('pwizImgInput').value = '';
+    document.getElementById('pwizImgPreview').style.display = 'none';
+    if (id) {
+      getDoc(doc(db, 'popups', id)).then(d => {
+        if (!d.exists()) return;
+        const p = d.data();
+        document.getElementById('pwizNameHe').value = p.nameHe || '';
+        document.getElementById('pwizNameRu').value = p.nameRu || '';
+        document.getElementById('pwizNameEn').value = p.nameEn || '';
+        document.getElementById('pwizDescHe').value = p.descHe || '';
+        document.getElementById('pwizDescRu').value = p.descRu || '';
+        document.getElementById('pwizDescEn').value = p.descEn || '';
+        document.getElementById('pwizImageOnly').checked = !!p.imageOnly;
+        document.getElementById('pwizTextFields').style.display = p.imageOnly ? 'none' : '';
+        document.getElementById('pwizTrigger').value = p.trigger || 'page_load';
+        document.getElementById('pwizAction').value = p.action || 'info';
+        document.getElementById('pwizPriority').value = p.priority || 1;
+        if (p.timesLimit) { document.getElementById('pwizUnlimited').checked = false; document.getElementById('pwizTimesWrap').style.display = ''; document.getElementById('pwizTimes').value = p.timesLimit; }
+        if (p.expiry) { document.getElementById('pwizNoExpiry').checked = false; document.getElementById('pwizExpiryWrap').style.display = ''; document.getElementById('pwizExpiry').value = p.expiry; }
+        if (p.imageURL) {
+          document.getElementById('pwizUploadZone').dataset.b64 = p.imageURL;
+          document.getElementById('pwizUploadZone').style.display = 'none';
+          document.getElementById('pwizImgThumb').src = p.imageURL;
+          document.getElementById('pwizImgName').textContent = 'Saved image';
+          document.getElementById('pwizImgPreview').style.display = 'flex';
+        }
+        pwizUpdateAction();
+      });
+    }
+    pwizRender();
+    document.getElementById('popupWizard').classList.remove('hidden');
+  }
+
+  function pwizRender() {
+    for (let i = 1; i <= 4; i++) {
+      document.getElementById(`pwizStep${i}`).style.display = i === pwizStep ? '' : 'none';
+      const circle = document.getElementById(`pstep${i}`);
+      const label = document.getElementById(`psteplabel${i}`);
+      const clickable = i < pwizStep;
+      if (i < pwizStep) { circle.className = 'pwiz-step-circle done'; circle.innerHTML = '✓'; }
+      else if (i === pwizStep) { circle.className = 'pwiz-step-circle active'; circle.textContent = i; }
+      else { circle.className = 'pwiz-step-circle pending'; circle.textContent = i; }
+      label.className = 'pwiz-step-label' + (i === pwizStep ? ' active' : '');
+      circle.style.cursor = clickable ? 'pointer' : 'default';
+      label.style.cursor = clickable ? 'pointer' : 'default';
+      circle.onclick = label.onclick = clickable ? () => { pwizStep = i; pwizRender(); } : null;
+      if (i < 4) document.getElementById(`pline${i}`).className = 'pwiz-step-line' + (i < pwizStep ? ' done' : '');
+    }
+    document.getElementById('pwizPrev').style.visibility = pwizStep === 1 ? 'hidden' : 'visible';
+    document.getElementById('pwizNext').classList.toggle('hidden', pwizStep === 4);
+    document.getElementById('pwizSave').classList.remove('hidden');
+    if (pwizStep === 4) pwizFillSummary();
+  }
+
+  function pwizFillSummary() {
+    const triggerMap = { page_load: 'On page visit', item_added: 'Item added to cart', click_item: 'On item click' };
+    const actionMap = { info: 'Info only', coupon: 'Apply coupon', link: 'Redirect to link' };
+    document.getElementById('sumNameRu').textContent = document.getElementById('pwizNameRu').value || '—';
+    document.getElementById('sumNameHe').textContent = document.getElementById('pwizNameHe').value || '—';
+    const descRu = document.getElementById('pwizDescRu').value;
+    document.getElementById('sumDesc').textContent = descRu ? (descRu.length > 40 ? descRu.slice(0, 40) + '…' : descRu) : '—';
+    document.getElementById('sumImg').textContent = document.getElementById('pwizUploadZone').dataset.b64 ? 'Image attached' : 'No image';
+    document.getElementById('sumTrigger').textContent = triggerMap[document.getElementById('pwizTrigger').value] || '—';
+    document.getElementById('sumAction').textContent = actionMap[document.getElementById('pwizAction').value] || '—';
+    document.getElementById('sumPriority').textContent = document.getElementById('pwizPriority').value || '1';
+    document.getElementById('sumTimes').textContent = document.getElementById('pwizUnlimited').checked ? 'Unlimited' : (document.getElementById('pwizTimes').value || '—');
+    document.getElementById('sumExpiry').textContent = document.getElementById('pwizNoExpiry').checked ? 'No expiry' : (document.getElementById('pwizExpiry').value || '—');
+  }
+
+  function pwizUpdateAction() {
+    const val = document.getElementById('pwizAction').value;
+    const extra = document.getElementById('pwizActionExtra');
+    const inp = document.getElementById('pwizActionValue');
+    if (val === 'coupon') { extra.style.display = ''; inp.placeholder = 'Coupon code'; }
+    else if (val === 'link') { extra.style.display = ''; inp.placeholder = 'https://…'; }
+    else { extra.style.display = 'none'; }
+  }
+
+  document.getElementById('pwizAction').addEventListener('change', pwizUpdateAction);
+
+  document.getElementById('pwizImageOnly').addEventListener('change', function() {
+    document.getElementById('pwizTextFields').style.display = this.checked ? 'none' : '';
+  });
+
+  document.getElementById('pwizUnlimited').addEventListener('change', function() {
+    document.getElementById('pwizTimesWrap').style.display = this.checked ? 'none' : '';
+  });
+
+  document.getElementById('pwizNoExpiry').addEventListener('change', function() {
+    document.getElementById('pwizExpiryWrap').style.display = this.checked ? 'none' : '';
+  });
+
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const MAX = 800 * 1024;
+      if (file.size > MAX) { reject(new Error('Image too large. Max 800KB.')); return; }
+      const reader = new FileReader();
+      reader.onload = e => resolve(e.target.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  document.getElementById('pwizImgInput').addEventListener('change', async function() {
+    const file = this.files[0];
+    if (!file) return;
+    try {
+      const b64 = await fileToBase64(file);
+      document.getElementById('pwizImgThumb').src = b64;
+      document.getElementById('pwizImgName').textContent = file.name + ' (' + (file.size / 1024).toFixed(0) + ' KB)';
+      document.getElementById('pwizImgPreview').style.display = 'flex';
+      document.getElementById('pwizUploadZone').style.display = 'none';
+      document.getElementById('pwizUploadZone').dataset.b64 = b64;
+    } catch(e) {
+      toast(e.message);
+      this.value = '';
+    }
+  });
+
+  document.getElementById('pwizImgRemove').addEventListener('click', function() {
+    document.getElementById('pwizUploadZone').dataset.b64 = '';
+    document.getElementById('pwizUploadZone').style.display = 'block';
+    document.getElementById('pwizImgPreview').style.display = 'none';
+    document.getElementById('pwizImgInput').value = '';
+  });
+
+  document.getElementById('pwizNext').addEventListener('click', () => {
+    if (pwizStep < 4) { pwizStep++; pwizRender(); }
+  });
+
+  document.getElementById('pwizPrev').addEventListener('click', () => {
+    if (pwizStep > 1) { pwizStep--; pwizRender(); }
+  });
+
+  document.getElementById('pwizClose').addEventListener('click', () => {
+    document.getElementById('popupWizard').classList.add('hidden');
+  });
+
+  document.getElementById('addPopupBtn').addEventListener('click', () => openPopupWizard(null));
+
+  document.getElementById('pwizSave').addEventListener('click', function() {
+    const btn = this;
+    btn.disabled = true;
+    btn.textContent = 'Saving…';
+
+    const nameHe = document.getElementById('pwizNameHe').value.trim();
+    const nameRu = document.getElementById('pwizNameRu').value.trim();
+    const nameEn = document.getElementById('pwizNameEn').value.trim();
+    const descHe = document.getElementById('pwizDescHe').value.trim();
+    const descRu = document.getElementById('pwizDescRu').value.trim();
+    const descEn = document.getElementById('pwizDescEn').value.trim();
+    const imageOnly = document.getElementById('pwizImageOnly').checked;
+    const trigger = document.getElementById('pwizTrigger').value;
+    const action = document.getElementById('pwizAction').value;
+    const actionValue = document.getElementById('pwizActionValue').value.trim() || null;
+    const priority = parseInt(document.getElementById('pwizPriority').value) || 1;
+    const unlimited = document.getElementById('pwizUnlimited').checked;
+    const timesLimit = unlimited ? null : (parseInt(document.getElementById('pwizTimes').value) || null);
+    const noExpiry = document.getElementById('pwizNoExpiry').checked;
+    const expiry = noExpiry ? null : (document.getElementById('pwizExpiry').value || null);
+    const editingId = pwizEditingId;
+    const imgURL = document.getElementById('pwizUploadZone').dataset.b64 || null;
+
+    const doSave = async () => {
+      const data = {
+        nameHe, nameRu, nameEn, descHe, descRu, descEn,
+        imageOnly, imageURL: imgURL || null,
+        trigger, action, actionValue,
+        priority, timesLimit, expiry,
+        active: true,
+        updatedAt: new Date().toISOString(),
+      };
+      if (editingId) {
+        await updateDoc(doc(db, 'popups', editingId), data);
+        toast('Popup updated ✓');
+      } else {
+        await addDoc(collection(db, 'popups'), data);
+        toast('Popup created ✓');
+      }
+      document.getElementById('popupWizard').classList.add('hidden');
+      loadPopups();
+    };
+
+    doSave().catch(e => {
+      console.error('Popup save error:', e);
+      toast('Error: ' + (e.message || 'could not save'));
+    }).finally(() => {
+      btn.disabled = false;
+      btn.textContent = 'Save';
+    });
+  });
+
+  document.getElementById('navPopups').addEventListener('click', () => { setActiveNav('Popups'); loadPopups(); stopLiveCounter(); });
 </script>
 </body>
 </html>

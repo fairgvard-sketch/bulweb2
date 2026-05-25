@@ -864,7 +864,6 @@
           <div class="shop-card-name">${name}</div>
           ${desc ? `<div class="shop-card-desc">${desc}</div>` : ''}
           <div class="shop-card-price">${item.price || ''}</div>
-          <a class="shop-card-btn" href="${href}" target="_blank" rel="noopener">${btnLabel}</a>
         </div>
       </div>`;
     };
@@ -922,34 +921,36 @@
     }
   });
 
-  // автоскролл
-  let autoScrollRaf = null;
+  // автоскролл — setInterval надёжнее на Safari iOS
+  let autoScrollTimer = null;
   let autoPaused = false;
 
   function startAutoScroll() {
-    if (autoScrollRaf) return;
-    function tick() {
-      if (!autoPaused) shopGrid.scrollLeft += 0.5;
-      autoScrollRaf = requestAnimationFrame(tick);
-    }
-    autoScrollRaf = requestAnimationFrame(tick);
+    if (autoScrollTimer) return;
+    autoScrollTimer = setInterval(() => {
+      if (autoPaused || document.hidden) return;
+      shopGrid.scrollLeft += 1;
+    }, 16);
   }
   function stopAutoScroll() {
-    if (autoScrollRaf) { cancelAnimationFrame(autoScrollRaf); autoScrollRaf = null; }
+    if (autoScrollTimer) { clearInterval(autoScrollTimer); autoScrollTimer = null; }
   }
 
-  // пауза при drag
+  // пауза при drag мышью
   shopGrid.addEventListener('mousedown', () => autoPaused = true);
   shopGrid.addEventListener('mouseup', () => autoPaused = false);
   shopGrid.addEventListener('mouseleave', () => autoPaused = false);
-  shopGrid.addEventListener('touchstart', () => autoPaused = true);
-  shopGrid.addEventListener('touchend', () => autoPaused = false);
 
-  // запуск когда видна секция
+  // запуск когда секция видна
   const shopSection = document.getElementById('shop');
   new IntersectionObserver(entries => {
     entries[0].isIntersecting ? startAutoScroll() : stopAutoScroll();
   }, { threshold: 0.1 }).observe(shopSection);
+
+  // возобновить после перехода на вкладку
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && autoScrollTimer) autoPaused = false;
+  });
 </script>
 <script type="module" src="analytics.js"></script>
 <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Back to top">↑</button>
