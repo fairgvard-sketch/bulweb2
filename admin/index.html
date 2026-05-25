@@ -2131,6 +2131,7 @@
 
   // ── SHOP ──
   let editingShopItemId = null;
+  let editingShopItemImg = '';
 
   document.getElementById('addShopItemBtn').onclick  = () => openShopModal(null);
   document.getElementById('shopModalCancel').onclick = () => closeModal('shopModal');
@@ -2213,6 +2214,7 @@
 
   function openShopModal(item) {
     editingShopItemId = item ? item.id : null;
+    editingShopItemImg = item?.img || '';
     document.getElementById('shopModalTitle').textContent = item ? 'Edit item' : 'Add item';
     document.getElementById('sName').value      = item?.name    || '';
     document.getElementById('sNameHe').value    = item?.nameHe  || '';
@@ -2251,7 +2253,7 @@
       descHe:    document.getElementById('sDescHe').value.trim(),
       descRu:    document.getElementById('sDescRu').value.trim(),
       price:     document.getElementById('sPrice').value.trim(),
-      img:       document.getElementById('sImg').value.trim(),
+      img:       document.getElementById('sImg').value.trim() || editingShopItemImg,
       available: document.getElementById('sAvailable').checked,
       updatedAt: serverTimestamp(),
     };
