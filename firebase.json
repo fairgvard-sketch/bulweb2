@@ -5,7 +5,13 @@
       "firebase.json",
       "**/.*",
       "extracted_text.txt",
-      "D _ Light Modern.html"
+      "D _ Light Modern.html",
+      "node_modules/**",
+      "storage.rules",
+      "firestore.rules",
+      "CLAUDE.md",
+      "package.json",
+      "package-lock.json"
     ],
     "cleanUrls": true,
     "trailingSlash": false

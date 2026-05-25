@@ -18,7 +18,7 @@
     /* ─── HERO ─────────────────────────────── */
     .hero {
       padding: 72px 24px 0;
-      max-width: 1100px;
+      max-width: 1300px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -175,7 +175,7 @@
       padding: 0 24px;
     }
     .stats-inner {
-      max-width: 1100px;
+      max-width: 1300px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(3, auto);
@@ -209,7 +209,7 @@
       padding: 14px 24px;
     }
     .ticker-inner {
-      max-width: 1100px;
+      max-width: 1300px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -235,7 +235,7 @@
     /* ─── THE ROOM ──────────────────────────── */
     .section {
       padding: 80px 24px;
-      max-width: 1100px;
+      max-width: 1300px;
       margin: 0 auto;
     }
     .section h2 {
@@ -313,7 +313,7 @@
       padding: 0 24px;
     }
     .medovik-inner {
-      max-width: 1100px;
+      max-width: 1300px;
       margin: 0 auto;
       padding: 80px 0;
       display: grid;
@@ -383,7 +383,7 @@
       padding: 0 24px;
     }
     .shop-inner {
-      max-width: 1100px;
+      max-width: 1300px;
       margin: 0 auto;
       padding: 80px 0;
     }
@@ -405,21 +405,31 @@
       line-height: 1.7;
     }
     .shop-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 14px;
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 12px;
+      cursor: grab;
     }
+    .shop-grid:active { cursor: grabbing; }
+    .shop-grid::-webkit-scrollbar { display: none; }
+    .shop-grid { scrollbar-width: none; }
     .shop-card {
       background: transparent;
       border: none;
       display: flex;
       flex-direction: column;
+      flex-shrink: 0;
       transition: transform 0.22s;
+      user-select: none;
     }
+    .shop-card img { pointer-events: none; }
     .shop-card:hover { transform: translateY(-2px); }
     .shop-card-photo {
-      width: 188px;
-      height: 222px;
+      width: 281px;
+      height: 330px;
       overflow: hidden;
       background: var(--cream-mid);
       border-radius: 4px;
@@ -429,6 +439,7 @@
     .shop-card-photo img {
       width: 100%; height: 100%;
       object-fit: cover;
+      object-position: center;
       display: block;
       transition: transform 0.45s ease;
     }
@@ -482,7 +493,7 @@
       border-top: 1px solid var(--brown-faint);
     }
     .visit-inner {
-      max-width: 1100px;
+      max-width: 1300px;
       margin: 0 auto;
       padding: 80px 0;
       display: grid;
@@ -877,7 +888,7 @@
     const isRu = lang === 'ru';
     const btnLabel = isHe ? 'להזמנה ←' : isRu ? 'Заказать →' : 'Order →';
 
-    grid.innerHTML = visible.map(item => {
+    const makeCard = (item) => {
       const name = (isHe && item.nameHe) ? item.nameHe : (isRu && item.nameRu) ? item.nameRu : (item.name || '');
       const desc = (isHe && item.descHe) ? item.descHe : (isRu && item.descRu) ? item.descRu : (item.desc || '');
       const waText = encodeURIComponent('Hi! I\'d like to order: ' + (item.name || ''));
@@ -894,7 +905,15 @@
           <a class="shop-card-btn" href="${href}" target="_blank" rel="noopener">${btnLabel}</a>
         </div>
       </div>`;
-    }).join('');
+    };
+    // тройное дублирование для бесконечной карусели
+    grid.innerHTML = [...visible, ...visible, ...visible].map(makeCard).join('');
+    // ставим скролл на начало второго блока
+    requestAnimationFrame(() => {
+      const cardWidth = grid.querySelector('.shop-card')?.offsetWidth || 0;
+      const gap = 24;
+      grid.scrollLeft = visible.length * (cardWidth + gap);
+    });
   }
 
   let _shopItems = [];
@@ -909,6 +928,66 @@
       setTimeout(() => renderShop(_shopItems), 0);
     });
   });
+
+  // drag-scroll + бесконечная карусель
+  const shopGrid = document.getElementById('shopGrid');
+  let isDown = false, startX, scrollLeft;
+  shopGrid.addEventListener('mousedown', e => {
+    isDown = true;
+    startX = e.pageX - shopGrid.offsetLeft;
+    scrollLeft = shopGrid.scrollLeft;
+  });
+  shopGrid.addEventListener('mouseleave', () => isDown = false);
+  shopGrid.addEventListener('mouseup', () => isDown = false);
+  shopGrid.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - shopGrid.offsetLeft;
+    shopGrid.scrollLeft = scrollLeft - (x - startX);
+  });
+
+  // бесконечный скролл — перепрыгиваем незаметно
+  shopGrid.addEventListener('scroll', () => {
+    const card = shopGrid.querySelector('.shop-card');
+    if (!card) return;
+    const cardWidth = card.offsetWidth + 24;
+    const total = shopGrid.children.length / 3;
+    const singleWidth = total * cardWidth;
+    if (shopGrid.scrollLeft < singleWidth * 0.5) {
+      shopGrid.scrollLeft += singleWidth;
+    } else if (shopGrid.scrollLeft > singleWidth * 1.5) {
+      shopGrid.scrollLeft -= singleWidth;
+    }
+  });
+
+  // автоскролл
+  let autoScrollRaf = null;
+  let autoPaused = false;
+
+  function startAutoScroll() {
+    if (autoScrollRaf) return;
+    function tick() {
+      if (!autoPaused) shopGrid.scrollLeft += 0.5;
+      autoScrollRaf = requestAnimationFrame(tick);
+    }
+    autoScrollRaf = requestAnimationFrame(tick);
+  }
+  function stopAutoScroll() {
+    if (autoScrollRaf) { cancelAnimationFrame(autoScrollRaf); autoScrollRaf = null; }
+  }
+
+  // пауза при drag
+  shopGrid.addEventListener('mousedown', () => autoPaused = true);
+  shopGrid.addEventListener('mouseup', () => autoPaused = false);
+  shopGrid.addEventListener('mouseleave', () => autoPaused = false);
+  shopGrid.addEventListener('touchstart', () => autoPaused = true);
+  shopGrid.addEventListener('touchend', () => autoPaused = false);
+
+  // запуск когда видна секция
+  const shopSection = document.getElementById('shop');
+  new IntersectionObserver(entries => {
+    entries[0].isIntersecting ? startAutoScroll() : stopAutoScroll();
+  }, { threshold: 0.1 }).observe(shopSection);
 </script>
 <script type="module" src="/analytics.js"></script>
 <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Back to top">↑</button>
