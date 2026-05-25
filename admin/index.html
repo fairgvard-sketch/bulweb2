@@ -2224,7 +2224,7 @@
     const sRemove = document.getElementById('sImgRemove');
     document.getElementById('sImgFile').value = '';
     if (item?.img) {
-      sPreview.src = item.img.startsWith('http') ? item.img : '../' + item.img;
+      sPreview.src = item.img.startsWith('http') ? item.img : '/' + item.img;
       sPreview.style.display = 'block';
       sPlaceholder.style.display = 'none';
       sRemove.style.display = 'block';
