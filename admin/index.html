@@ -932,6 +932,16 @@
       <button class="tab" data-tab="sAvail">Availability</button>
     </div>
     <div class="tab-content active" id="sBasic">
+      <div class="upload-area" id="sUploadArea">
+        <img id="sImgPreview" style="display:none">
+        <div class="upload-placeholder" id="sUploadPlaceholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Upload Image</span>
+        </div>
+        <button class="upload-remove" id="sImgRemove" style="display:none">Remove</button>
+        <input type="file" id="sImgFile" accept="image/*" style="display:none">
+      </div>
+      <input type="hidden" id="sImg">
       <div class="modal-section-title">Item name</div>
       <div class="modal-grid">
         <div class="field"><label>Name in English</label><input type="text" id="sName" placeholder="Sourdough loaf"></div>
@@ -951,17 +961,6 @@
       <div class="modal-grid">
         <div class="field"><label>Price</label><input type="text" id="sPrice" placeholder="₪45"></div>
       </div>
-      <div class="modal-section-title">Image</div>
-      <div class="upload-area" id="sUploadArea">
-        <img id="sImgPreview" style="display:none">
-        <div class="upload-placeholder" id="sUploadPlaceholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span>Upload Image</span>
-        </div>
-        <button class="upload-remove" id="sImgRemove" style="display:none">Remove</button>
-        <input type="file" id="sImgFile" accept="image/*" style="display:none">
-      </div>
-      <div class="field" style="margin-top:8px"><label>Or paste image URL / path</label><input type="text" id="sImg" placeholder="img/shop/loaf.webp or https://..."></div>
     </div>
     <div class="tab-content" id="sAvail">
       <div class="avail-row">
@@ -982,6 +981,7 @@
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
   import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
   import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, setDoc, getDoc, query, orderBy, where, limit, writeBatch, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+  import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js';
 
   const app = initializeApp({
     apiKey: "AIzaSyC_zaNtYW8wnS7nhoOzEvkNhbJeJPHWmaI",
@@ -994,6 +994,7 @@
 
   const auth = getAuth(app);
   const db = getFirestore(app);
+  const storage = getStorage(app);
 
   const CATEGORIES = [
     { id: 'hot-drinks',  label: 'Hot Drinks',          img: '../img/hot drinks/espresso_short.webp' },
@@ -1338,7 +1339,40 @@
   }
   setupUpload('iUploadArea','iImgFile','iImgPreview','iUploadPlaceholder','iImgRemove');
   setupUpload('cUploadArea','cImgFile','cImgPreview','cUploadPlaceholder','cImgRemove');
-  setupUpload('sUploadArea','sImgFile','sImgPreview','sUploadPlaceholder','sImgRemove');
+
+  // Shop upload — загружает файл в Firebase Storage и пишет URL в скрытый sImg
+  (function setupShopUpload() {
+    const area = document.getElementById('sUploadArea');
+    const file = document.getElementById('sImgFile');
+    const preview = document.getElementById('sImgPreview');
+    const placeholder = document.getElementById('sUploadPlaceholder');
+    const remove = document.getElementById('sImgRemove');
+    const imgInput = document.getElementById('sImg');
+    area.onclick = (e) => { if (e.target !== remove) file.click(); };
+    file.onchange = async () => {
+      const f = file.files[0];
+      if (!f) return;
+      preview.src = URL.createObjectURL(f);
+      preview.style.display = 'block';
+      placeholder.style.display = 'none';
+      remove.style.display = 'block';
+      toast('Uploading…');
+      const storageRef = ref(storage, 'shop/' + Date.now() + '_' + f.name);
+      await uploadBytes(storageRef, f);
+      const url = await getDownloadURL(storageRef);
+      imgInput.value = url;
+      toast('Uploaded ✓');
+    };
+    remove.onclick = (e) => {
+      e.stopPropagation();
+      preview.src = '';
+      preview.style.display = 'none';
+      placeholder.style.display = 'flex';
+      remove.style.display = 'none';
+      file.value = '';
+      imgInput.value = '';
+    };
+  })();
 
   // ── ITEM MODAL ──
   document.getElementById('addItemBtn').onclick = () => openItemModal(null);
