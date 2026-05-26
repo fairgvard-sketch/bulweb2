@@ -57,5 +57,5 @@
     btn.addEventListener('click', function () { applyLang(btn.dataset.lang); });
   });
 
-  applyLang(localStorage.getItem(LANG_KEY) || 'en');
+  applyLang(localStorage.getItem(LANG_KEY) || 'he');
 })();

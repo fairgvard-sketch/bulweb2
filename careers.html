@@ -17,7 +17,7 @@
   <link rel="alternate" hreflang="he" href="https://bulweb2.web.app/careers">
   <link rel="alternate" hreflang="ru" href="https://bulweb2.web.app/careers">
   <link rel="alternate" hreflang="x-default" href="https://bulweb2.web.app/careers">
-  <script>(function(){var l=localStorage.getItem('bulochka-lang');if(l==='he'){document.documentElement.dir='rtl';document.documentElement.lang='he';}else if(l){document.documentElement.lang=l;}})();</script>
+  <script>(function(){var l=localStorage.getItem('bulochka-lang')||'he';if(l==='he'){document.documentElement.dir='rtl';document.documentElement.lang='he';}else{document.documentElement.lang=l;}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Playfair+Display:ital,wght@0,400;1,400&family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
@@ -368,7 +368,7 @@
     const consent = this.consent.checked;
     if (!name || !phone || !position || !consent) return;
 
-    const lang = localStorage.getItem('bulochka-lang') || 'en';
+    const lang = localStorage.getItem('bulochka-lang') || 'he';
     const posLabels = {
       barista: { en: 'Barista', he: 'בריסטה', ru: 'Бариста' },
       baker:   { en: "Baker's assistant", he: 'עוזר/ת אופה', ru: 'Помощник пекаря' },
@@ -432,7 +432,7 @@
       document.getElementById('btnSubmit').textContent = s.submit;
       document.getElementById('applySuccess').textContent = s.success;
     }
-    var lang = localStorage.getItem('bulochka-lang') || 'en';
+    var lang = localStorage.getItem('bulochka-lang') || 'he';
     applyFormLang(lang);
     document.querySelectorAll('.lang-btn').forEach(function (btn) {
       btn.addEventListener('click', function () { applyFormLang(btn.dataset.lang); });
