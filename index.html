@@ -793,7 +793,7 @@
 
 <script src="mobile-menu.js"></script>
 <script src="lang.js"></script>
-<script src="cookie-consent.js"></script>
+<script src="cookie-consent.js?v=2"></script>
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
   import { getFirestore, collection, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
@@ -933,6 +933,32 @@
     btn.addEventListener('click', function(){
       window.scrollTo({top: 0, behavior: 'smooth'});
     });
+  })();
+</script>
+
+<script src="accessibility.js"></script>
+<script>
+  (function () {
+    function updateHoursDot() {
+      var el = document.querySelector('.nav-hours');
+      if (!el) return;
+      var now = new Date();
+      var day = now.getDay(); // 0=Sun,1=Mon,...,6=Sat
+      var h = now.getHours();
+      var m = now.getMinutes();
+      var mins = h * 60 + m;
+      var open = false;
+      if (day === 6) {
+        open = false; // Saturday closed
+      } else if (day === 5) {
+        open = mins >= 8 * 60 && mins < 15 * 60; // Friday 08:00–15:00
+      } else {
+        open = mins >= 8 * 60 && mins < 20 * 60; // Sun–Thu 08:00–20:00
+      }
+      el.classList.toggle('nav-hours--closed', !open);
+    }
+    updateHoursDot();
+    setInterval(updateHoursDot, 60000);
   })();
 </script>
 </body>

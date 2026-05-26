@@ -35,9 +35,9 @@
     });
 
     document.querySelectorAll('.menu-item-action').forEach(function (btn) {
-      if (isHe) btn.textContent = 'הוסף להזמנה ←';
-      else if (isRu) btn.textContent = 'Добавить →';
-      else btn.textContent = 'Add to order →';
+      if (isHe) btn.textContent = 'הוסף תוספות ←';
+      else if (isRu) btn.textContent = 'Добавить добавки →';
+      else btn.textContent = 'Add ingredients →';
     });
 
     var soldOutText = isHe ? ' — אזל המלאי' : isRu ? ' — нет в наличии' : ' — sold out';

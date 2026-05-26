@@ -166,7 +166,7 @@
       margin-bottom: 16px;
       font-optical-sizing: auto;
     }
-    .apply-text h2 em { font-style: italic; }
+    .apply-text h2 em { font-style: italic; color: var(--brown-mid); }
     .apply-text p {
       font-size: 15px;
       color: var(--brown-mid);
@@ -214,7 +214,21 @@
     .apply-form-submit {
       margin-top: 8px;
       align-self: flex-start;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      background: var(--brown-dark);
+      color: var(--cream);
+      border: none;
+      padding: 14px 32px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      white-space: nowrap;
     }
+    .apply-form-submit:hover { opacity: 0.82; }
     .apply-success {
       display: none;
       font-family: var(--sans);
@@ -393,7 +407,7 @@
 </script>
 <script src="mobile-menu.js"></script>
 <script src="lang.js"></script>
-<script src="cookie-consent.js"></script>
+<script src="cookie-consent.js?v=2"></script>
 <script>
   (function () {
     var formStrings = {
@@ -453,5 +467,7 @@
     });
   })();
 </script>
+
+<script src="accessibility.js"></script>
 </body>
 </html>

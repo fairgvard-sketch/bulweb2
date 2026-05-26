@@ -4,22 +4,16 @@
 
   var T = {
     en: {
-      title: 'We use cookies',
-      msg:   'We use cookies to analyse how visitors use our site and to improve your experience. You can accept or decline analytics cookies below.',
-      ok:    'Accept all',
-      no:    'Decline',
+      msg:    'We use cookies (cookies) to improve your browsing experience. To learn more – see our <a href="cookie-policy" class="cookie-link">privacy policy</a>.',
+      ok:     'Accept',
     },
     he: {
-      title: 'אנחנו משתמשים בעוגיות',
-      msg:   'אנחנו משתמשים בעוגיות כדי לנתח כיצד המבקרים משתמשים באתר ולשפר את חוויית הגלישה שלך. באפשרותך לאשר או לדחות עוגיות ניתוח.',
-      ok:    'אשר הכל',
-      no:    'דחה',
+      msg:    'אנחנו משתמשים ב״קבצי עוגיות״ (cookies) לשיפור חוויית הגלישה והתאמת תוכן. לפרטים נוספים – עיינו ב<a href="cookie-policy" class="cookie-link">מדיניות הפרטיות</a> שלנו.',
+      ok:     'קראתי',
     },
     ru: {
-      title: 'Мы используем cookies',
-      msg:   'Мы используем файлы cookie для анализа трафика и улучшения вашего опыта. Вы можете принять или отклонить аналитические cookie.',
-      ok:    'Принять все',
-      no:    'Отклонить',
+      msg:    'Мы используем файлы cookie для улучшения работы сайта. Подробнее — в нашей <a href="cookie-policy" class="cookie-link">политике конфиденциальности</a>.',
+      ok:     'Принять',
     },
   };
 
@@ -57,15 +51,9 @@
 
   wrap.innerHTML =
     '<div id="cookie-banner"' + (isRtl ? ' dir="rtl"' : '') + '>' +
-      '<div class="cookie-top">' +
-        '<span class="cookie-icon">🍪</span>' +
-        '<p class="cookie-title">' + t.title + '</p>' +
-      '</div>' +
+      '<span class="cookie-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="8" stroke="#7a5a3f" stroke-width="1.2"/><circle cx="6" cy="7" r="1.1" fill="#7a5a3f"/><circle cx="11" cy="6.5" r="0.8" fill="#7a5a3f"/><circle cx="11.5" cy="11" r="1.1" fill="#7a5a3f"/><circle cx="7" cy="11.5" r="0.8" fill="#7a5a3f"/><circle cx="9" cy="9" r="0.7" fill="#7a5a3f"/></svg></span>' +
       '<p class="cookie-msg">' + t.msg + '</p>' +
-      '<div class="cookie-btns">' +
-        '<button id="cookie-ok">'  + t.ok + '</button>' +
-        '<button id="cookie-no">'  + t.no + '</button>' +
-      '</div>' +
+      '<button id="cookie-ok">' + t.ok + '</button>' +
     '</div>';
 
   document.body.appendChild(wrap);
@@ -74,9 +62,5 @@
     localStorage.setItem(KEY, 'yes');
     dismiss(wrap);
     loadGA();
-  };
-  document.getElementById('cookie-no').onclick = function () {
-    localStorage.setItem(KEY, 'no');
-    dismiss(wrap);
   };
 })();

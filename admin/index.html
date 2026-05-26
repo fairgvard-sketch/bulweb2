@@ -58,7 +58,8 @@
     .topbar-brand-info{display:flex;flex-direction:column;gap:1px}
     .topbar-name{font-size:14px;font-weight:600;color:var(--ink);line-height:1}
     .topbar-status{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);line-height:1}
-    .topbar-status::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--success);flex-shrink:0}
+    .topbar-status::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--success);flex-shrink:0;animation:statusPulse 2s ease-in-out infinite}
+    @keyframes statusPulse{0%,100%{opacity:1}50%{opacity:.25}}
     .topbar-search{flex:1;max-width:320px;position:relative}
     .topbar-search input{width:100%;padding:8px 12px 8px 36px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:13px;background:var(--bg);color:var(--ink);outline:none;transition:border .18s}
     .topbar-search input:focus{border-color:var(--accent)}
@@ -70,6 +71,19 @@
     .topbar-user-avatar{width:32px;height:32px;border-radius:50%;background:var(--accentSoft);border:1.5px solid var(--accentBorder);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;font-weight:600;color:var(--accent)}
     .btn-logout{font-size:12px;color:var(--muted);background:none;border:1.5px solid var(--line);border-radius:100px;padding:6px 14px;cursor:pointer;font-family:var(--sans);transition:all .18s;white-space:nowrap}
     .btn-logout:hover{color:var(--text);border-color:var(--faint)}
+    /* LANG DROPDOWN */
+    .topbar-lang{position:relative;display:none}
+    @media(min-width:641px){.topbar-lang{display:block}}
+    .topbar-lang-btn{display:flex;align-items:center;gap:5px;padding:6px 11px;border:1.5px solid var(--line);border-radius:100px;background:none;font-family:var(--sans);font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;transition:all .18s;white-space:nowrap}
+    .topbar-lang-btn:hover{color:var(--text);border-color:var(--faint)}
+    .topbar-lang-btn svg{width:13px;height:13px;transition:transform .18s}
+    .topbar-lang.open .topbar-lang-btn{color:var(--accent);border-color:var(--accentBorder)}
+    .topbar-lang.open .topbar-lang-btn svg{transform:rotate(180deg)}
+    .topbar-lang-menu{position:absolute;top:calc(100% + 6px);right:0;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadowLg);overflow:hidden;min-width:110px;z-index:300;display:none}
+    .topbar-lang.open .topbar-lang-menu{display:block}
+    .topbar-lang-opt{display:block;width:100%;padding:9px 14px;border:none;background:none;font-family:var(--sans);font-size:13px;color:var(--text);cursor:pointer;text-align:left;transition:background .12s;white-space:nowrap}
+    .topbar-lang-opt:hover{background:var(--lineSoft)}
+    .topbar-lang-opt.active{color:var(--accent);font-weight:500;background:var(--accentSoft)}
 
     /* LAYOUT */
     .admin-body{display:flex;min-height:calc(100vh - 64px)}
@@ -85,6 +99,18 @@
     .sidebar-item svg{width:18px;height:18px;flex-shrink:0;transition:color .15s}
     .sidebar-item.active svg{color:var(--accent)}
     .sidebar-bottom{margin-top:auto;padding-top:8px;border-top:1px solid var(--line)}
+    /* SIDEBAR SETTINGS */
+    .sidebar-settings-label{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--subtle);padding:8px 10px 4px}
+    .sidebar-expand-btn{display:flex;align-items:center;gap:10px;width:100%;padding:9px 10px;border:none;background:none;font-family:var(--sans);font-size:13.5px;font-weight:500;color:var(--muted);cursor:pointer;border-radius:8px;transition:all .15s;position:relative}
+    .sidebar-expand-btn:hover{background:var(--lineSoft);color:var(--text)}
+    .sidebar-expand-btn svg:first-child{width:18px;height:18px;flex-shrink:0}
+    .sidebar-expand-chevron{width:14px;height:14px;margin-left:auto;transition:transform .2s;flex-shrink:0}
+    .sidebar-expand-btn.open .sidebar-expand-chevron{transform:rotate(180deg)}
+    .sidebar-submenu{overflow:hidden;max-height:0;transition:max-height .22s ease}
+    .sidebar-submenu.open{max-height:200px}
+    .sidebar-subitem{display:block;width:100%;padding:8px 10px 8px 38px;border:none;background:none;font-family:var(--sans);font-size:13px;color:var(--muted);cursor:pointer;text-align:left;border-radius:6px;transition:background .12s}
+    .sidebar-subitem:hover{background:var(--lineSoft);color:var(--text)}
+    .sidebar-subitem.active{color:var(--accent);background:var(--accentSoft);font-weight:500}
     .sidebar-user{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px}
     .sidebar-user-avatar{width:28px;height:28px;border-radius:50%;background:var(--accentSoft);border:1.5px solid var(--accentBorder);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--accent);flex-shrink:0}
     .sidebar-user-name{font-size:12.5px;font-weight:500;color:var(--text)}
@@ -520,6 +546,311 @@
     .pwiz-summary-key{color:var(--muted);flex-shrink:0;min-width:80px}
     .pwiz-summary-val{color:var(--ink);font-weight:500}
   </style>
+<script>
+(function(){
+  var T={
+    en:{
+      loginSub:'Admin panel',signIn:'Sign in',signOut:'Sign out',emailLabel:'Email',passwordLabel:'Password',
+      live:'Live',searchPh:'Search…',
+      dashboard:'Dashboard',menu:'Menu',shop:'Shop',badges:'Badges',popups:'Popups',changes:'Changes',more:'More',settings:'Settings',
+      siteAnalytics:'Site analytics',today:'Today',days7:'7 days',days14:'14 days',days30:'30 days',
+      exportCsv:'⬇ Export CSV',uniqueVisitors:'Unique visitors',pageViews:'Page views',
+      vsPrev:'vs prev period',visitorsNow:'visitors on the site',liveNow:'Live · right now',
+      topPages:'Top pages',mostVisited:'Most visited in period',pageCol:'PAGE',visitorsCol:'VISITORS',
+      trafficSources:'Traffic sources',fromWhere:'Where visitors come from',devices:'Devices',deviceMix:'Visitor device mix',
+      loading:'Loading…',noData:'No data yet',
+      menuStructure:'Menu structure',catCount:'categories',dishCount:'dishes',lastEdit:'last edit',
+      actions:'Actions',addCat:'+ Add category',searchCats:'Search categories…',
+      allStatuses:'All Statuses',statusLive:'Live',statusHidden:'Hidden',statusDraft:'Draft',openArrow:'Open →',
+      menuActionsTitle:'Menu Actions',closeBtn:'× Close',mgmt:'Management',
+      downloadMenu:'Download Menu',exportJson:'Export as JSON',uploadMenu:'Upload Menu',importJson:'Import from JSON',
+      downloadPdf:'Download PDF',printReady:'Print-ready PDF',template:'Template',downloadTpl:'Download template',
+      displaySection:'Display',showDescs:'Show descriptions',showDescsDesc:'Display item descriptions on the menu',
+      showPhotos:'Show photos',showPhotosDesc:'Display item photos on the menu',
+      itemCount:'items',addItem:'+ Add item',shopItems:'Shop items',loadSamples:'Load samples',
+      popupsTitle:'Popups',popupCount:'popups',addPopup:'+ Add Popup',
+      badgeList:'Badge List',badgeCount:'badges',addBadge:'+ Add Badge',
+      settingsTitle:'Settings',genLabel:'GENERAL',general:'General',
+      restaurantNameLogo:'Restaurant Name & Logo',restaurantName:'Restaurant name',save:'Save',
+      logo:'Logo',uploadLogo:'Upload logo',upload:'Upload',remove:'Remove',
+      moreTitle:'More',content:'Content',management:'Management',theme:'Theme',light:'Light',dark:'Dark',languages:'Languages',
+      addItemTitle:'Add item',editItemTitle:'Edit item',
+      basicInfo:'Basic Info',availability:'Availability',uploadImage:'Upload Image',
+      itemName:'Item name',nameEn:'Name in English',nameHe:'Name in Hebrew',nameRu:'Name in Russian',
+      descTitle:'Description',descEn:'Description in English',descHe:'Description in Hebrew',descRu:'Description in Russian',
+      price:'Price',comment:'Comment',subhead:'Subhead',subheadHe:'Subhead in Hebrew',subheadRu:'Subhead in Russian',
+      selectBadges:'Select badges for this item',available:'Available',cancel:'Cancel',
+      editCatTitle:'Edit Category',addCatTitle:'Add Category',catName:'Category name',
+      catNameEn:'Name in English',catNameHe:'Name in Hebrew',catDescEn:'Description in English',catDescHe:'Description in Hebrew',
+      catComment:'Comment',catSettingsTab:'Settings',visibleMenu:'Visible on menu',
+      noPhotosLayout:'No photos (list layout)',noPhotosDesc:'Display this category as a text list without images',
+      updateVis:'Update Visibility',
+      hideForTime:'Hide for a limited time',hideForTimeDesc:'The item will automatically become visible again at the end of the selected duration.',
+      h1:'1 Hour',h2:'2 Hours',h3:'3 Hours',custom:'Custom',selectHours:'Select how many hours:',
+      untilShift:'Until Next Shift',shiftDesc:'The item will automatically reappear at the start of the next shift.',
+      untilSpecific:'Until a Specific Time',specificDesc:'The item will automatically reappear at the date and time you choose.',
+      hideIndef:'Hide indefinitely',indefDesc:'The item stays hidden until you manually make it visible again.',hideUntil:'Hide until',
+      deleteTitle:'Delete Confirmation',deleteBody:'Are you sure you want to delete?',confirm:'Confirm',
+      hideNoLimitTitle:'Notice: Hiding without time limit',
+      hideNoLimitBody:'You have chosen to hide this item indefinitely. It will not reappear automatically — you will need to manually restore its visibility. Do you wish to proceed?',
+      goBack:'Go Back',hideForever:'I understand, hide indefinitely',
+      addPopupTitle:'Add Popup',editPopupTitle:'Edit Popup',
+      stepBasic:'Basic info',stepTrigger:'Trigger',stepSettings:'Settings',stepPreview:'Preview',
+      imageSection:'Image',wremove:'Remove',clickUpload:'Click to upload image',
+      imageOnlyLabel:'Image-only popup',nameSection:'Name',descSection:'Description',
+      hebrew:'Hebrew',russian:'Russian',english:'English',
+      whenPopup:'When does the popup appear?',chooseTrigger:'Choose the event that triggers this popup',
+      trigPageLoad:'When visiting the menu page',trigItemAdded:'When an item is added to cart',trigClick:'When clicking on an item',
+      whatAction:'What happens when confirmed?',actionPerformed:'Action performed when the user taps the button',
+      actInfo:'Display information only',actCoupon:'Apply coupon code',actLink:'Redirect to link',
+      timesDisplay:'Times to display',unlimited:'Unlimited',expiryDate:'Expiry date',noExpiry:'No expiry',
+      priority:'Priority',priorityDesc:'Lower number = shown first when multiple popups are active',
+      summaryTitle:'Summary — review before saving',whatDisplay:'What will be displayed',whenAppear:'When will it appear',
+      previous:'Previous',next:'Next →',
+      addBadgeTitle:'Add Badge',editBadgeTitle:'Edit Badge',badgeName:'Name',badgeIcon:'Icon',clickChooseIcon:'Click to choose icon',delete:'Delete',
+      toastSaved:'Saved ✓',toastAdded:'Added ✓',toastDeleted:'Deleted',toastOrderSaved:'Order saved ✓',toastHidden:'Hidden ✓',
+      noItemsYet:'No items yet',noShopItems:'No shop items yet. Add the first one!',
+      noBadgesYet:'No badges yet. Click “+ Add Badge” to create one.',
+      noPopupsYet:'No popups yet. Click “+ Add Popup” to create one.',
+      noBadgesModal:'No badges yet. Create them in the Badges section.',
+      sAvail:'Available in shop',todayAt:'today',
+    },
+    ru:{
+      loginSub:'Панель администратора',
+      signIn:'Войти',signOut:'Выйти',
+      emailLabel:'Эл. почта',passwordLabel:'Пароль',
+      live:'Онлайн',searchPh:'Поиск…',
+      dashboard:'Дашборд',menu:'Меню',shop:'Магазин',
+      badges:'Значки',popups:'Поп-апы',changes:'Изменения',
+      more:'Ещё',settings:'Настройки',
+      siteAnalytics:'Аналитика сайта',
+      today:'Сегодня',days7:'7 дней',days14:'14 дней',days30:'30 дней',
+      exportCsv:'⬇ Экспорт CSV',
+      uniqueVisitors:'Уникальные посетители',
+      pageViews:'Просмотры страниц',
+      vsPrev:'vs. прошлый период',
+      visitorsNow:'посетителей на сайте',
+      liveNow:'Онлайн · сейчас',
+      topPages:'Топ страниц',
+      mostVisited:'Наиболее посещаемые за период',
+      pageCol:'СТРАНИЦА',visitorsCol:'ПОСЕТИТЕЛИ',
+      trafficSources:'Источники трафика',
+      fromWhere:'Откуда приходят посетители',
+      devices:'Устройства',deviceMix:'Соотношение устройств',
+      loading:'Загрузка…',noData:'Нет данных',
+      menuStructure:'Структура меню',
+      catCount:'категорий',dishCount:'блюд',lastEdit:'изменено',
+      actions:'Действия',addCat:'+ Добавить категорию',
+      searchCats:'Поиск по категориям…',
+      allStatuses:'Все статусы',statusLive:'Активно',
+      statusHidden:'Скрыто',statusDraft:'Черновик',
+      openArrow:'Открыть →',
+      menuActionsTitle:'Действия с меню',closeBtn:'× Закрыть',
+      mgmt:'Управление',
+      downloadMenu:'Скачать меню',exportJson:'Экспорт в JSON',
+      uploadMenu:'Загрузить меню',importJson:'Импорт из JSON',
+      downloadPdf:'Скачать PDF',printReady:'PDF для печати',
+      template:'Шаблон',downloadTpl:'Скачать шаблон',
+      displaySection:'Отображение',
+      showDescs:'Показывать описания',showDescsDesc:'Отображать описания позиций в меню',
+      showPhotos:'Показывать фото',showPhotosDesc:'Отображать фото позиций в меню',
+      itemCount:'позиций',addItem:'+ Добавить позицию',
+      shopItems:'Товары магазина',loadSamples:'Загрузить примеры',
+      popupsTitle:'Поп-апы',popupCount:'поп-апов',addPopup:'+ Добавить поп-ап',
+      badgeList:'Список значков',badgeCount:'значков',addBadge:'+ Добавить значок',
+      settingsTitle:'Настройки',genLabel:'ОБЩЕЕ',general:'Общее',
+      restaurantNameLogo:'Название и логотип',
+      restaurantName:'Название заведения',
+      save:'Сохранить',logo:'Логотип',
+      uploadLogo:'Загрузить логотип',upload:'Загрузить',remove:'Удалить',
+      moreTitle:'Ещё',content:'Контент',management:'Управление',
+      theme:'Тема',light:'Светлая',dark:'Тёмная',languages:'Язык интерфейса',
+      addItemTitle:'Добавить позицию',editItemTitle:'Редактировать позицию',
+      basicInfo:'Основное',availability:'Доступность',uploadImage:'Загрузить фото',
+      itemName:'Название позиции',
+      nameEn:'Название на английском',nameHe:'Название на иврите',nameRu:'Название на русском',
+      descTitle:'Описание',descEn:'Описание на английском',descHe:'Описание на иврите',descRu:'Описание на русском',
+      price:'Цена',comment:'Комментарий',
+      subhead:'Подзаголовок',subheadHe:'Подзаголовок на иврите',subheadRu:'Подзаголовок на русском',
+      selectBadges:'Выберите значки для позиции',available:'Доступно',cancel:'Отмена',
+      editCatTitle:'Редактировать категорию',addCatTitle:'Добавить категорию',
+      catName:'Название категории',catNameEn:'Название на английском',catNameHe:'Название на иврите',
+      catDescEn:'Описание на английском',catDescHe:'Описание на иврите',
+      catComment:'Комментарий',catSettingsTab:'Настройки',
+      visibleMenu:'Виден в меню',noPhotosLayout:'Без фото (список)',
+      noPhotosDesc:'Отображать как текстовый список без изображений',
+      updateVis:'Изменить видимость',
+      hideForTime:'Скрыть на время',hideForTimeDesc:'Позиция автоматически станет видимой по истечении срока.',
+      h1:'1 час',h2:'2 часа',h3:'3 часа',custom:'Другое',selectHours:'Укажите количество часов:',
+      untilShift:'До следующей смены',shiftDesc:'Позиция появится в начале следующей смены.',
+      untilSpecific:'До определённого времени',specificDesc:'Позиция появится в указанные дату и время.',
+      hideIndef:'Скрыть навсегда',indefDesc:'Позиция останется скрытой до ручного восстановления.',hideUntil:'Скрыть до',
+      deleteTitle:'Подтверждение удаления',deleteBody:'Вы уверены, что хотите удалить?',confirm:'Подтвердить',
+      hideNoLimitTitle:'Внимание: скрыть без ограничений',
+      hideNoLimitBody:'Вы выбрали скрыть позицию навсегда. Она не появится автоматически — нужно вручную восстановить видимость. Продолжить?',
+      goBack:'Назад',hideForever:'Понятно, скрыть навсегда',
+      addPopupTitle:'Добавить поп-ап',editPopupTitle:'Редактировать поп-ап',
+      stepBasic:'Основное',stepTrigger:'Триггер',stepSettings:'Настройки',stepPreview:'Просмотр',
+      imageSection:'Изображение',wremove:'Удалить',clickUpload:'Нажмите для загрузки',
+      imageOnlyLabel:'Только изображение',nameSection:'Название',descSection:'Описание',
+      hebrew:'Иврит',russian:'Русский',english:'Английский',
+      whenPopup:'Когда показывается поп-ап?',chooseTrigger:'Выберите событие',
+      trigPageLoad:'При открытии страницы меню',trigItemAdded:'При добавлении в заказ',trigClick:'При нажатии на позицию',
+      whatAction:'Что происходит при подтверждении?',actionPerformed:'Действие при нажатии кнопки',
+      actInfo:'Только информация',actCoupon:'Применить промокод',actLink:'Перейти по ссылке',
+      timesDisplay:'Сколько раз показывать',unlimited:'Без ограничений',expiryDate:'Дата окончания',noExpiry:'Без ограничений',
+      priority:'Приоритет',priorityDesc:'Меньшее число = показывается первым',
+      summaryTitle:'Итог — проверьте перед сохранением',whatDisplay:'Что будет показано',whenAppear:'Когда появится',
+      previous:'Назад',next:'Далее →',
+      addBadgeTitle:'Добавить значок',editBadgeTitle:'Редактировать значок',badgeName:'Название',badgeIcon:'Иконка',clickChooseIcon:'Нажмите, чтобы выбрать иконку',delete:'Удалить',
+      toastSaved:'Сохранено ✓',toastAdded:'Добавлено ✓',toastDeleted:'Удалено',toastOrderSaved:'Порядок сохранён ✓',toastHidden:'Скрыто ✓',
+      noItemsYet:'Позиций пока нет',noShopItems:'Товаров пока нет. Добавьте первый!',
+      noBadgesYet:'Значков пока нет.',noPopupsYet:'Поп-апов пока нет.',
+      noBadgesModal:'Значков пока нет. Создайте их в разделе «Значки».',
+      sAvail:'Доступно в магазине',todayAt:'сегодня',
+    }
+  };
+  function _navTxt(id,txt){var el=document.getElementById(id);if(!el)return;for(var i=el.childNodes.length-1;i>=0;i--){var n=el.childNodes[i];if(n.nodeType===3&&n.nodeValue.trim()){n.nodeValue=n.nodeValue.replace(n.nodeValue.trim(),txt);return;}}}
+  window.ADMIN_I18N={
+    lang:localStorage.getItem('bulochka-admin-lang')||'en',
+    T:T,
+    t:function(k){return(this.T[this.lang]||this.T.en)[k]||(this.T.en[k]||k);},
+    apply:function(lang){
+      this.lang=lang;
+      localStorage.setItem('bulochka-admin-lang',lang);
+      var L=this.T[lang]||this.T.en;
+      var $=function(sel,key){var el=document.querySelector(sel);if(el&&L[key]!=null)el.textContent=L[key];};
+      var ph=function(sel,key){var el=document.querySelector(sel);if(el&&L[key])el.placeholder=L[key];};
+      // login
+      $('.login-sub','loginSub');$('#loginBtn','signIn');$('#logoutBtn','signOut');
+      var ll=document.querySelectorAll('.login-box .field label');if(ll[0])ll[0].textContent=L.emailLabel;if(ll[1])ll[1].textContent=L.passwordLabel;
+      // topbar
+      $('.topbar-status','live');ph('.topbar-search input','searchPh');
+      // sidebar
+      _navTxt('navDashboard',L.dashboard);_navTxt('navMenu',L.menu);_navTxt('navShop',L.shop);
+      _navTxt('navBadges',L.badges);_navTxt('navPopups',L.popups);_navTxt('navChanges',L.changes);
+      // bottom nav
+      _navTxt('bnDashboard',L.dashboard);_navTxt('bnMenu',L.menu);_navTxt('bnShop',L.shop);_navTxt('bnMore',L.more);
+      // dashboard
+      var dt=document.querySelector('.dash-title');if(dt){var dn=dt.childNodes[0];if(dn&&dn.nodeType===3)dn.nodeValue=L.siteAnalytics+' ';}
+      var rb=document.querySelectorAll('.dash-range-btn');if(rb[0])rb[0].textContent=L.today;if(rb[1])rb[1].textContent=L.days7;if(rb[2])rb[2].textContent=L.days14;if(rb[3])rb[3].textContent=L.days30;
+      $('#dashExportCSV','exportCsv');
+      var ml=document.querySelectorAll('.dash-metric-label');if(ml[0])ml[0].textContent=L.uniqueVisitors;if(ml[1])ml[1].textContent=L.pageViews;
+      document.querySelectorAll('.dash-vs').forEach(function(el){el.textContent=L.vsPrev;});
+      document.querySelectorAll('.dash-live-header span').forEach(function(s){if(/Live|Онлайн/.test(s.textContent))s.textContent=L.liveNow;});
+      document.querySelectorAll('.dash-metric-card [style*="color:#26282F"]').forEach(function(el){if(/visitor|посетит/.test(el.textContent))el.textContent=L.visitorsNow;});
+      var ct=document.querySelectorAll('.dash-card-box-title');if(ct[0])ct[0].textContent=L.topPages;if(ct[1])ct[1].textContent=L.trafficSources;if(ct[2])ct[2].textContent=L.devices;
+      var cs=document.querySelectorAll('.dash-card-box-sub');if(cs[0])cs[0].textContent=L.mostVisited;if(cs[1])cs[1].textContent=L.fromWhere;if(cs[2])cs[2].textContent=L.deviceMix;
+      var th=document.querySelectorAll('.dash-top-table th');if(th[0])th[0].textContent=L.pageCol;if(th[1])th[1].textContent=L.visitorsCol;
+      // menu view
+      var cvt=document.querySelector('#viewCats .page-title');if(cvt)cvt.textContent=L.menuStructure;
+      _navTxt('menuActionsToggle',L.actions);$('#addCatBtn','addCat');ph('#viewCats .filter-search input','searchCats');
+      var fs=document.querySelector('#viewCats .filter-select');if(fs){var fo=fs.querySelectorAll('option');if(fo[0])fo[0].textContent=L.allStatuses;if(fo[1])fo[1].textContent=L.statusLive;if(fo[2])fo[2].textContent=L.statusHidden;if(fo[3])fo[3].textContent=L.statusDraft;}
+      $('.menu-actions-title','menuActionsTitle');var mc=document.querySelector('.menu-actions-close');if(mc)mc.textContent=L.closeBtn;
+      var ms=document.querySelectorAll('.menu-actions-section');if(ms[0])ms[0].textContent=L.mgmt;if(ms[1])ms[1].textContent=L.displaySection;
+      var mal=document.querySelectorAll('.menu-action-label');if(mal[0])mal[0].textContent=L.downloadMenu;if(mal[1])mal[1].textContent=L.uploadMenu;if(mal[2])mal[2].textContent=L.downloadPdf;if(mal[3])mal[3].textContent=L.template;
+      var mas=document.querySelectorAll('.menu-action-sub');if(mas[0])mas[0].textContent=L.exportJson;if(mas[1])mas[1].textContent=L.importJson;if(mas[2])mas[2].textContent=L.printReady;if(mas[3])mas[3].textContent=L.downloadTpl;
+      var ptl=document.querySelectorAll('.panel-toggle-label');if(ptl[0])ptl[0].textContent=L.showDescs;if(ptl[1])ptl[1].textContent=L.showPhotos;
+      var ptd=document.querySelectorAll('.panel-toggle-desc');if(ptd[0])ptd[0].textContent=L.showDescsDesc;if(ptd[1])ptd[1].textContent=L.showPhotosDesc;
+      // items / shop / popups / badges
+      $('#addItemBtn','addItem');$('#backBtn2','menu');
+      var svt=document.querySelector('#viewShop .page-title');if(svt)svt.textContent=L.shopItems;
+      _navTxt('loadSamplesBtn',L.loadSamples);$('#addShopItemBtn','addItem');
+      var pvt=document.querySelector('#viewPopups .page-title');if(pvt)pvt.textContent=L.popupsTitle;$('#addPopupBtn','addPopup');
+      var bvt=document.querySelector('#viewBadges .page-title');if(bvt)bvt.textContent=L.badgeList;$('#addBadgeBtn','addBadge');
+      // settings
+      var svs=document.querySelector('#viewSettings .page-title');if(svs)svs.textContent=L.settingsTitle;
+      var sgl=document.querySelector('#viewSettings .settings-group-label');if(sgl)sgl.textContent=L.genLabel;
+      var sgr=document.querySelector('#goRestaurantInfo .settings-row-left span');if(sgr)sgr.textContent=L.general;
+      var rit=document.querySelector('#viewRestaurantInfo .page-title');if(rit)rit.textContent=L.restaurantNameLogo;
+      var scl=document.querySelectorAll('#viewRestaurantInfo .settings-card-label');if(scl[0])scl[0].textContent=L.restaurantName;if(scl[1])scl[1].textContent=L.logo;
+      $('#saveRestaurantName','save');var lps=document.querySelector('#logoPlaceholder span');if(lps)lps.textContent=L.uploadLogo;$('#uploadLogoBtn','upload');$('#removeLogoBtn','remove');
+      // more sheet
+      $('.more-sheet-title','moreTitle');var mss=document.querySelectorAll('.more-sheet-section');if(mss[0])mss[0].textContent=L.content;if(mss[1])mss[1].textContent=L.management;if(mss[2])mss[2].textContent=L.settings;
+      var sp=function(id,key){var s=document.querySelector('#'+id+' span');if(s)s.textContent=L[key];};
+      sp('msiBadges','badges');sp('msiPopups','popups');sp('msiChanges','changes');sp('msiSettings','settings');
+      var mts=document.querySelector('#msiTheme span:not(.more-sheet-chevron)');if(mts)mts.textContent=L.theme;
+      var mls=document.querySelector('#msiLanguages span:not(.more-sheet-chevron)');if(mls)mls.textContent=L.languages;
+      var tsi=document.querySelectorAll('#msiThemeMenu .more-sheet-subitem');if(tsi[0])tsi[0].textContent=L.light;if(tsi[1])tsi[1].textContent=L.dark;
+      // sidebar settings
+      var sbsl=document.getElementById('sbSettingsLabel');if(sbsl)sbsl.textContent=L.settings.toUpperCase();
+      var sbth=document.getElementById('sbThemeLabel');if(sbth)sbth.textContent=L.theme;
+      var sbll=document.getElementById('sbLangLabel');if(sbll)sbll.textContent=L.languages;
+      var sbsi=document.querySelectorAll('#sbThemeMenu .sidebar-subitem');if(sbsi[0])sbsi[0].textContent=L.light;if(sbsi[1])sbsi[1].textContent=L.dark;
+      // item modal
+      var imt=document.querySelectorAll('#itemModal .tab');if(imt[0])imt[0].textContent=L.basicInfo;if(imt[1])imt[1].textContent=L.badges;if(imt[2])imt[2].textContent=L.availability;
+      var ius=document.querySelector('#iUploadPlaceholder span');if(ius)ius.textContent=L.uploadImage;
+      var ims=document.querySelectorAll('#iBasic .modal-section-title');if(ims[0])ims[0].textContent=L.itemName;if(ims[1])ims[1].textContent=L.descTitle;
+      var ilm=['nameEn','nameHe','nameRu','descEn','descHe','descRu','price','comment','subhead','subheadHe','subheadRu'];
+      document.querySelectorAll('#iBasic .field label').forEach(function(el,i){if(ilm[i]&&L[ilm[i]])el.textContent=L[ilm[i]];});
+      var ibs=document.querySelector('#iBadges .modal-section-title');if(ibs)ibs.textContent=L.selectBadges;
+      var iar=document.querySelector('#iAvail .avail-row span');if(iar)iar.textContent=L.available;
+      $('#itemModalCancel','cancel');$('#itemModalSave','save');
+      // category modal
+      var cmt=document.querySelectorAll('#catModal .tab');if(cmt[0])cmt[0].textContent=L.basicInfo;if(cmt[1])cmt[1].textContent=L.catSettingsTab;
+      var cus=document.querySelector('#cUploadPlaceholder span');if(cus)cus.textContent=L.uploadImage;
+      var cms=document.querySelector('#cBasic .modal-section-title');if(cms)cms.textContent=L.catName;
+      var clm=['catNameEn','catNameHe','catDescEn','catDescHe','catComment'];
+      document.querySelectorAll('#cBasic .field label').forEach(function(el,i){if(clm[i]&&L[clm[i]])el.textContent=L[clm[i]];});
+      var csr=document.querySelectorAll('#cSettings .avail-row');
+      if(csr[0]){var sp0=csr[0].querySelector('span');if(sp0)sp0.textContent=L.visibleMenu;}
+      if(csr[1]){var td=csr[1].querySelector('[style*="font-size:14px"]');var dd=csr[1].querySelector('[style*="font-size:11px"]');if(td)td.textContent=L.noPhotosLayout;if(dd)dd.textContent=L.noPhotosDesc;}
+      $('#catModalCancel','cancel');$('#catModalSave','save');
+      // visibility modal
+      var vm=document.querySelector('#visModal .modal-title');if(vm)vm.textContent=L.updateVis;
+      var vo=document.querySelectorAll('.vis-option');
+      if(vo[0]){var vt=vo[0].querySelector('.vis-option-title');var vd=vo[0].querySelector('.vis-option-desc');if(vt)vt.textContent=L.hideForTime;if(vd)vd.textContent=L.hideForTimeDesc;}
+      if(vo[1]){var vt1=vo[1].querySelector('.vis-option-title');var vd1=vo[1].querySelector('.vis-option-desc');if(vt1){var vb=vt1.querySelector('.vis-badge');vt1.textContent=L.untilShift+' ';if(vb)vt1.appendChild(vb);}if(vd1)vd1.textContent=L.shiftDesc;}
+      if(vo[2]){var vt2=vo[2].querySelector('.vis-option-title');var vd2=vo[2].querySelector('.vis-option-desc');if(vt2)vt2.textContent=L.untilSpecific;if(vd2)vd2.textContent=L.specificDesc;}
+      if(vo[3]){var vt3=vo[3].querySelector('.vis-option-title');var vd3=vo[3].querySelector('.vis-option-desc');if(vt3)vt3.textContent=L.hideIndef;if(vd3)vd3.textContent=L.indefDesc;}
+      var vp=document.querySelectorAll('.vis-pill');if(vp[0])vp[0].textContent=L.h1;if(vp[1])vp[1].textContent=L.h2;if(vp[2])vp[2].textContent=L.h3;if(vp[3])vp[3].textContent=L.custom;
+      var vcl=document.querySelector('#visCustomWrap label');if(vcl)vcl.textContent=L.selectHours;
+      var vdl=document.querySelector('#visDurationSpecific label');if(vdl)vdl.textContent=L.hideUntil;
+      $('#visModalCancel','cancel');$('#visModalSave','save');
+      // delete modal
+      var dmt=document.querySelector('#deleteModal .modal-title');if(dmt)dmt.textContent=L.deleteTitle;
+      var dmb=document.querySelector('#deleteModal .vis-confirm-body');if(dmb)dmb.textContent=L.deleteBody;
+      $('#deleteModalCancel','cancel');$('#deleteModalConfirm','confirm');
+      // indef confirm
+      var vct=document.querySelector('#visConfirmModal .modal-title');if(vct)vct.textContent=L.hideNoLimitTitle;
+      var vcb=document.querySelector('#visConfirmModal .vis-confirm-body');if(vcb)vcb.textContent=L.hideNoLimitBody;
+      $('#visConfirmBack','goBack');$('#visConfirmProceed','hideForever');
+      // shop modal
+      var smt=document.querySelectorAll('#shopModal .tab');if(smt[0])smt[0].textContent=L.basicInfo;if(smt[1])smt[1].textContent=L.availability;
+      var sus=document.querySelector('#sUploadPlaceholder span');if(sus)sus.textContent=L.uploadImage;
+      var smss=document.querySelector('#sBasic .modal-section-title');if(smss)smss.textContent=L.itemName;
+      var slm=['nameEn','nameHe','nameRu','descEn','descHe','descRu','price'];
+      document.querySelectorAll('#sBasic .field label').forEach(function(el,i){if(slm[i]&&L[slm[i]])el.textContent=L[slm[i]];});
+      var sar=document.querySelector('#sAvail .avail-row span');if(sar)sar.textContent=L.sAvail;
+      $('#shopModalCancel','cancel');$('#shopModalSave','save');
+      // badge modal
+      var bfl=document.querySelectorAll('#badgeModal .field label');if(bfl[0])bfl[0].textContent=L.badgeName;if(bfl[1])bfl[1].textContent=L.badgeIcon;
+      var ipl=document.getElementById('iconPickerLabel');if(ipl&&!ipl.textContent.includes('selected'))ipl.textContent=L.clickChooseIcon;
+      $('#badgeModalCancel','cancel');$('#badgeModalSave','save');
+      // popup wizard
+      var psl=document.querySelectorAll('.pwiz-step-label');if(psl[0])psl[0].textContent=L.stepBasic;if(psl[1])psl[1].textContent=L.stepTrigger;if(psl[2])psl[2].textContent=L.stepSettings;if(psl[3])psl[3].textContent=L.stepPreview;
+      var wl=document.querySelectorAll('#pwizStep1 .wiz-label');if(wl[0])wl[0].textContent=L.imageSection;if(wl[1])wl[1].textContent=L.nameSection;
+      var pdl=document.querySelector('#pwizTextFields .wiz-label');if(pdl)pdl.textContent=L.descSection;
+      var put=document.querySelector('#pwizUploadZone [style*="font-size:13px"]');if(put)put.textContent=L.clickUpload;
+      var pir=document.getElementById('pwizImgRemove');if(pir)pir.textContent=L.wremove;
+      var pcl=document.querySelectorAll('#pwizStep1 .wiz-col-label');if(pcl[0])pcl[0].textContent=L.hebrew;if(pcl[1])pcl[1].textContent=L.russian;if(pcl[2])pcl[2].textContent=L.english;
+      var s2l=document.querySelectorAll('#pwizStep2 .wiz-label');if(s2l[0])s2l[0].textContent=L.whenPopup;if(s2l[1])s2l[1].textContent=L.whatAction;
+      var s2s=document.querySelectorAll('#pwizStep2 .wiz-sublabel');if(s2s[0])s2s[0].textContent=L.chooseTrigger;if(s2s[1])s2s[1].textContent=L.actionPerformed;
+      var to=document.querySelectorAll('#pwizTrigger option');if(to[0])to[0].textContent=L.trigPageLoad;if(to[1])to[1].textContent=L.trigItemAdded;if(to[2])to[2].textContent=L.trigClick;
+      var ao=document.querySelectorAll('#pwizAction option');if(ao[0])ao[0].textContent=L.actInfo;if(ao[1])ao[1].textContent=L.actCoupon;if(ao[2])ao[2].textContent=L.actLink;
+      var s3l=document.querySelectorAll('#pwizStep3 .wiz-label');if(s3l[0])s3l[0].textContent=L.timesDisplay;if(s3l[1])s3l[1].textContent=L.expiryDate;if(s3l[2])s3l[2].textContent=L.priority;
+      var s3s=document.querySelector('#pwizStep3 .wiz-sublabel');if(s3s)s3s.textContent=L.priorityDesc;
+      var put2=document.querySelector('#pwizUnlimited+.wiz-check-text');if(put2)put2.textContent=L.unlimited;
+      var pne=document.querySelector('#pwizNoExpiry+.wiz-check-text');if(pne)pne.textContent=L.noExpiry;
+      var s4l=document.querySelector('#pwizStep4 .wiz-label');if(s4l)s4l.textContent=L.summaryTitle;
+      var sct=document.querySelectorAll('.pwiz-summary-card-title');if(sct[0])sct[0].textContent=L.whatDisplay;if(sct[1])sct[1].textContent=L.whenAppear;if(sct[2])sct[2].textContent=L.stepSettings;
+      $('#pwizPrev','previous');$('#pwizNext','next');
+      // mark active lang
+      document.querySelectorAll('[data-lang]').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang);});
+    }
+  };
+})();
+</script>
 </head>
 <body>
 
@@ -552,13 +883,9 @@
       <input type="text" placeholder="Search…">
     </div>
     <div class="topbar-actions">
-      <button class="topbar-icon-btn" title="Notifications">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <button class="topbar-icon-btn" title="Settings" id="topbarSettingsBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l-.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
       </button>
-      <button class="topbar-icon-btn" title="Settings">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-      </button>
-      <div class="topbar-user-avatar">A</div>
       <button class="btn-logout" id="logoutBtn">Sign out</button>
     </div>
   </div>
@@ -596,6 +923,28 @@
         </button>
       </div>
       <div class="sidebar-bottom">
+        <div class="sidebar-settings-label" id="sbSettingsLabel">SETTINGS</div>
+        <!-- Theme -->
+        <button class="sidebar-expand-btn" id="sbThemeBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <span id="sbThemeLabel">Theme</span>
+          <svg class="sidebar-expand-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="sidebar-submenu" id="sbThemeMenu">
+          <button class="sidebar-subitem" data-theme="light" id="sbThemeLight">Light</button>
+          <button class="sidebar-subitem" data-theme="dark" id="sbThemeDark">Dark</button>
+        </div>
+        <!-- Language -->
+        <button class="sidebar-expand-btn" id="sbLangBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3a14 14 0 0 1 0 18M3 12h18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg>
+          <span id="sbLangLabel">Languages</span>
+          <svg class="sidebar-expand-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="sidebar-submenu" id="sbLangMenu">
+          <button class="sidebar-subitem" data-lang="en">English</button>
+          <button class="sidebar-subitem" data-lang="he">עברית</button>
+          <button class="sidebar-subitem" data-lang="ru">Русский</button>
+        </div>
         <div class="sidebar-user">
           <div class="sidebar-user-avatar">A</div>
           <div class="sidebar-user-name">Admin</div>
@@ -757,6 +1106,9 @@
             </button>
           </div>
           <div id="importProgress" style="display:none;margin-top:12px;font-size:12px;font-family:monospace;background:var(--lineSoft);border-radius:8px;padding:12px;max-height:200px;overflow-y:auto;white-space:pre-wrap;color:var(--text)"></div>
+          <div style="margin: 16px 0 4px; padding: 12px 16px; background: #fff8e6; border-left: 3px solid #f0a500; border-radius: 6px; font-size: 13px; color: #7a5a1a; font-family: sans-serif;">
+            ⚠️ Сайт находится в разработке!
+          </div>
           <div class="menu-actions-section">Display</div>
           <div class="panel-toggle-row">
             <div class="panel-toggle-info">
@@ -1772,7 +2124,7 @@
         <div class="item-info">
           <div class="item-name">${item.name || '—'}</div>
           <div class="item-desc">${item.desc || ''}</div>
-          ${item.badges?.length ? `<div class="item-badges">${item.badges.map(bid => { const b = window.__allBadges?.find(x => x.id === bid); if (!b) return ''; let src = ''; try { src = JSON.parse(b.icon).img; } catch(e) {} return src ? `<img class="item-badge-img" src="${src}" title="${b.name}" alt="${b.name}">` : ''; }).join('')}</div>` : ''}
+          ${item.badges?.length ? `<div class="item-badges">${item.badges.map(bid => { const b = window.__allBadges?.find(x => x.id === bid); if (!b) return ''; let src = ''; try { src = JSON.parse(b.icon).img; } catch(e) { const n = (b.icon||'').replace(/^.*[\\/]/,'').replace(/\.[^.]+$/,''); src = n ? `../img/Badges/${n}.webp` : ''; } return src ? `<img class="item-badge-img" src="${src}" title="${b.name}" alt="${b.name}">` : ''; }).join('')}</div>` : ''}
         </div>
         <div class="item-price">${item.price || ''}</div>
         <span class="status-badge ${isHidden ? 'status-hidden' : 'status-live'}">${isHidden ? 'Hidden' : 'Live'}</span>
@@ -1984,7 +2336,7 @@
     } else {
       allBadges.forEach(b => {
         let imgSrc = '';
-        try { imgSrc = JSON.parse(b.icon).img; } catch(e) {}
+        try { imgSrc = JSON.parse(b.icon).img; } catch(e) { const n = (b.icon||'').replace(/^.*[\\/]/,'').replace(/\.[^.]+$/,''); if (n) imgSrc = `../img/Badges/${n}.webp`; }
         const cell = document.createElement('div');
         cell.className = 'badge-picker-cell' + (selectedIds.includes(b.id) ? ' selected' : '');
         cell.dataset.badgeId = b.id;
@@ -2215,6 +2567,7 @@
   document.getElementById('msiSettings').onclick = () => {
     closeMoreSheet(); setActiveNav('Settings'); showView('viewSettings');
   };
+  document.getElementById('topbarSettingsBtn').onclick = () => { setActiveNav('Settings'); showView('viewSettings'); };
   document.getElementById('goRestaurantInfo').onclick = () => showView('viewRestaurantInfo');
   document.getElementById('backToSettings').onclick   = () => showView('viewSettings');
   document.getElementById('backToDashFromSettings').onclick = () => { setActiveNav('Dashboard'); showView('viewDash'); loadDashboard(); startLiveCounter(); };
@@ -2310,6 +2663,8 @@
   }
   toggleExpand('msiTheme', 'msiThemeMenu');
   toggleExpand('msiLanguages', 'msiLanguagesMenu');
+  toggleExpand('sbThemeBtn', 'sbThemeMenu');
+  toggleExpand('sbLangBtn', 'sbLangMenu');
 
   // theme switcher
   function applyTheme(theme) {
@@ -2324,13 +2679,15 @@
   });
   applyTheme(localStorage.getItem('bulochka-admin-theme') || 'light');
 
-  // language switcher (admin preview lang)
+  // language switcher — applies admin UI language without reload
+  function applyAdminLang(lang) {
+    ADMIN_I18N.apply(lang);
+  }
   document.querySelectorAll('[data-lang]').forEach(btn => {
-    btn.onclick = () => {
-      localStorage.setItem('bulochka-lang', btn.dataset.lang);
-      location.reload();
-    };
+    btn.onclick = () => applyAdminLang(btn.dataset.lang);
   });
+  // apply saved lang on load
+  applyAdminLang(ADMIN_I18N.lang);
 
   // ── SIDEBAR ──
   document.querySelectorAll('.sidebar-item').forEach(btn => {
@@ -2895,7 +3252,14 @@
     badges.forEach(badge => {
       let iconHtml = '<div style="width:40px;height:40px;border-radius:8px;background:var(--lineSoft)"></div>';
       if (badge.icon) {
-        try { const ic = JSON.parse(badge.icon); iconHtml = `<img src="${ic.img}" style="width:40px;height:40px;object-fit:contain" alt="${ic.label||''}">`; } catch(e) {}
+        try {
+          const ic = JSON.parse(badge.icon);
+          iconHtml = `<img src="${ic.img}" style="width:40px;height:40px;object-fit:contain" alt="${ic.label||''}">`;
+        } catch(e) {
+          // старый формат — просто имя файла
+          const name = badge.icon.replace(/^.*[\\/]/, '').replace(/\.[^.]+$/, '');
+          iconHtml = `<img src="../img/Badges/${name}.webp" style="width:40px;height:40px;object-fit:contain" alt="${badge.name||''}">`;
+        }
       }
       const badgeData = JSON.stringify({ id: badge.id, name: badge.name || '', icon: badge.icon || '' }).replace(/'/g, '&#39;');
       const card = document.createElement('div');
@@ -2908,11 +3272,11 @@
         <div style="display:flex;align-items:center;gap:12px">
           <button data-id="${badge.id}" class="badge-delete-btn" style="background:none;border:none;cursor:pointer;font-size:13px;color:var(--danger);font-family:var(--sans);display:flex;align-items:center;gap:4px">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:14px;height:14px"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
-            Delete
+            ${ADMIN_I18N.t('delete')}
           </button>
           <button data-id="${badge.id}" data-badge='${badgeData}' class="badge-edit-btn btn-save" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-            Edit Badge
+            ${ADMIN_I18N.t('editBadgeTitle')}
           </button>
         </div>`;
       grid.appendChild(card);
@@ -3009,7 +3373,7 @@
 
   function openBadgeModal(badge) {
     editingBadgeId = badge ? badge.id : null;
-    document.getElementById('badgeModalTitle').textContent = badge ? 'Edit Badge' : 'Add Badge';
+    document.getElementById('badgeModalTitle').textContent = badge ? ADMIN_I18N.t('editBadgeTitle') : ADMIN_I18N.t('addBadgeTitle');
     document.getElementById('badgeName').value = badge ? badge.name : '';
     const iconVal = badge ? (badge.icon || '') : '';
     document.getElementById('badgeIcon').value = iconVal;
@@ -3021,7 +3385,9 @@
         document.getElementById('iconPickerLabel').textContent = ic.label + ' — selected';
         document.getElementById('iconPickerLabel').style.color = 'var(--ink)';
       } catch(e) {
-        preview.innerHTML = '';
+        const n = iconVal.replace(/^.*[\\/]/,'').replace(/\.[^.]+$/,'');
+        if (n) { preview.innerHTML = `<img src="../img/Badges/${n}.webp" style="width:26px;height:26px;object-fit:contain">`; document.getElementById('iconPickerLabel').textContent = n + ' — selected'; document.getElementById('iconPickerLabel').style.color = 'var(--ink)'; }
+        else preview.innerHTML = '';
         document.getElementById('iconPickerLabel').textContent = 'Click to choose icon';
         document.getElementById('iconPickerLabel').style.color = 'var(--muted)';
       }
