@@ -1,7 +1,7 @@
 import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import { getFirestore, addDoc, updateDoc, collection } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
-if (location.pathname.startsWith('/admin')) throw new Error('skip');
+if (!location.pathname.startsWith('/admin') && window.__trackingAllowed) {
 
 const CFG = {
   apiKey: "AIzaSyC_zaNtYW8wnS7nhoOzEvkNhbJeJPHWmaI",
@@ -78,3 +78,5 @@ document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'hidden') flush();
 });
 window.addEventListener('pagehide', flush);
+
+} // end admin guard
