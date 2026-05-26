@@ -35,7 +35,7 @@ html:lang(ru) .ticker-inner {
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; background: #fbf8f2; overflow-x: hidden; }
+html { scroll-behavior: smooth; background: #fbf8f2; overflow-x: clip; }
 
 body {
   background: var(--cream);
