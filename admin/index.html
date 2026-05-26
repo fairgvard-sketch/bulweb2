@@ -1213,6 +1213,18 @@
       </div>
 
       <!-- SETTINGS -->
+      <div class="view" id="viewChanges">
+        <div class="page-body">
+          <div class="page-header">
+            <div class="page-title">Changes</div>
+          </div>
+          <div style="margin-top:32px;padding:20px 24px;background:#fff8e6;border-left:4px solid #f0a500;border-radius:8px;font-size:14px;font-family:sans-serif;color:#7a5a1a;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:20px;">⚠️</span>
+            <span>Сайт находится в разработке!</span>
+          </div>
+        </div>
+      </div>
+
       <div class="view" id="viewSettings">
         <div class="page-body">
           <div class="page-header" style="justify-content:flex-start">
@@ -3227,6 +3239,7 @@
   let editingBadgeId = null;
 
   document.getElementById('navBadges').onclick = () => { setActiveNav('Badges'); loadBadges(); stopLiveCounter(); };
+  document.getElementById('navChanges').onclick = () => { setActiveNav('Changes'); showView('viewChanges'); stopLiveCounter(); };
 
   document.getElementById('addBadgeBtn').onclick = () => openBadgeModal(null);
   document.getElementById('badgeModalCancel').onclick = () => closeModal('badgeModal');
