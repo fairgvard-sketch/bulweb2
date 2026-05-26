@@ -7,12 +7,28 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <title>Bulochka — Bakery · Coffee · Cakes</title>
+  <meta name="description" content="A small neighbourhood bakery-café in Petah Tikva. Fresh croissants, sourdough breads, homemade cakes, and excellent coffee. Pinsker 29, open Sun–Thu 08:00–20:00.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Bulochka">
+  <meta property="og:title" content="Bulochka — Bakery · Coffee · Cakes">
+  <meta property="og:description" content="A small neighbourhood bakery-café in Petah Tikva. Fresh croissants, sourdough breads, homemade cakes, and excellent coffee.">
+  <meta property="og:image" content="https://bulweb2.web.app/img/Main%20page/croissant_main.jfif">
+  <meta property="og:url" content="https://bulweb2.web.app/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="he_IL">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" hreflang="en" href="https://bulweb2.web.app/">
+  <link rel="alternate" hreflang="he" href="https://bulweb2.web.app/">
+  <link rel="alternate" hreflang="ru" href="https://bulweb2.web.app/">
+  <link rel="alternate" hreflang="x-default" href="https://bulweb2.web.app/">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1X6T5CVR62"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-1X6T5CVR62');</script>
   <script>(function(){var l=localStorage.getItem('bulochka-lang');if(l==='he'){document.documentElement.dir='rtl';document.documentElement.lang='he';}else if(l){document.documentElement.lang=l;}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Frank+Ruhl+Libre:wght@300;400;500&family=IBM+Plex+Sans+Hebrew:wght@300;400;500&family=Inter+Tight&family=Manrope:wght@300;400;500&family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Varela+Round:wght@400;500&family=JetBrains+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Rubik:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Frank+Ruhl+Libre:wght@300;400;500&family=IBM+Plex+Sans+Hebrew:wght@300;400;500&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Playfair+Display:ital,wght@0,400;1,400&family=Rubik:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=8">
   <style>
     /* ─── HERO ─────────────────────────────── */
@@ -147,38 +163,6 @@
       font-size: 12px;
       color: var(--brown-light);
       letter-spacing: 0.02em;
-    }
-
-    /* ─── STATS STRIP ───────────────────────── */
-    .stats-strip {
-      border-top: 1px solid var(--brown-faint);
-      padding: 0 24px;
-    }
-    .stats-inner {
-      max-width: 1300px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, auto);
-      justify-content: start;
-      gap: 0 80px;
-      padding: 28px 0 36px;
-    }
-    .stat-value {
-      font-family: var(--serif);
-      font-size: clamp(28px, 3.5vw, 52px);
-      font-weight: 300;
-      font-style: italic;
-      line-height: 1;
-      margin-bottom: 6px;
-      font-optical-sizing: auto;
-      color: var(--brown-dark);
-    }
-    .stat-label {
-      font-family: var(--sans);
-      font-size: 10px;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
-      color: var(--brown-light);
     }
 
     /* ─── TICKER STRIP ───────────────────────── */
@@ -562,15 +546,13 @@
       .hero {
         grid-template-columns: 1fr;
         gap: 40px;
-        padding-top: 56px;
+        padding-top: 64px;
       }
       .hero-left { padding-bottom: 0; }
       .hero-right { margin-bottom: 0; }
       .filter-card { right: 0; }
-      .stats-inner { gap: 0 48px; }
       .medovik-inner { grid-template-columns: 1fr; gap: 40px; }
       .medovik-photo { aspect-ratio: 3/2; }
-      .shop-grid { grid-template-columns: repeat(3, 1fr); }
       .visit-inner { grid-template-columns: 1fr; gap: 0; }
       .visit-details { grid-template-columns: 1fr; }
       .visit-map { display: none; }
@@ -586,11 +568,6 @@
       .visit-mobile-photo { display: block; border-radius: 10px; overflow: hidden; margin: 24px 0; }
       .visit-mobile-photo img { width: 100%; height: 220px; object-fit: cover; display: block; }
       .hero { padding: 48px 20px 48px; }
-      .stats-inner {
-        grid-template-columns: repeat(3, auto);
-        gap: 0 50px;
-        padding: 32px 0 40px;
-      }
       .filter-card { position: static; margin-top: 16px; box-shadow: none; border: 1px solid var(--brown-faint); }
       .ticker-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; font-size: 7.5px; }
       .ticker-group { width: 100%; }
@@ -599,19 +576,13 @@
       .room-header { flex-direction: column; align-items: flex-start; gap: 12px; }
       .room-sub { align-self: flex-end; text-align: right; }
       [dir="rtl"] .room-sub { align-self: flex-end; text-align: right; }
-      .room-sub { text-align: right; }
-      [dir="rtl"] .room-sub { text-align: right; }
       .section { padding: 56px 20px; }
       .shop-inner { padding: 56px 0; }
-      .shop-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       .medovik-stats { grid-template-columns: repeat(3, auto); gap: 16px; }
       .room-grid { grid-template-columns: 1fr 1fr; }
       .room-photo-1 { grid-column: 1 / 3; grid-row: 1; aspect-ratio: 16/7; }
       .room-photo-2, .room-photo-3,
       .room-photo-4, .room-photo-5 { grid-column: auto; grid-row: auto; aspect-ratio: 1; }
-    }
-    @media (max-width: 400px) {
-      .stats-inner { grid-template-columns: repeat(3, auto); gap: 0 16px; }
     }
   </style>
 </head>
@@ -683,23 +654,23 @@
     </div>
     <div class="room-grid">
       <div class="room-photo room-photo-1">
-        <img src="img/Main page/barista.webp" alt="The counter">
+        <img src="img/Main page/barista.webp" alt="The counter" loading="lazy">
         <div class="room-caption" data-en='the counter' data-he='הדלפק' data-ru='стойка'>the counter</div>
       </div>
       <div class="room-photo room-photo-2">
-        <img src="img/Main page/clients.jpg" alt="Served with care">
+        <img src="img/Main page/clients.jpg" alt="Served with care" loading="lazy">
         <div class="room-caption" data-en='served with care' data-he='מוגש באהבה' data-ru='с заботой'>served with care</div>
       </div>
       <div class="room-photo room-photo-3">
-        <img src="img/Main page/tables.webp" alt="The terrace">
+        <img src="img/Main page/tables.webp" alt="The terrace" loading="lazy">
         <div class="room-caption" data-en='the terrace' data-he='המרפסת' data-ru='терраса'>the terrace</div>
       </div>
       <div class="room-photo room-photo-4">
-        <img src="img/Main page/clients2.jpg" alt="Flat white, 09:14">
+        <img src="img/Main page/clients2.jpg" alt="Flat white, 09:14" loading="lazy">
         <div class="room-caption" data-en='flat white, 09:14' data-he='פלט וייט, 09:14' data-ru='флэт уайт, 09:14'>flat white, 09:14</div>
       </div>
       <div class="room-photo room-photo-5">
-        <img src="img/Main page/creambon.jpg" alt="Morning ritual">
+        <img src="img/Main page/creambon.jpg" alt="Morning ritual" loading="lazy">
         <div class="room-caption" data-en='morning ritual' data-he='טקס הבוקר' data-ru='утренний ритуал'>morning ritual</div>
       </div>
     </div>
@@ -733,7 +704,7 @@
       </div>
     </div>
     <div class="medovik-photo">
-      <img src="img/Main page/honeycake.jpg" alt="Medovik honey cake">
+      <img src="img/Main page/honeycake.jpg" alt="Medovik honey cake" loading="lazy">
     </div>
   </div>
 </section>
@@ -754,13 +725,13 @@
 <section class="visit-section" id="visit">
   <div class="visit-inner">
     <div class="visit-map">
-      <img src="img/Main page/street_view.jfif" alt="Bulochka exterior" style="width:100%; height:100%; object-fit:cover; display:block;">
+      <img src="img/Main page/street_view.jfif" alt="Bulochka exterior" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;">
     </div>
     <div class="visit-text">
       <p class="section-eyebrow" data-en='Visit' data-he='ביקור' data-ru='Как нас найти'>Visit</p>
       <h2><span data-en='The glass door,' data-he='הדלת הזכוכית,' data-ru='Стеклянная дверь,'>The glass door,</span><br><span data-en='under the awning.' data-he='מתחת לאוהל.' data-ru='под навесом.'>under the awning.</span></h2>
       <p class="visit-directions" data-en='On the corner of the building, between the glass veranda and the coffee sacks — you won&apos;t miss it!' data-he='בפינת הבניין, בין הוורנדה הזכוכית לשקי קפה — אי אפשר לפספס!' data-ru='На углу здания, между стеклянной верандой и мешками кофе — не пропустите!'>On the corner of the building, between the glass veranda and the coffee sacks — you won't miss it!</p>
-      <div class="visit-mobile-photo"><img src="img/Main page/street_view.jfif" alt="Bulochka exterior"></div>
+      <div class="visit-mobile-photo"><img src="img/Main page/street_view.jfif" alt="Bulochka exterior" loading="lazy"></div>
       <div class="visit-details">
         <div class="visit-details-left">
           <div class="visit-detail-group">

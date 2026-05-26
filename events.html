@@ -4,10 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Events — Bulochka</title>
+  <meta name="description" content="Events at Bulochka — tastings, workshops, and special evenings at our bakery-café in Petah Tikva. Check what's coming up and reserve your spot.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Bulochka">
+  <meta property="og:title" content="Events — Bulochka">
+  <meta property="og:description" content="Tastings, workshops, and special evenings at Bulochka. Check what's coming up and reserve your spot.">
+  <meta property="og:image" content="https://bulweb2.web.app/img/Main%20page/croissant_main.jfif">
+  <meta property="og:url" content="https://bulweb2.web.app/events">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" hreflang="en" href="https://bulweb2.web.app/events">
+  <link rel="alternate" hreflang="he" href="https://bulweb2.web.app/events">
+  <link rel="alternate" hreflang="ru" href="https://bulweb2.web.app/events">
+  <link rel="alternate" hreflang="x-default" href="https://bulweb2.web.app/events">
   <script>(function(){var l=localStorage.getItem('bulochka-lang');if(l==='he'){document.documentElement.dir='rtl';document.documentElement.lang='he';}else if(l){document.documentElement.lang=l;}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Playfair+Display:ital,wght@0,400;1,400&family=Rubik:wght@300;400;500&family=Varela+Round&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Playfair+Display:ital,wght@0,400;1,400&family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=8">
   <style>
     /* ─── HERO ─── */
@@ -420,10 +433,32 @@
   document.getElementById('eventsForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const fullname = document.getElementById('fullname').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const consent = document.getElementById('consent1').checked;
+    const phone    = document.getElementById('phone').value.trim();
+    const guests   = document.getElementById('guests').value.trim();
+    const eventType = document.getElementById('event_type').value;
+    const message  = document.getElementById('message').value.trim();
+    const consent  = document.getElementById('consent1').checked;
     if (!fullname || !phone || !consent) return;
+
     const lang = localStorage.getItem('bulochka-lang') || 'en';
+    const evtLabels = {
+      birthday:  { en: 'Birthday',         he: 'יום הולדת',    ru: 'День рождения' },
+      brunch:    { en: 'Brunch / gathering',he: 'ברנץ׳ / כינוס', ru: 'Бранч / встреча' },
+      corporate: { en: 'Corporate event',   he: 'אירוע ארגוני', ru: 'Корпоратив' },
+      private:   { en: 'Private event',     he: 'אירוע פרטי',   ru: 'Частное мероприятие' },
+      other:     { en: 'Other',             he: 'אחר',          ru: 'Другое' }
+    };
+    const evtLabel = (evtLabels[eventType] || {})[lang] || eventType || '—';
+    let msg;
+    if (lang === 'he') {
+      msg = `בקשת אירוע 🎉\nשם: ${fullname}\nטלפון: ${phone}${guests ? '\nאורחים: ' + guests : ''}${eventType ? '\nסוג: ' + evtLabel : ''}${message ? '\nהערות: ' + message : ''}`;
+    } else if (lang === 'ru') {
+      msg = `Запрос на мероприятие 🎉\nИмя: ${fullname}\nТелефон: ${phone}${guests ? '\nГостей: ' + guests : ''}${eventType ? '\nТип: ' + evtLabel : ''}${message ? '\nДополнительно: ' + message : ''}`;
+    } else {
+      msg = `Event enquiry 🎉\nName: ${fullname}\nPhone: ${phone}${guests ? '\nGuests: ' + guests : ''}${eventType ? '\nType: ' + evtLabel : ''}${message ? '\nNotes: ' + message : ''}`;
+    }
+    window.open('https://wa.me/972529662724?text=' + encodeURIComponent(msg), '_blank');
+
     const btn = this.querySelector('.btn-submit');
     btn.textContent = lang === 'he' ? 'תודה — נחזור אליכם בקרוב ✓' : lang === 'ru' ? 'Спасибо — скоро свяжемся ✓' : 'Thank you — we\'ll be in touch soon ✓';
     btn.disabled = true;

@@ -4,10 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Work with us — Bulochka</title>
+  <meta name="description" content="Join the Bulochka team in Petah Tikva. We're a small neighbourhood bakery-café looking for passionate people who love great food and warm hospitality.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Bulochka">
+  <meta property="og:title" content="Work with us — Bulochka">
+  <meta property="og:description" content="Join the Bulochka team in Petah Tikva. We're looking for passionate people who love great food and warm hospitality.">
+  <meta property="og:image" content="https://bulweb2.web.app/img/Main%20page/croissant_main.jfif">
+  <meta property="og:url" content="https://bulweb2.web.app/careers">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" hreflang="en" href="https://bulweb2.web.app/careers">
+  <link rel="alternate" hreflang="he" href="https://bulweb2.web.app/careers">
+  <link rel="alternate" hreflang="ru" href="https://bulweb2.web.app/careers">
+  <link rel="alternate" hreflang="x-default" href="https://bulweb2.web.app/careers">
   <script>(function(){var l=localStorage.getItem('bulochka-lang');if(l==='he'){document.documentElement.dir='rtl';document.documentElement.lang='he';}else if(l){document.documentElement.lang=l;}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Playfair+Display:ital,wght@0,400;1,400&family=Rubik:wght@300;400;500&family=Varela+Round&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Playfair+Display:ital,wght@0,400;1,400&family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=8">
   <style>
     /* ─── HERO ─────────────────────────────── */
@@ -345,14 +358,34 @@
   const sel = document.getElementById('positionSelect');
   sel.addEventListener('change', () => sel.classList.add('filled'));
 
-  // Form submit
+  // Form submit → WhatsApp
   document.getElementById('applyForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const name = this.name.value.trim();
     const phone = this.phone.value.trim();
+    const city = this.city.value.trim();
     const position = this.position.value;
     const consent = this.consent.checked;
     if (!name || !phone || !position || !consent) return;
+
+    const lang = localStorage.getItem('bulochka-lang') || 'en';
+    const posLabels = {
+      barista: { en: 'Barista', he: 'בריסטה', ru: 'Бариста' },
+      baker:   { en: "Baker's assistant", he: 'עוזר/ת אופה', ru: 'Помощник пекаря' },
+      cashier: { en: 'Cashier / Service', he: 'קופה / שירות', ru: 'Кассир / Обслуживание' },
+      other:   { en: 'Other', he: 'אחר', ru: 'Другое' }
+    };
+    const pos = (posLabels[position] || {})[lang] || position;
+    let msg;
+    if (lang === 'he') {
+      msg = `מועמדות חדשה 📋\nשם: ${name}\nטלפון: ${phone}${city ? '\nעיר: ' + city : ''}\nתפקיד: ${pos}`;
+    } else if (lang === 'ru') {
+      msg = `Новая анкета 📋\nИмя: ${name}\nТелефон: ${phone}${city ? '\nГород: ' + city : ''}\nДолжность: ${pos}`;
+    } else {
+      msg = `New application 📋\nName: ${name}\nPhone: ${phone}${city ? '\nCity: ' + city : ''}\nPosition: ${pos}`;
+    }
+    window.open('https://wa.me/972529662724?text=' + encodeURIComponent(msg), '_blank');
+
     document.getElementById('applySuccess').style.display = 'block';
     this.reset();
     sel.classList.remove('filled');
