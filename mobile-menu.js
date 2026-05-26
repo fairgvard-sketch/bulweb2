@@ -7,6 +7,7 @@
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-banner">
     <img src="img/Main page/background.webp" alt="" loading="eager">
+    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">✕</button>
   </div>
   <div class="mobile-menu-content">
   <a href="index.html" data-en="Home" data-he="ראשי" data-ru="Главная">Home</a>
@@ -45,6 +46,7 @@
     document.body.classList.remove('menu-open');
   }
   toggle.addEventListener('click', () => mobileMenu.classList.contains('open') ? closeMenu() : openMenu());
+  document.getElementById('mobileMenuClose').addEventListener('click', closeMenu);
   mobileMenu.querySelectorAll('.mobile-menu-content a').forEach(l => l.addEventListener('click', closeMenu));
 
   const langToggle = document.getElementById('mobileLangToggle');
