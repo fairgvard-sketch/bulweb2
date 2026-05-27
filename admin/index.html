@@ -2132,7 +2132,7 @@
       const isHidden = item.available === false;
       row.innerHTML = `
         <div class="cat-drag" title="Drag to reorder" style="margin-right:4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg></div>
-        ${item.img ? `<img class="item-thumb" draggable="false" src="${item.img.startsWith('data:') ? item.img : '../' + item.img}" onerror="this.style.display='none'">` : '<div class="item-thumb"></div>'}
+        ${item.img ? `<img class="item-thumb" draggable="false" src="${itemImgSrc(item.img)}" onerror="this.style.display='none'">` : '<div class="item-thumb"></div>'}
         <div class="item-info">
           <div class="item-name">${item.name || '—'}</div>
           <div class="item-desc">${item.desc || ''}</div>
@@ -2234,7 +2234,34 @@
       file.value = '';
     };
   }
-  // Menu item upload — конвертирует в base64 и сохраняет в dataset.b64
+  // ── Cloudinary config ──
+  const CLOUDINARY_CLOUD = 'degm8b24t';
+  const CLOUDINARY_PRESET = 'bulweb';
+
+  // Универсальная функция — возвращает правильный src для img из Firestore
+  // Поддерживает: https:// (Cloudinary), data: (base64), img/... (локальный файл)
+  function itemImgSrc(img) {
+    if (!img) return '';
+    if (img.startsWith('http') || img.startsWith('data:')) return img;
+    return '../' + img;
+  }
+
+  // Загружает файл в Cloudinary, возвращает secure_url
+  async function uploadToCloudinary(file) {
+    const fd = new FormData();
+    fd.append('file', file);
+    fd.append('upload_preset', CLOUDINARY_PRESET);
+    fd.append('folder', 'bulweb/menu');
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, {
+      method: 'POST',
+      body: fd,
+    });
+    if (!res.ok) throw new Error('Cloudinary upload failed: ' + res.status);
+    const json = await res.json();
+    return json.secure_url;
+  }
+
+  // Menu item upload — показывает превью сразу, загрузка в Cloudinary при Save
   (function setupItemUpload() {
     const area = document.getElementById('iUploadArea');
     const file = document.getElementById('iImgFile');
@@ -2242,32 +2269,22 @@
     const placeholder = document.getElementById('iUploadPlaceholder');
     const remove = document.getElementById('iImgRemove');
     area.onclick = (e) => { if (e.target !== remove) file.click(); };
-    file.onchange = async () => {
+    file.onchange = () => {
       const f = file.files[0];
       if (!f) return;
-      // показываем превью сразу
-      preview.src = URL.createObjectURL(f);
+      area.dataset.newFile = '1';
+      area.dataset.removed = '';
+      const blobUrl = URL.createObjectURL(f);
+      preview.src = blobUrl;
       preview.style.display = 'block';
       placeholder.style.display = 'none';
       remove.style.display = 'block';
-      area.style.opacity = '0.6';
-      area.style.pointerEvents = 'none';
-      try {
-        const b64 = await resizeToBase64(f, 600, 0.78);
-        area.dataset.b64 = b64;
-        preview.src = b64; // заменяем blob на base64
-      } catch(e) {
-        console.error('Image resize failed:', e);
-        area.dataset.b64 = '';
-      } finally {
-        area.style.opacity = '';
-        area.style.pointerEvents = '';
-      }
     };
     remove.onclick = (e) => {
       e.stopPropagation();
-      area.dataset.b64 = '';
-      area.dataset.removed = '1'; // явно помечаем что фото удалено
+      area.dataset.newFile = '';
+      area.dataset.existingUrl = '';
+      area.dataset.removed = '1';
       preview.src = '';
       preview.style.display = 'none';
       placeholder.style.display = 'flex';
@@ -2366,11 +2383,12 @@
     const removeBtn = document.getElementById('iImgRemove');
     const uploadArea = document.getElementById('iUploadArea');
     document.getElementById('iImgFile').value = '';
-    uploadArea.dataset.b64 = '';
+    uploadArea.dataset.newFile = '';
+    uploadArea.dataset.existingUrl = '';
     uploadArea.dataset.removed = '';
     if (item?.img) {
-      const imgSrc = item.img.startsWith('data:') ? item.img : (item.img.startsWith('http') ? item.img : '../' + item.img);
-      uploadArea.dataset.b64 = item.img;
+      const imgSrc = itemImgSrc(item.img);
+      uploadArea.dataset.existingUrl = item.img;
       preview.src = imgSrc;
       preview.style.display = 'block';
       placeholder.style.display = 'none';
@@ -2414,53 +2432,47 @@
     const selectedBadgeIds = [...document.querySelectorAll('#iBadgeGrid .badge-picker-cell.selected')]
       .map(c => c.dataset.badgeId);
     const uploadArea = document.getElementById('iUploadArea');
-    const imgB64 = uploadArea.dataset.b64 || null;
-
-    // Проверка размера — Firestore лимит 1MB на документ
-    // base64 строка не должна превышать ~700KB (с учётом остальных полей)
-    if (imgB64 && imgB64.length > 700000) {
-      toast('⚠ Image too large, compressing…');
-      // дожимаем сильнее
-      const file = document.getElementById('iImgFile').files[0];
-      if (file) {
-        try {
-          const smaller = await resizeToBase64(file, 600, 0.72);
-          uploadArea.dataset.b64 = smaller;
-        } catch(e) {}
-      }
-    }
-
-    const finalImg = uploadArea.dataset.b64 || null;
+    const imgFile = document.getElementById('iImgFile').files[0];
+    const isNewFile = uploadArea.dataset.newFile === '1';
     const imgRemoved = uploadArea.dataset.removed === '1';
-    const data = {
-      name:      document.getElementById('iName').value,
-      nameHe:    document.getElementById('iNameHe').value,
-      nameRu:    document.getElementById('iNameRu').value,
-      desc:      document.getElementById('iDesc').value,
-      descHe:    document.getElementById('iDescHe').value,
-      descRu:    document.getElementById('iDescRu').value,
-      price:     document.getElementById('iPrice').value,
-      comment:   document.getElementById('iComment').value,
-      subhead:   document.getElementById('iSubhead').value.trim(),
-      subheadHe: document.getElementById('iSubheadHe').value.trim(),
-      subheadRu: document.getElementById('iSubheadRu').value.trim(),
-      available: document.getElementById('iAvailable').checked,
-      badges:    selectedBadgeIds,
-      updatedAt: serverTimestamp(),
-    };
-    // img: пишем новое значение если оно есть, явно стираем если нажали Remove, иначе не трогаем
-    if (finalImg !== null) {
-      data.img = finalImg;
-    } else if (imgRemoved) {
-      data.img = null;
-    }
-    // если ни то ни другое — img не включаем в data, updateDoc не затронет поле
-    if (!data.name) return;
+    const existingUrl = uploadArea.dataset.existingUrl || null;
+
+    if (!document.getElementById('iName').value) return;
 
     const saveBtn = document.getElementById('itemModalSave');
     saveBtn.disabled = true;
     saveBtn.textContent = 'Saving…';
+
     try {
+      // Определяем итоговый img
+      let finalImg = undefined; // undefined = не трогать поле
+      if (isNewFile && imgFile) {
+        saveBtn.textContent = 'Uploading photo…';
+        finalImg = await uploadToCloudinary(imgFile);
+      } else if (imgRemoved) {
+        finalImg = null; // явно удаляем
+      }
+      // иначе — фото не изменилось, не трогаем
+
+      const data = {
+        name:      document.getElementById('iName').value,
+        nameHe:    document.getElementById('iNameHe').value,
+        nameRu:    document.getElementById('iNameRu').value,
+        desc:      document.getElementById('iDesc').value,
+        descHe:    document.getElementById('iDescHe').value,
+        descRu:    document.getElementById('iDescRu').value,
+        price:     document.getElementById('iPrice').value,
+        comment:   document.getElementById('iComment').value,
+        subhead:   document.getElementById('iSubhead').value.trim(),
+        subheadHe: document.getElementById('iSubheadHe').value.trim(),
+        subheadRu: document.getElementById('iSubheadRu').value.trim(),
+        available: document.getElementById('iAvailable').checked,
+        badges:    selectedBadgeIds,
+        updatedAt: serverTimestamp(),
+      };
+      if (finalImg !== undefined) data.img = finalImg;
+
+      saveBtn.textContent = 'Saving…';
       if (editingItemId) {
         await updateDoc(doc(db, currentCat, editingItemId), data);
         toast('Saved ✓');
@@ -2472,8 +2484,8 @@
       loadItems();
     } catch(e) {
       console.error('saveItem error:', e);
-      const msg = e.code === 'resource-exhausted' || (e.message||'').includes('exceeds')
-        ? 'Image too large for database. Please use a smaller photo.'
+      const msg = (e.message || '').includes('Cloudinary')
+        ? 'Photo upload failed. Check internet and try again.'
         : 'Save failed: ' + e.message;
       toast('❌ ' + msg);
     } finally {
@@ -2885,7 +2897,7 @@
       win.document.write(`<h2>${cat.label}</h2>`);
       for (const item of cat.items) {
         win.document.write(`<div class="item">`);
-        if (showPhotos && item.img) win.document.write(`<img src="${item.img.startsWith('data:') ? item.img : '../' + item.img}">`);
+        if (showPhotos && item.img) win.document.write(`<img src="${itemImgSrc(item.img)}">`);
         win.document.write(`<div><div class="item-name">${item.name || '—'}</div>`);
         if (showDesc && item.desc) win.document.write(`<div class="item-desc">${item.desc}</div>`);
         if (item.price) win.document.write(`<div class="item-price">${item.price}</div>`);

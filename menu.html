@@ -2296,8 +2296,9 @@
     el.className = 'menu-item' + (data.available === false ? ' item-unavailable' : '');
     if (data.order != null) el.dataset.order = data.order;
 
+    const imgSrc = img.startsWith('http') || img.startsWith('data:') ? img : img;
     const photoHtml = img
-      ? `<div class="menu-item-photo"><img src="${img}" alt="${data.name || ''}" loading="lazy"></div>`
+      ? `<div class="menu-item-photo"><img src="${imgSrc}" alt="${data.name || ''}" loading="lazy"></div>`
       : `<div class="menu-item-photo"></div>`;
 
     const actionLabel = isHe ? 'הוסף תוספות ←' : isRu ? 'Добавить добавки →' : 'Add ingredients →';
