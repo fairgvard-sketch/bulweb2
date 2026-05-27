@@ -9,6 +9,7 @@
     document.documentElement.dir = isHe ? 'rtl' : 'ltr';
 
     document.querySelectorAll('[data-he]').forEach(function (el) {
+      // сохраняем английский контент только один раз (innerHTML — т.к. может содержать <em>, <strong> и т.д.)
       if (!el.dataset.en) el.dataset.en = el.innerHTML;
       if (isHe) {
         el.innerHTML = el.dataset.he;

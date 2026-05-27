@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Privacy Policy — Bulochka</title>
-  <link rel="stylesheet" href="style.css">
+  <script>(function(){var l=localStorage.getItem('bulochka-lang')||'he';if(l==='he'){document.documentElement.dir='rtl';document.documentElement.lang='he';}else{document.documentElement.lang=l;}})();</script>
+  <link rel="stylesheet" href="style.css?v=8">
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;1,300;1,400&family=Inter+Tight:wght@400;500&family=Frank+Ruhl+Libre:wght@300;400&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
   <style>
     .policy-wrap { max-width: 720px; margin: 0 auto; padding: 80px 24px 100px; }
@@ -28,17 +29,22 @@
 
 <nav class="nav">
   <ul class="nav-links">
-    <li><a href="index.html" data-en="HOME" data-he="ראשי" data-ru="ГЛАВНАЯ">HOME</a></li>
-    <li><a href="menu.html" data-en="MENU" data-he="תפריט" data-ru="МЕНЮ">MENU</a></li>
+    <li><a href="index.html" data-en="Home" data-he="ראשי" data-ru="Главная">Home</a></li>
+    <li><a href="menu.html" data-en="Menu" data-he="תפריט" data-ru="Меню">Menu</a></li>
+    <li><a href="careers.html" data-en="Work with us" data-he="עבוד איתנו" data-ru="Работа у нас">Work with us</a></li>
+    <li><a href="events.html" data-en="Events" data-he="אירועים" data-ru="Мероприятия">Events</a></li>
   </ul>
   <a href="index.html" class="nav-logo">Bulochka</a>
   <div class="nav-right">
-    <div class="nav-lang">
+    <div class="lang-switch">
       <button class="lang-btn active" data-lang="en">EN</button>
       <button class="lang-btn" data-lang="he">עב</button>
       <button class="lang-btn" data-lang="ru">RU</button>
     </div>
   </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" type="button">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <div class="policy-wrap">
@@ -381,6 +387,7 @@
 
 </div>
 
+<script src="cookie-consent.js?v=2"></script>
 <script src="lang.js"></script>
 <script src="mobile-menu.js"></script>
 <script>
@@ -388,14 +395,11 @@
     document.getElementById('policy-en').style.display = lang === 'en' ? '' : 'none';
     document.getElementById('policy-he').style.display = lang === 'he' ? '' : 'none';
     document.getElementById('policy-ru').style.display = lang === 'ru' ? '' : 'none';
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
   }
-  var currentLang = localStorage.getItem('bulochka-lang') || 'he';
-  showPolicy(currentLang);
-  document.querySelectorAll('.lang-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() { showPolicy(btn.dataset.lang); });
-  });
+  showPolicy(localStorage.getItem('bulochka-lang') || 'he');
+  new MutationObserver(function() {
+    showPolicy(document.documentElement.lang || 'he');
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
 </script>
 
 <script src="accessibility.js"></script>

@@ -1,7 +1,7 @@
 import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import { getFirestore, addDoc, updateDoc, collection } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
-if (!location.pathname.startsWith('/admin') && window.__trackingAllowed) {
+if (!location.pathname.startsWith('/admin') && window.__trackingAllowed === true) {
 
 const CFG = {
   apiKey: "AIzaSyC_zaNtYW8wnS7nhoOzEvkNhbJeJPHWmaI",
@@ -65,13 +65,13 @@ addDoc(collection(db, '_visits'), {
   visitorId: visitorId,
   sessionId: sessionId,
   duration:  0,
-}).then(r => { ref = r; }).catch(() => {});
+}).then(r => { ref = r; }).catch(err => { console.warn('[analytics] addDoc failed:', err); });
 
 function flush() {
   if (!ref || saved) return;
   saved = true;
   const secs = Math.round((Date.now() - t0) / 1000);
-  updateDoc(ref, { duration: secs }).catch(() => {});
+  updateDoc(ref, { duration: secs }).catch(err => { console.warn('[analytics] updateDoc failed:', err); });
 }
 
 document.addEventListener('visibilitychange', () => {

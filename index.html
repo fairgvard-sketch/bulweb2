@@ -562,9 +562,6 @@
       .room-photo-4, .room-photo-5 { grid-column: auto; grid-row: auto; aspect-ratio: 1; }
     }
     @media (max-width: 640px) {
-      .visit-map { display: none; }
-      .visit-mobile-photo { display: block; border-radius: 10px; overflow: hidden; margin: 24px 0; }
-      .visit-mobile-photo img { width: 100%; height: 220px; object-fit: cover; display: block; }
       .hero { padding: 48px 20px 48px; }
       .filter-card { position: static; margin-top: 16px; box-shadow: none; border: 1px solid var(--brown-faint); }
       .ticker-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; font-size: 7.5px; }
@@ -577,10 +574,6 @@
       .section { padding: 56px 20px; }
       .shop-inner { padding: 56px 0; }
       .medovik-stats { grid-template-columns: repeat(3, auto); gap: 16px; }
-      .room-grid { grid-template-columns: 1fr 1fr; }
-      .room-photo-1 { grid-column: 1 / 3; grid-row: 1; aspect-ratio: 16/7; }
-      .room-photo-2, .room-photo-3,
-      .room-photo-4, .room-photo-5 { grid-column: auto; grid-row: auto; aspect-ratio: 1; }
     }
   </style>
 </head>
@@ -598,9 +591,9 @@
   <a href="index.html" class="nav-logo">Bulochka</a>
   <div class="nav-right">
     <div class="nav-social">
-      <a href="https://wa.me/972529662724" target="_blank" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
-      <a href="https://www.instagram.com/bulochka.pt" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-      <a href="https://www.facebook.com/bulochka.bulochka.2025" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+      <a href="https://wa.me/972529662724" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      <a href="https://www.instagram.com/bulochka.pt" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+      <a href="https://www.facebook.com/bulochka.bulochka.2025" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
     </div>
     <div class="lang-switch">
       <button class="lang-btn active" data-lang="en">EN</button>
@@ -610,9 +603,9 @@
     <span class="nav-hours" data-en='Open until 20:00' data-he='פתוח עד 20:00' data-ru='Открыто до 20:00' dir="ltr">Open until 20:00</span>
     <a href="tel:+972529662724" class="btn-reserve" data-en='Reserve a table' data-he='הזמנת שולחן' data-ru='Забронировать'>Reserve a table</a>
   </div>
-  <div class="nav-toggle" id="navToggle" aria-label="Open menu">
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" type="button">
     <span></span><span></span><span></span>
-  </div>
+  </button>
 </nav>
 
 
@@ -778,9 +771,9 @@
       <div>
         <div class="footer-col-title" data-en='Follow' data-he='עקבו אחרינו' data-ru='Соцсети'>Follow</div>
         <div class="footer-links">
-          <a href="https://www.instagram.com/bulochka.pt" target="_blank">Instagram</a>
-          <a href="https://www.facebook.com/bulochka.bulochka.2025#" target="_blank">Facebook</a>
-          <a href="https://www.google.com/search?q=Bulochka%2C+Yehuda+Leib+Pinsker+Street%2C+Petah+Tikva&rlz=1C1GCEA_enIL1186IL1186&oq=bu&gs_lcrp=EgZjaHJvbWUqCAgAEEUYJxg7MggIABBFGCcYOzIICAEQRRgnGDsyBggCEEUYOzIGCAMQRRg5MgYIBBBFGDsyBggFEEUYPDIGCAYQRRg8MgYIBxBFGDzSAQgxMzg2ajBqNKgCALACAQ&sourceid=chrome&ie=UTF-8#lrd=0x151d3713a80831a3:0x956fbd3c3adf20a3,3,,,," target="_blank" data-en='Google Reviews' data-he='ביקורות גוגל' data-ru='Отзывы на Google'>Google Reviews</a>
+          <a href="https://www.instagram.com/bulochka.pt" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href="https://www.facebook.com/bulochka.bulochka.2025" target="_blank" rel="noopener noreferrer">Facebook</a>
+          <a href="https://www.google.com/search?q=Bulochka%2C+Yehuda+Leib+Pinsker+Street%2C+Petah+Tikva&rlz=1C1GCEA_enIL1186IL1186&oq=bu&gs_lcrp=EgZjaHJvbWUqCAgAEEUYJxg7MggIABBFGCcYOzIICAEQRRgnGDsyBggCEEUYOzIGCAMQRRg5MgYIBBBFGDsyBggFEEUYPDIGCAYQRRg8MgYIBxBFGDzSAQgxMzg2ajBqNKgCALACAQ&sourceid=chrome&ie=UTF-8#lrd=0x151d3713a80831a3:0x956fbd3c3adf20a3,3,,,," target="_blank" rel="noopener noreferrer" data-en='Google Reviews' data-he='ביקורות גוגל' data-ru='Отзывы на Google'>Google Reviews</a>
         </div>
       </div>
     </div>
@@ -841,7 +834,9 @@
     grid.innerHTML = [...visible, ...visible, ...visible].map(makeCard).join('');
     // ставим скролл на начало второго блока
     requestAnimationFrame(() => {
-      const cardWidth = grid.querySelector('.shop-card')?.offsetWidth || 0;
+      const firstCard = grid.querySelector('.shop-card');
+      if (!firstCard) return;
+      const cardWidth = firstCard.offsetWidth || 0;
       const gap = 24;
       grid.scrollLeft = visible.length * (cardWidth + gap);
     });
@@ -880,7 +875,7 @@
   // бесконечный скролл — перепрыгиваем незаметно
   shopGrid.addEventListener('scroll', () => {
     const card = shopGrid.querySelector('.shop-card');
-    if (!card) return;
+    if (!card || !document.contains(card)) return;
     const cardWidth = card.offsetWidth + 24;
     const total = shopGrid.children.length / 3;
     const singleWidth = total * cardWidth;
@@ -899,6 +894,8 @@
     if (autoScrollTimer) return;
     autoScrollTimer = setInterval(() => {
       if (autoPaused || document.hidden) return;
+      // проверяем что секция ещё в DOM перед скроллом
+      if (!document.getElementById('shop')) { stopAutoScroll(); return; }
       shopGrid.scrollLeft += 1;
     }, 16);
   }
@@ -907,9 +904,9 @@
   }
 
   // пауза при drag мышью
-  shopGrid.addEventListener('mousedown', () => autoPaused = true);
-  shopGrid.addEventListener('mouseup', () => autoPaused = false);
-  shopGrid.addEventListener('mouseleave', () => autoPaused = false);
+  shopGrid.addEventListener('mousedown', () => { autoPaused = true; });
+  shopGrid.addEventListener('mouseup',   () => { autoPaused = false; });
+  shopGrid.addEventListener('mouseleave',() => { autoPaused = false; });
 
   // запуск когда секция видна
   const shopSection = document.getElementById('shop');
