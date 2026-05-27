@@ -2245,16 +2245,29 @@
     file.onchange = async () => {
       const f = file.files[0];
       if (!f) return;
-      const b64 = await resizeToBase64(f, 800, 0.85);
-      area.dataset.b64 = b64;
-      preview.src = b64;
+      // показываем превью сразу
+      preview.src = URL.createObjectURL(f);
       preview.style.display = 'block';
       placeholder.style.display = 'none';
       remove.style.display = 'block';
+      area.style.opacity = '0.6';
+      area.style.pointerEvents = 'none';
+      try {
+        const b64 = await resizeToBase64(f, 600, 0.78);
+        area.dataset.b64 = b64;
+        preview.src = b64; // заменяем blob на base64
+      } catch(e) {
+        console.error('Image resize failed:', e);
+        area.dataset.b64 = '';
+      } finally {
+        area.style.opacity = '';
+        area.style.pointerEvents = '';
+      }
     };
     remove.onclick = (e) => {
       e.stopPropagation();
       area.dataset.b64 = '';
+      area.dataset.removed = '1'; // явно помечаем что фото удалено
       preview.src = '';
       preview.style.display = 'none';
       placeholder.style.display = 'flex';
@@ -2352,15 +2365,17 @@
     const placeholder = document.getElementById('iUploadPlaceholder');
     const removeBtn = document.getElementById('iImgRemove');
     const uploadArea = document.getElementById('iUploadArea');
+    document.getElementById('iImgFile').value = '';
+    uploadArea.dataset.b64 = '';
+    uploadArea.dataset.removed = '';
     if (item?.img) {
-      const imgSrc = item.img.startsWith('data:') ? item.img : '../' + item.img;
+      const imgSrc = item.img.startsWith('data:') ? item.img : (item.img.startsWith('http') ? item.img : '../' + item.img);
       uploadArea.dataset.b64 = item.img;
       preview.src = imgSrc;
       preview.style.display = 'block';
       placeholder.style.display = 'none';
       removeBtn.style.display = 'block';
     } else {
-      uploadArea.dataset.b64 = '';
       preview.style.display = 'none';
       placeholder.style.display = 'flex';
       removeBtn.style.display = 'none';
@@ -2398,7 +2413,25 @@
   async function saveItem() {
     const selectedBadgeIds = [...document.querySelectorAll('#iBadgeGrid .badge-picker-cell.selected')]
       .map(c => c.dataset.badgeId);
-    const imgB64 = document.getElementById('iUploadArea').dataset.b64 || null;
+    const uploadArea = document.getElementById('iUploadArea');
+    const imgB64 = uploadArea.dataset.b64 || null;
+
+    // Проверка размера — Firestore лимит 1MB на документ
+    // base64 строка не должна превышать ~700KB (с учётом остальных полей)
+    if (imgB64 && imgB64.length > 700000) {
+      toast('⚠ Image too large, compressing…');
+      // дожимаем сильнее
+      const file = document.getElementById('iImgFile').files[0];
+      if (file) {
+        try {
+          const smaller = await resizeToBase64(file, 600, 0.72);
+          uploadArea.dataset.b64 = smaller;
+        } catch(e) {}
+      }
+    }
+
+    const finalImg = uploadArea.dataset.b64 || null;
+    const imgRemoved = uploadArea.dataset.removed === '1';
     const data = {
       name:      document.getElementById('iName').value,
       nameHe:    document.getElementById('iNameHe').value,
@@ -2413,19 +2446,40 @@
       subheadRu: document.getElementById('iSubheadRu').value.trim(),
       available: document.getElementById('iAvailable').checked,
       badges:    selectedBadgeIds,
-      img:       imgB64,
       updatedAt: serverTimestamp(),
     };
-    if (!data.name) return;
-    if (editingItemId) {
-      await updateDoc(doc(db, currentCat, editingItemId), data);
-      toast('Saved ✓');
-    } else {
-      await addDoc(collection(db, currentCat), data);
-      toast('Added ✓');
+    // img: пишем новое значение если оно есть, явно стираем если нажали Remove, иначе не трогаем
+    if (finalImg !== null) {
+      data.img = finalImg;
+    } else if (imgRemoved) {
+      data.img = null;
     }
-    closeModal('itemModal');
-    loadItems();
+    // если ни то ни другое — img не включаем в data, updateDoc не затронет поле
+    if (!data.name) return;
+
+    const saveBtn = document.getElementById('itemModalSave');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving…';
+    try {
+      if (editingItemId) {
+        await updateDoc(doc(db, currentCat, editingItemId), data);
+        toast('Saved ✓');
+      } else {
+        await addDoc(collection(db, currentCat), data);
+        toast('Added ✓');
+      }
+      closeModal('itemModal');
+      loadItems();
+    } catch(e) {
+      console.error('saveItem error:', e);
+      const msg = e.code === 'resource-exhausted' || (e.message||'').includes('exceeds')
+        ? 'Image too large for database. Please use a smaller photo.'
+        : 'Save failed: ' + e.message;
+      toast('❌ ' + msg);
+    } finally {
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Save';
+    }
   }
 
   // ── CATEGORY MODAL ──
