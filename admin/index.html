@@ -2132,7 +2132,7 @@
       const isHidden = item.available === false;
       row.innerHTML = `
         <div class="cat-drag" title="Drag to reorder" style="margin-right:4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg></div>
-        ${item.img ? `<img class="item-thumb" draggable="false" src="../${item.img}" onerror="this.style.display='none'">` : '<div class="item-thumb"></div>'}
+        ${item.img ? `<img class="item-thumb" draggable="false" src="${item.img.startsWith('data:') ? item.img : '../' + item.img}" onerror="this.style.display='none'">` : '<div class="item-thumb"></div>'}
         <div class="item-info">
           <div class="item-name">${item.name || '—'}</div>
           <div class="item-desc">${item.desc || ''}</div>
@@ -2234,7 +2234,34 @@
       file.value = '';
     };
   }
-  setupUpload('iUploadArea','iImgFile','iImgPreview','iUploadPlaceholder','iImgRemove');
+  // Menu item upload — конвертирует в base64 и сохраняет в dataset.b64
+  (function setupItemUpload() {
+    const area = document.getElementById('iUploadArea');
+    const file = document.getElementById('iImgFile');
+    const preview = document.getElementById('iImgPreview');
+    const placeholder = document.getElementById('iUploadPlaceholder');
+    const remove = document.getElementById('iImgRemove');
+    area.onclick = (e) => { if (e.target !== remove) file.click(); };
+    file.onchange = async () => {
+      const f = file.files[0];
+      if (!f) return;
+      const b64 = await resizeToBase64(f, 800, 0.85);
+      area.dataset.b64 = b64;
+      preview.src = b64;
+      preview.style.display = 'block';
+      placeholder.style.display = 'none';
+      remove.style.display = 'block';
+    };
+    remove.onclick = (e) => {
+      e.stopPropagation();
+      area.dataset.b64 = '';
+      preview.src = '';
+      preview.style.display = 'none';
+      placeholder.style.display = 'flex';
+      remove.style.display = 'none';
+      file.value = '';
+    };
+  })();
   setupUpload('cUploadArea','cImgFile','cImgPreview','cUploadPlaceholder','cImgRemove');
 
   function resizeToBase64(file, maxSide, quality) {
@@ -2324,12 +2351,16 @@
     const preview = document.getElementById('iImgPreview');
     const placeholder = document.getElementById('iUploadPlaceholder');
     const removeBtn = document.getElementById('iImgRemove');
+    const uploadArea = document.getElementById('iUploadArea');
     if (item?.img) {
-      preview.src = '../' + item.img;
+      const imgSrc = item.img.startsWith('data:') ? item.img : '../' + item.img;
+      uploadArea.dataset.b64 = item.img;
+      preview.src = imgSrc;
       preview.style.display = 'block';
       placeholder.style.display = 'none';
       removeBtn.style.display = 'block';
     } else {
+      uploadArea.dataset.b64 = '';
       preview.style.display = 'none';
       placeholder.style.display = 'flex';
       removeBtn.style.display = 'none';
@@ -2367,6 +2398,7 @@
   async function saveItem() {
     const selectedBadgeIds = [...document.querySelectorAll('#iBadgeGrid .badge-picker-cell.selected')]
       .map(c => c.dataset.badgeId);
+    const imgB64 = document.getElementById('iUploadArea').dataset.b64 || null;
     const data = {
       name:      document.getElementById('iName').value,
       nameHe:    document.getElementById('iNameHe').value,
@@ -2381,6 +2413,7 @@
       subheadRu: document.getElementById('iSubheadRu').value.trim(),
       available: document.getElementById('iAvailable').checked,
       badges:    selectedBadgeIds,
+      img:       imgB64,
       updatedAt: serverTimestamp(),
     };
     if (!data.name) return;
@@ -2798,7 +2831,7 @@
       win.document.write(`<h2>${cat.label}</h2>`);
       for (const item of cat.items) {
         win.document.write(`<div class="item">`);
-        if (showPhotos && item.img) win.document.write(`<img src="../${item.img}">`);
+        if (showPhotos && item.img) win.document.write(`<img src="${item.img.startsWith('data:') ? item.img : '../' + item.img}">`);
         win.document.write(`<div><div class="item-name">${item.name || '—'}</div>`);
         if (showDesc && item.desc) win.document.write(`<div class="item-desc">${item.desc}</div>`);
         if (item.price) win.document.write(`<div class="item-price">${item.price}</div>`);
