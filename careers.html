@@ -466,12 +466,21 @@
 <script>
   (function(){
     var btn = document.getElementById('scrollTopBtn');
+    var lastScrollY = 0;
     window.addEventListener('scroll', function(){
-      btn.classList.toggle('visible', window.scrollY > 300);
+      lastScrollY = window.scrollY;
+      btn.classList.toggle('visible', lastScrollY > 300);
     }, {passive: true});
     btn.addEventListener('click', function(){
       window.scrollTo({top: 0, behavior: 'smooth'});
     });
+    document.addEventListener('touchstart', function(e){
+      var touch = e.touches[0];
+      if (touch && touch.clientY < 50 && lastScrollY > 100) {
+        e.preventDefault();
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      }
+    }, {passive: false});
   })();
 </script>
 

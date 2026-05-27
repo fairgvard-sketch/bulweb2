@@ -978,6 +978,24 @@
     btn.addEventListener('click', function(){
       window.scrollTo({top: 0, behavior: 'smooth'});
     });
+
+    // iOS Dynamic Island / status bar tap → плавный скролл наверх
+    // Safari делает мгновенный прыжок; перехватываем touchstart в верхней зоне
+    // и заменяем на smoothScroll
+    var lastScrollY = 0;
+    var ticking = false;
+    window.addEventListener('scroll', function(){
+      lastScrollY = window.scrollY;
+    }, {passive: true});
+
+    document.addEventListener('touchstart', function(e){
+      var touch = e.touches[0];
+      // зона Dynamic Island / status bar — верхние ~50px экрана
+      if (touch && touch.clientY < 50 && lastScrollY > 100) {
+        e.preventDefault();
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      }
+    }, {passive: false});
   })();
 </script>
 
