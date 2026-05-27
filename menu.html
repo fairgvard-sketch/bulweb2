@@ -2567,6 +2567,7 @@
 
 <script type="module" src="analytics.js"></script>
 <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Back to top">↑</button>
+<div id="navTapZone" style="position:fixed;top:0;left:0;right:0;height:60px;z-index:101;-webkit-tap-highlight-color:transparent;" aria-hidden="true"></div>
 <script>
   (function(){
     var btn = document.getElementById('scrollTopBtn');
@@ -2578,9 +2579,9 @@
     btn.addEventListener('click', function(){
       window.scrollTo({top: 0, behavior: 'smooth'});
     });
-    document.addEventListener('touchstart', function(e){
-      var touch = e.touches[0];
-      if (touch && touch.clientY < 50 && lastScrollY > 100) {
+    var tapZone = document.getElementById('navTapZone');
+    tapZone.addEventListener('touchend', function(e){
+      if (lastScrollY > 100) {
         e.preventDefault();
         window.scrollTo({top: 0, behavior: 'smooth'});
       }
