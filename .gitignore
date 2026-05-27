@@ -5,3 +5,6 @@ package.json
 *.png
 test-drag.js
 verify-drag.js
+.DS_Store
+**/.DS_Store
+firebase-debug.log
