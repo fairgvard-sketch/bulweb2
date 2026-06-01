@@ -35,7 +35,7 @@ html:lang(ru) .ticker-inner {
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; background: #fbf8f2; overflow-x: hidden; }
+html { scroll-behavior: smooth; background: #fbf8f2; overflow-x: clip; }
 
 body {
   background: var(--cream);
@@ -44,7 +44,7 @@ body {
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 img { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -217,6 +217,12 @@ a.hero-menu-btn:hover {
 .lang-switch { display: flex; align-items: center; border: 1px solid var(--brown-faint); border-radius: 100px; padding: 3px; gap: 2px; }
 .lang-btn { font-family: var(--sans); font-size: 10px; letter-spacing: 0.04em; padding: 4px 9px; border-radius: 100px; border: none; background: none; color: var(--brown-light); cursor: pointer; transition: background 0.15s, color 0.15s; line-height: 1; }
 .lang-btn.active { background: var(--brown-dark); color: var(--cream); }
+.lang-globe-wrap { display: none; position: relative; }
+.lang-globe-btn { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: none; background: none; color: var(--brown-light); cursor: pointer; padding: 0; border-radius: 50%; transition: color 0.2s; }
+.lang-globe-btn:hover { color: var(--brown-dark); }
+.lang-globe-dropdown { display: none; position: fixed; top: 60px; background: #fbf8f2; border: 1px solid var(--brown-faint); border-radius: 12px; padding: 6px; gap: 4px; flex-direction: column; box-shadow: 0 4px 16px rgba(42,31,24,0.12); z-index: 200; min-width: 60px; }
+.lang-globe-dropdown.open { display: flex; }
+.lang-globe-option { width: 100%; text-align: center; padding: 6px 12px; border-radius: 8px; }
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -574,6 +580,11 @@ html[dir="rtl"] input[type="number"] { direction: ltr; text-align: right; }
   .nav-hours { display: none; }
   .nav-toggle { display: flex; }
   .btn-reserve { display: none; }
+  .lang-switch { display: none; }
+  .lang-globe-wrap { display: block; }
+  .nav-logo { font-size: 24px; }
+  .nav-right { gap: 8px; }
+  .nav { gap: 8px; padding: 0 16px; }
   .footer-top { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: row; align-items: center; flex-wrap: wrap; gap: 8px 16px; }
   body { padding-top: 60px; }
