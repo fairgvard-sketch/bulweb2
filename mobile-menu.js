@@ -10,11 +10,13 @@
     <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">✕</button>
   </div>
   <div class="mobile-menu-content">
+  <div class="mobile-menu-links">
   <a href="index.html" data-en="Home" data-he="ראשי" data-ru="Главная">Home</a>
   <a href="menu.html" data-en="Menu" data-he="תפריט" data-ru="Меню">Menu</a>
   <a href="${storyHref}" data-en="Our story" data-he="הסיפור שלנו" data-ru="О нас">Our story</a>
   <a href="careers.html" data-en="Work with us" data-he="עבוד איתנו" data-ru="Работа у нас">Work with us</a>
   <a href="events.html" data-en="Events" data-he="אירועים" data-ru="Мероприятия">Events</a>
+  </div>
   <a href="tel:+972529662724" class="mobile-menu-reserve" data-en="Reserve a table →" data-he="הזמן שולחן →" data-ru="Забронировать стол →">Reserve a table →</a>
   <div class="mobile-menu-secondary">
     <a href="https://www.instagram.com/bulochka.pt" target="_blank" rel="noopener noreferrer" class="mobile-menu-secondary-link">Instagram</a>

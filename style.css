@@ -310,6 +310,12 @@ a.hero-menu-btn:hover {
 .mobile-menu.open .mobile-menu-content :nth-child(6) { opacity: 1; transform: none; transition-delay: 0.48s; }
 .mobile-menu.open .mobile-menu-content :nth-child(7) { opacity: 1; transform: none; transition-delay: 0.54s; }
 
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
 .mobile-menu-content a {
   font-family: 'DM Sans', sans-serif;
   font-size: 22px;
@@ -785,4 +791,146 @@ html[dir="rtl"] input[type="number"] { direction: ltr; text-align: right; }
 }
 @media (min-width: 641px) {
   .scroll-top-btn { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ANIMATIONS — Bulochka (5, 6, 7, 10)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 6. NAV scrolled state ───────────────────────────────────────────────── */
+.nav {
+  transition: box-shadow 0.35s ease, backdrop-filter 0.35s ease, background 0.35s ease;
+}
+.nav--scrolled {
+  background: rgba(251, 248, 242, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 1px 32px rgba(42, 31, 24, 0.10);
+}
+
+/* ── 10. ROOM CAPTION — выезжает снизу при hover ────────────────────────── */
+.room-caption--animated {
+  transform: translateY(8px);
+  opacity: 0;
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.32s ease;
+}
+.room-photo:hover .room-caption--animated {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ── 10. Room photo hover — scale img ───────────────────────────────────── */
+.room-photo img {
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.room-photo:hover img {
+  transform: scale(1.06);
+}
+
+/* ── 2. SCROLL REVEAL ────────────────────────────────────────────────────── */
+.sr-hidden {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.sr-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* section-eyebrow — slide from left вместо translateY */
+.section-eyebrow.sr-hidden {
+  transform: translateX(-14px);
+  transition: opacity 0.55s ease,
+              transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.section-eyebrow.sr-visible {
+  transform: translateX(0) !important;
+}
+[dir="rtl"] .section-eyebrow.sr-hidden {
+  transform: translateX(14px);
+}
+
+/* visit-hours-row — slide from left */
+.visit-hours-row.sr-hidden {
+  transform: translateX(-10px);
+  transition: opacity 0.5s ease,
+              transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.visit-hours-row.sr-visible {
+  transform: translateX(0) !important;
+}
+
+/* ── 3. ROOM GRID STAGGER REVEAL ─────────────────────────────────────────── */
+.room-photo {
+  opacity: 0;
+  transform: translateY(24px) scale(0.97);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.room-photo.room-photo--visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.room-photo:nth-child(1) { transition-delay: 0s; }
+.room-photo:nth-child(2) { transition-delay: 0.1s; }
+.room-photo:nth-child(3) { transition-delay: 0.2s; }
+.room-photo:nth-child(4) { transition-delay: 0.3s; }
+.room-photo:nth-child(5) { transition-delay: 0.4s; }
+
+/* ── 7. RIPPLE EFFECT ────────────────────────────────────────────────────── */
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  background: rgba(251, 248, 242, 0.45);
+  transform: translate(-50%, -50%) scale(0);
+  animation: ripple-expand 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  pointer-events: none;
+}
+@keyframes ripple-expand {
+  to {
+    transform: translate(-50%, -50%) scale(30);
+    opacity: 0;
+  }
+}
+.btn-reserve .ripple-effect,
+.lang-btn .ripple-effect {
+  background: rgba(42, 31, 24, 0.12);
+}
+
+/* ── 7. HERO MENU BTN — magnetic + hover shadow ─────────────────────────── */
+a.hero-menu-btn {
+  transition: background 0.28s ease, transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.28s ease;
+}
+a.hero-menu-btn:hover {
+  box-shadow: 0 8px 28px rgba(42, 31, 24, 0.22);
+}
+
+/* ── 9. MEDOVIK PHOTO PARALLAX ───────────────────────────────────────────── */
+.medovik-photo {
+  overflow: hidden;
+}
+.medovik-photo img {
+  will-change: transform;
+  transition: transform 0.05s linear;
+}
+
+/* ── REDUCE MOTION ───────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .sr-hidden,
+  .room-photo,
+  .room-caption--animated,
+  .ripple-effect {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
