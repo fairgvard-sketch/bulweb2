@@ -121,11 +121,12 @@
       margin-left: auto;
     }
     @media (max-width: 640px) {
-      .filter-bar { padding: 0 16px; top: 60px; }
+      .filter-bar { padding: 0 16px; position: fixed; top: 60px; left: 0; right: 0; width: 100%; }
       .filter-bar-label { display: none; }
       .filter-bar-total { display: none; }
       .filter-bar-pills { gap: 4px; flex-wrap: nowrap; }
       .filter-pill { padding: 4px 10px; font-size: 9px; flex-shrink: 0; }
+      .menu-category:first-of-type { padding-top: 44px; }
     }
 
     /* ─── MENU CATEGORY ─────────────────────── */
