@@ -57,9 +57,11 @@
     .eyebrow-star { font-size: 9px; color: var(--brown-mid); vertical-align: middle; }
     [dir="rtl"] .hero-eyebrow,
     [dir="rtl"] .eyebrow-star,
-    [dir="rtl"] .ticker-inner,
     [dir="rtl"] .filter-card-label,
     [dir="rtl"] .visit-detail-label { font-size: 12px; font-family: 'Rubik', sans-serif; }
+    [dir="rtl"] .ticker-inner,
+    [dir="rtl"] .ticker-item,
+    [dir="rtl"] .ticker-sep { font-size: 14px; font-family: 'Rubik', sans-serif; }
 
     .hero h1 {
       font-family: var(--serif);
@@ -577,6 +579,7 @@
       .hero { padding: 48px 20px 48px; }
       .filter-card { position: static; margin-top: 16px; box-shadow: none; border: 1px solid var(--brown-faint); }
       .ticker-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; font-size: 7.5px; }
+      [dir="rtl"] .ticker-inner, [dir="rtl"] .ticker-item { font-size: 12px; }
       .ticker-group { width: 100%; }
       .ticker-item { white-space: normal; }
       .ticker-sep { margin: 0 12px; }
@@ -821,8 +824,8 @@
       <span data-en='Bakery · Coffee · Cakes' data-he='מאפייה · קפה · עוגות' data-ru='Пекарня · Кофе · Торты'>Bakery · Coffee · Cakes</span>
     </p>
     <h1 class="fhero-title">
-      <span class="fhero-line" data-en='Slow mornings,' data-he='בקרים שקטים,' data-ru='Неспешное утро,'>Slow mornings,</span>
-      <em class="fhero-line fhero-em" data-en='warm butter.' data-he='חמאה חמה.' data-ru='тёплое масло.'>warm butter.</em>
+      <span class="fhero-line" data-en='Morning at ease,' data-he='בוקר בנחת,' data-ru='Утро в покое,'>Morning at ease,</span>
+      <em class="fhero-line fhero-em" data-en='warm butter.' data-he='חמאה חמימה.' data-ru='тёплое масло.'>warm butter.</em>
     </h1>
     <p class="fhero-sub" data-en='A neighbourhood bakery-café in Petah Tikva. Fresh croissants, homemade cakes, excellent coffee.' data-he='בית קפה שכונתי בפתח תקווה. קרואסונים טריים, עוגות ביתיות, קפה מעולה.' data-ru='Уютная пекарня-кофейня в Петах-Тикве. Свежие круассаны, домашние торты, отличный кофе.'>A neighbourhood bakery-café in Petah Tikva. Fresh croissants, homemade cakes, excellent coffee.</p>
     <div class="fhero-ctas">
@@ -1054,7 +1057,7 @@
     </div>
     <div class="visit-text">
       <p class="section-eyebrow" data-en='Visit' data-he='ביקור' data-ru='Как нас найти'>Visit</p>
-      <h2><span data-en='The glass door,' data-he='הדלת הזכוכית,' data-ru='Стеклянная дверь,'>The glass door,</span><br><span data-en='under the awning.' data-he='מתחת לאוהל.' data-ru='под навесом.'>under the awning.</span></h2>
+      <h2><span data-en='The glass door' data-he='דלת הזכוכית' data-ru='Стеклянная дверь'>The glass door</span><br><span data-en='under the awning.' data-he='מתחת לסוכך.' data-ru='под навесом.'>under the awning.</span></h2>
       <p class="visit-directions" data-en='On the corner of the building, between the glass veranda and the coffee sacks — you won&apos;t miss it!' data-he='בפינת הבניין, בין הוורנדה הזכוכית לשקי קפה — אי אפשר לפספס!' data-ru='На углу здания, между стеклянной верандой и мешками кофе — не пропустите!'>On the corner of the building, between the glass veranda and the coffee sacks — you won't miss it!</p>
       <div class="visit-mobile-photo"><img src="img/Main page/street_view.jfif" alt="Bulochka exterior" loading="lazy"></div>
       <div class="visit-details">
@@ -1112,7 +1115,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">© Bulochka MMXIX—MMXXVI</span>
+      <span class="footer-copy">© Bulochka since 2021</span>
       <span class="footer-tagline" data-en='✦ Made with butter' data-he='✦ עשוי עם חמאה' data-ru='✦ Сделано с маслом'>✦ Made with butter</span>
     </div>
   </div>
