@@ -52,6 +52,7 @@
     if (extrasLabel) extrasLabel.textContent = isHe ? 'הוסף תוספות' : isRu ? 'Добавки' : 'Add extras';
     if (doneBtn) doneBtn.textContent = isHe ? 'סיום' : isRu ? 'Готово' : 'Done';
     if (totalLabel) totalLabel.textContent = isHe ? 'סה״כ' : isRu ? 'Итого' : 'Total';
+    document.dispatchEvent(new CustomEvent('bulochka-lang-changed'));
   }
 
   document.querySelectorAll('.lang-btn').forEach(function (btn) {

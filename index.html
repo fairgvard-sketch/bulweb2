@@ -13,7 +13,7 @@
   <meta property="og:site_name" content="Bulochka">
   <meta property="og:title" content="Bulochka — Bakery · Coffee · Cakes">
   <meta property="og:description" content="A small neighbourhood bakery-café in Petah Tikva. Fresh croissants, sourdough breads, homemade cakes, and excellent coffee.">
-  <meta property="og:image" content="https://bulweb2.web.app/img/Main%20page/croissant_main.jfif">
+  <meta property="og:image" content="https://bulweb2.web.app/img/Main%20page/cos_big.jfif">
   <meta property="og:url" content="https://bulweb2.web.app/">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="he_IL">
@@ -224,8 +224,7 @@
     }
     .section h2 em { font-style: italic; color: #8a6838; }
     .hero h1 em { color: #8a6838; font-style: normal; white-space: nowrap; }
-    [dir="rtl"] .hero-line1 { white-space: nowrap; }
-    html:lang(ru) .hero-line1 { white-space: nowrap; }
+    .hero-line1 { white-space: nowrap; }
     html:lang(ru) .hero h1 { font-size: clamp(30px, 5vw, 72px); }
     html:lang(ru) .medovik-stat-val { font-family: 'Rubik', sans-serif; font-weight: 300; }
     [dir="rtl"] .room-sub { text-align: right; font-family: 'IBM Plex Sans Hebrew', sans-serif; }
@@ -598,6 +597,7 @@
       width: 100%;
       height: 100svh;
       min-height: 600px;
+      margin-top: -60px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -613,19 +613,19 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 40%;
-      transform: scale(1.08);
+      object-position: 30% 20%;
+      transform: scale(1.0);
       transition: transform 0.1s linear;
-      filter: brightness(0.65) saturate(0.85);
+      filter: brightness(0.85) saturate(0.9);
     }
     .fhero-overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(
         to bottom,
-        rgba(26, 17, 12, 0.18) 0%,
-        rgba(26, 17, 12, 0.52) 50%,
-        rgba(26, 17, 12, 0.82) 100%
+        rgba(26, 17, 12, 0.1) 0%,
+        rgba(26, 17, 12, 0.35) 50%,
+        rgba(26, 17, 12, 0.65) 100%
       );
     }
     .fhero-content {
@@ -816,7 +816,7 @@
 <!-- ─── FULLSCREEN HERO ───────────────────────────────────── -->
 <section class="fhero">
   <div class="fhero-bg">
-    <img src="img/Main page/crowd.jpg" alt="Bulochka entrance" id="fheroBgImg">
+    <img src="img/Main page/crowd2.jpg" alt="Bulochka entrance" id="fheroBgImg">
   </div>
   <div class="fhero-overlay"></div>
   <div class="fhero-content">
@@ -824,8 +824,8 @@
       <span data-en='Bakery · Coffee · Cakes' data-he='מאפייה · קפה · עוגות' data-ru='Пекарня · Кофе · Торты'>Bakery · Coffee · Cakes</span>
     </p>
     <h1 class="fhero-title">
-      <span class="fhero-line" data-en='Morning at ease,' data-he='בוקר בנחת,' data-ru='Утро в покое,'>Morning at ease,</span>
-      <em class="fhero-line fhero-em" data-en='warm butter.' data-he='חמאה חמימה.' data-ru='тёплое масло.'>warm butter.</em>
+      <span class="fhero-line" data-en='Slow mornings,' data-he='בוקר בנחת,' data-ru='Неспешное утро,'>Slow mornings,</span>
+      <em class="fhero-line fhero-em" data-en='warm butter.' data-he='חמאה חמימה.' data-ru='теплое масло.'>warm butter.</em>
     </h1>
     <p class="fhero-sub" data-en='A neighbourhood bakery-café in Petah Tikva. Fresh croissants, homemade cakes, excellent coffee.' data-he='בית קפה שכונתי בפתח תקווה. קרואסונים טריים, עוגות ביתיות, קפה מעולה.' data-ru='Уютная пекарня-кофейня в Петах-Тикве. Свежие круассаны, домашние торты, отличный кофе.'>A neighbourhood bakery-café in Petah Tikva. Fresh croissants, homemade cakes, excellent coffee.</p>
     <div class="fhero-ctas">
@@ -846,116 +846,8 @@
 <h1><span data-he='מאפייה קטנה' data-ru='Маленькая пекарня' class="hero-line1">A small bakery</span><br><span data-he='עם <em class="hero-accent">נשמה גדולה.</em>' data-ru='с <em class="hero-accent">большой душой.</em>'>with a <em class="hero-accent">big soul.</em></span></h1>
     <p class="hero-body" data-en="A small, charming neighborhood café with on-site baking, premium jams and spreads from 'Bustan' in the Galilee, wonderful cookies, unique pastries, handmade sourdough breads (available on Fridays or by pre-order), excellent coffee, and many more delicious things. Definitely worth a visit!" data-he="בית קפה שכונתי קטן וקסום עם אפייה במקום, ריבות וממרחים מ'בוסתן' בגליל, עוגיות נפלאות, מאפים ייחודיים, לחמי מחמצת עבודת יד (זמינים בימי שישי או בהזמנה מראש), קפה מעולה ועוד המון דברים טעימים. בהחלט שווה ביקור!" data-ru="Небольшое уютное кафе-пекарня со свежей выпечкой, отборными джемами и намазками от «Бустан» из Галилеи, чудесным печеньем, авторскими пирожными, хлебом на закваске ручной работы (по пятницам или под заказ), отличным кофе — и ещё множеством вкусностей. Обязательно загляните!">A small, charming neighborhood café with on-site baking, premium jams and spreads from &lsquo;Bustan&rsquo; in the Galilee, wonderful cookies, unique pastries, handmade sourdough breads (available on Fridays or by pre-order), excellent coffee, and many more delicious things. Definitely worth a visit!</p>
   </div>
-  <div class="hero-right hero-illustration">
-    <svg viewBox="0 0 260 360" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:none">
-
-      <!-- ══ КОНТУР-ТЕНЬ (чёрная подложка) ══ -->
-      <path d="M130 8 C104 8 82 18 66 38 C50 56 42 80 40 106 C38 128 42 152 48 172 C44 172 34 180 30 196 C26 218 32 248 44 272 C56 298 76 322 100 338 C112 346 122 352 130 354 C138 352 148 346 160 338 C184 322 204 298 216 272 C228 248 234 218 230 196 C226 180 216 172 212 172 C218 152 222 128 220 106 C218 80 210 56 194 38 C178 18 156 8 130 8Z" fill="#1a1208" transform="translate(2,3)"/>
-
-      <!-- ══ ВОЛОСЫ — красные ══ -->
-      <!-- кокошник верх -->
-      <path d="M130 8 C104 8 82 18 66 38 C50 56 42 80 40 106 C38 128 42 152 48 172 C68 154 90 144 110 140 L110 108 C108 90 112 68 130 56 C148 68 152 90 150 108 L150 140 C170 144 192 154 212 172 C218 152 222 128 220 106 C218 80 210 56 194 38 C178 18 156 8 130 8Z" fill="#c0392b"/>
-      <!-- волосы боковые — спускаются вниз по бокам тела -->
-      <path d="M48 172 C44 172 34 180 30 196 C26 218 32 248 44 272 C54 292 68 312 84 328 C90 296 92 260 90 228 C88 208 80 188 68 176 C62 172 54 170 48 172Z" fill="#c0392b"/>
-      <path d="M212 172 C216 172 226 180 230 196 C234 218 228 248 216 272 C206 292 192 312 176 328 C170 296 168 260 170 228 C172 208 180 188 192 176 C198 172 206 170 212 172Z" fill="#c0392b"/>
-      <!-- тёмная граница волос (глубина) -->
-      <path d="M68 176 C80 188 88 208 90 228 C92 260 90 296 84 328 C80 320 76 310 72 298 C60 272 50 244 48 218 C46 200 50 184 60 176Z" fill="#a02820"/>
-      <path d="M192 176 C180 188 172 208 170 228 C168 260 170 296 176 328 C180 320 184 310 188 298 C200 272 210 244 212 218 C214 200 210 184 200 176Z" fill="#a02820"/>
-
-      <!-- ══ ТЕЛО — тёмное ══ -->
-      <path d="M110 140 C90 144 68 154 48 172 C34 180 26 196 30 218 C34 244 48 272 66 296 C84 320 106 342 130 352 C154 342 176 320 194 296 C212 272 226 244 230 218 C234 196 226 180 212 172 C192 154 170 144 150 140 Z" fill="#1e1410"/>
-
-      <!-- ══ ЦВЕТОЧНЫЙ УЗОР — красные лепестки на теле ══ -->
-      <!-- левый кластер -->
-      <g fill="#c0392b">
-        <ellipse cx="72" cy="268" rx="7" ry="11" transform="rotate(-35,72,268)"/>
-        <ellipse cx="60" cy="252" rx="6" ry="9" transform="rotate(-55,60,252)"/>
-        <ellipse cx="58" cy="280" rx="5" ry="8" transform="rotate(-15,58,280)"/>
-        <ellipse cx="78" cy="284" rx="5" ry="8" transform="rotate(20,78,284)"/>
-        <ellipse cx="52" cy="265" rx="4" ry="7" transform="rotate(-40,52,265)"/>
-        <ellipse cx="80" cy="252" rx="4" ry="6" transform="rotate(-20,80,252)"/>
-      </g>
-      <!-- правый кластер -->
-      <g fill="#c0392b">
-        <ellipse cx="188" cy="268" rx="7" ry="11" transform="rotate(35,188,268)"/>
-        <ellipse cx="200" cy="252" rx="6" ry="9" transform="rotate(55,200,252)"/>
-        <ellipse cx="202" cy="280" rx="5" ry="8" transform="rotate(15,202,280)"/>
-        <ellipse cx="182" cy="284" rx="5" ry="8" transform="rotate(-20,182,284)"/>
-        <ellipse cx="208" cy="265" rx="4" ry="7" transform="rotate(40,208,265)"/>
-        <ellipse cx="180" cy="252" rx="4" ry="6" transform="rotate(20,180,252)"/>
-      </g>
-      <!-- нижние акценты -->
-      <g fill="#c0392b">
-        <ellipse cx="86" cy="308" rx="5" ry="8" transform="rotate(-25,86,308)"/>
-        <ellipse cx="174" cy="308" rx="5" ry="8" transform="rotate(25,174,308)"/>
-        <ellipse cx="100" cy="326" rx="4" ry="6" transform="rotate(-10,100,326)"/>
-        <ellipse cx="160" cy="326" rx="4" ry="6" transform="rotate(10,160,326)"/>
-        <circle cx="130" cy="318" r="4" fill="#a02820"/>
-      </g>
-      <!-- мелкие точки-ягоды -->
-      <circle cx="64" cy="238" r="3.5" fill="#e74c3c"/>
-      <circle cx="196" cy="238" r="3.5" fill="#e74c3c"/>
-      <circle cx="68" cy="298" r="3" fill="#e74c3c" opacity="0.8"/>
-      <circle cx="192" cy="298" r="3" fill="#e74c3c" opacity="0.8"/>
-
-      <!-- ══ КОЛОСОК + МОНОГРАММА B ══ -->
-      <!-- колосок слева от B -->
-      <g transform="translate(88,242)" fill="#e8ddd0" opacity="0.85">
-        <line x1="0" y1="0" x2="0" y2="32" stroke="#e8ddd0" stroke-width="1.2"/>
-        <ellipse cx="-4" cy="8" rx="3" ry="5" transform="rotate(-25,-4,8)"/>
-        <ellipse cx="4" cy="8" rx="3" ry="5" transform="rotate(25,4,8)"/>
-        <ellipse cx="-4" cy="18" rx="3" ry="5" transform="rotate(-20,-4,18)"/>
-        <ellipse cx="4" cy="18" rx="3" ry="5" transform="rotate(20,4,18)"/>
-        <ellipse cx="-3" cy="27" rx="2.5" ry="4" transform="rotate(-15,-3,27)"/>
-        <ellipse cx="3" cy="27" rx="2.5" ry="4" transform="rotate(15,3,27)"/>
-      </g>
-      <!-- буква B -->
-      <text x="134" y="288" text-anchor="middle"
-            font-family="'Newsreader', Georgia, serif"
-            font-size="80" font-weight="400" font-style="italic"
-            fill="#f0e8dc" opacity="0.95">B</text>
-
-      <!-- ══ ГОЛОВА ══ -->
-      <ellipse cx="130" cy="108" rx="50" ry="52" fill="#f2ddc8"/>
-
-      <!-- ══ ЛИЦО ══ -->
-      <!-- чёлка / граница волос на голове -->
-      <path d="M80 96 C88 74 106 62 130 60 C154 62 172 74 180 96 C168 84 150 78 130 78 C110 78 92 84 80 96Z" fill="#1a1208"/>
-
-      <!-- щёки -->
-      <ellipse cx="108" cy="120" rx="14" ry="10" fill="#e0806a" opacity="0.45"/>
-      <ellipse cx="152" cy="120" rx="14" ry="10" fill="#e0806a" opacity="0.45"/>
-
-      <!-- нос -->
-      <ellipse cx="130" cy="114" rx="3" ry="2.2" fill="#b07060" opacity="0.7"/>
-
-      <!-- точка бинди / украшение -->
-      <circle cx="130" cy="84" r="3" fill="#1a1208"/>
-
-      <!-- губы — красные -->
-      <path d="M116 128 C120 123 125 121 130 122 C135 121 140 123 144 128 C140 133 135 135 130 135 C125 135 120 133 116 128Z" fill="#c0392b"/>
-      <path d="M116 128 Q130 122 144 128" stroke="#8b1a10" stroke-width="0.8" fill="none"/>
-
-      <!-- ══ ОЧКИ — круглые, чёрные ══ -->
-      <!-- левая линза -->
-      <circle cx="112" cy="106" r="18" fill="#111008"/>
-      <!-- правая линза -->
-      <circle cx="148" cy="106" r="18" fill="#111008"/>
-      <!-- перемычка -->
-      <path d="M130 103 C130 103 130 105 130 106" stroke="#111008" stroke-width="3" stroke-linecap="round"/>
-      <!-- дужки -->
-      <line x1="94" y1="103" x2="78" y2="99" stroke="#111008" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="166" y1="103" x2="182" y2="99" stroke="#111008" stroke-width="2.5" stroke-linecap="round"/>
-      <!-- блик на очках -->
-      <circle cx="105" cy="99" r="4" fill="white" opacity="0.1"/>
-      <circle cx="141" cy="99" r="4" fill="white" opacity="0.1"/>
-
-      <!-- ══ ОБЩИЙ КОНТУР ══ -->
-      <path d="M130 8 C104 8 82 18 66 38 C50 56 42 80 40 106 C38 128 42 152 48 172 C34 180 26 196 30 218 C34 244 48 272 66 296 C84 320 106 342 130 352 C154 342 176 320 194 296 C212 272 226 244 230 218 C234 196 226 180 212 172 C218 152 222 128 220 106 C218 80 210 56 194 38 C178 18 156 8 130 8Z" stroke="#1a1208" stroke-width="3" fill="none"/>
-      <!-- граница голова/тело -->
-      <path d="M48 172 C68 154 90 144 110 140 L150 140 C170 144 192 154 212 172" stroke="#1a1208" stroke-width="2.5" fill="none"/>
-
-    </svg>
+  <div class="hero-right hero-photo" style="border-radius:10px;overflow:hidden;align-self:start;">
+    <img src="img/Main page/cos_big.jfif" alt="Fresh croissants at Bulochka" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
   </div>
 
 </section>
@@ -1296,6 +1188,16 @@
 <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Back to top">↑</button>
 <script>
   (function(){
+    var nav = document.querySelector('.nav');
+    var heroH = window.innerHeight;
+    function updateNav() {
+      var scrolled = window.scrollY > heroH * 0.85;
+      nav.classList.toggle('nav--scrolled', scrolled);
+      nav.classList.toggle('nav--transparent', !scrolled);
+    }
+    updateNav();
+    window.addEventListener('scroll', updateNav, {passive: true});
+
     var btn = document.getElementById('scrollTopBtn');
     window.addEventListener('scroll', function(){
       btn.classList.toggle('visible', window.scrollY > 300);

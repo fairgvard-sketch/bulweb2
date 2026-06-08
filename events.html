@@ -10,7 +10,7 @@
   <meta property="og:site_name" content="Bulochka">
   <meta property="og:title" content="Events — Bulochka">
   <meta property="og:description" content="Tastings, workshops, and special evenings at Bulochka. Check what's coming up and reserve your spot.">
-  <meta property="og:image" content="https://bulweb2.web.app/img/Main%20page/croissant_main.jfif">
+  <meta property="og:image" content="https://bulweb2.web.app/img/Main%20page/cos_big.jfif">
   <meta property="og:url" content="https://bulweb2.web.app/events">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="alternate" hreflang="en" href="https://bulweb2.web.app/events">
@@ -25,7 +25,7 @@
   <style>
     /* ─── HERO ─── */
     .events-hero {
-      max-width: 1100px;
+      max-width: 1300px;
       margin: 0 auto;
       padding: 80px 24px 72px;
       display: grid;
@@ -61,7 +61,7 @@
       padding: 0 24px;
     }
     .events-features-inner {
-      max-width: 1100px;
+      max-width: 1300px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -101,7 +101,7 @@
       padding: 72px 24px 80px;
     }
     .events-form-inner {
-      max-width: 1100px;
+      max-width: 1300px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1.3fr;
@@ -505,7 +505,7 @@
     var s = {
       en: {
         lblFullname: 'Full name', phFullname: 'First and last name',
-        lblPhone: 'Phone', lblGuests: 'Guest count', phGuests: 'How many people?',
+        lblPhone: 'Phone', phPhone: '+972 5X-XXX-XXXX', lblGuests: 'Guest count', phGuests: 'How many people?',
         lblEventType: 'Event type',
         evtDefault: 'Select event type', evtBirthday: 'Birthday',
         evtBrunch: 'Brunch / gathering', evtCorporate: 'Corporate event',
@@ -517,7 +517,7 @@
       },
       he: {
         lblFullname: 'שם מלא', phFullname: 'שם פרטי ושם משפחה',
-        lblPhone: 'טלפון', lblGuests: 'מספר אורחים', phGuests: 'כמה אנשים?',
+        lblPhone: 'טלפון', phPhone: '05X-XXX-XXXX', lblGuests: 'מספר אורחים', phGuests: 'כמה אנשים?',
         lblEventType: 'סוג האירוע',
         evtDefault: 'בחרו סוג אירוע', evtBirthday: 'יום הולדת',
         evtBrunch: 'ברנץ׳ / כינוס', evtCorporate: 'אירוע ארגוני',
@@ -529,7 +529,7 @@
       },
       ru: {
         lblFullname: 'Имя и фамилия', phFullname: 'Имя и фамилия',
-        lblPhone: 'Телефон', lblGuests: 'Количество гостей', phGuests: 'Сколько человек?',
+        lblPhone: 'Телефон', phPhone: '+972 5X-XXX-XXXX', lblGuests: 'Количество гостей', phGuests: 'Сколько человек?',
         lblEventType: 'Тип мероприятия',
         evtDefault: 'Выберите тип мероприятия', evtBirthday: 'День рождения',
         evtBrunch: 'Бранч / встреча', evtCorporate: 'Корпоратив',
@@ -549,12 +549,13 @@
         if (el) el.textContent = t[id];
       });
       document.getElementById('fullname').placeholder = t.phFullname;
+      document.getElementById('phone').placeholder = t.phPhone;
       document.getElementById('guests').placeholder = t.phGuests;
       document.getElementById('message').placeholder = t.phMessage;
     }
     applyEventsLang(localStorage.getItem('bulochka-lang') || 'he');
-    document.querySelectorAll('.lang-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() { applyEventsLang(btn.dataset.lang); });
+    document.addEventListener('bulochka-lang-changed', function() {
+      applyEventsLang(document.documentElement.lang || 'en');
     });
   })();
 </script>
@@ -583,5 +584,20 @@
 
 <script src="animations.js"></script>
 <script src="accessibility.js"></script>
+<script>
+  (function () {
+    function updateHoursDot() {
+      var el = document.querySelector('.nav-hours');
+      if (!el) return;
+      var now = new Date();
+      var day = now.getDay();
+      var mins = now.getHours() * 60 + now.getMinutes();
+      var open = day === 6 ? false : day === 5 ? (mins >= 480 && mins < 900) : (mins >= 480 && mins < 1200);
+      el.classList.toggle('nav-hours--closed', !open);
+    }
+    updateHoursDot();
+    setInterval(updateHoursDot, 60000);
+  })();
+</script>
 </body>
 </html>

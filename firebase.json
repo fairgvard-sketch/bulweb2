@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "bulweb2",
     "public": ".",
     "ignore": [
       "firebase.json",
