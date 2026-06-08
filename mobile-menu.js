@@ -40,12 +40,21 @@
   }
   const toggle = document.getElementById('navToggle');
   const mobileMenu = document.getElementById('mobileMenu');
+  let scrollY = 0;
   function openMenu() {
+    scrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = '-' + scrollY + 'px';
+    document.body.style.width = '100%';
     mobileMenu.classList.add('open');
     toggle.classList.add('is-open');
     document.body.classList.add('menu-open');
   }
   function closeMenu() {
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, scrollY);
     mobileMenu.classList.remove('open');
     toggle.classList.remove('is-open');
     document.body.classList.remove('menu-open');
