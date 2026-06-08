@@ -498,6 +498,7 @@
       transition: background 0.2s, transform 0.2s;
     }
     .cart-fab.visible { display: flex; }
+    .cart-fab.modal-hidden { display: none !important; }
     .cart-fab:hover { background: var(--brown-mid); transform: translateY(-2px); }
     .cart-fab-count {
       background: var(--sage); color: #fff;
@@ -702,9 +703,9 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       </button>
       <div class="lang-globe-dropdown" id="langGlobeDropdown">
-        <button class="lang-globe-option lang-btn active" data-lang="en">EN</button>
-        <button class="lang-globe-option lang-btn" data-lang="he">עב</button>
-        <button class="lang-globe-option lang-btn" data-lang="ru">RU</button>
+        <button class="lang-globe-option active" data-lang="en">English</button>
+        <button class="lang-globe-option" data-lang="he">עברית</button>
+        <button class="lang-globe-option" data-lang="ru">Русский</button>
       </div>
     </div>
     <div class="lang-switch">
@@ -2336,11 +2337,17 @@
       recalc();
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
+      document.getElementById('cartFab')?.classList.add('modal-hidden');
+      const a11y = document.getElementById('a11y-wrap');
+      if (a11y) a11y.style.visibility = 'hidden';
     }
 
     function closeModal() {
       overlay.classList.remove('open');
       document.body.style.overflow = '';
+      document.getElementById('cartFab')?.classList.remove('modal-hidden');
+      const a11y = document.getElementById('a11y-wrap');
+      if (a11y) a11y.style.visibility = '';
     }
 
     // expose for wireAddons (called after Firebase renders new items)
@@ -2527,14 +2534,7 @@
     if (!btn || !dropdown) return;
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
-      var isOpen = dropdown.classList.toggle('open');
-      if (isOpen) {
-        var r = btn.getBoundingClientRect();
-        var ddW = 68;
-        var left = r.left + r.width / 2 - ddW / 2;
-        left = Math.max(8, Math.min(left, window.innerWidth - ddW - 8));
-        dropdown.style.left = left + 'px';
-      }
+      dropdown.classList.toggle('open');
     });
     dropdown.querySelectorAll('.lang-globe-option').forEach(function(opt) {
       opt.addEventListener('click', function() { dropdown.classList.remove('open'); });

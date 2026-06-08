@@ -31,7 +31,7 @@
       }
     });
 
-    document.querySelectorAll('.lang-btn').forEach(function (btn) {
+    document.querySelectorAll('.lang-btn, .lang-globe-option').forEach(function (btn) {
       btn.classList.toggle('active', btn.dataset.lang === lang);
     });
 
@@ -55,9 +55,10 @@
     document.dispatchEvent(new CustomEvent('bulochka-lang-changed'));
   }
 
-  document.querySelectorAll('.lang-btn').forEach(function (btn) {
+  document.querySelectorAll('.lang-btn, .lang-globe-option').forEach(function (btn) {
     btn.addEventListener('click', function () { applyLang(btn.dataset.lang); });
   });
 
+  window._bulochkaApplyLang = applyLang;
   applyLang(localStorage.getItem(LANG_KEY) || 'he');
 })();

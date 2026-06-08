@@ -61,7 +61,19 @@
       "PowerShell(\\(Get-Content \"c:\\\\Users\\\\Hub\\\\bulweb2\\\\careers.html\" | Measure-Object -Line\\).Lines)",
       "PowerShell(\\(Get-Content \"c:\\\\Users\\\\Hub\\\\bulweb2\\\\events.html\" | Measure-Object -Line\\).Lines)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
-      "Bash(git reset *)"
+      "Bash(git reset *)",
+      "Bash(git revert *)",
+      "Bash(npx skills *)",
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(python -c \"from PIL import Image; img = Image.open\\('img/Main page/hero.jpg.jfif'\\); print\\(img.size, img.mode\\)\")",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\('C:\\\\Users\\\\Hub\\\\bulweb2\\\\img\\\\Main page\\\\hero.jpg.jfif'\\); Write-Host \"$\\($img.Width\\) x $\\($img.Height\\)\"; $img.Dispose\\(\\))",
+      "Bash(start \"\" \"c:\\\\Users\\\\Hub\\\\bulweb2\\\\img\\\\Main page\\\\hero.jpg.jfif\")",
+      "Bash(dir \"c:\\\\Users\\\\Hub\\\\bulweb2\\\\img\\\\Main page\" /b)",
+      "Bash(start https://bulweb2.web.app/menu.html)",
+      "Bash(start http://localhost:5000/menu.html)",
+      "Bash(Start-Sleep -Seconds 2)",
+      "Bash(grep -v \"//\\\\|data-\\\\|desc\\\\|text\\\\|comment\\\\|lang\\\\|name\\\\|filter-pill\\\\|filter-bar-pills\\\\|filter-bar-inner\\\\|filter-bar-label\\\\|filter-bar-total\\\\|filter-bar-total\\\\|webp\\\\|svg\\\\|path\\\\|scroll\\\\|overflow-y\\\\|overflow-x\\\\|webkit\")"
     ]
   }
 }

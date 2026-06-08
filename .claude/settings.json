@@ -47,7 +47,15 @@
       "Bash(sed -i '' 's/'\\\\''Add to order →'\\\\''/'\\\\''Add ingredients →'\\\\''/g' /Users/enotov/Desktop/bulweb2/menu.html)",
       "Bash(sed -i '' 's/הוסף להזמנה ←/הוסף תוספות ←/g' /Users/enotov/Desktop/bulweb2/menu.html)",
       "Bash(sed -i '' 's/Добавить →/Добавить добавки →/g' /Users/enotov/Desktop/bulweb2/menu.html)",
-      "Bash(git stash *)"
+      "Bash(git stash *)",
+      "Bash(firebase login *)",
+      "Bash(firebase use *)",
+      "Bash(firebase hosting:sites:list)",
+      "Bash(firebase login:list)",
+      "Bash(firebase serve *)",
+      "Bash(Start-Sleep -Seconds 3)",
+      "Bash(Get-Content \"C:\\\\Users\\\\Hub\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-Hub-bulweb2\\\\5d4ac9d5-48f1-4e5a-adcd-8cb4091e4482\\\\tasks\\\\b7odhw903.output\")",
+      "Bash(npx --yes serve .)"
     ]
   }
 }

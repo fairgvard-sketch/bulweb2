@@ -35,6 +35,9 @@
   </div>
 </div>`);
 
+  if (window._bulochkaApplyLang) {
+    window._bulochkaApplyLang(localStorage.getItem('bulochka-lang') || 'he');
+  }
   const toggle = document.getElementById('navToggle');
   const mobileMenu = document.getElementById('mobileMenu');
   function openMenu() {
