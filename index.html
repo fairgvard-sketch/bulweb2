@@ -13,7 +13,7 @@
   <meta property="og:site_name" content="Bulochka">
   <meta property="og:title" content="Bulochka — Bakery · Coffee · Cakes">
   <meta property="og:description" content="A small neighbourhood bakery-café in Petah Tikva. Fresh croissants, sourdough breads, homemade cakes, and excellent coffee.">
-  <meta property="og:image" content="https://bulweb2.web.app/img/Main%20page/cos_big.jfif">
+  <meta property="og:image" content="https://bulweb2.web.app/img/Main%20page/hero.jpg.jfif">
   <meta property="og:url" content="https://bulweb2.web.app/">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="he_IL">
@@ -762,12 +762,126 @@
     .fhero--ready .fhero-line.fhero-em   { opacity: 1; transform: none; transition-delay: 0.4s; }
     .fhero--ready .fhero-sub       { opacity: 1; transform: none; transition-delay: 0.56s; }
     .fhero--ready .fhero-ctas      { opacity: 1; transform: none; transition-delay: 0.72s; }
+    .fhero--ready .fhero-info      { opacity: 1; transform: none; transition-delay: 0.88s; }
+
+    .fhero-info {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.8s cubic-bezier(0.22,1,0.36,1);
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .fhero-info-divider {
+      width: 48px;
+      height: 1px;
+      background: rgba(251,248,242,0.35);
+      margin-bottom: 4px;
+    }
+    .fhero-info-phone {
+      font-family: var(--sans);
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: rgba(251,248,242,0.95);
+      text-decoration: none;
+    }
+    .fhero-info-phone:hover { color: #d4a96a; }
+    .fhero-info-hours {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: rgba(251,248,242,0.65);
+      text-align: center;
+      line-height: 1.7;
+    }
+    .fhero-info-address {
+      font-family: var(--sans);
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: rgba(251,248,242,0.65);
+    }
 
     @media (max-width: 640px) {
       .fhero-title { font-size: clamp(42px, 12vw, 72px); }
       .fhero-ctas { gap: 12px; }
       .fhero-btn-primary, .fhero-btn-secondary { padding: 14px 28px; font-size: 10px; }
       .fhero-scroll-hint { display: none; }
+    }
+
+    /* ── Info hero ── */
+    .info-hero {
+      position: relative;
+      width: 100%;
+      height: 100svh;
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #1a110c;
+    }
+    .info-hero-bg {
+      position: absolute;
+      inset: 0;
+    }
+    .info-hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .info-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(20,12,6,0.45) 0%, rgba(20,12,6,0.6) 100%);
+    }
+    .info-hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      text-align: center;
+      padding: 0 24px;
+    }
+    .info-hero-phone {
+      font-family: var(--sans);
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: rgba(251,248,242,0.95);
+      text-decoration: none;
+    }
+    .info-hero-phone:hover { color: #d4a96a; }
+    .info-hero-divider {
+      width: 56px;
+      height: 1px;
+      background: rgba(251,248,242,0.3);
+    }
+    .info-hero-hours {
+      font-family: var(--sans);
+      font-size: clamp(13px, 1.5vw, 16px);
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: rgba(251,248,242,0.75);
+      line-height: 2;
+    }
+    .info-hero-address {
+      font-family: var(--sans);
+      font-size: clamp(12px, 1.3vw, 14px);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(251,248,242,0.5);
+    }
+    @media (max-width: 640px) {
+      .info-hero-hours { letter-spacing: 0.06em; }
     }
   </style>
 </head>
@@ -832,6 +946,17 @@
       <a href="menu.html" class="fhero-btn-primary" data-en='See the Menu' data-he='לתפריט' data-ru='Меню'>See the Menu</a>
       <a href="tel:+972529662724" class="fhero-btn-secondary" data-en='Reserve a table' data-he='הזמנת שולחן' data-ru='Забронировать'>Reserve a table</a>
     </div>
+    <div class="fhero-info">
+      <div class="fhero-info-divider"></div>
+      <a href="tel:+972529662724" class="fhero-info-phone" dir="ltr">+972 (52) 966-2724</a>
+      <div class="fhero-info-hours">
+        <span data-en='Sun – Thu 08:00 – 20:00' data-he='א׳ – ה׳ 08:00 – 20:00' data-ru='Вс – Чт 08:00 – 20:00' dir="ltr">Sun – Thu 08:00 – 20:00</span><br>
+        <span data-en='Fri 08:00 – 15:00 · Sat Closed' data-he='שישי 08:00 – 15:00 · שבת סגור' data-ru='Пт 08:00 – 15:00 · Сб закрыто' dir="ltr">Fri 08:00 – 15:00 · Sat Closed</span>
+      </div>
+      <div class="fhero-info-address">
+        <span data-en='Pinsker 29, Petah Tikva' data-he='פינסקר 29, פתח תקווה' data-ru='Пинскер 29, Петах-Тиква'>Pinsker 29, Petah Tikva</span>
+      </div>
+    </div>
   </div>
   <div class="fhero-scroll-hint" aria-hidden="true">
     <span data-en='scroll' data-he='גלול' data-ru='листай'>scroll</span>
@@ -845,9 +970,6 @@
 <p class="hero-eyebrow"><span class="eyebrow-star">✦</span> <span data-en='Our story' data-he='הסיפור שלנו' data-ru='Наша история'>Our story</span></p>
 <h1><span data-he='מאפייה קטנה' data-ru='Маленькая пекарня' class="hero-line1">A small bakery</span><br><span data-he='עם <em class="hero-accent">נשמה גדולה.</em>' data-ru='с <em class="hero-accent">большой душой.</em>'>with a <em class="hero-accent">big soul.</em></span></h1>
     <p class="hero-body" data-en="A small, charming neighborhood café with on-site baking, premium jams and spreads from 'Bustan' in the Galilee, wonderful cookies, unique pastries, handmade sourdough breads (available on Fridays or by pre-order), excellent coffee, and many more delicious things. Definitely worth a visit!" data-he="בית קפה שכונתי קטן וקסום עם אפייה במקום, ריבות וממרחים מ'בוסתן' בגליל, עוגיות נפלאות, מאפים ייחודיים, לחמי מחמצת עבודת יד (זמינים בימי שישי או בהזמנה מראש), קפה מעולה ועוד המון דברים טעימים. בהחלט שווה ביקור!" data-ru="Небольшое уютное кафе-пекарня со свежей выпечкой, отборными джемами и намазками от «Бустан» из Галилеи, чудесным печеньем, авторскими пирожными, хлебом на закваске ручной работы (по пятницам или под заказ), отличным кофе — и ещё множеством вкусностей. Обязательно загляните!">A small, charming neighborhood café with on-site baking, premium jams and spreads from &lsquo;Bustan&rsquo; in the Galilee, wonderful cookies, unique pastries, handmade sourdough breads (available on Fridays or by pre-order), excellent coffee, and many more delicious things. Definitely worth a visit!</p>
-  </div>
-  <div class="hero-right hero-photo" style="border-radius:10px;overflow:hidden;align-self:start;">
-    <img src="img/Main page/cos_big.jfif" alt="Fresh croissants at Bulochka" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
   </div>
 
 </section>
@@ -969,6 +1091,27 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── INFO HERO ───────────────────────────────────────────── -->
+<section class="info-hero">
+  <div class="info-hero-bg">
+    <img src="img/Main page/ver.webp" alt="Bulochka café" loading="lazy">
+  </div>
+  <div class="info-hero-overlay"></div>
+  <div class="info-hero-content">
+    <a href="tel:+972529662724" class="info-hero-phone" dir="ltr">+972 (52) 966-2724</a>
+    <div class="info-hero-divider"></div>
+    <div class="info-hero-hours">
+      <span data-en='Sun – Thu · 08:00 – 20:00' data-he='א׳ – ה׳ · 08:00 – 20:00' data-ru='Вс – Чт · 08:00 – 20:00' dir="ltr">Sun – Thu · 08:00 – 20:00</span><br>
+      <span data-en='Friday · 08:00 – 15:00' data-he='שישי · 08:00 – 15:00' data-ru='Пятница · 08:00 – 15:00' dir="ltr">Friday · 08:00 – 15:00</span><br>
+      <span data-en='Saturday · Closed' data-he='שבת · סגור' data-ru='Суббота · Закрыто'>Saturday · Closed</span>
+    </div>
+    <div class="info-hero-divider"></div>
+    <div class="info-hero-address">
+      <span data-en='Pinsker 29, Petah Tikva' data-he='פינסקר 29, פתח תקווה' data-ru='Пинскер 29, Петах-Тиква'>Pinsker 29, Petah Tikva</span>
     </div>
   </div>
 </section>
