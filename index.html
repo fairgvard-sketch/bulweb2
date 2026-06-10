@@ -1182,7 +1182,7 @@
 <script src="cookie-consent.js?v=2"></script>
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-  import { getFirestore, collection, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+  import { getFirestore, collection, onSnapshot, getDocs, query, where, orderBy } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
   const _app = initializeApp({
     apiKey: "AIzaSyC_zaNtYW8wnS7nhoOzEvkNhbJeJPHWmaI",
     authDomain: "bulweb2.firebaseapp.com",
@@ -1321,6 +1321,55 @@
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden && autoScrollTimer) autoPaused = false;
   });
+
+  // ── ANNOUNCEMENT POPUP ──────────────────────────────────────────────────
+  (async function() {
+    if (sessionStorage.getItem('ann-dismissed')) return;
+    let snap;
+    try { snap = await getDocs(collection(_db, 'announcements')); } catch(e) { return; }
+    if (!snap || snap.empty) return;
+    const today = new Date().toISOString().slice(0,10);
+    let best = null;
+    snap.forEach(d => {
+      const a = { id: d.id, ...d.data() };
+      if (!a.active) return;
+      if (a.dateFrom && a.dateFrom > today) return;
+      if (a.dateTo && a.dateTo < today) return;
+      if (!best) best = a;
+    });
+    if (!best) return;
+
+    const lang = localStorage.getItem('bulochka-lang') || 'he';
+    const title = (lang === 'ru' && best.titleRu) ? best.titleRu
+                : (lang === 'he' && best.titleHe) ? best.titleHe
+                : (best.titleEn || best.titleRu || best.titleHe || '');
+    const msg   = (lang === 'ru' && best.msgRu) ? best.msgRu
+                : (lang === 'he' && best.msgHe) ? best.msgHe
+                : (best.msgEn || best.msgRu || best.msgHe || '');
+
+    const overlay    = document.getElementById('annOverlay');
+    const closeBtn   = document.getElementById('annCloseBtn');
+    const dismissBtn = document.getElementById('annDismissBtn');
+    document.getElementById('annTitle').textContent = title;
+    document.getElementById('annMsg').textContent   = msg;
+    if (lang === 'he') document.getElementById('annPopup').setAttribute('dir', 'rtl');
+    if (best.closeable === false) closeBtn.style.display = 'none';
+    if (best.imageURL) {
+      const img = document.getElementById('annImage');
+      img.src = best.imageURL;
+      img.style.display = 'block';
+      document.getElementById('annIcon').style.display = 'none';
+    }
+    requestAnimationFrame(() => overlay.classList.add('visible'));
+
+    function closeAnn() {
+      overlay.classList.remove('visible');
+      if (best.closeable !== false) sessionStorage.setItem('ann-dismissed', '1');
+    }
+    closeBtn.onclick   = closeAnn;
+    dismissBtn.onclick = closeAnn;
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeAnn(); });
+  })();
 </script>
 <script type="module" src="analytics.js"></script>
 <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Back to top">↑</button>
@@ -1425,5 +1474,21 @@
     applyParallax();
   })();
 </script>
+
+<!-- ANNOUNCEMENT POPUP -->
+<div class="ann-overlay" id="annOverlay" aria-modal="true" role="dialog" aria-label="Announcement">
+  <div class="ann-popup" id="annPopup">
+    <button class="ann-close" id="annCloseBtn" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="ann-icon" id="annIcon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+    </div>
+    <img class="ann-image" id="annImage" style="display:none">
+    <h2 class="ann-title" id="annTitle"></h2>
+    <p class="ann-msg" id="annMsg"></p>
+    <button class="ann-btn" id="annDismissBtn">OK</button>
+  </div>
+</div>
 </body>
 </html>

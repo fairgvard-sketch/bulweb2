@@ -274,6 +274,9 @@
     .modal-actions{display:flex;gap:8px;justify-content:flex-end;padding:16px 24px;border-top:1px solid var(--line);margin-top:auto}
     .btn-cancel{padding:9px 18px;border:1.5px solid var(--line);border-radius:8px;background:none;font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--muted);transition:all .15s}
     .btn-cancel:hover{border-color:var(--faint);color:var(--text)}
+    .btn-primary{padding:9px 20px;border:none;border-radius:8px;background:var(--accent);color:#fff;font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;transition:background .15s}
+    .btn-primary:hover{background:var(--accentHover)}
+    .btn-primary:disabled{opacity:.6;cursor:not-allowed}
     .btn-save{padding:9px 22px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;transition:background .15s}
     .btn-save:hover{background:var(--accentHover)}
 
@@ -545,6 +548,33 @@
     .pwiz-summary-row{display:flex;gap:8px;margin-bottom:6px;font-size:12.5px}
     .pwiz-summary-key{color:var(--muted);flex-shrink:0;min-width:80px}
     .pwiz-summary-val{color:var(--ink);font-weight:500}
+
+    /* DATE PICKER */
+    .dp-wrap{position:relative}
+    .dp-trigger{width:100%;display:flex;align-items:center;gap:8px;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;cursor:pointer;text-align:left;transition:border .18s;outline:none}
+    .dp-trigger:hover,.dp-trigger:focus{border-color:var(--accent)}
+    .dp-trigger svg{flex-shrink:0;color:var(--subtle)}
+    .dp-trigger span{flex:1;color:var(--muted)}
+    .dp-trigger.has-value span{color:var(--ink)}
+    .dp-trigger.open{border-color:var(--accent)}
+    .dp-calendar{display:none;position:absolute;top:calc(100% + 6px);left:0;z-index:400;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadowLg);width:280px;padding:12px;user-select:none}
+    .dp-calendar.open{display:block}
+    .dp-cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+    .dp-cal-nav{width:28px;height:28px;border:none;background:none;cursor:pointer;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:background .15s}
+    .dp-cal-nav:hover{background:var(--lineSoft);color:var(--text)}
+    .dp-cal-month{font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;padding:4px 8px;border-radius:6px;transition:background .15s}
+    .dp-cal-month:hover{background:var(--lineSoft)}
+    .dp-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+    .dp-cal-dow{font-size:10px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-align:center;padding:4px 0}
+    .dp-cal-day{aspect-ratio:1;border:none;background:none;border-radius:6px;font-size:13px;cursor:pointer;color:var(--text);display:flex;align-items:center;justify-content:center;transition:background .12s,color .12s}
+    .dp-cal-day:hover:not(:disabled){background:var(--lineSoft)}
+    .dp-cal-day.today{font-weight:700;color:var(--accent)}
+    .dp-cal-day.selected{background:var(--accent);color:#fff !important}
+    .dp-cal-day.selected:hover{background:var(--accentHover)}
+    .dp-cal-day:disabled{opacity:.3;cursor:default}
+    .dp-cal-day.other-month{opacity:.35}
+    .dp-cal-clear{margin-top:8px;padding-top:8px;border-top:1px solid var(--line);width:100%;text-align:center;font-size:12px;color:var(--muted);background:none;border-left:none;border-right:none;border-bottom:none;cursor:pointer;font-family:var(--sans);padding-bottom:2px;transition:color .15s}
+    .dp-cal-clear:hover{color:var(--danger)}
   </style>
 <script>
 (function(){
@@ -569,6 +599,16 @@
       showPhotos:'Show photos',showPhotosDesc:'Display item photos on the menu',
       itemCount:'items',addItem:'+ Add item',shopItems:'Shop items',loadSamples:'Load samples',
       popupsTitle:'Popups',popupCount:'popups',addPopup:'+ Add Popup',
+      announcements:'Announcements',announcementsTitle:'Announcements',announcementCount:'announcements',addAnnouncement:'+ Add Announcement',
+      noAnnouncementsYet:'No announcements yet. Click "+ Add Announcement" to create one.',
+      annTitleLabel:'Title',annMsgLabel:'Message',annSchedule:'Schedule (optional)',annShowFrom:'Show from',annShowUntil:'Show until',
+      annOptions:'Options',annCloseable:'Allow visitors to close the popup',annActive:'Active (show on site)',
+      addAnnouncementTitle:'Add Announcement',editAnnouncementTitle:'Edit Announcement',
+      annLive:'Live',annScheduled:'Scheduled',annExpired:'Expired',annInactive:'Inactive',annAlways:'Always',
+      annSecImg:'Image (optional)',annUploadHint:'Click to upload image',
+      annSecContent:'Content (shown on homepage)',annSecMsg:'Message',annSecOptions:'Options',
+      annLabelFrom:'Show from',annLabelTo:'Show until',annSelectDate:'Select date',annClearDate:'Clear date',
+      annLabelCloseable:'Allow visitors to close the popup',annLabelActive:'Active (show on site)',
       badgeList:'Badge List',badgeCount:'badges',addBadge:'+ Add Badge',
       settingsTitle:'Settings',genLabel:'GENERAL',general:'General',
       restaurantNameLogo:'Restaurant Name & Logo',restaurantName:'Restaurant name',save:'Save',
@@ -657,6 +697,16 @@
       itemCount:'позиций',addItem:'+ Добавить позицию',
       shopItems:'Товары магазина',loadSamples:'Загрузить примеры',
       popupsTitle:'Поп-апы',popupCount:'поп-апов',addPopup:'+ Добавить поп-ап',
+      announcements:'Объявления',announcementsTitle:'Объявления',announcementCount:'объявлений',addAnnouncement:'+ Добавить объявление',
+      noAnnouncementsYet:'Объявлений пока нет. Нажмите «+ Добавить объявление».',
+      annTitleLabel:'Заголовок',annMsgLabel:'Текст',annSchedule:'Расписание (необязательно)',annShowFrom:'Показывать с',annShowUntil:'Показывать до',
+      annOptions:'Параметры',annCloseable:'Разрешить посетителям закрыть попап',annActive:'Активно (показывать на сайте)',
+      addAnnouncementTitle:'Добавить объявление',editAnnouncementTitle:'Редактировать объявление',
+      annLive:'Активно',annScheduled:'Запланировано',annExpired:'Истекло',annInactive:'Неактивно',annAlways:'Всегда',
+      annSecImg:'Изображение (необязательно)',annUploadHint:'Нажмите для загрузки',
+      annSecContent:'Контент (показывается на главной)',annSecMsg:'Текст',annSecOptions:'Параметры',
+      annLabelFrom:'Показывать с',annLabelTo:'Показывать до',annSelectDate:'Выберите дату',annClearDate:'Очистить',
+      annLabelCloseable:'Разрешить посетителям закрыть',annLabelActive:'Активно (показывать на сайте)',
       badgeList:'Список значков',badgeCount:'значков',addBadge:'+ Добавить значок',
       settingsTitle:'Настройки',genLabel:'ОБЩЕЕ',general:'Общее',
       restaurantNameLogo:'Название и логотип',
@@ -728,7 +778,7 @@
       $('.topbar-status','live');ph('.topbar-search input','searchPh');
       // sidebar
       _navTxt('navDashboard',L.dashboard);_navTxt('navMenu',L.menu);_navTxt('navShop',L.shop);
-      _navTxt('navBadges',L.badges);_navTxt('navPopups',L.popups);_navTxt('navChanges',L.changes);
+      _navTxt('navBadges',L.badges);_navTxt('navPopups',L.popups);_navTxt('navAnnouncements',L.announcements);_navTxt('navChanges',L.changes);
       // bottom nav
       _navTxt('bnDashboard',L.dashboard);_navTxt('bnMenu',L.menu);_navTxt('bnShop',L.shop);_navTxt('bnMore',L.more);
       // dashboard
@@ -757,6 +807,15 @@
       var svt=document.querySelector('#viewShop .page-title');if(svt)svt.textContent=L.shopItems;
       _navTxt('loadSamplesBtn',L.loadSamples);$('#addShopItemBtn','addItem');
       var pvt=document.querySelector('#viewPopups .page-title');if(pvt)pvt.textContent=L.popupsTitle;$('#addPopupBtn','addPopup');
+      var avt=document.querySelector('#viewAnnouncements .page-title');if(avt)avt.textContent=L.announcementsTitle;$('#addAnnouncementBtn','addAnnouncement');
+      $('#annSaveBtn','save');$('#annCancelBtn','cancel');
+      $('#annSecImg','annSecImg');$('#annUploadHint','annUploadHint');
+      $('#annSecContent','annSecContent');$('#annSecMsg','annSecMsg');
+      $('#annSecSchedule','annSchedule');$('#annSecOptions','annSecOptions');
+      $('#annLabelFrom','annLabelFrom');$('#annLabelTo','annLabelTo');
+      $('#annLabelCloseable','annLabelCloseable');$('#annLabelActive','annLabelActive');
+      var dpfl=document.getElementById('dpFromLabel');if(dpfl&&!dpfl.parentElement.classList.contains('has-value'))dpfl.textContent=L.annSelectDate;
+      var dptl=document.getElementById('dpToLabel');if(dptl&&!dptl.parentElement.classList.contains('has-value'))dptl.textContent=L.annSelectDate;
       var bvt=document.querySelector('#viewBadges .page-title');if(bvt)bvt.textContent=L.badgeList;$('#addBadgeBtn','addBadge');
       // settings
       var svs=document.querySelector('#viewSettings .page-title');if(svs)svs.textContent=L.settingsTitle;
@@ -768,7 +827,7 @@
       // more sheet
       $('.more-sheet-title','moreTitle');var mss=document.querySelectorAll('.more-sheet-section');if(mss[0])mss[0].textContent=L.content;if(mss[1])mss[1].textContent=L.management;if(mss[2])mss[2].textContent=L.settings;
       var sp=function(id,key){var s=document.querySelector('#'+id+' span');if(s)s.textContent=L[key];};
-      sp('msiBadges','badges');sp('msiPopups','popups');sp('msiChanges','changes');sp('msiSettings','settings');
+      sp('msiBadges','badges');sp('msiPopups','popups');sp('msiAnnouncements','announcements');sp('msiChanges','changes');sp('msiSettings','settings');
       var mts=document.querySelector('#msiTheme span:not(.more-sheet-chevron)');if(mts)mts.textContent=L.theme;
       var mls=document.querySelector('#msiLanguages span:not(.more-sheet-chevron)');if(mls)mls.textContent=L.languages;
       var tsi=document.querySelectorAll('#msiThemeMenu .more-sheet-subitem');if(tsi[0])tsi[0].textContent=L.light;if(tsi[1])tsi[1].textContent=L.dark;
@@ -916,6 +975,10 @@
         <button class="sidebar-item" id="navPopups">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="14" height="11" rx="1.5"/><rect x="8" y="10" width="13" height="9" rx="1.5"/></svg>
           Popups
+        </button>
+        <button class="sidebar-item" id="navAnnouncements">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          Announcements
         </button>
         <button class="sidebar-item" id="navChanges">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18"/><path d="m8 7-4 4 4 4"/><path d="m16 13 4 4-4 4"/></svg>
@@ -1191,6 +1254,119 @@
         </div>
       </div>
 
+      <!-- ANNOUNCEMENTS VIEW -->
+      <div class="view" id="viewAnnouncements">
+        <div class="page-body">
+          <div class="page-header">
+            <div>
+              <div class="page-breadcrumb">BULOCHKA <span>/ ANNOUNCEMENTS</span></div>
+              <div class="page-title">Announcements</div>
+              <div class="page-meta"><strong id="metaAnnouncementCount">—</strong> announcements</div>
+            </div>
+            <button class="btn-add-item" id="addAnnouncementBtn">+ Add Announcement</button>
+          </div>
+          <div id="announcementList" style="display:flex;flex-direction:column;gap:10px"></div>
+        </div>
+      </div>
+
+      <!-- ANNOUNCEMENT MODAL -->
+      <div class="overlay" id="announcementOverlay">
+        <div class="modal modal-wide" id="announcementModal">
+          <div class="modal-header">
+            <div class="modal-title" id="announcementModalTitle">Add Announcement</div>
+            <button class="modal-close" id="announcementModalClose">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            </button>
+          </div>
+          <div class="modal-body" style="padding:20px 24px;display:flex;flex-direction:column;gap:0">
+            <div class="modal-section-title" id="annSecImg" style="margin-bottom:10px">Image (optional)</div>
+            <div class="upload-area" id="annUploadArea" style="min-height:120px;margin-bottom:0">
+              <img id="annImgPreview" style="display:none">
+              <div class="upload-placeholder" id="annUploadPlaceholder">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
+                <span id="annUploadHint">Click to upload image</span>
+              </div>
+              <button class="upload-remove" id="annImgRemove" style="display:none">Remove</button>
+              <input type="file" id="annImgFile" accept="image/*" style="display:none">
+            </div>
+            <div class="modal-section-title" id="annSecContent" style="margin-top:16px">Content (shown on homepage)</div>
+            <div class="modal-grid">
+              <div class="field">
+                <label>Title — RU</label>
+                <input type="text" id="annTitleRu" placeholder="Объявление">
+              </div>
+              <div class="field">
+                <label>Title — EN</label>
+                <input type="text" id="annTitleEn" placeholder="Announcement">
+              </div>
+            </div>
+            <div class="field" style="margin-top:4px">
+              <label>Title — HE</label>
+              <input type="text" id="annTitleHe" placeholder="הודעה" dir="rtl">
+            </div>
+            <div class="modal-section-title" id="annSecMsg" style="margin-top:16px">Message</div>
+            <div class="modal-grid">
+              <div class="field">
+                <label>Message — RU</label>
+                <textarea id="annMsgRu" rows="3" placeholder="Мы закрыты с 12 по 20 апреля" style="resize:vertical;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--ink);outline:none;transition:border .18s"></textarea>
+              </div>
+              <div class="field">
+                <label>Message — EN</label>
+                <textarea id="annMsgEn" rows="3" placeholder="We are closed Apr 12–20" style="resize:vertical;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--ink);outline:none;transition:border .18s"></textarea>
+              </div>
+            </div>
+            <div class="field" style="margin-top:4px">
+              <label>Message — HE</label>
+              <textarea id="annMsgHe" rows="2" placeholder="אנחנו סגורים..." dir="rtl" style="resize:vertical;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--ink);outline:none;transition:border .18s"></textarea>
+            </div>
+            <div class="modal-section-title" id="annSecSchedule" style="margin-top:16px">Schedule (optional)</div>
+            <div class="modal-grid">
+              <div class="field">
+                <label id="annLabelFrom">Show from</label>
+                <div class="dp-wrap" id="dpFromWrap">
+                  <button type="button" class="dp-trigger" id="dpFromTrigger">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                    <span id="dpFromLabel">Select date</span>
+                  </button>
+                  <input type="hidden" id="annDateFrom">
+                  <div class="dp-calendar" id="dpFromCal"></div>
+                </div>
+              </div>
+              <div class="field">
+                <label id="annLabelTo">Show until</label>
+                <div class="dp-wrap" id="dpToWrap">
+                  <button type="button" class="dp-trigger" id="dpToTrigger">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                    <span id="dpToLabel">Select date</span>
+                  </button>
+                  <input type="hidden" id="annDateTo">
+                  <div class="dp-calendar" id="dpToCal"></div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-section-title" id="annSecOptions" style="margin-top:16px">Options</div>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+              <label class="toggle">
+                <input type="checkbox" id="annCloseable" checked>
+                <span class="toggle-slider"></span>
+              </label>
+              <span id="annLabelCloseable" style="font-size:13px;color:var(--text)">Allow visitors to close the popup</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <label class="toggle">
+                <input type="checkbox" id="annActive" checked>
+                <span class="toggle-slider"></span>
+              </label>
+              <span id="annLabelActive" style="font-size:13px;color:var(--text)">Active (show on site)</span>
+            </div>
+          </div>
+          <div class="modal-actions">
+            <button class="btn-cancel" id="annCancelBtn">Cancel</button>
+            <button class="btn-primary" id="annSaveBtn">Save</button>
+          </div>
+        </div>
+      </div>
+
       <!-- BADGES VIEW -->
       <div class="view" id="viewBadges">
         <div class="page-body">
@@ -1329,6 +1505,10 @@
     <button class="more-sheet-item" id="msiPopups">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="14" height="11" rx="1.5"/><rect x="8" y="10" width="13" height="9" rx="1.5"/></svg>
       <span>Popups</span>
+    </button>
+    <button class="more-sheet-item" id="msiAnnouncements">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span>Announcements</span>
     </button>
 
     <div class="more-sheet-divider"></div>
@@ -3796,6 +3976,310 @@
   });
 
   document.getElementById('navPopups').addEventListener('click', () => { setActiveNav('Popups'); loadPopups(); stopLiveCounter(); });
+
+  // ── ANNOUNCEMENTS ──────────────────────────────────────────────────────────
+  let annEditingId = null;
+
+  async function loadAnnouncements() {
+    showView('viewAnnouncements');
+    const list = document.getElementById('announcementList');
+    list.innerHTML = '<div class="empty">Loading…</div>';
+    let snap;
+    try { snap = await getDocs(collection(db, 'announcements')); }
+    catch(e) { list.innerHTML = `<div class="empty" style="color:var(--danger)">Error: ${e.message}</div>`; return; }
+    document.getElementById('metaAnnouncementCount').textContent = snap.size;
+    if (snap.empty) { list.innerHTML = `<div class="empty">${ADMIN_I18N.t('noAnnouncementsYet')}</div>`; return; }
+    list.innerHTML = '';
+    snap.forEach(d => {
+      const a = { id: d.id, ...d.data() };
+      const card = document.createElement('div');
+      card.className = 'popup-card';
+      const now = new Date().toISOString().slice(0,10);
+      let statusTag = '';
+      if (!a.active) {
+        statusTag = `<span style="font-size:11px;padding:2px 8px;border-radius:100px;background:var(--lineSoft);color:var(--muted)">${ADMIN_I18N.t('annInactive')}</span>`;
+      } else if (a.dateTo && a.dateTo < now) {
+        statusTag = `<span style="font-size:11px;padding:2px 8px;border-radius:100px;background:var(--dangerSoft);color:var(--danger)">${ADMIN_I18N.t('annExpired')}</span>`;
+      } else if (a.dateFrom && a.dateFrom > now) {
+        statusTag = `<span style="font-size:11px;padding:2px 8px;border-radius:100px;background:var(--accentSoft);color:var(--accent)">${ADMIN_I18N.t('annScheduled')}</span>`;
+      } else {
+        statusTag = `<span style="font-size:11px;padding:2px 8px;border-radius:100px;background:var(--successSoft);color:var(--success)">${ADMIN_I18N.t('annLive')}</span>`;
+      }
+      const dateRange = (a.dateFrom || a.dateTo) ? `${a.dateFrom||'∞'} → ${a.dateTo||'∞'}` : ADMIN_I18N.t('annAlways');
+      card.innerHTML = `
+        <div class="popup-card-img" style="background:var(--accentSoft)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </div>
+        <div class="popup-card-body">
+          <div class="popup-card-name">${a.titleRu || a.titleEn || a.titleHe || '(no title)'}</div>
+          <div class="popup-card-meta" style="display:flex;align-items:center;gap:8px">${statusTag} <span>${dateRange}</span></div>
+        </div>
+        <div class="popup-card-actions">
+          <label class="toggle" title="Enable/disable">
+            <input type="checkbox" ${a.active !== false ? 'checked' : ''} onchange="toggleAnnouncement('${a.id}', this.checked)">
+            <span class="toggle-slider"></span>
+          </label>
+          <button class="popup-edit-btn" onclick="openAnnouncementModal('${a.id}')">Edit</button>
+          <button class="popup-del-btn" onclick="deleteAnnouncement('${a.id}')" title="Delete">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+          </button>
+        </div>`;
+      list.appendChild(card);
+    });
+  }
+
+  window.toggleAnnouncement = async function(id, active) {
+    await updateDoc(doc(db, 'announcements', id), { active });
+    toast(active ? ADMIN_I18N.t('toastSaved') : ADMIN_I18N.t('toastHidden'));
+    loadAnnouncements();
+  };
+
+  window.deleteAnnouncement = async function(id) {
+    if (!confirm(ADMIN_I18N.t('deleteBody'))) return;
+    await deleteDoc(doc(db, 'announcements', id));
+    toast(ADMIN_I18N.t('toastDeleted'));
+    loadAnnouncements();
+  };
+
+  window.openAnnouncementModal = async function(id) {
+    annEditingId = id || null;
+    document.getElementById('announcementModalTitle').textContent = id ? ADMIN_I18N.t('editAnnouncementTitle') : ADMIN_I18N.t('addAnnouncementTitle');
+    ['annTitleRu','annTitleEn','annTitleHe','annMsgRu','annMsgEn','annMsgHe'].forEach(f => document.getElementById(f).value = '');
+    dpFrom.setValue(null); dpTo.setValue(null);
+    const annArea = document.getElementById('annUploadArea');
+    annArea.dataset.newFile = ''; annArea.dataset.removed = ''; annArea.dataset.existingUrl = '';
+    document.getElementById('annImgPreview').style.display = 'none';
+    document.getElementById('annImgPreview').src = '';
+    document.getElementById('annUploadPlaceholder').style.display = 'flex';
+    document.getElementById('annImgRemove').style.display = 'none';
+    document.getElementById('annImgFile').value = '';
+    document.getElementById('dpFromLabel').textContent = ADMIN_I18N.t('annSelectDate');
+    document.getElementById('dpToLabel').textContent   = ADMIN_I18N.t('annSelectDate');
+    document.getElementById('annCloseable').checked = true;
+    document.getElementById('annActive').checked = true;
+    if (id) {
+      const d = await getDoc(doc(db, 'announcements', id));
+      if (d.exists()) {
+        const a = d.data();
+        document.getElementById('annTitleRu').value = a.titleRu || '';
+        document.getElementById('annTitleEn').value = a.titleEn || '';
+        document.getElementById('annTitleHe').value = a.titleHe || '';
+        document.getElementById('annMsgRu').value = a.msgRu || '';
+        document.getElementById('annMsgEn').value = a.msgEn || '';
+        document.getElementById('annMsgHe').value = a.msgHe || '';
+        dpFrom.setValue(a.dateFrom || null);
+        dpTo.setValue(a.dateTo || null);
+        if (a.imageURL) {
+          const area = document.getElementById('annUploadArea');
+          area.dataset.existingUrl = a.imageURL;
+          area.dataset.newFile = ''; area.dataset.removed = '';
+          const prev = document.getElementById('annImgPreview');
+          prev.src = a.imageURL; prev.style.display = 'block';
+          document.getElementById('annUploadPlaceholder').style.display = 'none';
+          document.getElementById('annImgRemove').style.display = 'block';
+        }
+        document.getElementById('annCloseable').checked = a.closeable !== false;
+        document.getElementById('annActive').checked = a.active !== false;
+      }
+    }
+    document.getElementById('announcementOverlay').classList.add('open');
+  };
+
+  // ann image upload
+  (function() {
+    const area = document.getElementById('annUploadArea');
+    const file = document.getElementById('annImgFile');
+    const preview = document.getElementById('annImgPreview');
+    const placeholder = document.getElementById('annUploadPlaceholder');
+    const remove = document.getElementById('annImgRemove');
+    area.onclick = (e) => { if (e.target !== remove) file.click(); };
+    file.onchange = () => {
+      const f = file.files[0];
+      if (!f) return;
+      area.dataset.newFile = '1';
+      area.dataset.removed = '';
+      preview.src = URL.createObjectURL(f);
+      preview.style.display = 'block';
+      placeholder.style.display = 'none';
+      remove.style.display = 'block';
+    };
+    remove.onclick = (e) => {
+      e.stopPropagation();
+      area.dataset.newFile = '';
+      area.dataset.existingUrl = '';
+      area.dataset.removed = '1';
+      preview.src = '';
+      preview.style.display = 'none';
+      placeholder.style.display = 'flex';
+      remove.style.display = 'none';
+      file.value = '';
+    };
+  })();
+
+  document.getElementById('announcementModalClose').onclick = () => document.getElementById('announcementOverlay').classList.remove('open');
+  document.getElementById('annCancelBtn').onclick = () => document.getElementById('announcementOverlay').classList.remove('open');
+  document.getElementById('announcementOverlay').addEventListener('click', e => { if (e.target === document.getElementById('announcementOverlay')) document.getElementById('announcementOverlay').classList.remove('open'); });
+  document.getElementById('addAnnouncementBtn').onclick = () => openAnnouncementModal(null);
+
+  document.getElementById('annSaveBtn').onclick = async function() {
+    const btn = this;
+    btn.disabled = true; btn.textContent = 'Saving…';
+    const annArea = document.getElementById('annUploadArea');
+    const annImgFile = document.getElementById('annImgFile').files[0];
+    const isNewFile = annArea.dataset.newFile === '1';
+    const isRemoved = annArea.dataset.removed === '1';
+    const existingUrl = annArea.dataset.existingUrl || null;
+
+    let imageURL = existingUrl;
+    if (isRemoved) imageURL = null;
+    if (isNewFile && annImgFile) {
+      btn.textContent = 'Uploading…';
+      const fd = new FormData();
+      fd.append('file', annImgFile);
+      fd.append('upload_preset', CLOUDINARY_PRESET);
+      fd.append('folder', 'bulweb/announcements');
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, { method: 'POST', body: fd });
+      const json = await res.json();
+      imageURL = json.secure_url;
+    }
+
+    const data = {
+      titleRu: document.getElementById('annTitleRu').value.trim(),
+      titleEn: document.getElementById('annTitleEn').value.trim(),
+      titleHe: document.getElementById('annTitleHe').value.trim(),
+      msgRu:   document.getElementById('annMsgRu').value.trim(),
+      msgEn:   document.getElementById('annMsgEn').value.trim(),
+      msgHe:   document.getElementById('annMsgHe').value.trim(),
+      dateFrom: dpFrom.getValue(),
+      dateTo:   dpTo.getValue(),
+      closeable: document.getElementById('annCloseable').checked,
+      active:   document.getElementById('annActive').checked,
+      imageURL: imageURL,
+      updatedAt: new Date().toISOString(),
+    };
+    try {
+      if (annEditingId) {
+        await updateDoc(doc(db, 'announcements', annEditingId), data);
+        toast(ADMIN_I18N.t('toastSaved'));
+      } else {
+        data.createdAt = new Date().toISOString();
+        await addDoc(collection(db, 'announcements'), data);
+        toast(ADMIN_I18N.t('toastAdded'));
+      }
+      document.getElementById('announcementOverlay').classList.remove('open');
+      loadAnnouncements();
+    } catch(e) {
+      toast('Error: ' + (e.message || 'could not save'));
+    } finally {
+      btn.disabled = false; btn.textContent = 'Save';
+    }
+  };
+
+  // ── DATE PICKER ────────────────────────────────────────────────────────────
+  function createDatePicker(triggerId, calId, hiddenId, labelId) {
+    const trigger = document.getElementById(triggerId);
+    const cal     = document.getElementById(calId);
+    const hidden  = document.getElementById(hiddenId);
+    const label   = document.getElementById(labelId);
+    let viewYear, viewMonth;
+
+    function today() { const d = new Date(); return { y: d.getFullYear(), m: d.getMonth(), d: d.getDate() }; }
+
+    function open() {
+      const val = hidden.value;
+      if (val) { const p = val.split('-'); viewYear = +p[0]; viewMonth = +p[1] - 1; }
+      else { const t = today(); viewYear = t.y; viewMonth = t.m; }
+      render();
+      cal.classList.add('open');
+      trigger.classList.add('open');
+      setTimeout(() => document.addEventListener('click', outside), 0);
+    }
+    function close() {
+      cal.classList.remove('open');
+      trigger.classList.remove('open');
+      document.removeEventListener('click', outside);
+    }
+    function outside(e) { if (!trigger.contains(e.target) && !cal.contains(e.target)) close(); }
+
+    function render() {
+      const DAYS = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+      const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      const t = today();
+      const firstDay = new Date(viewYear, viewMonth, 1).getDay();
+      const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+      const daysInPrev  = new Date(viewYear, viewMonth, 0).getDate();
+      const selectedVal = hidden.value;
+
+      let html = `
+        <div class="dp-cal-header">
+          <button type="button" class="dp-cal-nav" id="${calId}-prev">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <span class="dp-cal-month">${months[viewMonth]} ${viewYear}</span>
+          <button type="button" class="dp-cal-nav" id="${calId}-next">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+        <div class="dp-cal-grid">`;
+      DAYS.forEach(d => { html += `<div class="dp-cal-dow">${d}</div>`; });
+      for (let i = 0; i < firstDay; i++) {
+        const d = daysInPrev - firstDay + 1 + i;
+        html += `<button type="button" class="dp-cal-day other-month" disabled>${d}</button>`;
+      }
+      for (let d = 1; d <= daysInMonth; d++) {
+        const iso = `${viewYear}-${String(viewMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        const isToday    = viewYear === t.y && viewMonth === t.m && d === t.d;
+        const isSelected = iso === selectedVal;
+        html += `<button type="button" class="dp-cal-day${isToday?' today':''}${isSelected?' selected':''}" data-iso="${iso}">${d}</button>`;
+      }
+      const cells = firstDay + daysInMonth;
+      const trailing = cells % 7 ? 7 - (cells % 7) : 0;
+      for (let i = 1; i <= trailing; i++) {
+        html += `<button type="button" class="dp-cal-day other-month" disabled>${i}</button>`;
+      }
+      html += `</div>`;
+      if (selectedVal) html += `<button type="button" class="dp-cal-clear">${ADMIN_I18N.t('annClearDate')}</button>`;
+      cal.innerHTML = html;
+
+      cal.querySelector(`#${calId}-prev`).onclick = (e) => { e.stopPropagation(); viewMonth--; if (viewMonth < 0) { viewMonth = 11; viewYear--; } render(); };
+      cal.querySelector(`#${calId}-next`).onclick = (e) => { e.stopPropagation(); viewMonth++; if (viewMonth > 11) { viewMonth = 0; viewYear++; } render(); };
+      cal.querySelectorAll('.dp-cal-day[data-iso]').forEach(btn => {
+        btn.onclick = (e) => {
+          e.stopPropagation();
+          hidden.value = btn.dataset.iso;
+          const [y,m,d] = btn.dataset.iso.split('-');
+          label.textContent = `${d}.${m}.${y}`;
+          trigger.classList.add('has-value');
+          close();
+        };
+      });
+      const clearBtn = cal.querySelector('.dp-cal-clear');
+      if (clearBtn) clearBtn.onclick = (e) => { e.stopPropagation(); hidden.value = ''; label.textContent = ADMIN_I18N.t('annSelectDate'); trigger.classList.remove('has-value'); render(); };
+    }
+
+    trigger.addEventListener('click', (e) => { e.stopPropagation(); cal.classList.contains('open') ? close() : open(); });
+
+    return {
+      setValue(iso) {
+        hidden.value = iso || '';
+        if (iso) {
+          const [y,m,d] = iso.split('-');
+          label.textContent = `${d}.${m}.${y}`;
+          trigger.classList.add('has-value');
+        } else {
+          label.textContent = ADMIN_I18N.t('annSelectDate');
+          trigger.classList.remove('has-value');
+        }
+      },
+      getValue() { return hidden.value || null; }
+    };
+  }
+
+  const dpFrom = createDatePicker('dpFromTrigger','dpFromCal','annDateFrom','dpFromLabel');
+  const dpTo   = createDatePicker('dpToTrigger','dpToCal','annDateTo','dpToLabel');
+
+  document.getElementById('navAnnouncements').addEventListener('click', () => { setActiveNav('Announcements'); loadAnnouncements(); stopLiveCounter(); });
+  document.getElementById('msiAnnouncements').onclick = () => { closeMoreSheet(); setActiveNav('Announcements'); loadAnnouncements(); stopLiveCounter(); };
 </script>
 </body>
 </html>
