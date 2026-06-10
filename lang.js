@@ -36,9 +36,22 @@
     });
 
     document.querySelectorAll('.menu-item-action').forEach(function (btn) {
-      if (isHe) btn.textContent = 'הוסף תוספות ←';
-      else if (isRu) btn.textContent = 'Добавить добавки →';
-      else btn.textContent = 'Add ingredients →';
+      const itemName = (function() {
+        const item = btn.closest('.menu-item');
+        if (!item) return '';
+        const nameEl = item.querySelector('.menu-item-name');
+        return (nameEl?.dataset.en || nameEl?.textContent || '').trim().replace(/\s*◦\s*$/, '');
+      })();
+      const hasAddons = window.__ADDONS__ && window.__ADDONS__[itemName];
+      if (hasAddons) {
+        if (isHe) btn.textContent = 'הוסף תוספות';
+        else if (isRu) btn.textContent = 'Добавить добавки →';
+        else btn.textContent = 'Add ingredients →';
+      } else {
+        if (isHe) btn.textContent = '+ הוסף להזמנה';
+        else if (isRu) btn.textContent = '+ В корзину';
+        else btn.textContent = '+ Add to order';
+      }
     });
 
     var soldOutText = isHe ? ' — אזל המלאי' : isRu ? ' — нет в наличии' : ' — sold out';

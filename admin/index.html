@@ -3312,7 +3312,8 @@
   document.getElementById('navShop').onclick = () => { setActiveNav('Shop'); loadShop(); stopLiveCounter(); };
   document.getElementById('bnShop').onclick  = () => { setActiveNav('Shop'); loadShop(); stopLiveCounter(); };
 
-  document.getElementById('loadSamplesBtn').onclick = async () => {
+  const loadSamplesBtnEl = document.getElementById('loadSamplesBtn');
+  if (loadSamplesBtnEl) loadSamplesBtnEl.onclick = async () => {
     const SAMPLES = [
       { name: 'Sourdough Loaf',      nameHe: 'כיכר שאור',        nameRu: 'Хлеб на закваске',   price: '₪38', desc: 'Naturally leavened, baked in-house every morning.',      descHe: 'על בסיס שאור טבעי, נאפה אצלנו כל בוקר.',  descRu: 'На натуральной закваске, выпекается каждое утро.',  img: 'img/friday special/plushka.webp',           order: 0 },
       { name: 'Honey Jar — Local',   nameHe: 'צנצנת דבש מקומי',  nameRu: 'Мёд местный',        price: '₪52', desc: 'Raw wildflower honey from a local beekeeper.',           descHe: 'דבש פרחי בר גולמי מגדיל מקומי.',           descRu: 'Сырой цветочный мёд от местного пчеловода.',        img: 'img/friday special/vatrushka.webp',          order: 10 },
@@ -3345,7 +3346,9 @@
     showView('viewBadges');
     const grid = document.getElementById('badgeGrid');
     grid.innerHTML = '<div class="empty">Loading…</div>';
-    const snap = await getDocs(collection(db, 'badges'));
+    let snap;
+    try { snap = await getDocs(collection(db, 'badges')); }
+    catch(e) { grid.innerHTML = `<div class="empty" style="color:var(--danger)">Error: ${e.message}</div>`; return; }
     const badges = [];
     snap.forEach(d => badges.push({ id: d.id, ...d.data() }));
     badges.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
@@ -3534,7 +3537,9 @@
     showView('viewPopups');
     const list = document.getElementById('popupList');
     list.innerHTML = '<div class="empty">Loading…</div>';
-    const snap = await getDocs(collection(db, 'popups'));
+    let snap;
+    try { snap = await getDocs(collection(db, 'popups')); }
+    catch(e) { list.innerHTML = `<div class="empty" style="color:var(--danger)">Error: ${e.message}</div>`; return; }
     document.getElementById('metaPopupCount').textContent = snap.size;
     if (snap.empty) { list.innerHTML = '<div class="empty">No popups yet. Click "+ Add Popup" to create one.</div>'; return; }
     list.innerHTML = '';
