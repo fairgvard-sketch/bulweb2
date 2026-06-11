@@ -20,6 +20,12 @@
       }
     });
 
+    document.querySelectorAll('[data-placeholder-he]').forEach(function (el) {
+      if (isHe) el.placeholder = el.dataset.placeholderHe;
+      else if (isRu && el.dataset.placeholderRu) el.placeholder = el.dataset.placeholderRu;
+      else el.placeholder = el.dataset.placeholderEn;
+    });
+
     document.querySelectorAll('[data-he-html]').forEach(function (el) {
       if (!el.dataset.enHtml) el.dataset.enHtml = el.innerHTML;
       if (isHe) {

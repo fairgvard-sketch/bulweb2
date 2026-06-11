@@ -72,7 +72,7 @@
       border-left: 1px solid var(--brown-faint);
       padding-left: 40px;
     }
-    .events-feature:last-child { border-left: none; padding-left: 0; }
+    .events-feature:last-child { border-right: 1px solid var(--brown-faint); }
     .events-feature-num {
       font-family: var(--sans);
       font-size: 10px;
@@ -354,47 +354,47 @@
 
     <form class="events-form" id="eventsForm" novalidate>
       <div class="form-group">
-        <label for="fullname" id="lblFullname">Full name</label>
-        <input type="text" id="fullname" name="fullname" placeholder="First and last name" required>
+        <label for="fullname" data-en='Full name' data-he='שם מלא' data-ru='Полное имя'>Full name</label>
+        <input type="text" id="fullname" name="fullname" data-placeholder-en='First and last name' data-placeholder-he='שם פרטי ושם משפחה' data-placeholder-ru='Имя и фамилия' placeholder="First and last name" required>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label for="phone" id="lblPhone">Phone</label>
+          <label for="phone" data-en='Phone' data-he='טלפון' data-ru='Телефон'>Phone</label>
           <input type="tel" id="phone" name="phone" placeholder="+972 5X-XXXXXXX" dir="ltr" required>
         </div>
         <div class="form-group">
-          <label for="guests" id="lblGuests">Guest count</label>
-          <input type="number" id="guests" name="guests" placeholder="How many people?" min="1">
+          <label for="guests" data-en='Guest count' data-he='מספר אורחים' data-ru='Количество гостей'>Guest count</label>
+          <input type="number" id="guests" name="guests" data-placeholder-en='How many people?' data-placeholder-he='כמה אנשים?' data-placeholder-ru='Сколько человек?' placeholder="How many people?" min="1">
         </div>
       </div>
       <div class="form-group">
-        <label for="event_type" id="lblEventType">Event type</label>
+        <label for="event_type" data-en='Event type' data-he='סוג האירוע' data-ru='Тип мероприятия'>Event type</label>
         <select id="event_type" name="event_type">
-          <option value="" disabled selected id="evtDefault">Select event type</option>
-          <option value="birthday" id="evtBirthday">Birthday</option>
-          <option value="brunch" id="evtBrunch">Brunch / gathering</option>
-          <option value="corporate" id="evtCorporate">Corporate event</option>
-          <option value="private" id="evtPrivate">Private event</option>
-          <option value="other" id="evtOther">Other</option>
+          <option value="" disabled selected data-en='Select event type' data-he='בחרו סוג אירוע' data-ru='Выберите тип'>Select event type</option>
+          <option value="birthday" data-en='Birthday' data-he='יום הולדת' data-ru='День рождения'>Birthday</option>
+          <option value="brunch" data-en='Brunch / gathering' data-he='בראנץ׳ / מפגש' data-ru='Бранч / встреча'>Brunch / gathering</option>
+          <option value="corporate" data-en='Corporate event' data-he='אירוע חברתי' data-ru='Корпоратив'>Corporate event</option>
+          <option value="private" data-en='Private event' data-he='אירוע פרטי' data-ru='Частное мероприятие'>Private event</option>
+          <option value="other" data-en='Other' data-he='אחר' data-ru='Другое'>Other</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="message" id="lblMessage">Additional notes</label>
-        <textarea id="message" name="message" placeholder="Preferred date, special requests, questions…"></textarea>
+        <label for="message" data-en='Additional notes' data-he='הערות נוספות' data-ru='Дополнительно'>Additional notes</label>
+        <textarea id="message" name="message" data-placeholder-en='Preferred date, special requests, questions…' data-placeholder-he='תאריך מועדף, בקשות מיוחדות, שאלות…' data-placeholder-ru='Желаемая дата, пожелания, вопросы…' placeholder="Preferred date, special requests, questions…"></textarea>
       </div>
 
       <div class="form-divider"></div>
 
       <div class="form-check">
         <input type="checkbox" id="consent1" name="consent1" required>
-        <label for="consent1" id="lblConsent1">I agree to the use of my details for the purpose of handling this enquiry, in accordance with the privacy policy.</label>
+        <label for="consent1" data-en='I agree to the use of my details for the purpose of handling this enquiry, in accordance with the privacy policy.' data-he='אני מסכים/ה לשימוש בפרטיי לטיפול בפנייה זו, בהתאם למדיניות הפרטיות.' data-ru='Я согласен(а) на использование моих данных для обработки этого запроса в соответствии с политикой конфиденциальности.'>I agree to the use of my details for the purpose of handling this enquiry, in accordance with the privacy policy.</label>
       </div>
       <div class="form-check">
         <input type="checkbox" id="consent2" name="consent2">
-        <label for="consent2" id="lblConsent2">I'd like to receive updates and offers from Bulochka. I can unsubscribe at any time.</label>
+        <label for="consent2" data-en='I&apos;d like to receive updates and offers from Bulochka. I can unsubscribe at any time.' data-he='אני מעוניין/ת לקבל עדכונים והצעות מבולוצ׳קה. אפשר להסיר בכל עת.' data-ru='Я хочу получать новости и предложения от Bulochka. Могу отписаться в любое время.'>I'd like to receive updates and offers from Bulochka. I can unsubscribe at any time.</label>
       </div>
 
-      <button type="submit" class="btn-submit" id="evtSubmit">Send →</button>
+      <button type="submit" class="btn-submit" data-en='Send →' data-he='שלח ←' data-ru='Отправить →'>Send →</button>
     </form>
   </div>
 </div>

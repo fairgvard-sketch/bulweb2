@@ -23,41 +23,191 @@
   <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Playfair+Display:ital,wght@0,400;1,400&family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=8">
   <style>
-    /* ─── HERO ─────────────────────────────── */
-    .careers-hero {
-      padding: 80px 24px 64px;
+    /* ─── PHOTO BANNER ─────────────────────── */
+    .careers-banner-wrap {
       max-width: 1300px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
+      margin: 40px auto;
+      padding: 0 24px;
     }
-    .careers-hero .section-eyebrow { margin-bottom: 20px; }
-    .careers-hero h1 {
-      font-family: var(--serif);
-      font-size: clamp(42px, 7vw, 96px);
-      font-weight: 300;
-      line-height: 0.98;
-      letter-spacing: -0.02em;
-      margin-bottom: 28px;
-      font-optical-sizing: auto;
-    }
-    .careers-hero h1 em { font-style: italic; color: var(--brown-mid); }
-    .careers-lead {
-      font-size: clamp(15px, 2vw, 18px);
-      color: var(--brown-mid);
-      line-height: 1.7;
-    }
-    .careers-hero-photo {
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    .careers-hero-photo img {
+    .careers-banner {
+      position: relative;
       width: 100%;
-      height: auto;
+      height: clamp(280px, 38vw, 480px);
+      overflow: hidden;
+      border-radius: 12px;
+      background: #1a110c;
+    }
+    .careers-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
       display: block;
     }
+    .careers-banner-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(20,12,6,0.45);
+    }
+    .careers-banner-deco {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 4%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    [dir="rtl"] .careers-banner-deco { justify-content: flex-start; padding-right: 0; padding-left: 4%; }
+    .careers-banner-deco-text {
+      font-family: var(--serif);
+      font-size: clamp(120px, 22vw, 320px);
+      font-weight: 300;
+      color: rgba(251,248,242,0.08);
+      line-height: 1;
+      letter-spacing: -0.05em;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .careers-banner-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0 6% 0 0;
+      text-align: right;
+    }
+    [dir="rtl"] .careers-banner-content { align-items: flex-start; padding: 0 0 0 6%; text-align: left; }
+    .careers-banner-title {
+      font-family: var(--serif);
+      font-size: clamp(28px, 4.5vw, 64px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: #fbf8f2;
+      margin-bottom: 12px;
+      font-optical-sizing: auto;
+    }
+    .careers-banner-sub {
+      font-family: var(--sans);
+      font-size: clamp(12px, 1.2vw, 16px);
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(251,248,242,0.75);
+    }
+    [dir="rtl"] .careers-banner-title,
+    [dir="rtl"] .careers-banner-sub { font-family: 'IBM Plex Sans Hebrew', sans-serif; font-style: normal; }
+
+    /* ─── HERO ─────────────────────────────── */
+    .careers-hero-wrap {
+      max-width: 1300px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+    .careers-hero {
+      position: relative;
+      width: 100%;
+      height: clamp(260px, 30vw, 400px);
+      overflow: hidden;
+      border-radius: 12px;
+      background: #1a110c;
+    }
+    .careers-hero-bg {
+      position: absolute;
+      top: -25%;
+      left: 0;
+      right: 0;
+      bottom: -25%;
+    }
+    .careers-hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 35%;
+      display: block;
+      will-change: transform;
+    }
+    .careers-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(20,12,6,0.45);
+    }
+    .careers-hero-deco {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 2%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    [dir="rtl"] .careers-hero-deco { justify-content: flex-end; padding-left: 0; padding-right: 2%; }
+    .careers-hero-deco-text {
+      font-family: var(--serif);
+      font-size: clamp(120px, 22vw, 320px);
+      font-weight: 300;
+      color: rgba(251,248,242,0.07);
+      line-height: 1;
+      letter-spacing: -0.05em;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .careers-hero-content {
+      position: absolute;
+      inset: 0;
+    }
+    .careers-hero-content-left {
+      position: absolute;
+      top: 3%;
+      left: 6%;
+      max-width: 55%;
+    }
+    .careers-hero-content-right {
+      position: absolute;
+      bottom: 8%;
+      right: 6%;
+      max-width: 340px;
+      text-align: right;
+    }
+    [dir="rtl"] .careers-hero-content-left { left: auto; right: 6%; text-align: right; }
+    [dir="rtl"] .careers-hero-content-right { right: auto; left: 6%; text-align: left; bottom: 8%; top: auto; }
+    .careers-hero-eyebrow {
+      font-family: var(--sans);
+      font-size: clamp(10px, 1vw, 13px);
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(251,248,242,0.75) !important;
+      color: rgba(251,248,242,0.6);
+      margin-bottom: 12px;
+    }
+    .careers-hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 4.5vw, 64px);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: #fbf8f2;
+      margin-bottom: 14px;
+      font-optical-sizing: auto;
+    }
+    .careers-lead {
+      font-family: var(--sans);
+      font-size: clamp(12px, 1.2vw, 15px);
+      font-weight: 400;
+      color: rgba(251,248,242,0.75);
+      line-height: 1.6;
+      max-width: 380px;
+    }
+    .careers-hero h1 em { font-style: italic; color: #fbf8f2 !important; }
+    [dir="rtl"] .careers-hero h1,
+    [dir="rtl"] .careers-lead { font-family: 'IBM Plex Sans Hebrew', sans-serif; font-style: normal; }
 
     /* ─── APPLY FORM ────────────────────────── */
     .apply-section {
@@ -211,18 +361,26 @@
 </nav>
 
 
+
 <!-- ─── HERO ──────────────────────────────────────────────── -->
-<div class="careers-hero">
-  <div class="careers-hero-left">
-    <p class="section-eyebrow" data-en='Work with us' data-he='עבודה אצלנו' data-ru='Работа у нас'>Work with us</p>
-    <h1><span data-en='Come bake' data-he='בואו לאפות' data-ru='Приходите печь'>Come bake</span><br><em data-en='with us.' data-he='איתנו.' data-ru='вместе с нами.'>with us.</em></h1>
-    <p class="careers-lead" data-en='We&apos;re a small team that takes our craft seriously. If you love early mornings, honest work, and the smell of something just out of the oven — let&apos;s talk.' data-he='אנחנו צוות קטן שלוקח את המלאכה ברצינות. אם אתם אוהבים בקרים מוקדמים, עבודה אמיתית וריח של משהו טרי מהתנור — בואו נדבר.' data-ru='Мы небольшая команда, которая серьёзно относится к своему делу. Если вы любите ранние утра, честную работу и запах свежей выпечки — давайте поговорим.'>We're a small team that takes our craft seriously. If you love
-      early mornings, honest work, and the smell of something just out
-      of the oven — let's talk.
-    </p>
-  </div>
-  <div class="careers-hero-photo">
-    <img src="img/Main page/work_with_us.webp" alt="Working at Bulochka">
+<div class="careers-hero-wrap">
+  <div class="careers-hero">
+    <div class="careers-hero-bg">
+      <img src="img/Main page/crowd2.jpg" alt="Working at Bulochka">
+    </div>
+    <div class="careers-hero-overlay"></div>
+<div class="careers-hero-content">
+      <div class="careers-hero-content-left">
+        <p class="careers-hero-eyebrow section-eyebrow" data-en='Work with us' data-he='עבודה אצלנו' data-ru='Работа у нас'>Work with us</p>
+        <h1>
+          <span data-en='Come bake' data-he='בואו לאפות' data-ru='Приходите печь'>Come bake</span><br>
+          <em data-en='with us.' data-he='איתנו.' data-ru='вместе с нами.'>with us.</em>
+        </h1>
+      </div>
+      <div class="careers-hero-content-right">
+        <p class="careers-lead" data-en='We&apos;re a small team that takes our craft seriously. If you love early mornings, honest work, and the smell of something just out of the oven — let&apos;s talk.' data-he='אנחנו צוות קטן שלוקח את המלאכה ברצינות. אם אתם אוהבים בקרים מוקדמים, עבודה אמיתית וריח של משהו טרי מהתנור — בואו נדבר.' data-ru='Мы небольшая команда, которая серьёзно относится к своему делу. Если вы любите ранние утра, честную работу и запах свежей выпечки — давайте поговорим.'>We're a small team that takes our craft seriously. If you love early mornings, honest work, and the smell of something just out of the oven — let's talk.</p>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -429,6 +587,29 @@
 
 <script src="animations.js"></script>
 <script src="accessibility.js"></script>
+<script>
+  (function() {
+    var bg = document.querySelector('.careers-hero-bg');
+    var hero = document.querySelector('.careers-hero');
+    if (!bg || !hero) return;
+    var ticking = false;
+    function update() {
+      var rect = hero.getBoundingClientRect();
+      var viewH = window.innerHeight;
+      var progress = (viewH - rect.top) / (viewH + rect.height);
+      var offset = (progress - 0.5) * 400;
+      bg.style.transform = 'translateY(' + offset + 'px)';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }, { passive: true });
+    update();
+  })();
+</script>
 <script>
   (function () {
     function updateHoursDot() {
