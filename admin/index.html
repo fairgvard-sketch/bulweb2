@@ -1334,6 +1334,88 @@
               <button class="btn-primary" id="hpHeroSaveBtn">Save</button>
             </div>
           </div>
+
+          <!-- STORY CARD -->
+          <div class="modal modal-wide" style="position:static;transform:none;box-shadow:none;border:1.5px solid var(--line);max-width:760px;margin:16px 0 0">
+            <div class="modal-header"><div class="modal-title">Story section ("A small bakery")</div></div>
+            <div class="modal-body" style="padding:20px 24px;display:flex;flex-direction:column;gap:0">
+              <div class="modal-section-title" style="margin-bottom:10px">Eyebrow</div>
+              <div class="modal-grid">
+                <div class="field"><label>RU</label><input type="text" id="hpStoryEyebrowRu" placeholder="Наша история"></div>
+                <div class="field"><label>EN</label><input type="text" id="hpStoryEyebrowEn" placeholder="Our story"></div>
+              </div>
+              <div class="field" style="margin-top:10px"><label>HE</label><input type="text" id="hpStoryEyebrowHe" placeholder="הסיפור שלנו" dir="rtl"></div>
+
+              <div class="modal-section-title" style="margin-top:16px">Title — line 1</div>
+              <div class="modal-grid">
+                <div class="field"><label>RU</label><input type="text" id="hpStoryTitle1Ru" placeholder="Маленькая пекарня"></div>
+                <div class="field"><label>EN</label><input type="text" id="hpStoryTitle1En" placeholder="A small bakery"></div>
+              </div>
+              <div class="field" style="margin-top:10px"><label>HE</label><input type="text" id="hpStoryTitle1He" placeholder="מאפייה קטנה" dir="rtl"></div>
+
+              <div class="modal-section-title" style="margin-top:16px">Title — line 2 (HTML, &lt;em&gt; allowed for accent)</div>
+              <div class="modal-grid">
+                <div class="field"><label>RU</label><input type="text" id="hpStoryTitle2Ru" placeholder="с <em class=&quot;hero-accent&quot;>большой душой.</em>"></div>
+                <div class="field"><label>EN</label><input type="text" id="hpStoryTitle2En" placeholder="with a <em class=&quot;hero-accent&quot;>big soul.</em>"></div>
+              </div>
+              <div class="field" style="margin-top:10px"><label>HE</label><input type="text" id="hpStoryTitle2He" placeholder="עם <em class=&quot;hero-accent&quot;>נשמה גדולה.</em>" dir="rtl"></div>
+
+              <div class="modal-section-title" style="margin-top:16px">Body text</div>
+              <div class="modal-grid">
+                <div class="field"><label>RU</label><textarea id="hpStoryBodyRu" rows="4" style="resize:vertical;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--ink);outline:none"></textarea></div>
+                <div class="field"><label>EN</label><textarea id="hpStoryBodyEn" rows="4" style="resize:vertical;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--ink);outline:none"></textarea></div>
+              </div>
+              <div class="field" style="margin-top:10px"><label>HE</label><textarea id="hpStoryBodyHe" rows="4" dir="rtl" style="resize:vertical;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--ink);outline:none"></textarea></div>
+            </div>
+            <div class="modal-actions">
+              <button class="btn-cancel" id="hpStoryResetBtn">Reset</button>
+              <button class="btn-primary" id="hpStorySaveBtn">Save</button>
+            </div>
+          </div>
+
+          <!-- TICKER CARD -->
+          <div class="modal modal-wide" style="position:static;transform:none;box-shadow:none;border:1.5px solid var(--line);max-width:760px;margin:16px 0 0">
+            <div class="modal-header"><div class="modal-title">Ticker strip (4 phrases)</div></div>
+            <div class="modal-body" style="padding:20px 24px;display:flex;flex-direction:column;gap:0" id="hpTickerBody"></div>
+            <div class="modal-actions">
+              <button class="btn-cancel" id="hpTickerResetBtn">Reset</button>
+              <button class="btn-primary" id="hpTickerSaveBtn">Save</button>
+            </div>
+          </div>
+
+          <!-- ROOM CARD -->
+          <div class="modal modal-wide" style="position:static;transform:none;box-shadow:none;border:1.5px solid var(--line);max-width:760px;margin:16px 0 0">
+            <div class="modal-header"><div class="modal-title">"The Room" section</div></div>
+            <div class="modal-body" style="padding:20px 24px;display:flex;flex-direction:column;gap:0">
+              <div class="modal-section-title" style="margin-bottom:10px">Eyebrow</div>
+              <div class="modal-grid">
+                <div class="field"><label>RU</label><input type="text" id="hpRoomEyebrowRu" placeholder="Пространство"></div>
+                <div class="field"><label>EN</label><input type="text" id="hpRoomEyebrowEn" placeholder="The room"></div>
+              </div>
+              <div class="field" style="margin-top:10px"><label>HE</label><input type="text" id="hpRoomEyebrowHe" placeholder="החדר" dir="rtl"></div>
+
+              <div class="modal-section-title" style="margin-top:16px">Title — line 1</div>
+              <div class="modal-grid">
+                <div class="field"><label>RU</label><input type="text" id="hpRoomTitle1Ru" placeholder="Место,"></div>
+                <div class="field"><label>EN</label><input type="text" id="hpRoomTitle1En" placeholder="The kind of place"></div>
+              </div>
+              <div class="field" style="margin-top:10px"><label>HE</label><input type="text" id="hpRoomTitle1He" placeholder="סוג המקום" dir="rtl"></div>
+
+              <div class="modal-section-title" style="margin-top:16px">Title — line 2</div>
+              <div class="modal-grid">
+                <div class="field"><label>RU</label><input type="text" id="hpRoomTitle2Ru" placeholder="не нуждающееся в объяснении."></div>
+                <div class="field"><label>EN</label><input type="text" id="hpRoomTitle2En" placeholder="you don't explain."></div>
+              </div>
+              <div class="field" style="margin-top:10px"><label>HE</label><input type="text" id="hpRoomTitle2He" placeholder="שלא מסבירים." dir="rtl"></div>
+
+              <div class="modal-section-title" style="margin-top:18px">Photos (5)</div>
+              <div id="hpRoomPhotos" style="display:flex;flex-direction:column;gap:18px;margin-top:8px"></div>
+            </div>
+            <div class="modal-actions">
+              <button class="btn-cancel" id="hpRoomResetBtn">Reset</button>
+              <button class="btn-primary" id="hpRoomSaveBtn">Save</button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -4359,79 +4441,209 @@
   document.getElementById('navAnnouncements').addEventListener('click', () => { setActiveNav('Announcements'); loadAnnouncements(); stopLiveCounter(); });
   document.getElementById('msiAnnouncements').onclick = () => { closeMoreSheet(); setActiveNav('Announcements'); loadAnnouncements(); stopLiveCounter(); };
 
-  // ─── HOMEPAGE (hero pilot) ──────────────────────────────
+  // ─── HOMEPAGE (hero / story / ticker / room) ────────────
   (function setupHomepage() {
-    const HERO_FIELDS = [
-      'eyebrowRu','eyebrowEn','eyebrowHe',
-      'title1Ru','title1En','title1He',
-      'title2Ru','title2En','title2He',
-      'subRu','subEn','subHe',
-    ];
-    // map field key -> input element id
-    const elId = k => 'hpHero' + k.charAt(0).toUpperCase() + k.slice(1);
+    // Current site content used as defaults when a Firestore field is empty,
+    // so the admin shows exactly what's live and you edit from there.
+    const DEFAULTS = {
+      hero: {
+        eyebrowRu:'Пекарня · Кофе · Торты', eyebrowEn:'Bakery · Coffee · Cakes', eyebrowHe:'מאפייה · קפה · עוגות',
+        title1Ru:'Неспешное утро,', title1En:'Slow mornings,', title1He:'בוקר בנחת,',
+        title2Ru:'теплое масло.', title2En:'warm butter.', title2He:'חמאה חמימה.',
+        subRu:'Уютная пекарня-кофейня в Петах-Тикве. Свежие круассаны, домашние торты, отличный кофе.',
+        subEn:'A neighbourhood bakery-café in Petah Tikva. Fresh croissants, homemade cakes, excellent coffee.',
+        subHe:'בית קפה שכונתי בפתח תקווה. קרואסונים טריים, עוגות ביתיות, קפה מעולה.',
+        bgImg:'img/Main page/ver.webp',
+      },
+      story: {
+        eyebrowRu:'Наша история', eyebrowEn:'Our story', eyebrowHe:'הסיפור שלנו',
+        title1Ru:'Маленькая пекарня', title1En:'A small bakery', title1He:'מאפייה קטנה',
+        title2Ru:'с <em class="hero-accent">большой душой.</em>', title2En:'with a <em class="hero-accent">big soul.</em>', title2He:'עם <em class="hero-accent">נשמה גדולה.</em>',
+        bodyRu:'Небольшое уютное кафе-пекарня со свежей выпечкой, отборными джемами и намазками от «Бустан» из Галилеи, чудесным печеньем, авторскими пирожными, хлебом на закваске ручной работы (по пятницам или под заказ), отличным кофе — и ещё множеством вкусностей. Обязательно загляните!',
+        bodyEn:"A small, charming neighborhood café with on-site baking, premium jams and spreads from 'Bustan' in the Galilee, wonderful cookies, unique pastries, handmade sourdough breads (available on Fridays or by pre-order), excellent coffee, and many more delicious things. Definitely worth a visit!",
+        bodyHe:"בית קפה שכונתי קטן וקסום עם אפייה במקום, ריבות וממרחים מ'בוסתן' בגליל, עוגיות נפלאות, מאפים ייחודיים, לחמי מחמצת עבודת יד (זמינים בימי שישי או בהזמנה מראש), קפה מעולה ועוד המון דברים טעימים. בהחלט שווה ביקור!",
+      },
+      ticker: {
+        item1Ru:'Свежие круассаны каждый день', item1En:'Freshly baked croissant every day', item1He:'קרואסון טרי אפוי כל יום',
+        item2Ru:'Цельнозерновой хлеб под заказ', item2En:'Whole bread by 24-hour pre-order', item2He:'לחם שלם בהזמנה מראש 24 שעות',
+        item3Ru:'Домашние торты', item3En:'Homemade cakes', item3He:'עוגות ביתיות',
+        item4Ru:'Можно с питомцами', item4En:'Pet friendly', item4He:'ידידותי לחיות מחמד',
+      },
+      room: {
+        eyebrowRu:'Пространство', eyebrowEn:'The room', eyebrowHe:'החדר',
+        title1Ru:'Место,', title1En:'The kind of place', title1He:'סוג המקום',
+        title2Ru:'не нуждающееся в объяснении.', title2En:"you don't explain.", title2He:'שלא מסבירים.',
+        caption1Ru:'стойка', caption1En:'the counter', caption1He:'הדלפק', img1:'img/Main page/barista.webp',
+        caption2Ru:'с заботой', caption2En:'served with care', caption2He:'מוגש באהבה', img2:'img/Main page/clients.jpg',
+        caption3Ru:'терраса', caption3En:'the terrace', caption3He:'המרפסת', img3:'img/Main page/tables.webp',
+        caption4Ru:'флэт уайт, 09:14', caption4En:'flat white, 09:14', caption4He:'פלט וייט, 09:14', img4:'img/Main page/clients2.jpg',
+        caption5Ru:'утренний ритуал', caption5En:'morning ritual', caption5He:'טקס הבוקר', img5:'img/Main page/creambon.jpg',
+      },
+    };
+    // merge Firestore data over defaults (non-empty Firestore values win)
+    const withDefaults = (section, data) => {
+      const out = Object.assign({}, DEFAULTS[section] || {});
+      Object.keys(data || {}).forEach(k => { if (data[k] !== '' && data[k] != null) out[k] = data[k]; });
+      return out;
+    };
 
-    const heroArea   = document.getElementById('hpHeroUploadArea');
-    const heroPrev   = document.getElementById('hpHeroImgPreview');
-    const heroPlace  = document.getElementById('hpHeroUploadPlaceholder');
-    const heroRemove = document.getElementById('hpHeroImgRemove');
-
-    setupUpload('hpHeroUploadArea','hpHeroImgFile','hpHeroImgPreview','hpHeroUploadPlaceholder','hpHeroImgRemove');
-
-    function showHeroImg(url) {
-      if (url) {
-        heroPrev.src = itemImgSrc(url);
-        heroPrev.style.display = 'block';
-        heroPlace.style.display = 'none';
-        heroRemove.style.display = 'block';
-        heroArea.dataset.existingUrl = url;
-      } else {
-        heroPrev.src = '';
-        heroPrev.style.display = 'none';
-        heroPlace.style.display = 'flex';
-        heroRemove.style.display = 'none';
-        heroArea.dataset.existingUrl = '';
+    // text-only section: list of field keys; input id = prefix + Capitalized(key)
+    function textSaver(section, prefix, fields, saveBtnId, resetBtnId, label) {
+      const inputId = k => prefix + k.charAt(0).toUpperCase() + k.slice(1);
+      let cached = {};
+      async function load() {
+        try { const s = await getDoc(doc(db, 'homepage', section)); cached = withDefaults(section, s.exists() ? s.data() : {}); }
+        catch (e) { cached = withDefaults(section, {}); }
+        fields.forEach(k => { const el = document.getElementById(inputId(k)); if (el) el.value = cached[k] || ''; });
       }
+      document.getElementById(resetBtnId).onclick = () => load();
+      document.getElementById(saveBtnId).onclick = async () => {
+        const btn = document.getElementById(saveBtnId);
+        btn.disabled = true; toast('Saving…');
+        try {
+          const data = {};
+          fields.forEach(k => { const el = document.getElementById(inputId(k)); data[k] = el ? el.value.trim() : ''; });
+          await setDoc(doc(db, 'homepage', section), data, { merge: true });
+          cached = data; toast(label + ' saved ✓');
+        } catch (e) { console.error(section + ' save error:', e); toast('Error: ' + (e.message || e)); }
+        finally { btn.disabled = false; }
+      };
+      return { load };
     }
-    // clearing the existing image too
+
+    // ── HERO (text + bg image) ──
+    const HERO_FIELDS = ['eyebrowRu','eyebrowEn','eyebrowHe','title1Ru','title1En','title1He','title2Ru','title2En','title2He','subRu','subEn','subHe'];
+    const heroId = k => 'hpHero' + k.charAt(0).toUpperCase() + k.slice(1);
+    const heroArea = document.getElementById('hpHeroUploadArea');
+    const heroPrev = document.getElementById('hpHeroImgPreview');
+    const heroPlace = document.getElementById('hpHeroUploadPlaceholder');
+    const heroRemove = document.getElementById('hpHeroImgRemove');
+    setupUpload('hpHeroUploadArea','hpHeroImgFile','hpHeroImgPreview','hpHeroUploadPlaceholder','hpHeroImgRemove');
+    function showHeroImg(url) {
+      if (url) { heroPrev.src = itemImgSrc(url); heroPrev.style.display='block'; heroPlace.style.display='none'; heroRemove.style.display='block'; heroArea.dataset.existingUrl=url; }
+      else { heroPrev.src=''; heroPrev.style.display='none'; heroPlace.style.display='flex'; heroRemove.style.display='none'; heroArea.dataset.existingUrl=''; }
+    }
     heroRemove.addEventListener('click', () => { heroArea.dataset.existingUrl = ''; });
-
     let heroData = {};
-
-    async function loadHomepage() {
-      showView('viewHomepage');
-      try {
-        const snap = await getDoc(doc(db, 'homepage', 'hero'));
-        heroData = snap.exists() ? snap.data() : {};
-      } catch (e) { heroData = {}; }
-      // fill fields
-      HERO_FIELDS.forEach(k => { const el = document.getElementById(elId(k)); if (el) el.value = heroData[k] || ''; });
+    async function loadHero() {
+      try { const s = await getDoc(doc(db, 'homepage', 'hero')); heroData = withDefaults('hero', s.exists() ? s.data() : {}); }
+      catch (e) { heroData = withDefaults('hero', {}); }
+      HERO_FIELDS.forEach(k => { const el = document.getElementById(heroId(k)); if (el) el.value = heroData[k] || ''; });
       showHeroImg(heroData.bgImg || '');
       document.getElementById('hpHeroImgFile').value = '';
     }
-
-    document.getElementById('hpHeroResetBtn').onclick = () => loadHomepage();
-
+    document.getElementById('hpHeroResetBtn').onclick = () => loadHero();
     document.getElementById('hpHeroSaveBtn').onclick = async () => {
       const btn = document.getElementById('hpHeroSaveBtn');
       btn.disabled = true; toast('Saving…');
       try {
         const data = {};
-        HERO_FIELDS.forEach(k => { const el = document.getElementById(elId(k)); data[k] = el ? el.value.trim() : ''; });
-
-        // image: upload new file if chosen, else keep existing url
+        HERO_FIELDS.forEach(k => { const el = document.getElementById(heroId(k)); data[k] = el ? el.value.trim() : ''; });
         const file = document.getElementById('hpHeroImgFile').files[0];
-        if (file) data.bgImg = await uploadToCloudinary(file);
-        else data.bgImg = heroArea.dataset.existingUrl || '';
-
+        data.bgImg = file ? await uploadToCloudinary(file) : (heroArea.dataset.existingUrl || '');
         await setDoc(doc(db, 'homepage', 'hero'), data, { merge: true });
-        heroData = data;
-        showHeroImg(data.bgImg);
+        heroData = data; showHeroImg(data.bgImg);
         document.getElementById('hpHeroImgFile').value = '';
         toast('Hero saved ✓');
       } catch (e) { console.error('Hero save error:', e); toast('Error: ' + (e.message || e)); }
       finally { btn.disabled = false; }
     };
 
+    // ── STORY (text only) ──
+    const story = textSaver('story', 'hpStory',
+      ['eyebrowRu','eyebrowEn','eyebrowHe','title1Ru','title1En','title1He','title2Ru','title2En','title2He','bodyRu','bodyEn','bodyHe'],
+      'hpStorySaveBtn','hpStoryResetBtn','Story');
+
+    // ── TICKER (4 phrases × 3 langs, generated rows) ──
+    (function buildTickerRows() {
+      const body = document.getElementById('hpTickerBody');
+      let html = '';
+      for (let i = 1; i <= 4; i++) {
+        html += `<div class="modal-section-title" style="margin-top:${i===1?0:16}px">Phrase ${i}</div>
+          <div class="modal-grid">
+            <div class="field"><label>RU</label><input type="text" id="hpTickerItem${i}Ru"></div>
+            <div class="field"><label>EN</label><input type="text" id="hpTickerItem${i}En"></div>
+          </div>
+          <div class="field" style="margin-top:10px"><label>HE</label><input type="text" id="hpTickerItem${i}He" dir="rtl"></div>`;
+      }
+      body.innerHTML = html;
+    })();
+    // ticker input ids are hpTickerItem{N}{Ru|En|He}; prefix 'hpTicker', keys item{N}{Ru|En|He}
+    const TICKER_FIELDS = [];
+    for (let i = 1; i <= 4; i++) ['Ru','En','He'].forEach(l => TICKER_FIELDS.push(`item${i}${l}`));
+    const tickerSaver = textSaver('ticker', 'hpTicker', TICKER_FIELDS, 'hpTickerSaveBtn','hpTickerResetBtn','Ticker');
+
+    // ── ROOM (text + 5 photos) ──
+    const roomImgState = {}; // i -> existing url
+    (function buildRoomPhotos() {
+      const wrap = document.getElementById('hpRoomPhotos');
+      let html = '';
+      for (let i = 1; i <= 5; i++) {
+        html += `<div style="display:flex;gap:14px;align-items:flex-start;padding-top:${i===1?0:14}px;${i===1?'':'border-top:1px solid var(--line)'}">
+          <div class="upload-area" id="hpRoomUploadArea${i}" style="min-height:90px;width:120px;flex:0 0 120px;margin-bottom:0">
+            <img id="hpRoomImgPreview${i}" style="display:none">
+            <div class="upload-placeholder" id="hpRoomUploadPlaceholder${i}" style="font-size:11px">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
+            </div>
+            <button class="upload-remove" id="hpRoomImgRemove${i}" style="display:none">Remove</button>
+            <input type="file" id="hpRoomImgFile${i}" accept="image/*" style="display:none">
+          </div>
+          <div style="flex:1">
+            <div class="modal-section-title" style="margin:0 0 8px">Caption ${i}</div>
+            <div class="modal-grid">
+              <div class="field"><label>RU</label><input type="text" id="hpRoomCaption${i}Ru"></div>
+              <div class="field"><label>EN</label><input type="text" id="hpRoomCaption${i}En"></div>
+            </div>
+            <div class="field" style="margin-top:8px"><label>HE</label><input type="text" id="hpRoomCaption${i}He" dir="rtl"></div>
+          </div>
+        </div>`;
+      }
+      wrap.innerHTML = html;
+      for (let i = 1; i <= 5; i++) {
+        setupUpload(`hpRoomUploadArea${i}`,`hpRoomImgFile${i}`,`hpRoomImgPreview${i}`,`hpRoomUploadPlaceholder${i}`,`hpRoomImgRemove${i}`);
+        document.getElementById(`hpRoomImgRemove${i}`).addEventListener('click', () => { roomImgState[i] = ''; });
+      }
+    })();
+    const ROOM_TEXT = ['eyebrowRu','eyebrowEn','eyebrowHe','title1Ru','title1En','title1He','title2Ru','title2En','title2He'];
+    for (let i = 1; i <= 5; i++) ['Ru','En','He'].forEach(l => ROOM_TEXT.push(`caption${i}${l}`));
+    const roomId = k => 'hpRoom' + k.charAt(0).toUpperCase() + k.slice(1);
+    function showRoomImg(i, url) {
+      const prev = document.getElementById(`hpRoomImgPreview${i}`);
+      const place = document.getElementById(`hpRoomUploadPlaceholder${i}`);
+      const rm = document.getElementById(`hpRoomImgRemove${i}`);
+      if (url) { prev.src = itemImgSrc(url); prev.style.display='block'; place.style.display='none'; rm.style.display='block'; roomImgState[i]=url; }
+      else { prev.src=''; prev.style.display='none'; place.style.display='flex'; rm.style.display='none'; roomImgState[i]=''; }
+    }
+    let roomData = {};
+    async function loadRoom() {
+      try { const s = await getDoc(doc(db, 'homepage', 'room')); roomData = withDefaults('room', s.exists() ? s.data() : {}); }
+      catch (e) { roomData = withDefaults('room', {}); }
+      ROOM_TEXT.forEach(k => { const el = document.getElementById(roomId(k)); if (el) el.value = roomData[k] || ''; });
+      for (let i = 1; i <= 5; i++) { showRoomImg(i, roomData['img'+i] || ''); document.getElementById(`hpRoomImgFile${i}`).value = ''; }
+    }
+    document.getElementById('hpRoomResetBtn').onclick = () => loadRoom();
+    document.getElementById('hpRoomSaveBtn').onclick = async () => {
+      const btn = document.getElementById('hpRoomSaveBtn');
+      btn.disabled = true; toast('Saving…');
+      try {
+        const data = {};
+        ROOM_TEXT.forEach(k => { const el = document.getElementById(roomId(k)); data[k] = el ? el.value.trim() : ''; });
+        for (let i = 1; i <= 5; i++) {
+          const file = document.getElementById(`hpRoomImgFile${i}`).files[0];
+          data['img'+i] = file ? await uploadToCloudinary(file) : (roomImgState[i] || '');
+        }
+        await setDoc(doc(db, 'homepage', 'room'), data, { merge: true });
+        roomData = data;
+        for (let i = 1; i <= 5; i++) { showRoomImg(i, data['img'+i]); document.getElementById(`hpRoomImgFile${i}`).value = ''; }
+        toast('The Room saved ✓');
+      } catch (e) { console.error('Room save error:', e); toast('Error: ' + (e.message || e)); }
+      finally { btn.disabled = false; }
+    };
+
+    function loadHomepage() {
+      showView('viewHomepage');
+      loadHero(); story.load(); tickerSaver.load(); loadRoom();
+    }
     document.getElementById('navHomepage').addEventListener('click', () => { setActiveNav('Homepage'); loadHomepage(); stopLiveCounter(); });
   })();
 </script>
