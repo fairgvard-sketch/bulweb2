@@ -12,7 +12,12 @@
       "firestore.rules",
       "CLAUDE.md",
       "package.json",
-      "package-lock.json"
+      "package-lock.json",
+      "serviceAccount.json",
+      "**/serviceAccount*.json",
+      "cloudinary.env",
+      "*.env",
+      "scripts/**"
     ],
     "cleanUrls": true,
     "trailingSlash": false
