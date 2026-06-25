@@ -3,6 +3,7 @@ node_modules/
 package-lock.json
 package.json
 *.png
+!img/**/*.png
 test-drag.js
 verify-drag.js
 .DS_Store
