@@ -55,7 +55,16 @@
       "Bash(firebase serve *)",
       "Bash(Start-Sleep -Seconds 3)",
       "Bash(Get-Content \"C:\\\\Users\\\\Hub\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-Hub-bulweb2\\\\5d4ac9d5-48f1-4e5a-adcd-8cb4091e4482\\\\tasks\\\\b7odhw903.output\")",
-      "Bash(npx --yes serve .)"
+      "Bash(npx --yes serve .)",
+      "Read(//c/Users/Hub/bulweb2/**)",
+      "Bash(python3 -c \"from PIL import Image; print\\('ok'\\)\")",
+      "Bash(pip install *)",
+      "Bash(python -c \"from PIL import Image; print\\('ok'\\)\")",
+      "PowerShell(node -e \"console.log\\('node ok'\\)\" 2>&1)",
+      "PowerShell(node -e \"require\\('sharp'\\); console.log\\('sharp ok'\\)\" 2>&1)",
+      "Bash(python -c \"from PIL import Image; img = Image.open\\('c:/Users/Hub/bulweb2/img/Main page/logotip_crop.png'\\); print\\(img.size\\)\")",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\('c:\\\\Users\\\\Hub\\\\bulweb2\\\\img\\\\Main page\\\\logotip_crop.png'\\); \"$\\($img.Width\\) x $\\($img.Height\\)\"; $img.Dispose\\(\\))",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\('c:\\\\Users\\\\Hub\\\\bulweb2\\\\img\\\\Main page\\\\bul_logo.png'\\); \"$\\($img.Width\\) x $\\($img.Height\\)\"; $img.Dispose\\(\\))"
     ]
   }
 }
