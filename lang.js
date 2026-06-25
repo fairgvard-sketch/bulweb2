@@ -1,5 +1,39 @@
 (function () {
   const LANG_KEY = 'bulochka-lang';
+  var _langThumbFirst = true; // first positioning is instant (no slide-in on load)
+
+  // Slide the "droplet" pill under the active button in each .lang-switch.
+  // instant=true positions without animating (initial paint / resize).
+  function moveLangThumbs(instant) {
+    document.querySelectorAll('.lang-switch').forEach(function (sw) {
+      var thumb = sw.querySelector('.lang-switch-thumb');
+      if (!thumb) {
+        thumb = document.createElement('span');
+        thumb.className = 'lang-switch-thumb';
+        sw.insertBefore(thumb, sw.firstChild);
+      }
+      var active = sw.querySelector('.lang-btn.active');
+      if (!active) { thumb.classList.remove('ready'); return; }
+      var x = active.offsetLeft;
+      var w = active.offsetWidth;
+      var apply = function () {
+        thumb.style.width = w + 'px';
+        thumb.style.transform = 'translateX(' + x + 'px)';
+        thumb.classList.add('ready');
+      };
+      if (instant) {
+        var prev = thumb.style.transition;
+        thumb.style.transition = 'none';
+        apply();
+        // force reflow, then restore transition for subsequent moves
+        void thumb.offsetWidth;
+        thumb.style.transition = prev;
+      } else {
+        apply();
+      }
+    });
+  }
+  window.addEventListener('resize', function () { moveLangThumbs(true); });
 
   function applyLang(lang) {
     localStorage.setItem(LANG_KEY, lang);
@@ -41,6 +75,9 @@
       btn.classList.toggle('active', btn.dataset.lang === lang);
     });
 
+    moveLangThumbs(_langThumbFirst);
+    _langThumbFirst = false;
+
     document.querySelectorAll('.menu-item-action').forEach(function (btn) {
       const itemName = (function() {
         const item = btn.closest('.menu-item');
@@ -80,4 +117,11 @@
 
   window._bulochkaApplyLang = applyLang;
   applyLang(localStorage.getItem(LANG_KEY) || 'he');
+
+  // Re-snap the thumb once the page (and web fonts) finish loading, in case
+  // button widths shifted after the first instant positioning.
+  window.addEventListener('load', function () { moveLangThumbs(true); });
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () { moveLangThumbs(true); });
+  }
 })();
