@@ -12,3 +12,9 @@ firebase-debug.log
 .agents/
 .claude/
 skills-lock.json
+
+# Firebase Admin service-account key — never commit
+serviceAccount.json
+*serviceAccount*.json
+.env
+cloudinary.env
