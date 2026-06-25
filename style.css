@@ -167,6 +167,9 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: -0.3px;
   white-space: nowrap;
   font-optical-sizing: auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .nav-logo-img {
   height: 30px;
