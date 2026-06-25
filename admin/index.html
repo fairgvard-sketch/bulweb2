@@ -965,6 +965,10 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
           Shop
         </button>
+        <button class="sidebar-item" id="navHomepage">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 9v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9"/><path d="M9 21v-7h6v7"/></svg>
+          Homepage
+        </button>
       </div>
       <div class="sidebar-divider"></div>
       <div class="sidebar-section">
@@ -1266,6 +1270,70 @@
             <button class="btn-add-item" id="addAnnouncementBtn">+ Add Announcement</button>
           </div>
           <div id="announcementList" style="display:flex;flex-direction:column;gap:10px"></div>
+        </div>
+      </div>
+
+      <!-- HOMEPAGE VIEW -->
+      <div class="view" id="viewHomepage">
+        <div class="page-body">
+          <div class="page-header">
+            <div>
+              <div class="page-breadcrumb">BULOCHKA <span>/ HOMEPAGE</span></div>
+              <div class="page-title" id="hpTitle">Homepage</div>
+              <div class="page-meta" id="hpMeta">Edit the homepage hero section</div>
+            </div>
+          </div>
+
+          <!-- HERO CARD -->
+          <div class="modal modal-wide" style="position:static;transform:none;box-shadow:none;border:1.5px solid var(--line);max-width:760px;margin:0">
+            <div class="modal-header">
+              <div class="modal-title" id="hpHeroCardTitle">Hero section</div>
+            </div>
+            <div class="modal-body" style="padding:20px 24px;display:flex;flex-direction:column;gap:0">
+              <div class="modal-section-title" id="hpHeroSecImg" style="margin-bottom:10px">Background photo</div>
+              <div class="upload-area" id="hpHeroUploadArea" style="min-height:140px;margin-bottom:0">
+                <img id="hpHeroImgPreview" style="display:none">
+                <div class="upload-placeholder" id="hpHeroUploadPlaceholder">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
+                  <span id="hpHeroUploadHint">Click to upload image</span>
+                </div>
+                <button class="upload-remove" id="hpHeroImgRemove" style="display:none">Remove</button>
+                <input type="file" id="hpHeroImgFile" accept="image/*" style="display:none">
+              </div>
+
+              <div class="modal-section-title" id="hpHeroSecEyebrow" style="margin-top:16px">Eyebrow (small line above title)</div>
+              <div class="modal-grid">
+                <div class="field"><label>RU</label><input type="text" id="hpHeroEyebrowRu" placeholder="Пекарня · Кофе · Торты"></div>
+                <div class="field"><label>EN</label><input type="text" id="hpHeroEyebrowEn" placeholder="Bakery · Coffee · Cakes"></div>
+              </div>
+              <div class="field" style="margin-top:10px"><label>HE</label><input type="text" id="hpHeroEyebrowHe" placeholder="מאפייה · קפה · עוגות" dir="rtl"></div>
+
+              <div class="modal-section-title" id="hpHeroSecTitle1" style="margin-top:16px">Title — line 1</div>
+              <div class="modal-grid">
+                <div class="field"><label>RU</label><input type="text" id="hpHeroTitle1Ru" placeholder="Неспешное утро,"></div>
+                <div class="field"><label>EN</label><input type="text" id="hpHeroTitle1En" placeholder="Slow mornings,"></div>
+              </div>
+              <div class="field" style="margin-top:10px"><label>HE</label><input type="text" id="hpHeroTitle1He" placeholder="בוקר בנחת," dir="rtl"></div>
+
+              <div class="modal-section-title" id="hpHeroSecTitle2" style="margin-top:16px">Title — line 2 (accent)</div>
+              <div class="modal-grid">
+                <div class="field"><label>RU</label><input type="text" id="hpHeroTitle2Ru" placeholder="теплое масло."></div>
+                <div class="field"><label>EN</label><input type="text" id="hpHeroTitle2En" placeholder="warm butter."></div>
+              </div>
+              <div class="field" style="margin-top:10px"><label>HE</label><input type="text" id="hpHeroTitle2He" placeholder="חמאה חמימה." dir="rtl"></div>
+
+              <div class="modal-section-title" id="hpHeroSecSub" style="margin-top:16px">Subtitle</div>
+              <div class="modal-grid">
+                <div class="field"><label>RU</label><textarea id="hpHeroSubRu" rows="3" placeholder="Уютная пекарня-кофейня в Петах-Тикве…" style="resize:vertical;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--ink);outline:none;transition:border .18s"></textarea></div>
+                <div class="field"><label>EN</label><textarea id="hpHeroSubEn" rows="3" placeholder="A neighbourhood bakery-café in Petah Tikva…" style="resize:vertical;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--ink);outline:none;transition:border .18s"></textarea></div>
+              </div>
+              <div class="field" style="margin-top:10px"><label>HE</label><textarea id="hpHeroSubHe" rows="3" dir="rtl" placeholder="בית קפה שכונתי בפתח תקווה…" style="resize:vertical;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--ink);outline:none;transition:border .18s"></textarea></div>
+            </div>
+            <div class="modal-actions">
+              <button class="btn-cancel" id="hpHeroResetBtn">Reset</button>
+              <button class="btn-primary" id="hpHeroSaveBtn">Save</button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -4290,6 +4358,82 @@
 
   document.getElementById('navAnnouncements').addEventListener('click', () => { setActiveNav('Announcements'); loadAnnouncements(); stopLiveCounter(); });
   document.getElementById('msiAnnouncements').onclick = () => { closeMoreSheet(); setActiveNav('Announcements'); loadAnnouncements(); stopLiveCounter(); };
+
+  // ─── HOMEPAGE (hero pilot) ──────────────────────────────
+  (function setupHomepage() {
+    const HERO_FIELDS = [
+      'eyebrowRu','eyebrowEn','eyebrowHe',
+      'title1Ru','title1En','title1He',
+      'title2Ru','title2En','title2He',
+      'subRu','subEn','subHe',
+    ];
+    // map field key -> input element id
+    const elId = k => 'hpHero' + k.charAt(0).toUpperCase() + k.slice(1);
+
+    const heroArea   = document.getElementById('hpHeroUploadArea');
+    const heroPrev   = document.getElementById('hpHeroImgPreview');
+    const heroPlace  = document.getElementById('hpHeroUploadPlaceholder');
+    const heroRemove = document.getElementById('hpHeroImgRemove');
+
+    setupUpload('hpHeroUploadArea','hpHeroImgFile','hpHeroImgPreview','hpHeroUploadPlaceholder','hpHeroImgRemove');
+
+    function showHeroImg(url) {
+      if (url) {
+        heroPrev.src = itemImgSrc(url);
+        heroPrev.style.display = 'block';
+        heroPlace.style.display = 'none';
+        heroRemove.style.display = 'block';
+        heroArea.dataset.existingUrl = url;
+      } else {
+        heroPrev.src = '';
+        heroPrev.style.display = 'none';
+        heroPlace.style.display = 'flex';
+        heroRemove.style.display = 'none';
+        heroArea.dataset.existingUrl = '';
+      }
+    }
+    // clearing the existing image too
+    heroRemove.addEventListener('click', () => { heroArea.dataset.existingUrl = ''; });
+
+    let heroData = {};
+
+    async function loadHomepage() {
+      showView('viewHomepage');
+      try {
+        const snap = await getDoc(doc(db, 'homepage', 'hero'));
+        heroData = snap.exists() ? snap.data() : {};
+      } catch (e) { heroData = {}; }
+      // fill fields
+      HERO_FIELDS.forEach(k => { const el = document.getElementById(elId(k)); if (el) el.value = heroData[k] || ''; });
+      showHeroImg(heroData.bgImg || '');
+      document.getElementById('hpHeroImgFile').value = '';
+    }
+
+    document.getElementById('hpHeroResetBtn').onclick = () => loadHomepage();
+
+    document.getElementById('hpHeroSaveBtn').onclick = async () => {
+      const btn = document.getElementById('hpHeroSaveBtn');
+      btn.disabled = true; toast('Saving…');
+      try {
+        const data = {};
+        HERO_FIELDS.forEach(k => { const el = document.getElementById(elId(k)); data[k] = el ? el.value.trim() : ''; });
+
+        // image: upload new file if chosen, else keep existing url
+        const file = document.getElementById('hpHeroImgFile').files[0];
+        if (file) data.bgImg = await uploadToCloudinary(file);
+        else data.bgImg = heroArea.dataset.existingUrl || '';
+
+        await setDoc(doc(db, 'homepage', 'hero'), data, { merge: true });
+        heroData = data;
+        showHeroImg(data.bgImg);
+        document.getElementById('hpHeroImgFile').value = '';
+        toast('Hero saved ✓');
+      } catch (e) { console.error('Hero save error:', e); toast('Error: ' + (e.message || e)); }
+      finally { btn.disabled = false; }
+    };
+
+    document.getElementById('navHomepage').addEventListener('click', () => { setActiveNav('Homepage'); loadHomepage(); stopLiveCounter(); });
+  })();
 </script>
 </body>
 </html>

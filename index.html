@@ -976,13 +976,13 @@
   <div class="fhero-overlay"></div>
   <div class="fhero-content">
     <p class="fhero-eyebrow">
-      <span data-en='Bakery · Coffee · Cakes' data-he='מאפייה · קפה · עוגות' data-ru='Пекарня · Кофе · Торты'>Bakery · Coffee · Cakes</span>
+      <span id="fheroEyebrow" data-en='Bakery · Coffee · Cakes' data-he='מאפייה · קפה · עוגות' data-ru='Пекарня · Кофе · Торты'>Bakery · Coffee · Cakes</span>
     </p>
     <h1 class="fhero-title">
-      <span class="fhero-line" data-en='Slow mornings,' data-he='בוקר בנחת,' data-ru='Неспешное утро,'>Slow mornings,</span>
-      <em class="fhero-line fhero-em" data-en='warm butter.' data-he='חמאה חמימה.' data-ru='теплое масло.'>warm butter.</em>
+      <span id="fheroTitle1" class="fhero-line" data-en='Slow mornings,' data-he='בוקר בנחת,' data-ru='Неспешное утро,'>Slow mornings,</span>
+      <em id="fheroTitle2" class="fhero-line fhero-em" data-en='warm butter.' data-he='חמאה חמימה.' data-ru='теплое масло.'>warm butter.</em>
     </h1>
-    <p class="fhero-sub" data-en='A neighbourhood bakery-café in Petah Tikva. Fresh croissants, homemade cakes, excellent coffee.' data-he='בית קפה שכונתי בפתח תקווה. קרואסונים טריים, עוגות ביתיות, קפה מעולה.' data-ru='Уютная пекарня-кофейня в Петах-Тикве. Свежие круассаны, домашние торты, отличный кофе.'>A neighbourhood bakery-café in Petah Tikva. Fresh croissants, homemade cakes, excellent coffee.</p>
+    <p id="fheroSub" class="fhero-sub" data-en='A neighbourhood bakery-café in Petah Tikva. Fresh croissants, homemade cakes, excellent coffee.' data-he='בית קפה שכונתי בפתח תקווה. קרואסונים טריים, עוגות ביתיות, קפה מעולה.' data-ru='Уютная пекарня-кофейня в Петах-Тикве. Свежие круассаны, домашние торты, отличный кофе.'>A neighbourhood bakery-café in Petah Tikva. Fresh croissants, homemade cakes, excellent coffee.</p>
     <div class="fhero-ctas">
       <a href="menu.html" class="fhero-btn-primary" data-en='See the Menu' data-he='לתפריט' data-ru='Меню'>See the Menu</a>
       <a href="tel:+972529662724" class="fhero-btn-secondary" data-en='Reserve a table' data-he='הזמנת שולחן' data-ru='Забронировать'>Reserve a table</a>
@@ -1183,7 +1183,7 @@
 <script src="cookie-consent.js?v=2"></script>
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-  import { getFirestore, collection, onSnapshot, getDocs, query, where, orderBy } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+  import { getFirestore, collection, onSnapshot, getDocs, getDoc, doc, query, where, orderBy } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
   const _app = initializeApp({
     apiKey: "AIzaSyC_zaNtYW8wnS7nhoOzEvkNhbJeJPHWmaI",
     authDomain: "bulweb2.firebaseapp.com",
@@ -1193,6 +1193,48 @@
     appId: "1:260150671022:web:6dfa58bd50a9725cec9f3f"
   });
   const _db = getFirestore(_app);
+
+  // ─── HOMEPAGE HERO (editable from admin) ───────────────
+  // Overrides the hardcoded hero text/image with values saved in Firestore
+  // (homepage/hero). If the doc is missing or a field is empty, the existing
+  // hardcoded data-en/he/ru content is kept as a fallback.
+  (async function loadHero() {
+    let data;
+    try {
+      const snap = await getDoc(doc(_db, 'homepage', 'hero'));
+      if (!snap.exists()) return;
+      data = snap.data();
+    } catch (e) { return; }
+
+    const lang = document.documentElement.lang || localStorage.getItem('bulochka-lang') || 'he';
+
+    // Update the 3 language attributes of one element, then re-apply current lang.
+    function setText(id, base) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const en = (data[base + 'En'] || '').trim();
+      const he = (data[base + 'He'] || '').trim();
+      const ru = (data[base + 'Ru'] || '').trim();
+      if (en) el.dataset.en = en;
+      if (he) el.dataset.he = he;
+      if (ru) el.dataset.ru = ru;
+      // apply the currently active language immediately
+      const val = lang === 'he' ? (el.dataset.he || el.dataset.en)
+                : lang === 'ru' ? (el.dataset.ru || el.dataset.en)
+                : el.dataset.en;
+      if (val != null) el.innerHTML = val;
+    }
+
+    setText('fheroEyebrow', 'eyebrow');
+    setText('fheroTitle1', 'title1');
+    setText('fheroTitle2', 'title2');
+    setText('fheroSub', 'sub');
+
+    if (data.bgImg) {
+      const img = document.getElementById('fheroBgImg');
+      if (img) img.src = data.bgImg;
+    }
+  })();
 
   function renderShop(items) {
     const section = document.getElementById('shop');
