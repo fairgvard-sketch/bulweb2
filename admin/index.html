@@ -1826,10 +1826,16 @@
         <div class="field"><label>Name in English</label><input type="text" id="cName" placeholder="Hot Drinks"></div>
         <div class="field"><label>Name in Hebrew</label><input type="text" id="cNameHe" placeholder="משקאות חמים" dir="rtl"></div>
       </div>
+      <div class="modal-grid" style="margin-top:0">
+        <div class="field"><label>Name in Russian</label><input type="text" id="cNameRu" placeholder="Горячие напитки"></div>
+      </div>
       <div class="modal-section-title">Description</div>
       <div class="modal-grid">
         <div class="field"><label>Description in English</label><textarea id="cDesc" placeholder="Fresh brewed..." rows="2"></textarea></div>
         <div class="field"><label>Description in Hebrew</label><textarea id="cDescHe" placeholder="..." dir="rtl" rows="2"></textarea></div>
+      </div>
+      <div class="modal-grid" style="margin-top:0">
+        <div class="field"><label>Description in Russian</label><textarea id="cDescRu" placeholder="Свежезаваренный..." rows="2"></textarea></div>
       </div>
       <div class="field"><label>Comment</label><input type="text" id="cComment" placeholder="Optional note"></div>
     </div>
@@ -2680,8 +2686,10 @@
     if (!editingCatId) { closeModal('catModal'); return; }
     const data = {
       labelHe:  document.getElementById('cNameHe').value.trim(),
+      labelRu:  document.getElementById('cNameRu').value.trim(),
       desc:     document.getElementById('cDesc').value.trim(),
       descHe:   document.getElementById('cDescHe').value.trim(),
+      descRu:   document.getElementById('cDescRu').value.trim(),
       comment:  document.getElementById('cComment').value.trim(),
       visible:  document.getElementById('cVisible').checked,
       noPhotos: document.getElementById('cNoPhotos').checked,
@@ -2695,10 +2703,12 @@
   function openCatModal(cat) {
     editingCatId = cat?.id || null;
     document.getElementById('catModalTitle').textContent = cat ? 'Edit Category' : 'Add Category';
-    document.getElementById('cName').value    = cat?.label  || '';
+    document.getElementById('cName').value    = cat?.label   || '';
     document.getElementById('cNameHe').value  = cat?.labelHe || '';
-    document.getElementById('cDesc').value    = cat?.desc   || '';
-    document.getElementById('cDescHe').value  = cat?.descHe || '';
+    document.getElementById('cNameRu').value  = cat?.labelRu || '';
+    document.getElementById('cDesc').value    = cat?.desc    || '';
+    document.getElementById('cDescHe').value  = cat?.descHe  || '';
+    document.getElementById('cDescRu').value  = cat?.descRu  || '';
     document.getElementById('cComment').value = cat?.comment || '';
     document.getElementById('cVisible').checked = cat?.visible !== false;
     document.getElementById('cNoPhotos').checked = cat?.noPhotos === true;
