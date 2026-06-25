@@ -1053,21 +1053,21 @@
 <section class="medovik-section">
   <div class="medovik-inner">
     <div class="medovik-text">
-      <p class="section-eyebrow" data-en='The reason we opened' data-he='הסיבה שפתחנו' data-ru='Ради чего мы открылись'>The reason we opened</p>
-      <h2 data-en="Medovik" data-he="מדוביק" data-ru="Медовик">Medovik</h2>
-      <p class="medovik-story" data-en='Eight paper-thin sheets of honey sponge, baked one at a time and stacked with sour-cream cream. Rested overnight in the fridge so the layers go tender and the cream sets enough to slice clean.' data-he='שמונה שכבות דקות כנייר של בצק דבש, אפויות אחת אחת ומוערמות עם קרם שמנת חמוצה. נח לילה שלם במקרר כדי שהשכבות יתרככו והקרם יתייצב לפרוסה נקייה.' data-ru='Восемь тончайших коржей медового бисквита, испечённых по одному и переложенных на смазанных сметанным кремом. Ночь в холодильнике — чтобы коржи пропитались, а крем схватился до идеального среза.'>Eight paper-thin sheets of honey sponge, baked one at a time and stacked with sour-cream cream. Rested overnight in the fridge so the layers go tender and the cream sets enough to slice clean.</p>
+      <p class="section-eyebrow" id="medovikEyebrow" data-en='The reason we opened' data-he='הסיבה שפתחנו' data-ru='Ради чего мы открылись'>The reason we opened</p>
+      <h2 id="medovikTitle" data-en="Medovik" data-he="מדוביק" data-ru="Медовик">Medovik</h2>
+      <p class="medovik-story" id="medovikStory" data-en='Eight paper-thin sheets of honey sponge, baked one at a time and stacked with sour-cream cream. Rested overnight in the fridge so the layers go tender and the cream sets enough to slice clean.' data-he='שמונה שכבות דקות כנייר של בצק דבש, אפויות אחת אחת ומוערמות עם קרם שמנת חמוצה. נח לילה שלם במקרר כדי שהשכבות יתרככו והקרם יתייצב לפרוסה נקייה.' data-ru='Восемь тончайших коржей медового бисквита, испечённых по одному и переложенных на смазанных сметанным кремом. Ночь в холодильнике — чтобы коржи пропитались, а крем схватился до идеального среза.'>Eight paper-thin sheets of honey sponge, baked one at a time and stacked with sour-cream cream. Rested overnight in the fridge so the layers go tender and the cream sets enough to slice clean.</p>
       <div class="medovik-stats">
         <div>
-          <div class="medovik-stat-key" data-en='Layers' data-he='שכבות' data-ru='Коржей'>Layers</div>
-          <div class="medovik-stat-val">8</div>
+          <div class="medovik-stat-key" id="medovikStat1Key" data-en='Layers' data-he='שכבות' data-ru='Коржей'>Layers</div>
+          <div class="medovik-stat-val" id="medovikStat1Val">8</div>
         </div>
         <div>
-          <div class="medovik-stat-key" data-en='Rests' data-he='מנוחה' data-ru='Пропитка'>Rests</div>
-          <div class="medovik-stat-val" data-en="12 hrs" data-he="12 שעות" data-ru="12 ч">12 hrs</div>
+          <div class="medovik-stat-key" id="medovikStat2Key" data-en='Rests' data-he='מנוחה' data-ru='Пропитка'>Rests</div>
+          <div class="medovik-stat-val" id="medovikStat2Val" data-en="12 hrs" data-he="12 שעות" data-ru="12 ч">12 hrs</div>
         </div>
         <div>
-          <div class="medovik-stat-key" data-en='Honey' data-he='דבש' data-ru='Мёд'>Honey</div>
-          <div class="medovik-stat-val" data-en='Local' data-he='מקומי' data-ru='Местный'>Local</div>
+          <div class="medovik-stat-key" id="medovikStat3Key" data-en='Honey' data-he='דבש' data-ru='Мёд'>Honey</div>
+          <div class="medovik-stat-val" id="medovikStat3Val" data-en='Local' data-he='מקומי' data-ru='Местный'>Local</div>
         </div>
       </div>
       <div class="medovik-pricing">
@@ -1076,7 +1076,7 @@
       </div>
     </div>
     <div class="medovik-photo">
-      <img src="img/Main page/medovik_hd.png" alt="Medovik honey cake" loading="lazy">
+      <img id="medovikImg" src="img/Main page/medovik_hd.png" alt="Medovik honey cake" loading="lazy">
     </div>
   </div>
 </section>
@@ -1098,23 +1098,23 @@
 <!-- ─── INFO HERO ───────────────────────────────────────────── -->
 <section class="info-hero" id="visit">
   <div class="info-hero-bg">
-    <img src="img/Main page/ver2.webp" alt="Bulochka café">
+    <img id="visitBgImg" src="img/Main page/ver2.webp" alt="Bulochka café">
   </div>
   <div class="info-hero-overlay"></div>
   <div class="info-hero-content">
     <img src="img/Main page/logotip_crop_hq.png" alt="Bulochka" class="info-hero-logo">
-    <p class="info-hero-tagline">I have a dream</p>
+    <p class="info-hero-tagline" id="visitTagline">I have a dream</p>
     <div class="info-hero-tagline-divider"></div>
-    <a href="tel:+972529662724" class="info-hero-phone" dir="ltr">+972 (52) 966-2724</a>
+    <a href="tel:+972529662724" class="info-hero-phone" id="visitPhone" dir="ltr">+972 (52) 966-2724</a>
     <div class="info-hero-divider"></div>
     <div class="info-hero-hours">
-      <span data-en='Sun – Thu · 08:00 – 20:00' data-he='א׳ – ה׳ · 08:00 – 20:00' data-ru='Вс – Чт · 08:00 – 20:00' dir="ltr">Sun – Thu · 08:00 – 20:00</span><br>
-      <span data-en='Friday · 08:00 – 15:00' data-he='שישי · 08:00 – 15:00' data-ru='Пятница · 08:00 – 15:00' dir="ltr">Friday · 08:00 – 15:00</span><br>
-      <span data-en='Saturday · Closed' data-he='שבת · סגור' data-ru='Суббота · Закрыто'>Saturday · Closed</span>
+      <span id="visitHours1" data-en='Sun – Thu · 08:00 – 20:00' data-he='א׳ – ה׳ · 08:00 – 20:00' data-ru='Вс – Чт · 08:00 – 20:00' dir="ltr">Sun – Thu · 08:00 – 20:00</span><br>
+      <span id="visitHours2" data-en='Friday · 08:00 – 15:00' data-he='שישי · 08:00 – 15:00' data-ru='Пятница · 08:00 – 15:00' dir="ltr">Friday · 08:00 – 15:00</span><br>
+      <span id="visitHours3" data-en='Saturday · Closed' data-he='שבת · סגור' data-ru='Суббота · Закрыто'>Saturday · Closed</span>
     </div>
     <div class="info-hero-divider"></div>
     <div class="info-hero-address">
-      <span data-en='Pinsker 29, Petah Tikva' data-he='פינסקר 29, פתח תקווה' data-ru='Пинскер 29, Петах-Тиква'>Pinsker 29, Petah Tikva</span>
+      <span id="visitAddress" data-en='Pinsker 29, Petah Tikva' data-he='פינסקר 29, פתח תקווה' data-ru='Пинскер 29, Петах-Тиква'>Pinsker 29, Petah Tikva</span>
     </div>
   </div>
 </section>
@@ -1231,8 +1231,8 @@
   }
 
   (async function loadHomepage() {
-    const [hero, story, ticker, room] = await Promise.all([
-      _hpGet('hero'), _hpGet('story'), _hpGet('ticker'), _hpGet('room'),
+    const [hero, story, ticker, room, medovik, visit] = await Promise.all([
+      _hpGet('hero'), _hpGet('story'), _hpGet('ticker'), _hpGet('room'), _hpGet('medovik'), _hpGet('visit'),
     ]);
 
     if (hero) {
@@ -1262,6 +1262,33 @@
         _hpSetImg('roomImg' + i, room['img' + i]);
         _hpSetText('roomCaption' + i, room, 'caption' + i);
       }
+    }
+
+    if (medovik) {
+      _hpSetText('medovikEyebrow', medovik, 'eyebrow');
+      _hpSetText('medovikTitle', medovik, 'title');
+      _hpSetText('medovikStory', medovik, 'story');
+      for (let i = 1; i <= 3; i++) {
+        _hpSetText('medovikStat' + i + 'Key', medovik, 'stat' + i + 'Key');
+        _hpSetText('medovikStat' + i + 'Val', medovik, 'stat' + i + 'Val');
+      }
+      _hpSetImg('medovikImg', medovik.img);
+    }
+
+    if (visit) {
+      // tagline / phone are single-language plain text
+      const tg = document.getElementById('visitTagline');
+      if (tg && visit.tagline) tg.textContent = visit.tagline;
+      const ph = document.getElementById('visitPhone');
+      if (ph && visit.phone) {
+        ph.textContent = visit.phone;
+        ph.href = 'tel:' + visit.phone.replace(/[^\d+]/g, '');
+      }
+      _hpSetText('visitHours1', visit, 'hours1');
+      _hpSetText('visitHours2', visit, 'hours2');
+      _hpSetText('visitHours3', visit, 'hours3');
+      _hpSetText('visitAddress', visit, 'address');
+      _hpSetImg('visitBgImg', visit.bgImg);
     }
   })();
 
