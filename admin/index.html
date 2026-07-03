@@ -205,6 +205,12 @@
     .badge-picker-cell.selected{background:var(--accentSoft);border-color:var(--accent)}
     .badge-picker-cell img{width:40px;height:40px;object-fit:contain}
     .badge-picker-cell span{font-size:9px;color:var(--muted);text-align:center;line-height:1.2;max-width:64px}
+    .addon-type-btn.active,.addon-mode-btn.active{background:var(--accentSoft)!important;border-color:var(--accent)!important;color:var(--accent)!important;font-weight:600}
+    .addon-opt-row{display:grid;grid-template-columns:1fr 1fr 1fr 80px 32px;gap:6px;align-items:center}
+    .addon-opt-row input{padding:8px 10px;border:1.5px solid var(--line);border-radius:7px;font-family:var(--sans);font-size:13px;background:var(--bg);color:var(--ink);outline:none;width:100%}
+    .addon-opt-del{background:none;border:none;color:var(--danger);cursor:pointer;font-size:18px;line-height:1;padding:4px}
+    .addon-pick-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1.5px solid var(--line);border-radius:9px;font-size:14px;color:var(--ink);background:var(--surface)}
+    .addon-pick-row.dragging{box-shadow:var(--shadowLg)}
 
     /* MENU ACTIONS PANEL */
     .menu-actions-panel{position:fixed;top:64px;right:0;bottom:0;width:340px;background:var(--surface);border-left:1px solid var(--line);padding:24px 20px;transform:translateX(100%);transition:transform .25s ease;z-index:150;overflow-y:auto;box-shadow:var(--shadowLg)}
@@ -627,6 +633,14 @@
       annLabelFrom:'Show from',annLabelTo:'Show until',annSelectDate:'Select date',annClearDate:'Clear date',
       annLabelCloseable:'Allow visitors to close the popup',annLabelActive:'Active (show on site)',
       badgeList:'Badge List',badgeCount:'badges',addBadge:'+ Add Badge',
+      addons:'Add-ons',addonList:'Add-on List',addonCount:'add-ons',addAddon:'+ Add Add-on',
+      addAddonTitle:'Add Add-on',editAddonTitle:'Edit Add-on',
+      addonLabelEn:'Label (English)',addonLabelHe:'Label (Hebrew)',addonLabelRu:'Label (Russian)',addonPrice:'Extra price (₪)',
+      addonType:'Type',addonTypeSingle:'Single add-on',addonTypeGroup:'Group',
+      addonGroupTitleEn:'Group title (English)',addonGroupTitleHe:'Group title (Hebrew)',addonGroupTitleRu:'Group title (Russian)',
+      addonSelection:'Selection',addonModeOne:'One choice',addonModeSeveral:'Several',addonOptions:'Options',addonAddOption:'+ Add option',
+      selectAddons:'Select add-ons for this item',noAddonsYet:'No add-ons yet. Click "+ Add Add-on" to create one.',
+      noAddonsModal:'No add-ons yet. Create them in the Add-ons section.',
       settingsTitle:'Settings',genLabel:'GENERAL',general:'General',
       restaurantNameLogo:'Restaurant Name & Logo',restaurantName:'Restaurant name',save:'Save',
       logo:'Logo',uploadLogo:'Upload logo',upload:'Upload',remove:'Remove',
@@ -725,6 +739,14 @@
       annLabelFrom:'Показывать с',annLabelTo:'Показывать до',annSelectDate:'Выберите дату',annClearDate:'Очистить',
       annLabelCloseable:'Разрешить посетителям закрыть',annLabelActive:'Активно (показывать на сайте)',
       badgeList:'Список значков',badgeCount:'значков',addBadge:'+ Добавить значок',
+      addons:'Добавки',addonList:'Список добавок',addonCount:'добавок',addAddon:'+ Добавить добавку',
+      addAddonTitle:'Добавить добавку',editAddonTitle:'Редактировать добавку',
+      addonLabelEn:'Название (английский)',addonLabelHe:'Название (иврит)',addonLabelRu:'Название (русский)',addonPrice:'Доп. цена (₪)',
+      addonType:'Тип',addonTypeSingle:'Одиночная добавка',addonTypeGroup:'Группа',
+      addonGroupTitleEn:'Заголовок группы (английский)',addonGroupTitleHe:'Заголовок группы (иврит)',addonGroupTitleRu:'Заголовок группы (русский)',
+      addonSelection:'Выбор',addonModeOne:'Один вариант',addonModeSeveral:'Несколько',addonOptions:'Варианты',addonAddOption:'+ Добавить вариант',
+      selectAddons:'Выберите добавки для позиции',noAddonsYet:'Добавок пока нет.',
+      noAddonsModal:'Добавок пока нет. Создайте их в разделе «Добавки».',
       settingsTitle:'Настройки',genLabel:'ОБЩЕЕ',general:'Общее',
       restaurantNameLogo:'Название и логотип',
       restaurantName:'Название заведения',
@@ -795,7 +817,7 @@
       $('.topbar-status','live');ph('.topbar-search input','searchPh');
       // sidebar
       _navTxt('navDashboard',L.dashboard);_navTxt('navMenu',L.menu);_navTxt('navShop',L.shop);
-      _navTxt('navBadges',L.badges);_navTxt('navPopups',L.popups);_navTxt('navAnnouncements',L.announcements);_navTxt('navChanges',L.changes);
+      _navTxt('navBadges',L.badges);_navTxt('navAddons',L.addons);_navTxt('navPopups',L.popups);_navTxt('navAnnouncements',L.announcements);_navTxt('navChanges',L.changes);
       // bottom nav
       _navTxt('bnDashboard',L.dashboard);_navTxt('bnMenu',L.menu);_navTxt('bnShop',L.shop);_navTxt('bnMore',L.more);
       // dashboard
@@ -834,6 +856,23 @@
       var dpfl=document.getElementById('dpFromLabel');if(dpfl&&!dpfl.parentElement.classList.contains('has-value'))dpfl.textContent=L.annSelectDate;
       var dptl=document.getElementById('dpToLabel');if(dptl&&!dptl.parentElement.classList.contains('has-value'))dptl.textContent=L.annSelectDate;
       var bvt=document.querySelector('#viewBadges .page-title');if(bvt)bvt.textContent=L.badgeList;$('#addBadgeBtn','addBadge');
+      // add-ons view + modal
+      var avt=document.getElementById('addonListTitle');if(avt)avt.textContent=L.addonList;$('#addAddonBtn','addAddon');
+      var acl=document.getElementById('addonCountLabel');if(acl)acl.textContent=L.addonCount;
+      var alel=document.getElementById('addonLabelEnLbl');if(alel)alel.textContent=L.addonLabelEn;
+      var alhl=document.getElementById('addonLabelHeLbl');if(alhl)alhl.textContent=L.addonLabelHe;
+      var alrl=document.getElementById('addonLabelRuLbl');if(alrl)alrl.textContent=L.addonLabelRu;
+      var apl=document.getElementById('addonPriceLbl');if(apl)apl.textContent=L.addonPrice;
+      var atl=document.getElementById('addonTypeLbl');if(atl)atl.textContent=L.addonType;
+      var atb=document.querySelectorAll('.addon-type-btn');if(atb[0])atb[0].textContent=L.addonTypeSingle;if(atb[1])atb[1].textContent=L.addonTypeGroup;
+      var agtl=document.getElementById('addonGroupTitleLbl');if(agtl)agtl.textContent=L.addonGroupTitleEn;
+      var aghl=document.getElementById('addonGroupHeLbl');if(aghl)aghl.textContent=L.addonGroupTitleHe;
+      var agrl=document.getElementById('addonGroupRuLbl');if(agrl)agrl.textContent=L.addonGroupTitleRu;
+      var aml=document.getElementById('addonModeLbl');if(aml)aml.textContent=L.addonSelection;
+      var amb=document.querySelectorAll('.addon-mode-btn');if(amb[0])amb[0].textContent=L.addonModeOne;if(amb[1])amb[1].textContent=L.addonModeSeveral;
+      var aol=document.getElementById('addonOptionsLbl');if(aol)aol.textContent=L.addonOptions;
+      var aab=document.getElementById('addonAddOptionBtn');if(aab)aab.textContent=L.addonAddOption;
+      $('#addonModalCancel','cancel');$('#addonModalSave','save');
       // settings
       var svs=document.querySelector('#viewSettings .page-title');if(svs)svs.textContent=L.settingsTitle;
       var sgl=document.querySelector('#viewSettings .settings-group-label');if(sgl)sgl.textContent=L.genLabel;
@@ -844,7 +883,7 @@
       // more sheet
       $('.more-sheet-title','moreTitle');var mss=document.querySelectorAll('.more-sheet-section');if(mss[0])mss[0].textContent=L.content;if(mss[1])mss[1].textContent=L.management;if(mss[2])mss[2].textContent=L.settings;
       var sp=function(id,key){var s=document.querySelector('#'+id+' span');if(s)s.textContent=L[key];};
-      sp('msiBadges','badges');sp('msiPopups','popups');sp('msiAnnouncements','announcements');sp('msiChanges','changes');sp('msiSettings','settings');
+      sp('msiBadges','badges');sp('msiAddons','addons');sp('msiPopups','popups');sp('msiAnnouncements','announcements');sp('msiChanges','changes');sp('msiSettings','settings');
       var mts=document.querySelector('#msiTheme span:not(.more-sheet-chevron)');if(mts)mts.textContent=L.theme;
       var mls=document.querySelector('#msiLanguages span:not(.more-sheet-chevron)');if(mls)mls.textContent=L.languages;
       var tsi=document.querySelectorAll('#msiThemeMenu .more-sheet-subitem');if(tsi[0])tsi[0].textContent=L.light;if(tsi[1])tsi[1].textContent=L.dark;
@@ -854,12 +893,13 @@
       var sbll=document.getElementById('sbLangLabel');if(sbll)sbll.textContent=L.languages;
       var sbsi=document.querySelectorAll('#sbThemeMenu .sidebar-subitem');if(sbsi[0])sbsi[0].textContent=L.light;if(sbsi[1])sbsi[1].textContent=L.dark;
       // item modal
-      var imt=document.querySelectorAll('#itemModal .tab');if(imt[0])imt[0].textContent=L.basicInfo;if(imt[1])imt[1].textContent=L.badges;if(imt[2])imt[2].textContent=L.availability;
+      var imt=document.querySelectorAll('#itemModal .tab');if(imt[0])imt[0].textContent=L.basicInfo;if(imt[1])imt[1].textContent=L.badges;if(imt[2])imt[2].textContent=L.addons;if(imt[3])imt[3].textContent=L.availability;
       var ius=document.querySelector('#iUploadPlaceholder span');if(ius)ius.textContent=L.uploadImage;
       var ims=document.querySelectorAll('#iBasic .modal-section-title');if(ims[0])ims[0].textContent=L.itemName;if(ims[1])ims[1].textContent=L.descTitle;
       var ilm=['nameEn','nameHe','nameRu','descEn','descHe','descRu','price','comment','subhead','subheadHe','subheadRu'];
       document.querySelectorAll('#iBasic .field label').forEach(function(el,i){if(ilm[i]&&L[ilm[i]])el.textContent=L[ilm[i]];});
       var ibs=document.querySelector('#iBadges .modal-section-title');if(ibs)ibs.textContent=L.selectBadges;
+      var ias=document.getElementById('iAddonsTitle');if(ias)ias.textContent=L.selectAddons;
       var iar=document.querySelector('#iAvail .avail-row span');if(iar)iar.textContent=L.available;
       $('#itemModalCancel','cancel');$('#itemModalSave','save');
       // category modal
@@ -992,6 +1032,10 @@
         <button class="sidebar-item" id="navBadges">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="9" r="6"/><path d="m8 14-2 7 6-3 6 3-2-7"/></svg>
           Badges
+        </button>
+        <button class="sidebar-item" id="navAddons">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          Add-ons
         </button>
         <button class="sidebar-item" id="navPopups">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="14" height="11" rx="1.5"/><rect x="8" y="10" width="13" height="9" rx="1.5"/></svg>
@@ -1689,6 +1733,23 @@
         </div>
       </div>
 
+      <!-- ADD-ONS VIEW -->
+      <div class="view" id="viewAddons">
+        <div class="page-body">
+          <div class="page-header">
+            <div>
+              <div class="page-breadcrumb">BULOCHKA <span>/ ADD-ONS</span></div>
+              <div class="page-title" id="addonListTitle">Add-on List</div>
+              <div class="page-meta"><strong id="metaAddonCount">—</strong> <span id="addonCountLabel">add-ons</span></div>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button class="btn-add-item" id="addAddonBtn">+ Add Add-on</button>
+            </div>
+          </div>
+          <div id="addonGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px"></div>
+        </div>
+      </div>
+
       <!-- SETTINGS -->
       <div class="view" id="viewChanges">
         <div class="page-body">
@@ -1806,6 +1867,10 @@
     <button class="more-sheet-item" id="msiBadges">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="9" r="6"/><path d="m8 14-2 7 6-3 6 3-2-7"/></svg>
       <span>Badges</span>
+    </button>
+    <button class="more-sheet-item" id="msiAddons">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+      <span>Add-ons</span>
     </button>
     <button class="more-sheet-item" id="msiPopups">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="14" height="11" rx="1.5"/><rect x="8" y="10" width="13" height="9" rx="1.5"/></svg>
@@ -2046,6 +2111,7 @@
     <div class="tabs">
       <button class="tab active" data-tab="iBasic">Basic Info</button>
       <button class="tab" data-tab="iBadges">Badges</button>
+      <button class="tab" data-tab="iAddons">Add-ons</button>
       <button class="tab" data-tab="iAvail">Availability</button>
     </div>
     <div class="tab-content active" id="iBasic">
@@ -2089,6 +2155,10 @@
     <div class="tab-content" id="iBadges">
       <div class="modal-section-title">Select badges for this item</div>
       <div id="iBadgeGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:8px;padding:4px 0"></div>
+    </div>
+    <div class="tab-content" id="iAddons">
+      <div class="modal-section-title" id="iAddonsTitle">Select add-ons for this item</div>
+      <div id="iAddonGrid" style="display:flex;flex-direction:column;gap:6px;padding:4px 0"></div>
     </div>
     <div class="tab-content" id="iAvail">
       <div class="avail-row">
@@ -2352,6 +2422,82 @@
     <div class="modal-actions">
       <button class="btn-cancel" id="badgeModalCancel">Cancel</button>
       <button class="btn-save" id="badgeModalSave">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD-ON MODAL -->
+<div class="overlay" id="addonModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="addonModalTitle">Add Add-on</div>
+      <button class="modal-close" id="addonModalClose">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div style="padding:20px 24px;display:flex;flex-direction:column;gap:14px;max-height:70vh;overflow-y:auto">
+      <!-- type selector -->
+      <div class="field">
+        <label id="addonTypeLbl">Type</label>
+        <div id="addonTypeSeg" style="display:flex;gap:6px">
+          <button type="button" class="addon-type-btn active" data-type="single" style="flex:1;padding:9px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:13px;cursor:pointer">Single add-on</button>
+          <button type="button" class="addon-type-btn" data-type="group" style="flex:1;padding:9px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:13px;cursor:pointer">Group</button>
+        </div>
+      </div>
+
+      <!-- SINGLE fields -->
+      <div id="addonSingleFields" style="display:flex;flex-direction:column;gap:14px">
+        <div class="field">
+          <label id="addonLabelEnLbl">Label (English)</label>
+          <input id="addonLabelEn" placeholder="e.g. Baileys" style="width:100%;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--ink);outline:none">
+        </div>
+        <div class="field">
+          <label id="addonLabelHeLbl">Label (Hebrew)</label>
+          <input id="addonLabelHe" dir="rtl" placeholder="ביילס" style="width:100%;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--ink);outline:none">
+        </div>
+        <div class="field">
+          <label id="addonLabelRuLbl">Label (Russian)</label>
+          <input id="addonLabelRu" placeholder="Бейлис" style="width:100%;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--ink);outline:none">
+        </div>
+        <div class="field">
+          <label id="addonPriceLbl">Extra price (₪)</label>
+          <input id="addonPrice" type="number" min="0" step="1" placeholder="10" style="width:100%;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--ink);outline:none">
+        </div>
+      </div>
+
+      <!-- GROUP fields -->
+      <div id="addonGroupFields" style="display:none;flex-direction:column;gap:14px">
+        <div class="field">
+          <label id="addonGroupTitleLbl">Group title (English)</label>
+          <input id="addonGroupLabelEn" placeholder="e.g. Milk base" style="width:100%;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--ink);outline:none">
+        </div>
+        <div class="modal-grid">
+          <div class="field">
+            <label id="addonGroupHeLbl">Group title (Hebrew)</label>
+            <input id="addonGroupLabelHe" dir="rtl" placeholder="בסיס חלב" style="width:100%;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--ink);outline:none">
+          </div>
+          <div class="field">
+            <label id="addonGroupRuLbl">Group title (Russian)</label>
+            <input id="addonGroupLabelRu" placeholder="Основа" style="width:100%;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--ink);outline:none">
+          </div>
+        </div>
+        <div class="field">
+          <label id="addonModeLbl">Selection</label>
+          <div id="addonModeSeg" style="display:flex;gap:6px">
+            <button type="button" class="addon-mode-btn active" data-mode="single" style="flex:1;padding:9px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:13px;cursor:pointer">One choice</button>
+            <button type="button" class="addon-mode-btn" data-mode="multi" style="flex:1;padding:9px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:13px;cursor:pointer">Several</button>
+          </div>
+        </div>
+        <div class="field">
+          <label id="addonOptionsLbl">Options</label>
+          <div id="addonOptionsList" style="display:flex;flex-direction:column;gap:8px"></div>
+          <button type="button" id="addonAddOptionBtn" style="margin-top:8px;padding:8px 14px;border:1.5px dashed var(--line);border-radius:8px;background:none;color:var(--accent);font-family:var(--sans);font-size:13px;cursor:pointer;align-self:flex-start">+ Add option</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" id="addonModalCancel">Cancel</button>
+      <button class="btn-save" id="addonModalSave">Save</button>
     </div>
   </div>
 </div>
@@ -2910,6 +3056,57 @@
         badgeGrid.appendChild(cell);
       });
     }
+
+    // load add-ons picker
+    const selectedAddonIds = item?.addons || [];
+    const addonGrid = document.getElementById('iAddonGrid');
+    addonGrid.innerHTML = '<div style="color:var(--muted);font-size:13px">Loading…</div>';
+    const aSnap = await getDocs(collection(db, 'addons'));
+    const allAddons = [];
+    aSnap.forEach(d => allAddons.push({ id: d.id, ...d.data() }));
+    // Order: selected first, in the saved item.addons order (this is the order
+    // shown to customers, drag-reorderable); then the rest alphabetically.
+    const byId = Object.fromEntries(allAddons.map(a => [a.id, a]));
+    const selectedInOrder = selectedAddonIds.map(id => byId[id]).filter(Boolean);
+    const rest = allAddons.filter(a => !selectedAddonIds.includes(a.id))
+      .sort((a, b) => (a.label || '').localeCompare(b.label || ''));
+    const orderedAddons = [...selectedInOrder, ...rest];
+
+    addonGrid.innerHTML = '';
+    if (!allAddons.length) {
+      addonGrid.innerHTML = `<div style="color:var(--muted);font-size:13px">${ADMIN_I18N.t('noAddonsModal')}</div>`;
+    } else {
+      const itemOverrides = (item && item.addonPrices && typeof item.addonPrices === 'object') ? item.addonPrices : {};
+      orderedAddons.forEach(a => {
+        const isGroup = a.type === 'group';
+        const row = document.createElement('div');
+        row.className = 'addon-pick-row';
+        row.dataset.addonId = a.id;
+        let meta, priceCtl;
+        if (isGroup) {
+          const opts = Array.isArray(a.options) ? a.options : [];
+          const modeTag = a.mode === 'single' ? 'one choice' : 'several';
+          meta = `${opts.map(o => o.label).join(', ')}`;
+          priceCtl = `<span style="font-size:11px;font-weight:600;color:var(--muted);background:var(--lineSoft);padding:2px 8px;border-radius:100px;white-space:nowrap">${modeTag}</span>`;
+        } else {
+          meta = [a.labelHe, a.labelRu].filter(Boolean).join(' · ');
+          // per-item price: placeholder = library price; value = override if set for THIS item
+          const ov = itemOverrides[a.id];
+          const ovVal = (ov != null && ov !== '') ? ov : '';
+          priceCtl = `<span style="color:var(--accent);font-weight:600">+₪</span><input class="addon-price-override" type="number" min="0" step="1" placeholder="${a.price ?? 0}" value="${ovVal}" title="Price for this item (empty = default ₪${a.price ?? 0})" style="width:56px;padding:5px 7px;border:1.5px solid var(--line);border-radius:6px;font-family:var(--sans);font-size:13px;background:var(--bg);color:var(--ink);outline:none">`;
+        }
+        row.innerHTML = `
+          <div class="cat-drag" title="Drag to reorder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg></div>
+          <input type="checkbox" data-addon-id="${a.id}" ${selectedAddonIds.includes(a.id) ? 'checked' : ''} style="width:17px;height:17px;accent-color:var(--accent);cursor:pointer;flex-shrink:0">
+          <span style="flex:1">${a.label || '—'}${isGroup ? ' <span style="color:var(--muted);font-size:11px">(group)</span>' : ''}</span>
+          <span style="color:var(--muted);font-size:13px;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${meta}</span>
+          <span style="display:flex;align-items:center;gap:3px;white-space:nowrap">${priceCtl}</span>`;
+        // Reorder within the picker (order of selected rows = display order on site).
+        setupPointerDrag(row, addonGrid, '.addon-pick-row', () => {});
+        addonGrid.appendChild(row);
+      });
+    }
+
     // reset tabs
     document.querySelector('#itemModal .tab').click();
     openModal('itemModal');
@@ -2918,6 +3115,16 @@
   async function saveItem() {
     const selectedBadgeIds = [...document.querySelectorAll('#iBadgeGrid .badge-picker-cell.selected')]
       .map(c => c.dataset.badgeId);
+    // Read in DOM (drag) order; keep only checked rows → this is the on-site order.
+    const checkedAddonRows = [...document.querySelectorAll('#iAddonGrid .addon-pick-row')]
+      .filter(r => r.querySelector('input[type=checkbox]').checked);
+    const selectedAddonIds = checkedAddonRows.map(r => r.dataset.addonId);
+    // per-item price overrides for single add-ons (blank = use library default)
+    const addonPrices = {};
+    checkedAddonRows.forEach(r => {
+      const inp = r.querySelector('.addon-price-override');
+      if (inp && inp.value !== '') addonPrices[r.dataset.addonId] = Number(inp.value) || 0;
+    });
     const uploadArea = document.getElementById('iUploadArea');
     const imgFile = document.getElementById('iImgFile').files[0];
     const isNewFile = uploadArea.dataset.newFile === '1';
@@ -2955,6 +3162,8 @@
         subheadRu: document.getElementById('iSubheadRu').value.trim(),
         available: document.getElementById('iAvailable').checked,
         badges:    selectedBadgeIds,
+        addons:    selectedAddonIds,
+        addonPrices: addonPrices,
         updatedAt: serverTimestamp(),
       };
       if (finalImg !== undefined) data.img = finalImg;
@@ -3141,6 +3350,9 @@
   document.getElementById('moreSheetClose').onclick = closeMoreSheet;
   document.getElementById('msiBadges').onclick = () => {
     closeMoreSheet(); setActiveNav('Badges'); loadBadges(); stopLiveCounter();
+  };
+  document.getElementById('msiAddons').onclick = () => {
+    closeMoreSheet(); setActiveNav('Addons'); loadAddons(); stopLiveCounter();
   };
   document.getElementById('msiPopups').onclick = () => {
     closeMoreSheet(); setActiveNav('Popups'); loadPopups(); stopLiveCounter();
@@ -3653,7 +3865,11 @@
   }
   function openModal(id) { document.getElementById(id).classList.add('open'); }
   function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+  // Backdrop click closes most modals, but not ones with a form to fill in
+  // (avoids losing typed data on a stray click) — those close via × / Cancel only.
+  const NO_BACKDROP_CLOSE = ['addonModal', 'itemModal', 'badgeModal'];
   document.querySelectorAll('.overlay').forEach(o => {
+    if (NO_BACKDROP_CLOSE.includes(o.id)) return;
     o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); });
   });
 
@@ -4022,6 +4238,176 @@
     window.__allBadges = null;
     closeModal('badgeModal');
     loadBadges();
+  }
+
+  // ── ADD-ONS ──
+  let editingAddonId = null;
+
+  document.getElementById('navAddons').onclick = () => { setActiveNav('Addons'); loadAddons(); stopLiveCounter(); };
+  document.getElementById('addAddonBtn').onclick = () => openAddonModal(null);
+  document.getElementById('addonModalCancel').onclick = () => closeModal('addonModal');
+  document.getElementById('addonModalClose').onclick  = () => closeModal('addonModal');
+  document.getElementById('addonModalSave').onclick   = saveAddon;
+
+  async function loadAddons() {
+    showView('viewAddons');
+    const grid = document.getElementById('addonGrid');
+    grid.innerHTML = '<div class="empty">Loading…</div>';
+    let snap;
+    try { snap = await getDocs(collection(db, 'addons')); }
+    catch(e) { grid.innerHTML = `<div class="empty" style="color:var(--danger)">Error: ${e.message}</div>`; return; }
+    const addons = [];
+    snap.forEach(d => addons.push({ id: d.id, ...d.data() }));
+    addons.sort((a, b) => (a.label || '').localeCompare(b.label || ''));
+    document.getElementById('metaAddonCount').textContent = addons.length;
+
+    if (addons.length === 0) {
+      grid.innerHTML = `<div class="empty">${ADMIN_I18N.t('noAddonsYet')}</div>`;
+      return;
+    }
+
+    grid.innerHTML = '';
+    addons.forEach(a => {
+      const isGroup = a.type === 'group';
+      const addonData = JSON.stringify(a).replace(/'/g, '&#39;');
+      const card = document.createElement('div');
+      card.style.cssText = 'background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 16px 12px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow)';
+      let header;
+      if (isGroup) {
+        const opts = Array.isArray(a.options) ? a.options : [];
+        const modeTag = a.mode === 'single' ? 'one choice' : 'several';
+        header = `
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <span style="font-size:15px;font-weight:600;color:var(--ink)">${a.label || '—'}</span>
+          <span style="font-size:11px;font-weight:600;color:var(--muted);background:var(--lineSoft);padding:2px 8px;border-radius:100px;white-space:nowrap">${modeTag}</span>
+        </div>
+        <div style="font-size:12px;color:var(--muted)">${opts.map(o => `${o.label} +₪${o.price ?? 0}`).join(' · ') || '—'}</div>`;
+      } else {
+        header = `
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <span style="font-size:15px;font-weight:600;color:var(--ink)">${a.label || '—'}</span>
+          <span style="font-size:14px;font-weight:600;color:var(--accent);white-space:nowrap">+₪${a.price ?? 0}</span>
+        </div>
+        <div style="font-size:12px;color:var(--muted)">${[a.labelHe, a.labelRu].filter(Boolean).join(' · ') || '—'}</div>`;
+      }
+      card.innerHTML = `
+        ${header}
+        <div style="display:flex;align-items:center;gap:12px">
+          <button data-id="${a.id}" class="addon-delete-btn" style="background:none;border:none;cursor:pointer;font-size:13px;color:var(--danger);font-family:var(--sans);display:flex;align-items:center;gap:4px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:14px;height:14px"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+            ${ADMIN_I18N.t('delete')}
+          </button>
+          <button data-id="${a.id}" data-addon='${addonData}' class="addon-edit-btn btn-save" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            ${ADMIN_I18N.t('editAddonTitle')}
+          </button>
+        </div>`;
+      grid.appendChild(card);
+    });
+
+    grid.querySelectorAll('.addon-delete-btn').forEach(btn => {
+      btn.onclick = async () => {
+        if (!confirm('Delete this add-on?')) return;
+        await deleteDoc(doc(db, 'addons', btn.dataset.id));
+        toast('Deleted ✓');
+        loadAddons();
+      };
+    });
+    grid.querySelectorAll('.addon-edit-btn').forEach(btn => {
+      try { btn.onclick = () => openAddonModal(JSON.parse(btn.dataset.addon)); } catch(e) {}
+    });
+  }
+
+  // ── addon type + mode segmented toggles ──
+  let addonType = 'single';   // 'single' | 'group'
+  let addonMode = 'single';   // group selection mode: 'single' | 'multi'
+
+  function setAddonType(type) {
+    addonType = type;
+    document.querySelectorAll('.addon-type-btn').forEach(b => b.classList.toggle('active', b.dataset.type === type));
+    document.getElementById('addonSingleFields').style.display = type === 'single' ? 'flex' : 'none';
+    document.getElementById('addonGroupFields').style.display  = type === 'group'  ? 'flex' : 'none';
+  }
+  function setAddonMode(mode) {
+    addonMode = mode;
+    document.querySelectorAll('.addon-mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+  }
+  document.querySelectorAll('.addon-type-btn').forEach(b => b.onclick = () => setAddonType(b.dataset.type));
+  document.querySelectorAll('.addon-mode-btn').forEach(b => b.onclick = () => setAddonMode(b.dataset.mode));
+
+  function addOptionRow(opt) {
+    const list = document.getElementById('addonOptionsList');
+    const row = document.createElement('div');
+    row.className = 'addon-opt-row';
+    row.innerHTML = `
+      <input class="opt-en" placeholder="English" value="${(opt?.label||'').replace(/"/g,'&quot;')}">
+      <input class="opt-he" dir="rtl" placeholder="עברית" value="${(opt?.labelHe||'').replace(/"/g,'&quot;')}">
+      <input class="opt-ru" placeholder="Русский" value="${(opt?.labelRu||'').replace(/"/g,'&quot;')}">
+      <input class="opt-price" type="number" min="0" step="1" placeholder="₪" value="${opt?.price ?? ''}">
+      <button type="button" class="addon-opt-del" title="Remove">×</button>`;
+    row.querySelector('.addon-opt-del').onclick = () => row.remove();
+    list.appendChild(row);
+  }
+  document.getElementById('addonAddOptionBtn').onclick = () => addOptionRow(null);
+
+  function openAddonModal(addon) {
+    editingAddonId = addon ? addon.id : null;
+    document.getElementById('addonModalTitle').textContent = addon ? ADMIN_I18N.t('editAddonTitle') : ADMIN_I18N.t('addAddonTitle');
+    const isGroup = addon && addon.type === 'group';
+
+    // single fields
+    document.getElementById('addonLabelEn').value = (addon && !isGroup) ? (addon.label || '') : '';
+    document.getElementById('addonLabelHe').value = (addon && !isGroup) ? (addon.labelHe || '') : '';
+    document.getElementById('addonLabelRu').value = (addon && !isGroup) ? (addon.labelRu || '') : '';
+    document.getElementById('addonPrice').value   = (addon && !isGroup && addon.price != null && addon.price !== '') ? addon.price : '';
+
+    // group fields
+    document.getElementById('addonGroupLabelEn').value = isGroup ? (addon.label || '') : '';
+    document.getElementById('addonGroupLabelHe').value = isGroup ? (addon.labelHe || '') : '';
+    document.getElementById('addonGroupLabelRu').value = isGroup ? (addon.labelRu || '') : '';
+    document.getElementById('addonOptionsList').innerHTML = '';
+    if (isGroup && Array.isArray(addon.options) && addon.options.length) addon.options.forEach(addOptionRow);
+    else { addOptionRow(null); addOptionRow(null); }
+    setAddonMode(isGroup && addon.mode === 'multi' ? 'multi' : 'single');
+    setAddonType(isGroup ? 'group' : 'single');
+
+    openModal('addonModal');
+    (isGroup ? document.getElementById('addonGroupLabelEn') : document.getElementById('addonLabelEn')).focus();
+  }
+
+  async function saveAddon() {
+    let data;
+    if (addonType === 'group') {
+      const label   = document.getElementById('addonGroupLabelEn').value.trim();
+      const labelHe = document.getElementById('addonGroupLabelHe').value.trim();
+      const labelRu = document.getElementById('addonGroupLabelRu').value.trim();
+      if (!label) { alert('Group title (English) is required'); return; }
+      const options = [...document.querySelectorAll('#addonOptionsList .addon-opt-row')].map(r => ({
+        label:   r.querySelector('.opt-en').value.trim(),
+        labelHe: r.querySelector('.opt-he').value.trim(),
+        labelRu: r.querySelector('.opt-ru').value.trim(),
+        price:   Number(r.querySelector('.opt-price').value) || 0,
+      })).filter(o => o.label);
+      if (!options.length) { alert('Add at least one option with an English label'); return; }
+      data = { type: 'group', mode: addonMode, label, labelHe, labelRu, options };
+    } else {
+      const label   = document.getElementById('addonLabelEn').value.trim();
+      const labelHe = document.getElementById('addonLabelHe').value.trim();
+      const labelRu = document.getElementById('addonLabelRu').value.trim();
+      const price   = Number(document.getElementById('addonPrice').value) || 0;
+      if (!label) { alert('English label is required'); return; }
+      data = { label, labelHe, labelRu, price };
+    }
+    if (editingAddonId) {
+      await updateDoc(doc(db, 'addons', editingAddonId), data);
+      toast('Updated ✓');
+    } else {
+      await addDoc(collection(db, 'addons'), data);
+      toast('Added ✓');
+    }
+    window.__allAddons = null;
+    closeModal('addonModal');
+    loadAddons();
   }
 
   // ── POPUPS ──────────────────────────────────────────────────────────────
@@ -4629,9 +5015,9 @@
         title1Ru:'Место,', title1En:'The kind of place', title1He:'סוג המקום',
         title2Ru:'не нуждающееся в объяснении.', title2En:"you don't explain.", title2He:'שלא ניתן להסביר במילים',
         caption1Ru:'стойка', caption1En:'the counter', caption1He:'הדלפק', img1:'img/Main page/barista.webp',
-        caption2Ru:'с заботой', caption2En:'served with care', caption2He:'מוגש באהבה', img2:'img/Main page/clients.jpg',
+        caption2Ru:'с заботой', caption2En:'served with care', caption2He:'מוגש באהבה', img2:'img/Main page/clients.webp',
         caption3Ru:'терраса', caption3En:'the terrace', caption3He:'המרפסת', img3:'img/Main page/tables.webp',
-        caption4Ru:'флэт уайт, 09:14', caption4En:'flat white, 09:14', caption4He:'פלט וייט, 09:14', img4:'img/Main page/clients2.jpg',
+        caption4Ru:'флэт уайт, 09:14', caption4En:'flat white, 09:14', caption4He:'פלט וייט, 09:14', img4:'img/Main page/clients2.webp',
         caption5Ru:'утренний ритуал', caption5En:'morning ritual', caption5He:'טקס הבוקר', img5:'img/Main page/creambon.jpg',
       },
       medovik: {
@@ -4643,7 +5029,7 @@
         stat1KeyRu:'Коржей', stat1KeyEn:'Layers', stat1KeyHe:'שכבות', stat1ValRu:'8', stat1ValEn:'8', stat1ValHe:'8',
         stat2KeyRu:'Пропитка', stat2KeyEn:'Rests', stat2KeyHe:'מנוחה', stat2ValRu:'12 ч', stat2ValEn:'12 hrs', stat2ValHe:'12 שעות',
         stat3KeyRu:'Мёд', stat3KeyEn:'Honey', stat3KeyHe:'דבש', stat3ValRu:'Местный', stat3ValEn:'Local', stat3ValHe:'מקומי',
-        img:'img/Main page/medovik_hd.png',
+        img:'img/Main page/medovik_hd.webp',
       },
       visit: {
         tagline:'I have a dream', phone:'+972 (52) 966-2724',

@@ -21,6 +21,39 @@
   <meta property="og:locale:alternate" content="he_IL">
   <meta property="og:locale:alternate" content="ru_RU">
   <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Bakery",
+    "name": "Bulochka",
+    "description": "A small neighbourhood bakery-café in Petah Tikva. Fresh croissants, sourdough breads, homemade cakes, and excellent coffee.",
+    "url": "https://bulweb2.web.app/",
+    "image": "https://bulweb2.web.app/img/Main%20page/hero.jpg.jfif",
+    "telephone": "+972-52-966-2724",
+    "servesCuisine": ["Bakery", "Coffee", "Cakes", "Sandwiches"],
+    "priceRange": "₪₪",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Pinsker 29",
+      "addressLocality": "Petah Tikva",
+      "addressCountry": "IL"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+        "opens": "08:00",
+        "closes": "20:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Friday",
+        "opens": "08:00",
+        "closes": "15:00"
+      }
+    ]
+  }
+  </script>
   <link rel="alternate" hreflang="en" href="https://bulweb2.web.app/">
   <link rel="alternate" hreflang="he" href="https://bulweb2.web.app/">
   <link rel="alternate" hreflang="ru" href="https://bulweb2.web.app/">
@@ -61,9 +94,6 @@
     [dir="rtl"] .eyebrow-star,
     [dir="rtl"] .filter-card-label,
     [dir="rtl"] .visit-detail-label { font-size: 12px; font-family: 'Rubik', sans-serif; }
-    [dir="rtl"] .ticker-inner,
-    [dir="rtl"] .ticker-item,
-    [dir="rtl"] .ticker-sep { font-size: 14px; font-family: 'Rubik', sans-serif; }
 
     .hero h1 {
       font-family: var(--serif);
@@ -178,36 +208,6 @@
       letter-spacing: 0.02em;
     }
 
-    /* ─── TICKER STRIP ───────────────────────── */
-    .ticker-strip {
-      background: var(--cream-mid);
-      border-top: 1px solid var(--brown-faint);
-      border-bottom: 1px solid var(--brown-faint);
-      padding: 14px 24px;
-    }
-    .ticker-inner {
-      max-width: 1300px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0;
-      font-family: var(--serif);
-      font-size: 9px;
-      font-weight: 400;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--brown-mid);
-      transform: scaleY(1.3);
-    }
-    .ticker-item { white-space: nowrap; }
-    .ticker-group { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
-    .ticker-sep {
-      margin: 0 4px;
-      color: var(--brown-mid);
-      font-weight: 400;
-    }
 
     /* ─── THE ROOM ──────────────────────────── */
     .section {
@@ -579,11 +579,6 @@
     @media (max-width: 640px) {
       .hero { padding: 48px 20px 48px; }
       .filter-card { position: static; margin-top: 16px; box-shadow: none; border: 1px solid var(--brown-faint); }
-      .ticker-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; font-size: 7.5px; }
-      [dir="rtl"] .ticker-inner, [dir="rtl"] .ticker-item { font-size: 12px; }
-      .ticker-group { width: 100%; }
-      .ticker-item { white-space: normal; }
-      .ticker-sep { margin: 0 12px; }
       .room-header { flex-direction: column; align-items: flex-start; gap: 12px; }
       .room-sub { align-self: flex-end; text-align: right; }
       [dir="rtl"] .room-sub { align-self: flex-end; text-align: right; }
@@ -1005,16 +1000,6 @@
 </section>
 
 
-<!-- ─── TICKER STRIP ─────────────────────────────────────── -->
-<div class="ticker-strip">
-  <div class="ticker-inner">
-    <span class="ticker-group"><span class="ticker-sep">✦</span><span class="ticker-item" id="tickerItem1" data-en='Freshly baked croissant every day' data-he='קרואסון טרי אפוי כל יום' data-ru='Свежие круассаны каждый день'>Freshly baked croissant every day</span></span>
-    <span class="ticker-group"><span class="ticker-sep">✦</span><span class="ticker-item" id="tickerItem2" data-en='Whole bread by 24-hour pre-order' data-he='לחם שלם בהזמנה מראש 24 שעות' data-ru='Цельнозерновой хлеб под заказ'>Whole bread by 24-hour pre-order</span></span>
-    <span class="ticker-group"><span class="ticker-sep">✦</span><span class="ticker-item" id="tickerItem3" data-en='Homemade cakes' data-he='עוגות ביתיות' data-ru='Домашние торты'>Homemade cakes</span></span>
-    <span class="ticker-group"><span class="ticker-sep">✦</span><span class="ticker-item" id="tickerItem4" data-en='Pet friendly' data-he='ידידותי לחיות מחמד' data-ru='Можно с питомцами'>Pet friendly</span></span>
-  </div>
-</div>
-
 <!-- ─── THE ROOM ──────────────────────────────────────────── -->
 <div id="story" style="background: var(--cream-mid); border-top: 1px solid var(--brown-faint);">
   <section class="section">
@@ -1030,7 +1015,7 @@
         <div class="room-caption" id="roomCaption1" data-en='the counter' data-he='הדלפק' data-ru='стойка'>the counter</div>
       </div>
       <div class="room-photo room-photo-2">
-        <img id="roomImg2" src="img/Main page/clients.jpg" alt="Served with care" loading="lazy">
+        <img id="roomImg2" src="img/Main page/clients.webp" alt="Served with care" loading="lazy">
         <div class="room-caption" id="roomCaption2" data-en='served with care' data-he='מוגש באהבה' data-ru='с заботой'>served with care</div>
       </div>
       <div class="room-photo room-photo-3">
@@ -1038,7 +1023,7 @@
         <div class="room-caption" id="roomCaption3" data-en='the terrace' data-he='המרפסת' data-ru='терраса'>the terrace</div>
       </div>
       <div class="room-photo room-photo-4">
-        <img id="roomImg4" src="img/Main page/clients2.jpg" alt="Flat white, 09:14" loading="lazy">
+        <img id="roomImg4" src="img/Main page/clients2.webp" alt="Flat white, 09:14" loading="lazy">
         <div class="room-caption" id="roomCaption4" data-en='flat white, 09:14' data-he='פלט וייט, 09:14' data-ru='флэт уайт, 09:14'>flat white, 09:14</div>
       </div>
       <div class="room-photo room-photo-5">
@@ -1076,7 +1061,7 @@
       </div>
     </div>
     <div class="medovik-photo">
-      <img id="medovikImg" src="img/Main page/medovik_hd.png" alt="Medovik honey cake" loading="lazy">
+      <img id="medovikImg" src="img/Main page/medovik_hd.webp" alt="Medovik honey cake" loading="lazy">
     </div>
   </div>
 </section>
@@ -1231,8 +1216,8 @@
   }
 
   (async function loadHomepage() {
-    const [hero, story, ticker, room, medovik, visit] = await Promise.all([
-      _hpGet('hero'), _hpGet('story'), _hpGet('ticker'), _hpGet('room'), _hpGet('medovik'), _hpGet('visit'),
+    const [hero, story, room, medovik, visit] = await Promise.all([
+      _hpGet('hero'), _hpGet('story'), _hpGet('room'), _hpGet('medovik'), _hpGet('visit'),
     ]);
 
     if (hero) {
@@ -1248,10 +1233,6 @@
       _hpSetText('storyTitle1', story, 'title1');
       _hpSetText('storyTitle2', story, 'title2');
       _hpSetText('storyBody', story, 'body');
-    }
-
-    if (ticker) {
-      for (let i = 1; i <= 4; i++) _hpSetText('tickerItem' + i, ticker, 'item' + i);
     }
 
     if (room) {

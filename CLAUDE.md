@@ -37,7 +37,7 @@
 - `.photo-placeholder` с диагональным паттерном остался как fallback.
 
 ## Структура index.html
-Hero (фото + filter card) → Ticker strip → «The Room» (5 фото) → Медовик → Shop (динамический из Firestore, скрыт если пусто) → Visit (адрес/часы/фото фасада) → Footer
+Hero (фото + filter card) → «The Room» (5 фото) → Медовик → Shop (динамический из Firestore, скрыт если пусто) → Visit (адрес/часы/фото фасада) → Footer
 
 ## Структура menu.html
 Hero → Filter bar (sticky, 10 категорий) → 10 категорий × 98 позиций с фото. Кнопка «Add to order» открывает addon-модал с WhatsApp-заказом.

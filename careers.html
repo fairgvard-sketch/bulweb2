@@ -20,7 +20,7 @@
   <script>(function(){var l=localStorage.getItem('bulochka-lang')||'he';if(l==='he'){document.documentElement.dir='rtl';document.documentElement.lang='he';}else{document.documentElement.lang=l;}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Playfair+Display:ital,wght@0,400;1,400&family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=IBM+Plex+Sans+Hebrew:wght@300;400;500&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Playfair+Display:ital,wght@0,400;1,400&family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=8">
   <style>
     /* ─── PHOTO BANNER ─────────────────────── */
@@ -366,7 +366,7 @@
 <div class="careers-hero-wrap">
   <div class="careers-hero">
     <div class="careers-hero-bg">
-      <img src="img/Main page/crowd2.jpg" alt="Working at Bulochka">
+      <img src="img/Main page/crowd2.webp" alt="Working at Bulochka" loading="lazy" decoding="async">
     </div>
     <div class="careers-hero-overlay"></div>
 <div class="careers-hero-content">
@@ -404,7 +404,8 @@
       <select name="position" id="positionSelect" required>
         <option value="" disabled selected id="optDefault">Position of interest</option>
         <option value="barista" id="optBarista">Barista</option>
-        <option value="baker" id="optBaker">Baker's assistant</option>
+        <option value="pastry" id="optPastry">Pastry chef</option>
+        <option value="cook" id="optCook">Cook</option>
         <option value="cashier" id="optCashier">Cashier / Service</option>
         <option value="other" id="optOther">Other</option>
       </select>
@@ -477,7 +478,8 @@
     const lang = localStorage.getItem('bulochka-lang') || 'he';
     const posLabels = {
       barista: { en: 'Barista', he: 'בריסטה', ru: 'Бариста' },
-      baker:   { en: "Baker's assistant", he: 'עוזר/ת אופה', ru: 'Помощник пекаря' },
+      pastry:  { en: 'Pastry chef', he: 'קונדיטור/ית', ru: 'Кондитер' },
+      cook:    { en: 'Cook', he: 'טבח/ית', ru: 'Повар' },
       cashier: { en: 'Cashier / Service', he: 'קופה / שירות', ru: 'Кассир / Обслуживание' },
       other:   { en: 'Other', he: 'אחר', ru: 'Другое' }
     };
@@ -522,21 +524,21 @@
       en: {
         name: 'Full name', phone: 'Phone number', city: 'City',
         optDefault: 'Position of interest', optBarista: 'Barista',
-        optBaker: "Baker's assistant", optCashier: 'Cashier / Service', optOther: 'Other',
+        optPastry: 'Pastry chef', optCook: 'Cook', optCashier: 'Cashier / Service', optOther: 'Other',
         consent: 'I agree that my details may be used to contact me regarding this application, in accordance with the privacy policy.',
         submit: 'Send →', success: '✦ Thank you! We\'ll be in touch soon.'
       },
       he: {
         name: 'שם מלא', phone: 'מספר טלפון', city: 'עיר',
         optDefault: 'תפקיד מבוקש', optBarista: 'בריסטה',
-        optBaker: 'עוזר/ת אופה', optCashier: 'קופה / שירות', optOther: 'אחר',
+        optPastry: 'קונדיטור/ית', optCook: 'טבח/ית', optCashier: 'קופה / שירות', optOther: 'אחר',
         consent: 'אני מסכים/ה שהפרטים שלי ישמשו ליצירת קשר בנוגע למועמדות זו, בהתאם למדיניות הפרטיות.',
         submit: '← שלח', success: '✦ תודה! נחזור אליכם בקרוב.'
       },
       ru: {
         name: 'Имя и фамилия', phone: 'Номер телефона', city: 'Город',
         optDefault: 'Интересующая должность', optBarista: 'Бариста',
-        optBaker: 'Помощник пекаря', optCashier: 'Кассир / Обслуживание', optOther: 'Другое',
+        optPastry: 'Кондитер', optCook: 'Повар', optCashier: 'Кассир / Обслуживание', optOther: 'Другое',
         consent: 'Я согласен(на) на использование моих данных для связи по данной заявке в соответствии с политикой конфиденциальности.',
         submit: 'Отправить →', success: '✦ Спасибо! Мы свяжемся с вами в ближайшее время.'
       }
@@ -548,7 +550,8 @@
       document.getElementById('inputCity').placeholder = s.city;
       document.getElementById('optDefault').textContent = s.optDefault;
       document.getElementById('optBarista').textContent = s.optBarista;
-      document.getElementById('optBaker').textContent = s.optBaker;
+      document.getElementById('optPastry').textContent = s.optPastry;
+      document.getElementById('optCook').textContent = s.optCook;
       document.getElementById('optCashier').textContent = s.optCashier;
       document.getElementById('optOther').textContent = s.optOther;
       document.getElementById('consentLabel').textContent = s.consent;

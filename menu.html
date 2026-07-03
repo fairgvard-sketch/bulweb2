@@ -16,6 +16,39 @@
   <meta property="og:locale:alternate" content="he_IL">
   <meta property="og:locale:alternate" content="ru_RU">
   <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Menu",
+    "name": "Bulochka Menu",
+    "url": "https://bulweb2.web.app/menu",
+    "inLanguage": ["en", "he", "ru"],
+    "hasMenuSection": [
+      { "@type": "MenuSection", "name": "Hot Drinks" },
+      { "@type": "MenuSection", "name": "Cold Drinks" },
+      { "@type": "MenuSection", "name": "Sandwiches & Salads" },
+      { "@type": "MenuSection", "name": "Pastries" },
+      { "@type": "MenuSection", "name": "Filled Croissants" },
+      { "@type": "MenuSection", "name": "Tartlets" },
+      { "@type": "MenuSection", "name": "Cakes & Desserts" },
+      { "@type": "MenuSection", "name": "Ice Cream" },
+      { "@type": "MenuSection", "name": "Alcohol" },
+      { "@type": "MenuSection", "name": "Friday Special" }
+    ],
+    "provider": {
+      "@type": "Bakery",
+      "name": "Bulochka",
+      "url": "https://bulweb2.web.app/",
+      "telephone": "+972-52-966-2724",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Pinsker 29",
+        "addressLocality": "Petah Tikva",
+        "addressCountry": "IL"
+      }
+    }
+  }
+  </script>
   <link rel="alternate" hreflang="en" href="https://bulweb2.web.app/menu">
   <link rel="alternate" hreflang="he" href="https://bulweb2.web.app/menu">
   <link rel="alternate" hreflang="ru" href="https://bulweb2.web.app/menu">
@@ -445,6 +478,27 @@
       border-top: 1px solid var(--brown-faint);
       padding-top: 18px; margin-top: 22px; margin-bottom: 4px;
     }
+    .addon-group-head {
+      font-family: var(--sans); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase; color: var(--brown-mid);
+      padding: 12px 0 4px;
+    }
+    /* compact chip options for grouped add-ons */
+    .addon-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 2px 0 6px; }
+    .addon-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px; border: 1.5px solid var(--brown-faint);
+      border-radius: 100px; cursor: pointer; user-select: none;
+      font-family: var(--sans); font-size: 13px; color: var(--brown-dark);
+      background: transparent; transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .addon-chip input { position: absolute; opacity: 0; pointer-events: none; width: 0; height: 0; }
+    .addon-chip:hover { border-color: var(--brown-light); }
+    .addon-chip:has(input:checked) {
+      background: var(--brown-dark); border-color: var(--brown-dark); color: var(--cream);
+    }
+    .addon-chip:has(input:checked) .addon-option-name { color: var(--cream); }
+    .addon-chip-price { font-size: 12px; opacity: 0.75; white-space: nowrap; }
     .addon-option {
       display: flex; align-items: center; gap: 12px;
       padding: 11px 0;
@@ -452,6 +506,16 @@
       cursor: pointer;
     }
     .addon-option:last-child { border-bottom: none; }
+    .addon-option input[type=radio] {
+      appearance: none; -webkit-appearance: none;
+      width: 18px; height: 18px; border: 1.5px solid var(--brown-light);
+      border-radius: 50%; flex-shrink: 0; cursor: pointer; position: relative;
+    }
+    .addon-option input[type=radio]:checked { border-color: var(--sage); }
+    .addon-option input[type=radio]:checked::after {
+      content: ''; position: absolute; inset: 3px;
+      border-radius: 50%; background: var(--sage);
+    }
     .addon-option input[type=checkbox] {
       width: 18px; height: 18px; flex-shrink: 0;
       appearance: none; -webkit-appearance: none;
@@ -850,7 +914,7 @@
     <hr class="menu-divider">
     <div class="menu-items">
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/hot drinks/espresso_short.webp" alt="Espresso"></div>
+        <div class="menu-item-photo"><img src="img/hot drinks/espresso_short.webp" alt="Espresso" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="אספרסו">Espresso</span>
@@ -861,7 +925,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/hot drinks/maciatto_short.webp" alt="Macchiato"></div>
+        <div class="menu-item-photo"><img src="img/hot drinks/maciatto_short.webp" alt="Macchiato" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="מקיאטו">Macchiato</span>
@@ -872,7 +936,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/hot drinks/americano_small.webp" alt="Americano"></div>
+        <div class="menu-item-photo"><img src="img/hot drinks/americano_small.webp" alt="Americano" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="אמריקנו">Americano</span>
@@ -883,7 +947,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/hot drinks/capuchino_small.webp" alt="Cappuccino"></div>
+        <div class="menu-item-photo"><img src="img/hot drinks/capuchino_small.webp" alt="Cappuccino" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קפוצ'ינו">Cappuccino</span>
@@ -894,7 +958,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/hot drinks/flat_white.webp" alt="Flat White"></div>
+        <div class="menu-item-photo"><img src="img/hot drinks/flat_white.webp" alt="Flat White" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="פלאט וויס">Flat White</span>
@@ -905,7 +969,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/hot drinks/latte_hot.webp" alt="Latte"></div>
+        <div class="menu-item-photo"><img src="img/hot drinks/latte_hot.webp" alt="Latte" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="לאטה">Latte</span>
@@ -916,7 +980,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/hot drinks/raf.webp" alt="Raf"></div>
+        <div class="menu-item-photo"><img src="img/hot drinks/raf.webp" alt="Raf" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="ראף">Raf</span>
@@ -927,7 +991,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/hot drinks/tea_hot.webp" alt="Hot Tea"></div>
+        <div class="menu-item-photo"><img src="img/hot drinks/tea_hot.webp" alt="Hot Tea" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="תה חם">Hot Tea</span>
@@ -938,7 +1002,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/hot drinks/schoko_hot.webp" alt="Hot Cocoa"></div>
+        <div class="menu-item-photo"><img src="img/hot drinks/schoko_hot.webp" alt="Hot Cocoa" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="שוקו חם עם מרשמלו">Hot Cocoa</span>
@@ -949,7 +1013,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/hot drinks/black_coffee.webp" alt="Black Coffee"></div>
+        <div class="menu-item-photo"><img src="img/hot drinks/black_coffee.webp" alt="Black Coffee" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קפה שחור">Black Coffee</span>
@@ -960,7 +1024,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/hot drinks/afogato.webp" alt="Affogato"></div>
+        <div class="menu-item-photo"><img src="img/hot drinks/afogato.webp" alt="Affogato" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="אפוגטו">Affogato</span>
@@ -971,7 +1035,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/hot drinks/chocolata.webp" alt="Dark Hot Chocolate"></div>
+        <div class="menu-item-photo"><img src="img/hot drinks/chocolata.webp" alt="Dark Hot Chocolate" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="שוקולטה חמה">Hot Chocolate</span>
@@ -982,7 +1046,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/hot drinks/shlav.webp" alt="Sahlab"></div>
+        <div class="menu-item-photo"><img src="img/hot drinks/shlav.webp" alt="Sahlab" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="סחלב חם">Sahlab</span>
@@ -993,7 +1057,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/hot drinks/matcha_latte_hot.webp" alt="Matcha Latte"></div>
+        <div class="menu-item-photo"><img src="img/hot drinks/matcha_latte_hot.webp" alt="Matcha Latte" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="מאצ'ה לאטה">Matcha Latte</span>
@@ -1021,7 +1085,7 @@
     <div class="menu-items">
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/cold_coffee.webp" alt="Iced Coffee"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/cold_coffee.webp" alt="Iced Coffee" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קפה קר">Iced Coffee</span>
@@ -1033,7 +1097,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/cold_tea.webp" alt="House Iced Tea"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/cold_tea.webp" alt="House Iced Tea" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="תה קר ביתי">House Iced Tea</span>
@@ -1045,7 +1109,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/cold_cocoa.webp" alt="Iced Chocolate"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/cold_cocoa.webp" alt="Iced Chocolate" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="שוקו קר">Iced Chocolate</span>
@@ -1057,7 +1121,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/fruit_shake.webp" alt="Fruitshake"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/fruit_shake.webp" alt="Fruitshake" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="פרישייק">Fruitshake</span>
@@ -1069,7 +1133,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/Bumblebee.webp" alt="Bumble Bee"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/Bumblebee.webp" alt="Bumble Bee" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="באמבל בי">Bumble Bee</span>
@@ -1081,7 +1145,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/black_lara.webp" alt="Black Lara"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/black_lara.webp" alt="Black Lara" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="בלאק לארה">Black Lara</span>
@@ -1093,7 +1157,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/cold_matcha.webp" alt="Iced Matcha"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/cold_matcha.webp" alt="Iced Matcha" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="מאצ'ה קרה">Iced Matcha</span>
@@ -1107,7 +1171,7 @@
       <div class="menu-subhead" data-he="מיצים" data-ru="Соки">Juices</div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/coconut_water.webp" alt="Flavoured Coconut Water"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/coconut_water.webp" alt="Flavoured Coconut Water" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="מי קוקוס בטעמים">Flavoured Coconut Water</span>
@@ -1119,7 +1183,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/real_juice.webp" alt="Real Juice"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/real_juice.webp" alt="Real Juice" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="מיץ ריאל">Real Juice</span>
@@ -1131,7 +1195,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/apple_juice.webp" alt="Organic Apple Juice"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/apple_juice.webp" alt="Organic Apple Juice" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="מיץ תפוח עץ אורגני">Organic Apple Juice</span>
@@ -1143,7 +1207,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/pomegranate_juice.webp" alt="Organic Pomegranate Juice"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/pomegranate_juice.webp" alt="Organic Pomegranate Juice" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="מיץ רימון אורגני">Organic Pomegranate Juice</span>
@@ -1155,7 +1219,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/apricot_juice.webp" alt="Organic Apricot Juice"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/apricot_juice.webp" alt="Organic Apricot Juice" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="מיץ משמש אורגני">Organic Apricot Juice</span>
@@ -1167,7 +1231,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/pear_juice.webp" alt="Organic Pear Juice"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/pear_juice.webp" alt="Organic Pear Juice" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="מיץ אגס אורגני">Organic Pear Juice</span>
@@ -1179,7 +1243,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/mulberry_juice.webp" alt="Organic Mulberry Juice"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/mulberry_juice.webp" alt="Organic Mulberry Juice" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="מיץ תות עץ אורגני">Organic Mulberry Juice</span>
@@ -1191,7 +1255,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/juice_mix_yellow.webp" alt="Fruit &amp; Veg Blend — Yellow"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/juice_mix_yellow.webp" alt="Fruit &amp; Veg Blend — Yellow" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="מיץ מיקס פירות וירקות - צהוב">Fruit & Veg Blend — Yellow</span>
@@ -1203,7 +1267,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/juice_mix_pink.webp" alt="Fruit &amp; Veg Blend — Purple"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/juice_mix_pink.webp" alt="Fruit &amp; Veg Blend — Purple" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="מיץ מיקס פירות וירקות - ורוד">Fruit & Veg Blend — Purple</span>
@@ -1215,7 +1279,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/juice_mix_red.webp" alt="Fruit &amp; Veg Blend — Red"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/juice_mix_red.webp" alt="Fruit &amp; Veg Blend — Red" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="מיץ מיקס פירות וירקות - אדום">Fruit & Veg Blend — Red</span>
@@ -1229,7 +1293,7 @@
       <div class="menu-subhead" data-he="קומבוצ'ה" data-ru="Комбуча">Kombucha</div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/cucumber_coriander.webp" alt="Cucumber &amp; Coriander"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/cucumber_coriander.webp" alt="Cucumber &amp; Coriander" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="מלפפון כוסברה">Cucumber & Coriander</span>
@@ -1241,7 +1305,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/ginger_acerolla.webp" alt="Acerola &amp; Ginger"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/ginger_acerolla.webp" alt="Acerola &amp; Ginger" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="אסרולה-ג'ינג'ר">Acerola & Ginger</span>
@@ -1253,7 +1317,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/mango_paciflora.webp" alt="Mango &amp; Passionfruit"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/mango_paciflora.webp" alt="Mango &amp; Passionfruit" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="מנגו-פסיפלורה">Mango & Passionfruit</span>
@@ -1265,7 +1329,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/matte_caffeine.webp" alt="Maté &amp; Caffeine"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/matte_caffeine.webp" alt="Maté &amp; Caffeine" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="מאטה-קופאין">Maté & Caffeine</span>
@@ -1277,7 +1341,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/cold drinks/rose.webp" alt="Rose Hips"></div>
+        <div class="menu-item-photo"><img src="img/cold drinks/rose.webp" alt="Rose Hips" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="ורדים">Rose Hips</span>
@@ -1308,7 +1372,7 @@
       <div class="menu-subhead" data-he="כריכים" data-ru="Сэндвичи">Sandwiches</div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/sandwiches/sanswich_salmon.webp" alt="Smoked Salmon"></div>
+        <div class="menu-item-photo"><img src="img/sandwiches/sanswich_salmon.webp" alt="Smoked Salmon" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="כריך סלמון מעושן" data-ru="Сэндвич с копчёным лососем">Smoked Salmon</span>
@@ -1319,7 +1383,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/sandwiches/croissant_salmon.webp" alt="Croissant Salmon"></div>
+        <div class="menu-item-photo"><img src="img/sandwiches/croissant_salmon.webp" alt="Croissant Salmon" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קרואסון סלמון מעושן" data-ru="Круассан с копчёным лососем">Croissant Salmon</span>
@@ -1331,7 +1395,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/sandwiches/sandwich_tuna.webp" alt="Tuna Sandwich"></div>
+        <div class="menu-item-photo"><img src="img/sandwiches/sandwich_tuna.webp" alt="Tuna Sandwich" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="כריך טונה" data-ru="Сэндвич с тунцом">Tuna Sandwich</span>
@@ -1342,7 +1406,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/sandwiches/croissant_tuna.webp" alt="Croissant Tuna"></div>
+        <div class="menu-item-photo"><img src="img/sandwiches/croissant_tuna.webp" alt="Croissant Tuna" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קרואסון טונה" data-ru="Круассан с тунцом">Croissant Tuna</span>
@@ -1353,7 +1417,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/sandwiches/sandwich_avocado.webp" alt="Avocado Sandwich"></div>
+        <div class="menu-item-photo"><img src="img/sandwiches/sandwich_avocado.webp" alt="Avocado Sandwich" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="כריך אבוקדו" data-ru="Сэндвич с авокадо">Avocado Sandwich</span>
@@ -1364,7 +1428,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/sandwiches/croissant_avocado.webp" alt="Croissant Avocado"></div>
+        <div class="menu-item-photo"><img src="img/sandwiches/croissant_avocado.webp" alt="Croissant Avocado" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קרואסון אבוקדו" data-ru="Круассан с авокадо">Croissant Avocado</span>
@@ -1375,7 +1439,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/sandwiches/sandwich_vegan.webp" alt="Vegan Sandwich Avocado"></div>
+        <div class="menu-item-photo"><img src="img/sandwiches/sandwich_vegan.webp" alt="Vegan Sandwich Avocado" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="רוסטיק אבוקדו VEGAN <span class=&quot;menu-item-veg&quot;>◦</span>" data-ru="VEGAN — сэндвич с авокадо <span class=&quot;menu-item-veg&quot;>◦</span>">Vegan Sandwich Avocado <span class="menu-item-veg">◦</span></span>
@@ -1387,7 +1451,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/sandwiches/croissant_antipasti.webp" alt="Croissant Antipasti"></div>
+        <div class="menu-item-photo"><img src="img/sandwiches/croissant_antipasti.webp" alt="Croissant Antipasti" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קרואסון אנטיפסטי" data-ru="Круассан антипасти">Croissant Antipasti</span>
@@ -1398,7 +1462,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/sandwiches/croissant_pesto.webp" alt="Croissant Pesto"></div>
+        <div class="menu-item-photo"><img src="img/sandwiches/croissant_pesto.webp" alt="Croissant Pesto" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קרואסון פסטו" data-ru="Круассан с песто">Croissant Pesto</span>
@@ -1409,7 +1473,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/sandwiches/tost_5_cheese.webp" alt="Five Cheese Toast"></div>
+        <div class="menu-item-photo"><img src="img/sandwiches/tost_5_cheese.webp" alt="Five Cheese Toast" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="טוסט חמש גבינות" data-ru="Тост с пятью сырами">Five Cheese Toast</span>
@@ -1423,7 +1487,7 @@
       <div class="menu-subhead" data-he="סלטים" data-ru="Салаты">Salads</div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/salads/salad_tuna.webp" alt="Tuna Salad"></div>
+        <div class="menu-item-photo"><img src="img/salads/salad_tuna.webp" alt="Tuna Salad" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="סלט טונה" data-ru="Салат с тунцом">Tuna Salad</span>
@@ -1434,7 +1498,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/salads/salad_white_cheese.webp" alt="White cheese Salad"></div>
+        <div class="menu-item-photo"><img src="img/salads/salad_white_cheese.webp" alt="White cheese Salad" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="סלט בולגרית" data-ru="Салат с брынзой">White cheese Salad</span>
@@ -1445,7 +1509,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/salads/choped_salad.webp" alt="Chopped Salad"></div>
+        <div class="menu-item-photo"><img src="img/salads/choped_salad.webp" alt="Chopped Salad" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="סלט ירקות דק" data-ru="Мелко нарезанный салат">Chopped Salad</span>
@@ -1459,7 +1523,7 @@
       <div class="menu-subhead" data-he="קערות" data-ru="Боулы">Bowls</div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/small bites/musli.webp" alt="Muesli"></div>
+        <div class="menu-item-photo"><img src="img/small bites/musli.webp" alt="Muesli" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="מוזלי" data-ru="Мюсли">Muesli</span>
@@ -1470,7 +1534,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/small bites/quiche_mushrooms_with_small_salad.webp" alt="Mushroom Quiche"></div>
+        <div class="menu-item-photo"><img src="img/small bites/quiche_mushrooms_with_small_salad.webp" alt="Mushroom Quiche" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קיש פיטריות עם סלט אישי <span class=&quot;menu-item-veg&quot;>◦</span>" data-ru="Киш с грибами и личным салатом <span class=&quot;menu-item-veg&quot;>◦</span>">Mushroom Quiche + Salad <span class="menu-item-veg">◦</span></span>
@@ -1481,7 +1545,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/small bites/quiche_antipasti_with_small_salad.webp" alt="Antipasti Quiche"></div>
+        <div class="menu-item-photo"><img src="img/small bites/quiche_antipasti_with_small_salad.webp" alt="Antipasti Quiche" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קיש אנטיפסטי עם סלט אישי <span class=&quot;menu-item-veg&quot;>◦</span>" data-ru="Киш антипасти и личный салат <span class=&quot;menu-item-veg&quot;>◦</span>">Antipasti Quiche + Salad <span class="menu-item-veg">◦</span></span>
@@ -1509,7 +1573,7 @@
     <hr class="menu-divider">
     <div class="menu-items">
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/pastries/croissant_classic_big.webp" alt="Classic French Croissant"></div>
+        <div class="menu-item-photo"><img src="img/pastries/croissant_classic_big.webp" alt="Classic French Croissant" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קרואסון צרפתי קלאסי">Classic French Croissant</span>
@@ -1520,7 +1584,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/pastries/chocolate_big.webp" alt="Pain au Chocolat"></div>
+        <div class="menu-item-photo"><img src="img/pastries/chocolate_big.webp" alt="Pain au Chocolat" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קרואסון שוקולד">Pain au Chocolat</span>
@@ -1531,7 +1595,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/pastries/croissant_classic_small.webp" alt="Small French Croissant"></div>
+        <div class="menu-item-photo"><img src="img/pastries/croissant_classic_small.webp" alt="Small French Croissant" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קרואסון צרפתי קטן">Small French Croissant</span>
@@ -1542,7 +1606,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/pastries/chocolate_small.webp" alt="Small Chocolate Croissant"></div>
+        <div class="menu-item-photo"><img src="img/pastries/chocolate_small.webp" alt="Small Chocolate Croissant" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קרואסון שוקולד קטן">Small Chocolate Croissant</span>
@@ -1553,7 +1617,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/pastries/big_apple.webp" alt="Apple Turnover"></div>
+        <div class="menu-item-photo"><img src="img/pastries/big_apple.webp" alt="Apple Turnover" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="שסון תפוח עץ">Apple Turnover</span>
@@ -1564,7 +1628,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/pastries/cinnamon_roll.webp" alt="Cinnamon Roll"></div>
+        <div class="menu-item-photo"><img src="img/pastries/cinnamon_roll.webp" alt="Cinnamon Roll" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="רול קינמון">Cinnamon Roll</span>
@@ -1575,7 +1639,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/pastries/reisins_vanilla_roll.webp" alt="Vanilla &amp; Raisin Roll"></div>
+        <div class="menu-item-photo"><img src="img/pastries/reisins_vanilla_roll.webp" alt="Vanilla &amp; Raisin Roll" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="רול וניל צימוקים">Vanilla & Raisin Roll</span>
@@ -1586,7 +1650,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/pastries/filo.webp" alt="Phyllo Fingers"></div>
+        <div class="menu-item-photo"><img src="img/pastries/filo.webp" alt="Phyllo Fingers" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="אצבעות פילו">Phyllo Fingers</span>
@@ -1597,7 +1661,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/pastries/quiche_mushroom.webp" alt="Mushroom Quiche"></div>
+        <div class="menu-item-photo"><img src="img/pastries/quiche_mushroom.webp" alt="Mushroom Quiche" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קיש פטריות">Mushroom Quiche</span>
@@ -1608,7 +1672,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/pastries/quiche_antipasti.webp" alt="Antipasti Quiche"></div>
+        <div class="menu-item-photo"><img src="img/pastries/quiche_antipasti.webp" alt="Antipasti Quiche" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קיש אנטיפסטי">Antipasti Quiche</span>
@@ -1635,7 +1699,7 @@
     <hr class="menu-divider">
     <div class="menu-items">
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_wildberies_vanilla.webp" alt="Vanilla Cream & Forest Berries"></div>
+        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_wildberies_vanilla.webp" alt="Vanilla Cream & Forest Berries" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קרואסון קרם וניל-פירות יער">Vanilla Cream & Forest Berries</span>
@@ -1646,7 +1710,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_raspberry_lemon.jpg" alt="Lemon Cream & Raspberry"></div>
+        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_raspberry_lemon.jpg" alt="Lemon Cream & Raspberry" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קרואסון קרם לימון-פטל אדום">Lemon Cream & Raspberry</span>
@@ -1657,7 +1721,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_halva_pistachio.webp" alt="Halva & Pistachio Cream"></div>
+        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_halva_pistachio.webp" alt="Halva & Pistachio Cream" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קרואסון קרם חלבה-קרם פיסטוק">Halva & Pistachio Cream</span>
@@ -1668,7 +1732,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_caramel_baigle.webp" alt="Bagel Cream & Salted Caramel"></div>
+        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_caramel_baigle.webp" alt="Bagel Cream & Salted Caramel" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קרואסון קרם בייגל-קרמל מלוח">Bagel Cream & Salted Caramel</span>
@@ -1679,7 +1743,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_nutella_banana.webp" alt="Nutella, Banana & Almonds"></div>
+        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_nutella_banana.webp" alt="Nutella, Banana & Almonds" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קרואסון נוטלה-בננה-שקדים">Nutella, Banana & Almonds</span>
@@ -1690,7 +1754,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_pistachio.webp" alt="Pistachio Cream & Pistachio Nuts"></div>
+        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_pistachio.webp" alt="Pistachio Cream & Pistachio Nuts" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קרואסון קרם פיסטוק-אגוזי פיסטוק">Pistachio Cream & Pistachio Nuts</span>
@@ -1701,7 +1765,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_lemon_apples.webp" alt="Apple & Lemon Cream"></div>
+        <div class="menu-item-photo"><img src="img/Filled Croissants/croissant_lemon_apples.webp" alt="Apple & Lemon Cream" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קרואסון תפוח עץ-קרם לימון">Apple & Lemon Cream</span>
@@ -1728,7 +1792,7 @@
     <hr class="menu-divider">
     <div class="menu-items">
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/tarts/tart_mango.webp" alt="Mascarpone & Mango"></div>
+        <div class="menu-item-photo"><img src="img/tarts/tart_mango.webp" alt="Mascarpone & Mango" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="טארטלט מסקרפונה - מנגו">Mascarpone & Mango</span>
@@ -1739,7 +1803,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/tarts/tart_strawberry.webp" alt="Mascarpone & Strawberry"></div>
+        <div class="menu-item-photo"><img src="img/tarts/tart_strawberry.webp" alt="Mascarpone & Strawberry" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="טארטלט מסקרפונה - תות שדה">Mascarpone & Strawberry</span>
@@ -1750,7 +1814,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/tarts/tart_wildberries.webp" alt="Mascarpone, Vanilla Cream & Forest Berries"></div>
+        <div class="menu-item-photo"><img src="img/tarts/tart_wildberries.webp" alt="Mascarpone, Vanilla Cream & Forest Berries" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="טארטלט מסקרפונה - קרם וניל - פירות יער">Mascarpone, Vanilla & Forest Berries</span>
@@ -1761,7 +1825,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/tarts/tart_raspberry.webp" alt="Mascarpone, Pistachio Cream & Raspberry"></div>
+        <div class="menu-item-photo"><img src="img/tarts/tart_raspberry.webp" alt="Mascarpone, Pistachio Cream & Raspberry" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="טארטלט מסקרפונה - קרם פיסטוק-פטל">Mascarpone, Pistachio & Raspberry</span>
@@ -1772,7 +1836,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/Main page/menu_placeholder.jpg" alt=""></div>
+        <div class="menu-item-photo"><img src="img/Main page/menu_placeholder.jpg" alt="" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="לימון מרנג ופרנג'יפן שקדים">Lemon Meringue & Almond Frangipane</span>
@@ -1783,7 +1847,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/Main page/menu_placeholder.jpg" alt=""></div>
+        <div class="menu-item-photo"><img src="img/Main page/menu_placeholder.jpg" alt="" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="בראוניז, שוקולד חלב וקרמל אגוזי לוז">Brownie, Milk Chocolate & Hazelnut Caramel</span>
@@ -1810,7 +1874,7 @@
     <hr class="menu-divider">
     <div class="menu-items">
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/Cakes/Cheesecake.jpg" alt="Baked Cheesecake"></div>
+        <div class="menu-item-photo"><img src="img/Cakes/Cheesecake.jpg" alt="Baked Cheesecake" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="עוגת גבינה אפויה">Baked Cheesecake</span>
@@ -1821,7 +1885,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/Main page/menu_placeholder.jpg" alt=""></div>
+        <div class="menu-item-photo"><img src="img/Main page/menu_placeholder.jpg" alt="" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="טירמיסו">Tiramisu</span>
@@ -1832,7 +1896,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/Cakes/creme_brule.webp" alt="Crème Brûlée"></div>
+        <div class="menu-item-photo"><img src="img/Cakes/creme_brule.webp" alt="Crème Brûlée" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קרם ברולה">Crème Brûlée</span>
@@ -1843,7 +1907,7 @@
         </div>
       </div>
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/Main page/menu_placeholder.jpg" alt=""></div>
+        <div class="menu-item-photo"><img src="img/Main page/menu_placeholder.jpg" alt="" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="עוגת הבית (משתנה)">House Cake <em>(rotating)</em></span>
@@ -1873,7 +1937,7 @@
     <div class="menu-items">
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/ice_cream/classic.webp" alt="The Classics"></div>
+        <div class="menu-item-photo"><img src="img/ice_cream/classic.webp" alt="The Classics" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="הקלאסית">The Classics</span>
@@ -1885,7 +1949,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/ice_cream/tropical.webp" alt="The Tropical"></div>
+        <div class="menu-item-photo"><img src="img/ice_cream/tropical.webp" alt="The Tropical" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="הטרופית">The Tropical</span>
@@ -1897,7 +1961,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/ice_cream/black_forest.webp" alt="The Black Forest"></div>
+        <div class="menu-item-photo"><img src="img/ice_cream/black_forest.webp" alt="The Black Forest" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="היער השחור">The Black Forest</span>
@@ -2049,7 +2113,7 @@
     <div class="menu-items">
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/friday special/plushka.webp" alt="Plyushka"></div>
+        <div class="menu-item-photo"><img src="img/friday special/plushka.webp" alt="Plyushka" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="פליושקה">Plyushka</span>
@@ -2061,7 +2125,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/friday special/vatrushka.webp" alt="Vatrushka"></div>
+        <div class="menu-item-photo"><img src="img/friday special/vatrushka.webp" alt="Vatrushka" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="ואטרושקה">Vatrushka</span>
@@ -2073,7 +2137,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/Main page/menu_placeholder.jpg" alt="Sochnik"></div>
+        <div class="menu-item-photo"><img src="img/Main page/menu_placeholder.jpg" alt="Sochnik" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="סוצ'ניק">Sochnik</span>
@@ -2085,7 +2149,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/friday special/korzinochka.webp" alt="Korzinochka"></div>
+        <div class="menu-item-photo"><img src="img/friday special/korzinochka.webp" alt="Korzinochka" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קארינוצ'קה">Korzinochka</span>
@@ -2097,7 +2161,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/Main page/menu_placeholder.jpg" alt="Bulochka"></div>
+        <div class="menu-item-photo"><img src="img/Main page/menu_placeholder.jpg" alt="Bulochka" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="בולוצ'קה">Bulochka</span>
@@ -2109,7 +2173,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/friday special/cremobon.webp" alt="Creambon"></div>
+        <div class="menu-item-photo"><img src="img/friday special/cremobon.webp" alt="Creambon" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="קרמבון">Creambon</span>
@@ -2121,7 +2185,7 @@
       </div>
 
       <div class="menu-item">
-        <div class="menu-item-photo"><img src="img/friday special/cinnabon.webp" alt="Cinnamon"></div>
+        <div class="menu-item-photo"><img src="img/friday special/cinnabon.webp" alt="Cinnamon" loading="lazy" decoding="async"></div>
         <div class="menu-item-body">
           <div class="menu-item-top">
             <span class="menu-item-name" data-he="סינבון">Cinnamon</span>
@@ -2235,6 +2299,9 @@
 </aside>
 
 <script>
+  // escape untrusted (Firestore) strings before injecting into innerHTML
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
   // ─── FRIDAY POSITIONING ──────────────────────────────────
   (function () {
     const isFriday = new Date().getDay() === 5;
@@ -2271,98 +2338,9 @@
 
   // ─── ADD-ON MODAL ─────────────────────────────────────────
   (function () {
-    const ADDONS = {
-      'Cappuccino': [
-        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', labelRu: 'Основа (овсяное / соевое)', price: 2 },
-        { label: 'Syrup — caramel / hazelnut / vanilla / lavender', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / אייריש קרים', labelRu: 'Сироп — карамель / фундук / ваниль / лаванда', price: 5 },
-        { label: 'Baileys', labelHe: 'ביילס', labelRu: 'Бейлис', price: 10 }
-      ],
-      'Hot Cocoa': [
-        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', labelRu: 'Основа (овсяное / соевое)', price: 2 }
-      ],
-      'Espresso': [
-        { label: 'Baileys', labelHe: 'ביילס', labelRu: 'Бейлис', price: 10 }
-      ],
-      'Macchiato': [
-        { label: 'Baileys', labelHe: 'ביילס', labelRu: 'Бейлис', price: 10 }
-      ],
-      'Americano': [
-        { label: 'Syrup — caramel / hazelnut / vanilla / lavender', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / אייריש קרים', labelRu: 'Сироп — карамель / фундук / ваниль / лаванда', price: 5 },
-        { label: 'Baileys', labelHe: 'ביילס', labelRu: 'Бейлис', price: 10 }
-      ],
-      'Flat White': [
-        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', labelRu: 'Основа (овсяное / соевое)', price: 2 },
-        { label: 'Syrup — caramel / hazelnut / vanilla / lavender', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / אייריש קרים', labelRu: 'Сироп — карамель / фундук / ваниль / лаванда', price: 5 },
-        { label: 'Baileys', labelHe: 'ביילס', labelRu: 'Бейлис', price: 10 }
-      ],
-      'Latte': [
-        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', labelRu: 'Основа (овсяное / соевое)', price: 2 },
-        { label: 'Syrup — caramel / vanilla / Irish cream / hazelnut', labelHe: 'סירופ — קרמל / וניל / אייריש קרים / אגוזי לוז', labelRu: 'Сироп — карамель / ваниль / айриш крим / фундук', price: 5 },
-        { label: 'Baileys', labelHe: 'ביילס', labelRu: 'Бейлис', price: 10 }
-      ],
-      'Matcha Latte': [
-        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', labelRu: 'Основа (овсяное / соевое)', price: 2 },
-        { label: 'Syrup — caramel / hazelnut / vanilla / Irish cream', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / אייריש קרים', labelRu: 'Сироп — карамель / фундук / ваниль / айриш крим', price: 5 }
-      ],
-      'Iced Coffee': [
-        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', labelRu: 'Основа (овсяное / соевое)', price: 2 },
-        { label: 'Syrup — caramel / hazelnut / vanilla / Irish cream', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / אייריש קרים', labelRu: 'Сироп — карамель / фундук / ваниль / айриш крим', price: 5 },
-        { label: 'Baileys', labelHe: 'ביילס', labelRu: 'Бейлис', price: 10 }
-      ],
-      'Iced Matcha': [
-        { label: 'Milk base (oat / soy)', labelHe: 'בסיס חלב (שיבולת / סויה)', labelRu: 'Основа (овсяное / соевое)', price: 2 },
-        { label: 'Syrup — caramel / hazelnut / vanilla / Irish cream', labelHe: 'סירופ — קרמל / אגוזי לוז / וניל / אייריש קרים', labelRu: 'Сироп — карамель / фундук / ваниль / айриш крим', price: 5 }
-      ],
-      'Fruitshake': [
-        { label: 'Alternative base (oat / soy / orange juice)', labelHe: 'בסיס חלופי (שיבולת / סויה / מיץ תפוזים)', labelRu: 'Альтернативная основа (овсяное / соевое / апельсиновый сок)', price: 3 }
-      ],
-      'Smoked Salmon': [
-        { label: 'Avocado', labelHe: 'אבוקדו', labelRu: 'Авокадо', price: 8 },
-        { label: 'Hard-boiled egg', labelHe: 'ביצה קשה', labelRu: 'Варёное яйцо', price: 3 }
-      ],
-      'Smoked Salmon Sandwich': [
-        { label: 'Avocado', labelHe: 'אבוקדו', labelRu: 'Авокадо', price: 8 },
-        { label: 'Hard-boiled egg', labelHe: 'ביצה קשה', labelRu: 'Варёное яйцо', price: 3 }
-      ],
-      'Croissant Salmon': [
-        { label: 'Avocado', labelHe: 'אבוקדו', labelRu: 'Авокадо', price: 8 },
-        { label: 'Hard-boiled egg', labelHe: 'ביצה קשה', labelRu: 'Варёное яйцо', price: 3 }
-      ],
-      'Tuna Sandwich': [
-        { label: 'Avocado', labelHe: 'אבוקדו', labelRu: 'Авокадо', price: 8 }
-      ],
-      'Croissant Tuna': [
-        { label: 'Avocado', labelHe: 'אבוקדו', labelRu: 'Авокадо', price: 8 }
-      ],
-      'Five Cheese Toast': [
-        { label: 'Tuna', labelHe: 'טונה', labelRu: 'Тунец', price: 8 },
-        { label: 'Avocado', labelHe: 'אבוקדו', labelRu: 'Авокадо', price: 8 },
-        { label: 'Egg', labelHe: 'ביצה', labelRu: 'Яйцо', price: 6 },
-        { label: 'Tomato', labelHe: 'עגבניה', labelRu: 'Томат', price: 3 },
-        { label: 'Corn', labelHe: 'תירס', labelRu: 'Кукуруза', price: 3 },
-        { label: 'Red onion', labelHe: 'בצל סגול', labelRu: 'Красный лук', price: 3 },
-        { label: 'Kalamata olives', labelHe: 'זיתי קלמטה', labelRu: 'Оливки каламата', price: 4 }
-      ],
-      'Tuna Salad': [
-        { label: 'Avocado', labelHe: 'אבוקדו', labelRu: 'Авокадо', price: 8 },
-        { label: 'Bulgarian cheese', labelHe: 'גבינה בולגרית', labelRu: 'Болгарский сыр', price: 8 },
-        { label: 'Whole wheat bread', labelHe: 'לחם מלא', labelRu: 'Цельнозерновой хлеб', price: 8 },
-        { label: 'Extra egg', labelHe: 'ביצה נוספת', labelRu: 'Дополнительное яйцо', price: 6 }
-      ],
-      'White cheese Salad': [
-        { label: 'Avocado', labelHe: 'אבוקדו', labelRu: 'Авокадо', price: 8 },
-        { label: 'Tuna', labelHe: 'טונה', labelRu: 'Тунец', price: 8 },
-        { label: 'Whole wheat bread', labelHe: 'לחם מלא', labelRu: 'Цельнозерновой хлеб', price: 8 },
-        { label: 'Extra egg', labelHe: 'ביצה נוספת', labelRu: 'Дополнительное яйцо', price: 6 }
-      ],
-      'Chopped Salad': [
-        { label: 'Bulgarian cheese', labelHe: 'גבינה בולגרית', labelRu: 'Болгарский сыр', price: 8 },
-        { label: 'Tuna', labelHe: 'טונה', labelRu: 'Тунец', price: 8 },
-        { label: 'Avocado', labelHe: 'אבוקדו', labelRu: 'Авокадо', price: 8 },
-        { label: 'Egg', labelHe: 'ביצה', labelRu: 'Яйцо', price: 6 },
-        { label: 'Whole wheat bread', labelHe: 'לחם מלא', labelRu: 'Цельнозерновой хлеб', price: 8 }
-      ]
-    };
+    // Add-on options are loaded from Firestore by the module script below and
+    // keyed by each item's English name in window.__ADDONS__ (same shape as before).
+    const ADDONS = window.__ADDONS__ || (window.__ADDONS__ = {});
 
     const overlay  = document.getElementById('addonOverlay');
     const nameEl   = document.getElementById('addonName');
@@ -2374,8 +2352,8 @@
     let basePrice  = 0;
 
     function firstPrice(str) {
-      const m = str.match(/₪(\d+)/);
-      return m ? +m[1] : 0;
+      const m = str.match(/₪\s*([\d.]+)/);
+      return m ? parseFloat(m[1]) : 0;
     }
 
     function recalc() {
@@ -2442,15 +2420,58 @@
           else if (lang === 'ru') extrasLabelEl.textContent = 'Добавить опции';
           else extrasLabelEl.textContent = 'Add extras';
         }
-        addons.forEach(a => {
+        const isHe = lang === 'he';
+        const isRu = lang === 'ru';
+        const pickLabel = o => (isHe && o.labelHe) ? o.labelHe : (isRu && o.labelRu) ? o.labelRu : o.label;
+        let groupIdx = 0;
+
+        // full-width row option (used for standalone, non-group extras)
+        const renderOption = (o, inputType, groupName) => {
           const lbl = document.createElement('label');
           lbl.className = 'addon-option';
-          const isHe = lang === 'he';
-          const isRu = lang === 'ru';
-          const displayLabel = (isHe && a.labelHe) ? a.labelHe : (isRu && a.labelRu) ? a.labelRu : a.label;
-          lbl.innerHTML = `<input type="checkbox" data-price="${a.price}"><span class="addon-option-name" data-en="${a.label}" data-he="${a.labelHe||a.label}" data-ru="${a.labelRu||a.label}">${displayLabel}</span><span class="addon-option-price">+₪${a.price}</span>`;
+          const nameAttr = groupName ? ` name="${esc(groupName)}"` : '';
+          lbl.innerHTML = `<input type="${inputType}"${nameAttr} data-price="${esc(o.price)}"><span class="addon-option-name" data-en="${esc(o.label)}" data-he="${esc(o.labelHe||o.label)}" data-ru="${esc(o.labelRu||o.label)}">${esc(pickLabel(o))}</span><span class="addon-option-price">+₪${esc(o.price)}</span>`;
           lbl.querySelector('input').addEventListener('change', recalc);
           listEl.appendChild(lbl);
+        };
+
+        // compact chip option (used inside groups)
+        const renderChip = (o, inputType, groupName, container) => {
+          const lbl = document.createElement('label');
+          lbl.className = 'addon-chip';
+          const nameAttr = groupName ? ` name="${esc(groupName)}"` : '';
+          const priceHtml = Number(o.price) ? `<span class="addon-chip-price">+₪${esc(o.price)}</span>` : '';
+          lbl.innerHTML = `<input type="${inputType}"${nameAttr} data-price="${esc(o.price)}"><span class="addon-option-name" data-en="${esc(o.label)}" data-he="${esc(o.labelHe||o.label)}" data-ru="${esc(o.labelRu||o.label)}">${esc(pickLabel(o))}</span>${priceHtml}`;
+          lbl.querySelector('input').addEventListener('change', recalc);
+          container.appendChild(lbl);
+        };
+
+        // Standalone (non-group) add-ons are collected into one shared chip row
+        // so they read as compact capsules instead of full-width list rows.
+        let looseChips = null;
+        const flushLoose = () => { looseChips = null; };
+        addons.forEach(a => {
+          if (a.group) {
+            flushLoose();
+            // group heading
+            const head = document.createElement('div');
+            head.className = 'addon-group-head';
+            head.textContent = pickLabel(a);
+            listEl.appendChild(head);
+            const single = a.mode === 'single';
+            const groupName = single ? `addon-group-${groupIdx++}` : '';
+            const chips = document.createElement('div');
+            chips.className = 'addon-chips';
+            (a.options || []).forEach(o => renderChip(o, single ? 'radio' : 'checkbox', groupName, chips));
+            listEl.appendChild(chips);
+          } else {
+            if (!looseChips) {
+              looseChips = document.createElement('div');
+              looseChips.className = 'addon-chips';
+              listEl.appendChild(looseChips);
+            }
+            renderChip(a, 'checkbox', '', looseChips);
+          }
         });
       } else {
         extrasEl.style.display = 'none';
@@ -2470,8 +2491,7 @@
       if (a11y) a11y.style.visibility = '';
     }
 
-    // expose for wireAddons (called after Firebase renders new items)
-    window.__ADDONS__ = ADDONS;
+    // ADDONS === window.__ADDONS__ (same object); module script fills it from Firestore.
     window.__openAddonModal__ = openModal;
 
     document.getElementById('addonClose').addEventListener('click', closeModal);
@@ -2576,12 +2596,12 @@
         const extras = lang === 'he' ? (item.extrasHe || item.extrasEn) : lang === 'ru' ? (item.extrasRu || item.extrasEn) : item.extrasEn;
         const extrasText = extras && extras.length ? extras.join(', ') : '';
         div.innerHTML = `
-          <div class="cart-item-img">${item.imgSrc ? `<img src="${item.imgSrc}" alt="${name}">` : ''}</div>
+          <div class="cart-item-img">${item.imgSrc ? `<img src="${esc(item.imgSrc)}" alt="${esc(name)}">` : ''}</div>
           <div class="cart-item-info">
             <div class="cart-item-top">
               <div>
-                <div class="cart-item-name">${name}</div>
-                ${extrasText ? `<div class="cart-item-extras">${extrasText}</div>` : ''}
+                <div class="cart-item-name">${esc(name)}</div>
+                ${extrasText ? `<div class="cart-item-extras">${esc(extrasText)}</div>` : ''}
               </div>
               <div class="cart-item-price">₪${item.price}</div>
             </div>
@@ -2640,8 +2660,8 @@
       const priceStr = item.querySelector('.menu-item-price').textContent.trim();
       const imgEl2 = item.querySelector('.menu-item-photo img');
       const imgSrc = imgEl2 ? imgEl2.src : '';
-      const m = priceStr.match(/₪(\d+)/);
-      const price = m ? +m[1] : 0;
+      const m = priceStr.match(/₪\s*([\d.]+)/);
+      const price = m ? parseFloat(m[1]) : 0;
       const existing = cart.find(i => i.nameEn === nameEn && !i.extrasEn.length);
       if (existing) { existing.qty++; } else { cart.push({ nameEn, nameHe, nameRu, price, imgSrc, extrasEn: [], extrasHe: [], extrasRu: [], qty: 1 }); }
       saveCart(); renderCart();
@@ -2669,8 +2689,8 @@
       const imgSrc = imgEl2 ? imgEl2.src : '';
 
       let price = 0;
-      const m = priceStr.match(/₪(\d+)/);
-      if (m) price = +m[1];
+      const m = priceStr.match(/₪\s*([\d.]+)/);
+      if (m) price = parseFloat(m[1]);
 
       const extrasEn = [], extrasHe = [], extrasRu = [];
       document.querySelectorAll('#addonList input:checked').forEach(cb => {
@@ -2759,8 +2779,49 @@
   });
   const db = getFirestore(app);
 
+  // escape untrusted (Firestore) strings before injecting into innerHTML
+  const escHtml = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
   // load badges once, keyed by Firestore doc id
   let badgeMap = {};
+  // add-on library, keyed by Firestore doc id
+  let addonMap = {};
+
+  // Resolve an item's addon id list into entries and register them under the
+  // item's English name so the (name-keyed) add-on modal can find them.
+  // An entry is either a single option { label,labelHe,labelRu,price } or a
+  // group { group:true, label,labelHe,labelRu, mode:'single'|'multi', options:[...] }.
+  function registerAddons(data) {
+    const name = (data.name || '').trim();
+    if (!name) return;
+    const ids = Array.isArray(data.addons) ? data.addons : [];
+    // per-item price overrides for single add-ons: { addonId: price }
+    const overrides = (data.addonPrices && typeof data.addonPrices === 'object') ? data.addonPrices : {};
+    const opt = a => ({ label: a.label || '', labelHe: a.labelHe || '', labelRu: a.labelRu || '', price: Number(a.price) || 0 });
+    const entries = ids
+      .map(id => ({ id, a: addonMap[id] }))
+      .filter(x => x.a)
+      .map(({ id, a }) => {
+        if (a.type === 'group') {
+          return {
+            group: true,
+            label: a.label || '', labelHe: a.labelHe || '', labelRu: a.labelRu || '',
+            mode: a.mode === 'single' ? 'single' : 'multi',
+            options: (Array.isArray(a.options) ? a.options : []).map(opt),
+          };
+        }
+        const o = opt(a);
+        // apply per-item override if a numeric price is set for this addon
+        if (overrides[id] != null && overrides[id] !== '') {
+          const p = Number(overrides[id]);
+          if (!Number.isNaN(p)) o.price = p;
+        }
+        return o;
+      });
+    const store = window.__ADDONS__ || (window.__ADDONS__ = {});
+    if (entries.length) store[name] = entries;
+    else delete store[name];
+  }
 
   const CAT_IDS = ['hot-drinks','cold-drinks','sandwiches','pastries','filled','tartlets','cakes','ice-cream','alcohol','friday'];
 
@@ -2779,11 +2840,12 @@
 
     el.innerHTML = `
       <div class="menu-list-main">
-        <span class="menu-list-name" data-en="${data.name || ''}" ${data.nameHe ? `data-he="${data.nameHe}"` : ''} ${data.nameRu ? `data-ru="${data.nameRu}"` : ''}>${name}</span>
-        <span class="menu-list-price">${price}</span>
+        <span class="menu-list-name" data-en="${escHtml(data.name || '')}" ${data.nameHe ? `data-he="${escHtml(data.nameHe)}"` : ''} ${data.nameRu ? `data-ru="${escHtml(data.nameRu)}"` : ''}>${escHtml(name)}</span>
+        <span class="menu-list-price">${escHtml(price)}</span>
       </div>
-      ${desc ? `<span class="menu-list-desc" data-en="${data.desc || ''}" ${data.descHe ? `data-he="${data.descHe}"` : ''} ${data.descRu ? `data-ru="${data.descRu}"` : ''}>${desc}</span>` : ''}`;
+      ${desc ? `<span class="menu-list-desc" data-en="${escHtml(data.desc || '')}" ${data.descHe ? `data-he="${escHtml(data.descHe)}"` : ''} ${data.descRu ? `data-ru="${escHtml(data.descRu)}"` : ''}>${escHtml(desc)}</span>` : ''}`;
 
+    registerAddons(data);
     return el;
   }
 
@@ -2803,7 +2865,7 @@
 
     const imgSrc = img.startsWith('http') || img.startsWith('data:') ? img : img;
     const photoHtml = img
-      ? `<div class="menu-item-photo"><img src="${imgSrc}" alt="${data.name || ''}" loading="lazy"></div>`
+      ? `<div class="menu-item-photo"><img src="${escHtml(imgSrc)}" alt="${escHtml(data.name || '')}" loading="lazy"></div>`
       : `<div class="menu-item-photo"></div>`;
 
     const actionLabel = isHe ? 'הוסף תוספות ←' : isRu ? 'Добавить добавки →' : 'Add ingredients →';
@@ -2813,7 +2875,7 @@
           const b = badgeMap[id];
           if (!b) return '';
           let src = ''; try { src = JSON.parse(b.icon).img; } catch(e) {}
-          return src ? `<img src="${src}" alt="${b.name}" title="${b.name}">` : '';
+          return src ? `<img src="${escHtml(src)}" alt="${escHtml(b.name)}" title="${escHtml(b.name)}">` : '';
         }).join('')}</div>`
       : '';
 
@@ -2821,14 +2883,15 @@
       ${photoHtml}
       <div class="menu-item-body">
         <div class="menu-item-top">
-          <span class="menu-item-name" data-en="${data.name || ''}" ${data.nameHe ? `data-he="${data.nameHe}"` : ''} ${data.nameRu ? `data-ru="${data.nameRu}"` : ''}>${name}</span>
-          <span class="menu-item-price">${price}</span>
+          <span class="menu-item-name" data-en="${escHtml(data.name || '')}" ${data.nameHe ? `data-he="${escHtml(data.nameHe)}"` : ''} ${data.nameRu ? `data-ru="${escHtml(data.nameRu)}"` : ''}>${escHtml(name)}</span>
+          <span class="menu-item-price">${escHtml(price)}</span>
         </div>
-        <span class="menu-item-desc" data-en="${data.desc || ''}" ${data.descHe ? `data-he="${data.descHe}"` : ''} ${data.descRu ? `data-ru="${data.descRu}"` : ''}>${desc}</span>
+        <span class="menu-item-desc" data-en="${escHtml(data.desc || '')}" ${data.descHe ? `data-he="${escHtml(data.descHe)}"` : ''} ${data.descRu ? `data-ru="${escHtml(data.descRu)}"` : ''}>${escHtml(desc)}</span>
         <span class="menu-item-action">${actionLabel}</span>
         ${badgesHtml}
       </div>`;
 
+    registerAddons(data);
     return el;
   }
 
@@ -3032,9 +3095,13 @@
   const cachedDocs = {};
 
   (async () => {
-    // 1. load badges first so buildItemEl has them ready
+    // 1. load badges + add-on library first so buildItemEl has them ready
     const bSnap = await getDocs(collection(db, 'badges'));
     bSnap.forEach(d => { badgeMap[d.id] = d.data(); });
+    try {
+      const aSnap = await getDocs(collection(db, 'addons'));
+      aSnap.forEach(d => { addonMap[d.id] = d.data(); });
+    } catch (e) { /* addons collection may not exist yet */ }
 
     // 2. load category meta (order + noPhotos)
     getDocs(collection(db, '_categories')).then(snap => {
