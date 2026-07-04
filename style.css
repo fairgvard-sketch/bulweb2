@@ -694,6 +694,11 @@ html[dir="rtl"] input[type="number"] { direction: ltr; text-align: right; }
   .nav-social { gap: 8px; }
   .nav-right { gap: 6px; }
 }
+/* на самых узких экранах (320px: iPhone SE/5s) соцсети в навбар не влезают —
+   они остаются в бургер-меню и футере */
+@media (max-width: 360px) {
+  .nav-social { display: none; }
+}
 @media (max-width: 900px) {
   .footer-top { grid-template-columns: 1fr 1fr; }
 }
