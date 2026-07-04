@@ -623,6 +623,9 @@
     @media (max-width: 640px) {
       #navCart { display: none; }
       .nav-cart--mobile { display: inline-flex; }
+      /* третий флекс-ребёнок ломает space-between: прижимаем бургер к корзине,
+         иначе он оказывается по центру под логотипом */
+      .nav-toggle { margin-inline-end: auto; }
     }
     .cart-panel {
       position: fixed; top: 0; right: 0; bottom: 0; z-index: 400;
