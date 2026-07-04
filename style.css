@@ -352,12 +352,13 @@ a.hero-menu-btn:hover {
 /* ─── MOBILE MENU ────────────────────────── */
 .mobile-menu {
   position: fixed;
-  top: 60px;
+  /* накрывает весь экран, включая навбар — чтобы страница не просвечивала сверху */
+  top: 0;
   left: 0;
   bottom: 0;
   width: 100vw;
   background: var(--cream);
-  z-index: 99;
+  z-index: 120;
   padding: 0;
   flex-direction: column;
   gap: 0;
@@ -379,7 +380,7 @@ a.hero-menu-btn:hover {
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 28px 36px max(48px, env(safe-area-inset-bottom));
+  padding: max(72px, calc(env(safe-area-inset-top) + 56px)) 36px max(48px, env(safe-area-inset-bottom));
   gap: 0;
 }
 @media (max-height: 500px) and (orientation: landscape) {
