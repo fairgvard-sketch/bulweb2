@@ -78,16 +78,14 @@
   <link rel="stylesheet" href="style.css?v=8">
   <style>
     /* ─── HERO ─────────────────────────────── */
+    /* редакционный блок без фото: всё по центру */
     .hero {
-      padding: 72px 24px 48px;
-      max-width: 1300px;
+      padding: 96px 24px 72px;
+      max-width: 900px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: start;
+      text-align: center;
     }
-    .hero-left { padding-bottom: 72px; }
+    .hero-left { padding-bottom: 0; }
     /* якорь #story: не прятать заголовок под фиксированным навом */
     .hero { scroll-margin-top: 60px; }
 
@@ -102,6 +100,7 @@
       margin-bottom: 28px;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
     }
     .eyebrow-star { font-size: 10px; color: var(--brown-mid); vertical-align: middle; }
@@ -110,12 +109,11 @@
 
     .hero h2 {
       font-family: var(--serif);
-      font-size: clamp(42px, 8vw, 104px);
+      font-size: clamp(42px, 7vw, 92px);
       font-weight: 300;
       line-height: 0.98;
       letter-spacing: -0.02em;
-      max-width: 780px;
-      margin-top: 32px;
+      margin-top: 24px;
       margin-bottom: 28px;
       font-optical-sizing: auto;
     }
@@ -126,21 +124,8 @@
       font-size: 17px;
       line-height: 28.9px;
       color: rgba(42, 31, 24, 0.72);
-      max-width: 480px;
-      margin-bottom: 24px;
-    }
-    /* ─── HERO RIGHT (photo) ─── */
-    .hero-right {
-      position: relative;
-      overflow: visible;
-      align-self: start;
-    }
-    .hero-photo {
-      aspect-ratio: 4/5;
-      max-height: 700px;
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      align-self: start;
+      max-width: 620px;
+      margin: 0 auto;
     }
 
 
@@ -482,14 +467,7 @@
     }
     /* ─── RESPONSIVE ─────────────────────────── */
     @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        padding-top: 64px;
-      }
-      .hero-left { padding-bottom: 0; }
-      .hero-right { margin-bottom: 0; }
-      .hero-photo { aspect-ratio: 4/3; }
+      .hero { padding-top: 64px; }
       .room-grid {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: none;
@@ -955,11 +933,6 @@
 <p class="hero-eyebrow"><span class="eyebrow-star">✦</span> <span id="storyEyebrow" data-en='Our story' data-he='הסיפור שלנו' data-ru='Наша история'>Our story</span></p>
 <h2><span id="storyTitle1" data-en='A small bakery' data-he='מאפייה קטנה' data-ru='Маленькая пекарня' class="hero-line1">A small bakery</span><br><span id="storyTitle2" data-en='with a <em class="hero-accent">big soul.</em>' data-he='עם <em class="hero-accent">נשמה גדולה.</em>' data-ru='с <em class="hero-accent">большой душой.</em>'>with a <em class="hero-accent">big soul.</em></span></h2>
     <p id="storyBody" class="hero-body" data-en="A small, charming neighborhood café with on-site baking, premium jams and spreads from 'Bustan' in the Galilee, wonderful cookies, unique pastries, handmade sourdough breads (available on Fridays or by pre-order), excellent coffee, and many more delicious things. Definitely worth a visit!" data-he="בית קפה שכונתי קטן וקסום עם אפייה במקום, ריבות וממרחים מ'בוסתן' בגליל, עוגיות נפלאות, מאפים ייחודיים, לחמי מחמצת עבודת יד (זמינים בימי שישי או בהזמנה מראש), קפה מעולה ועוד המון דברים טעימים. בהחלט שווה ביקור!" data-ru="Небольшое уютное кафе-пекарня со свежей выпечкой, отборными джемами и намазками от «Бустан» из Галилеи, чудесным печеньем, авторскими пирожными, хлебом на закваске ручной работы (по пятницам или под заказ), отличным кофе — и ещё множеством вкусностей. Обязательно загляните!">A small, charming neighborhood café with on-site baking, premium jams and spreads from &lsquo;Bustan&rsquo; in the Galilee, wonderful cookies, unique pastries, handmade sourdough breads (available on Fridays or by pre-order), excellent coffee, and many more delicious things. Definitely worth a visit!</p>
-  </div>
-  <div class="hero-right">
-    <div class="hero-photo">
-      <img src="img/Main page/background.webp" alt="Fresh pastries and coffee at Bulochka" loading="lazy">
-    </div>
   </div>
 </section>
 
