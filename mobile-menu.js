@@ -7,6 +7,7 @@
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">✕</button>
   <div class="mobile-menu-content">
+  <a href="index.html" class="mobile-menu-logo"><img src="img/Main page/logotip_crop_hq.png" alt="Bulochka"></a>
   <div class="mobile-menu-links">
   <a href="index.html" data-en="Home" data-he="ראשי" data-ru="Главная">Home</a>
   <a href="menu.html" data-en="Menu" data-he="תפריט" data-ru="Меню">Menu</a>
