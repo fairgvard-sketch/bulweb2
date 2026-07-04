@@ -380,7 +380,7 @@ a.hero-menu-btn:hover {
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: max(72px, calc(env(safe-area-inset-top) + 56px)) 36px max(48px, env(safe-area-inset-bottom));
+  padding: max(20px, calc(env(safe-area-inset-top) + 12px)) 36px max(48px, env(safe-area-inset-bottom));
   gap: 0;
 }
 .mobile-menu-logo {
