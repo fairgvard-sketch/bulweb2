@@ -739,10 +739,19 @@
       width: 100%; padding: 18px;
       font-family: var(--sans); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
       background: var(--brown-mid); color: var(--cream);
-      border: none; border-radius: 0;
+      border: none; border-radius: var(--radius-pill);
       cursor: pointer; transition: background 0.2s;
     }
     .cart-finalize-btn:hover { background: var(--brown-dark); }
+    .cart-clear-btn {
+      width: 100%; margin-top: 10px; padding: 12px;
+      background: none; border: none; cursor: pointer;
+      font-family: var(--sans); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--brown-light); transition: color 0.15s;
+    }
+    .cart-clear-btn:hover,
+    .cart-clear-btn.confirm { color: #c0392b; }
+    .cart-clear-btn.confirm { font-weight: 600; }
     @media (max-width: 640px) {
       .addon-overlay { padding: 0; align-items: flex-end; }
       .addon-modal { border-radius: 16px 16px 0 0; max-height: 82vh; }
@@ -2305,6 +2314,7 @@
       <span class="cart-total-sum" id="cartTotal">₪0</span>
     </div>
     <button class="cart-finalize-btn" id="cartFinalize" data-en="Finalize the order" data-he="לסיום ההזמנה" data-ru="Оформить заказ">Finalize the order</button>
+    <button class="cart-clear-btn" id="cartClear" style="display:none" data-en="Clear cart" data-he="רוקן עגלה" data-ru="Очистить корзину">Clear cart</button>
   </div>
 </aside>
 
@@ -2520,6 +2530,7 @@
     const bg        = document.getElementById('cartBg');
     const closeBtn  = document.getElementById('cartClose');
     const finalizeBtn = document.getElementById('cartFinalize');
+    const clearBtn  = document.getElementById('cartClear');
     const itemsEl   = document.getElementById('cartItems');
     const totalEl2  = document.getElementById('cartTotal');
     const countEl   = document.getElementById('navCartCount');
@@ -2591,6 +2602,7 @@
       if (countElMobile) countElMobile.textContent = qtyTotal;
       headCountEl.textContent = qtyTotal;
       totalEl2.textContent = '₪' + total;
+      if (clearBtn) clearBtn.style.display = cart.length ? '' : 'none';
 
       if (!cart.length) {
         const msg = lang === 'he' ? 'אין פריטים עדיין' : lang === 'ru' ? 'Корзина пуста' : 'No items yet';
@@ -2660,6 +2672,29 @@
       const msg = `${head}\n${lines.join('\n')}\n\n${totalLbl}: ₪${total}`;
       window.open('https://wa.me/972529662724?text=' + encodeURIComponent(msg), '_blank');
     });
+    // очистка корзины: первый тап — просьба подтвердить, второй — очищает
+    let clearConfirmTimer = null;
+    function resetClearBtn() {
+      clearBtn.classList.remove('confirm');
+      const lang = document.documentElement.lang;
+      clearBtn.textContent = lang === 'he' ? 'רוקן עגלה' : lang === 'ru' ? 'Очистить корзину' : 'Clear cart';
+    }
+    clearBtn.addEventListener('click', () => {
+      if (!cart.length) return;
+      if (!clearBtn.classList.contains('confirm')) {
+        const lang = document.documentElement.lang;
+        clearBtn.classList.add('confirm');
+        clearBtn.textContent = lang === 'he' ? 'לחצו שוב לאישור' : lang === 'ru' ? 'Нажмите ещё раз для подтверждения' : 'Tap again to confirm';
+        clearTimeout(clearConfirmTimer);
+        clearConfirmTimer = setTimeout(resetClearBtn, 3000);
+        return;
+      }
+      clearTimeout(clearConfirmTimer);
+      resetClearBtn();
+      cart = [];
+      saveCart(); renderCart();
+    });
+
     document.addEventListener('bulochka-lang-changed', renderCart);
 
     window.__addToCartDirect__ = function(item, originEl) {
