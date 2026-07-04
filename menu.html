@@ -627,13 +627,11 @@
     }
     .nav.nav--transparent .nav-cart,
     .nav.nav--transparent .nav-cart-count { color: #fbf8f2; }
-    /* mobile-only cart sits in the far corner opposite the burger; hidden on desktop */
-    .nav-cart--mobile { display: none; order: 2; margin-inline-start: auto; }
+    /* mobile-only cart sits at the far end next to the social icons; hidden on desktop */
+    .nav-cart--mobile { display: none; order: 2; }
     @media (max-width: 640px) {
       #navCart { display: none; }
-      .nav-cart--mobile { display: inline-flex; }
-      /* соцсети сдвигаются в сторону от корзины, чтобы не перекрываться */
-      .nav-social { inset-inline-end: 82px; }
+      .nav-cart--mobile { display: inline-flex; margin-inline-start: 6px; }
     }
     .cart-panel {
       position: fixed; top: 0; right: 0; bottom: 0; z-index: 400;

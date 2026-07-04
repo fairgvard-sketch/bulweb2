@@ -685,15 +685,14 @@ html[dir="rtl"] input[type="number"] { direction: ltr; text-align: right; }
   .nav { gap: 8px; padding: 0 16px; }
   .footer-top { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: row; align-items: center; flex-wrap: wrap; gap: 8px 16px; }
-  .nav-toggle { order: -1; }
+  /* бургер прижат к стартовому краю, всё остальное (соцсети/глобус/корзина)
+     уходит к противоположному краю за счёт auto-margin */
+  .nav-toggle { order: -1; margin-inline-end: auto; }
   .nav-logo { order: 0; }
-  .nav-right { order: 2; }
-  .nav-social {
-    position: absolute;
-    inset-inline-end: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
+  .nav-right { order: 1; }
+  /* компактнее на узких экранах (iPhone 375px), чтобы не упираться в логотип */
+  .nav-social { gap: 8px; }
+  .nav-right { gap: 6px; }
 }
 @media (max-width: 900px) {
   .footer-top { grid-template-columns: 1fr 1fr; }
