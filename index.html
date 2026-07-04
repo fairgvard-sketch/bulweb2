@@ -78,12 +78,12 @@
   <link rel="stylesheet" href="style.css?v=8">
   <style>
     /* ─── HERO ─────────────────────────────── */
-    /* редакционный блок без фото: всё по центру */
+    /* редакционный блок без фото: заголовок у стартового края,
+       текст ниже у противоположного (в RTL зеркалится автоматически) */
     .hero {
       padding: 96px 24px 72px;
-      max-width: 900px;
+      max-width: 1300px;
       margin: 0 auto;
-      text-align: center;
     }
     .hero-left { padding-bottom: 0; }
     /* якорь #story: не прятать заголовок под фиксированным навом */
@@ -100,7 +100,6 @@
       margin-bottom: 28px;
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 10px;
     }
     .eyebrow-star { font-size: 10px; color: var(--brown-mid); vertical-align: middle; }
@@ -113,8 +112,9 @@
       font-weight: 300;
       line-height: 0.98;
       letter-spacing: -0.02em;
+      max-width: 900px;
       margin-top: 24px;
-      margin-bottom: 28px;
+      margin-bottom: 36px;
       font-optical-sizing: auto;
     }
     .hero-body {
@@ -124,8 +124,8 @@
       font-size: 17px;
       line-height: 28.9px;
       color: rgba(42, 31, 24, 0.72);
-      max-width: 620px;
-      margin: 0 auto;
+      max-width: 560px;
+      margin-inline-start: auto;
     }
 
 
