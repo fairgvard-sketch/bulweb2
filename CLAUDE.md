@@ -37,7 +37,13 @@
 - `.photo-placeholder` с диагональным паттерном остался как fallback.
 
 ## Структура index.html
-Hero (фото + filter card) → «The Room» (5 фото) → Медовик → Shop (динамический из Firestore, скрыт если пусто) → Visit (адрес/часы/фото фасада) → Footer
+Hero (фото + filter card) → Story → Shop (динамический из Firestore, скрыт если пусто) → «The Room» (живая галерея) → Visit (адрес/часы/фото фасада) → Footer
+
+## Галерея «The Room»
+- Мозаика 5 ячеек; пул фото = 5 фото сетки + локальные экстры (`crowd2.webp`, `cafe_outside.webp`) + фото из Firestore `homepage/gallery` (`images: [url]`, редактируется в админке, карточка «Gallery pool», загрузка в Cloudinary).
+- Если фото в пуле больше, чем ячеек, кадры в ячейках медленно меняются с crossfade (интервал 5с, пауза при открытом лайтбоксе/скрытой вкладке).
+- Клик по любой ячейке → полноэкранный лайтбокс (стрелки, клавиатура, свайп, счётчик).
+- Код галереи — отдельный обычный `<script>` в index.html (не module): работает даже если Firebase CDN недоступен; Firestore-модуль доуточняет пул через `window._bulGallery.syncCells()/addImages()`.
 
 ## Структура menu.html
 Hero → Filter bar (sticky, 10 категорий) → 10 категорий × 98 позиций с фото. Кнопка «Add to order» открывает addon-модал с WhatsApp-заказом.

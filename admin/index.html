@@ -1504,6 +1504,28 @@
             </div>
           </div>
 
+          <!-- GALLERY POOL CARD -->
+          <div class="modal modal-wide hp-card" style="position:static;transform:none;box-shadow:none;border:1.5px solid var(--line)">
+            <div class="modal-header">
+              <div class="hp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="15" height="15" rx="2"/><path d="M21 16V7a2 2 0 0 0-2-2h-9"/><path d="M3 16l4-4 3 3 2.5-2.5L18 18"/><circle cx="8" cy="10" r="1.3"/></svg></div>
+              <div class="hp-head-text">
+                <div class="modal-title">Gallery pool</div>
+                <div class="hp-head-sub">Extra photos — rotate inside "The Room" grid & show in the fullscreen viewer</div>
+              </div>
+              <span class="hp-chev"></span>
+            </div>
+            <div class="modal-body" style="padding:20px 24px">
+              <div class="modal-section-title" style="margin-bottom:4px">Photos</div>
+              <div style="font-size:12px;color:#8a8f98;margin-bottom:12px">The 5 photos from "The Room" section are always included automatically. Photos added here rotate in the grid and appear in the fullscreen gallery.</div>
+              <div id="hpGalleryGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px"></div>
+              <input type="file" id="hpGalleryFile" accept="image/*" multiple style="display:none">
+            </div>
+            <div class="modal-actions">
+              <button class="btn-cancel" id="hpGalleryResetBtn">Reset</button>
+              <button class="btn-primary" id="hpGallerySaveBtn">Save</button>
+            </div>
+          </div>
+
           <!-- MEDOVIK CARD -->
           <div class="modal modal-wide hp-card" style="position:static;transform:none;box-shadow:none;border:1.5px solid var(--line)">
             <div class="modal-header">
@@ -5239,6 +5261,59 @@
       finally { btn.disabled = false; }
     };
 
+    // ── GALLERY POOL (extra photos: multi-upload → Cloudinary → homepage/gallery) ──
+    const galleryUI = (function setupGalleryPool() {
+      const grid = document.getElementById('hpGalleryGrid');
+      const fileInput = document.getElementById('hpGalleryFile');
+      let items = []; // { url } — сохранённые | { file, blob } — ожидают загрузки
+      function render() {
+        grid.innerHTML = items.map((it, i) => `
+          <div style="position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;border:1.5px solid var(--line);background:#f4f2ee">
+            <img src="${it.file ? it.blob : itemImgSrc(it.url)}" style="width:100%;height:100%;object-fit:cover;display:block">
+            ${it.file ? '<span style="position:absolute;top:5px;left:5px;background:#4a7c3f;color:#fff;font-size:9px;font-weight:600;padding:2px 7px;border-radius:100px;letter-spacing:.04em">NEW</span>' : ''}
+            <button type="button" class="gal-rm" data-i="${i}" style="position:absolute;top:5px;right:5px;width:22px;height:22px;border:none;border-radius:50%;background:rgba(15,17,21,0.7);color:#fff;font-size:12px;line-height:1;cursor:pointer">✕</button>
+          </div>`).join('') + `
+          <button type="button" id="hpGalleryAdd" style="aspect-ratio:1;border:1.5px dashed var(--line);border-radius:8px;background:none;cursor:pointer;font-size:28px;color:#9a9fa8;display:flex;align-items:center;justify-content:center" title="Add photos">+</button>`;
+        grid.querySelectorAll('.gal-rm').forEach(b => b.onclick = () => {
+          const it = items[+b.dataset.i];
+          if (it && it.blob) URL.revokeObjectURL(it.blob);
+          items.splice(+b.dataset.i, 1);
+          render();
+        });
+        document.getElementById('hpGalleryAdd').onclick = () => fileInput.click();
+      }
+      fileInput.onchange = () => {
+        Array.from(fileInput.files).forEach(f => items.push({ file: f, blob: URL.createObjectURL(f) }));
+        fileInput.value = '';
+        render();
+      };
+      async function load() {
+        let urls = [];
+        try {
+          const s = await getDoc(doc(db, 'homepage', 'gallery'));
+          if (s.exists() && Array.isArray(s.data().images)) urls = s.data().images;
+        } catch (e) { console.error('Gallery load error:', e); }
+        items = urls.map(u => ({ url: u }));
+        render();
+      }
+      document.getElementById('hpGalleryResetBtn').onclick = () => load();
+      document.getElementById('hpGallerySaveBtn').onclick = async () => {
+        const btn = document.getElementById('hpGallerySaveBtn');
+        btn.disabled = true; toast('Saving…');
+        try {
+          const urls = [];
+          for (const it of items) urls.push(it.file ? await uploadToCloudinary(it.file) : it.url);
+          await setDoc(doc(db, 'homepage', 'gallery'), { images: urls });
+          items.forEach(it => { if (it.blob) URL.revokeObjectURL(it.blob); });
+          items = urls.map(u => ({ url: u }));
+          render();
+          toast('Gallery saved ✓');
+        } catch (e) { console.error('Gallery save error:', e); toast('Error: ' + (e.message || e)); }
+        finally { btn.disabled = false; }
+      };
+      return { load };
+    })();
+
     // ── MEDOVIK (text + 3 stats + photo) ──
     (function buildMedovikStats() {
       const wrap = document.getElementById('hpMedovikStats');
@@ -5286,7 +5361,7 @@
 
     function loadHomepage() {
       showView('viewHomepage');
-      loadHero(); story.load(); tickerSaver.load(); loadRoom(); medovik.load(); visit.load();
+      loadHero(); story.load(); tickerSaver.load(); loadRoom(); galleryUI.load(); medovik.load(); visit.load();
       // collapse all on entry so the user picks a section
       hpCards.forEach(c => c.classList.remove('open'));
     }

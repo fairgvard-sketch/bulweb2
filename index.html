@@ -252,16 +252,26 @@
     }
     .room-grid {
       display: grid;
-      grid-template-columns: 1.2fr 1fr 1fr;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      grid-auto-rows: 1fr;
       gap: 12px;
+      aspect-ratio: 16 / 7;
     }
-    .room-photo { border-radius: 10px; overflow: hidden; position: relative; }
-    .room-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .room-photo-1 { grid-column: 1; grid-row: 1 / 3; }
-    .room-photo-2 { grid-column: 2; grid-row: 1; aspect-ratio: 1; }
-    .room-photo-3 { grid-column: 3; grid-row: 1; aspect-ratio: 1; }
-    .room-photo-4 { grid-column: 2; grid-row: 2; aspect-ratio: 1; }
-    .room-photo-5 { grid-column: 3; grid-row: 2; aspect-ratio: 1; }
+    .room-photo { border-radius: 10px; overflow: hidden; position: relative; cursor: pointer; }
+    .room-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .room-photo:hover img { transform: scale(1.04); }
+    /* второй слой для плавной смены кадров */
+    .room-photo img.room-fade { opacity: 0; transition: opacity 1s ease, transform 0.6s ease; }
+    .room-photo img.room-fade.show { opacity: 1; }
+    /* Неровная редакторская мозаика (референс): 4 колонки разной высоты —
+       высокий слева, средняя пара, ещё пара, высокий справа */
+    .room-photo-1 { grid-column: 1; grid-row: 1 / 6; }  /* высокий вертикальный */
+    .room-photo-2 { grid-column: 2; grid-row: 1 / 3; }  /* верх — квадрат/пейзаж */
+    .room-photo-3 { grid-column: 2; grid-row: 3 / 6; }  /* низ — вертикальный */
+    .room-photo-4 { grid-column: 3; grid-row: 1 / 4; }  /* верх — горизонтальный */
+    .room-photo-5 { grid-column: 3; grid-row: 4 / 6; }  /* низ — горизонтальный */
+    .room-photo-6 { grid-column: 4; grid-row: 1 / 6; }  /* высокий вертикальный */
     .room-caption {
       position: absolute;
       bottom: 12px;
@@ -277,6 +287,100 @@
       -webkit-backdrop-filter: blur(6px);
       padding: 6px 13px;
       border-radius: 100px;
+    }
+
+    /* ─── LIGHTBOX ───────────────────────────── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 400;
+      background: rgba(26, 17, 12, 0.94);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .lightbox.open { opacity: 1; pointer-events: auto; }
+    .lb-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      max-width: min(1100px, 92vw);
+    }
+    .lb-stage img {
+      max-width: min(1100px, 92vw);
+      max-height: 80vh;
+      border-radius: 10px;
+      object-fit: contain;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+      transition: opacity 0.25s ease;
+    }
+    .lb-meta {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--cream);
+    }
+    .lb-caption {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+    .lb-counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      opacity: 0.5;
+    }
+    .lb-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1px solid rgba(251,248,242,0.28);
+      background: rgba(251,248,242,0.06);
+      color: var(--cream);
+      font-size: 26px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .lb-btn:hover { background: rgba(251,248,242,0.16); border-color: rgba(251,248,242,0.5); }
+    .lb-prev { left: 22px; }
+    .lb-next { right: 22px; }
+    .lb-close {
+      position: absolute;
+      top: 20px;
+      right: 22px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(251,248,242,0.08);
+      color: var(--cream);
+      font-size: 22px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .lb-close:hover { background: rgba(251,248,242,0.18); }
+    @media (max-width: 640px) {
+      .lb-btn { width: 42px; height: 42px; font-size: 22px; }
+      .lb-prev { left: 10px; }
+      .lb-next { right: 10px; }
+      .lb-stage img { max-height: 70vh; }
     }
 
     [dir="rtl"] .visit-directions { font-family: 'IBM Plex Sans Hebrew', sans-serif; }
@@ -499,10 +603,16 @@
       .visit-map { display: none; }
       .visit-mobile-photo { display: block; border-radius: 10px; overflow: hidden; margin: 24px 0; }
       .visit-mobile-photo img { width: 100%; height: 220px; object-fit: cover; display: block; }
-      .room-grid { grid-template-columns: 1fr 1fr; }
-      .room-photo-1 { grid-column: 1 / 3; grid-row: 1; aspect-ratio: 16/7; }
+      .room-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: none;
+        grid-auto-rows: 1fr;
+        aspect-ratio: auto;
+      }
+      .room-photo-1 { grid-column: 1 / 3; grid-row: auto; aspect-ratio: 16/9; }
       .room-photo-2, .room-photo-3,
-      .room-photo-4, .room-photo-5 { grid-column: auto; grid-row: auto; aspect-ratio: 1; }
+      .room-photo-4, .room-photo-5,
+      .room-photo-6 { grid-column: auto; grid-row: auto; aspect-ratio: 1; }
     }
     @media (max-width: 640px) {
       .hero { padding: 48px 20px 48px; }
@@ -969,6 +1079,10 @@
         <img id="roomImg5" src="img/Main page/creambon.jpg" alt="Morning ritual" loading="lazy">
         <div class="room-caption" id="roomCaption5" data-en='morning ritual' data-he='טקס הבוקר' data-ru='утренний ритуал'>morning ritual</div>
       </div>
+      <div class="room-photo room-photo-6">
+        <img id="roomImg6" src="img/Main page/crowd2.webp" alt="The morning rush" loading="lazy">
+        <div class="room-caption" id="roomCaption6" data-en='the morning rush' data-he='עומס הבוקר' data-ru='утренний час пик'>the morning rush</div>
+      </div>
     </div>
   </section>
 </div>
@@ -999,6 +1113,20 @@
     </div>
   </div>
 </section>
+
+<!-- ─── LIGHTBOX ──────────────────────────────────────────── -->
+<div class="lightbox" id="lightbox" dir="ltr" role="dialog" aria-modal="true" aria-hidden="true">
+  <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous photo">‹</button>
+  <div class="lb-stage">
+    <img id="lbImg" src="" alt="">
+    <div class="lb-meta">
+      <span class="lb-caption" id="lbCaption"></span>
+      <span class="lb-counter" id="lbCounter"></span>
+    </div>
+  </div>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Next photo">›</button>
+</div>
 
 <!-- ─── FOOTER ────────────────────────────────────────────── -->
 <footer class="footer">
@@ -1062,6 +1190,146 @@
   });
 </script>
 <script src="cookie-consent.js?v=2"></script>
+<script>
+// ─── THE ROOM: живая галерея (ротация кадров + лайтбокс) ───
+// Работает сразу на хардкод-фото; Firestore-модуль ниже может обновить ячейки
+// (syncCells) и долить фото из админки (addImages).
+(function roomGallery() {
+  const cells = Array.from(document.querySelectorAll('.room-photo'));
+  const lb = document.getElementById('lightbox');
+  if (!cells.length || !lb) return;
+
+  const lang = () => document.documentElement.lang || 'he';
+  const pool = [];        // { url, en, he, ru }
+  const current = [];     // индекс пула в каждой ячейке
+
+  function cellEntry(i) {
+    const img = document.getElementById('roomImg' + (i + 1));
+    const cap = document.getElementById('roomCaption' + (i + 1));
+    if (!img || !img.getAttribute('src')) return null;
+    return { url: img.getAttribute('src'), en: cap?.dataset.en || '', he: cap?.dataset.he || '', ru: cap?.dataset.ru || '' };
+  }
+  // стартовый пул: 5 фото сетки + локальные экстры
+  cells.forEach((_, i) => { const e = cellEntry(i); if (e) { pool.push(e); current[i] = pool.length - 1; } });
+  [
+    { url: 'img/Main page/cafe_outside.webp', en: 'our corner', he: 'הפינה שלנו', ru: 'наш угол' },
+  ].forEach(e => { if (!pool.some(p => p.url === e.url)) pool.push(e); });
+
+  const capText = e => (lang() === 'he' ? e.he : lang() === 'ru' ? e.ru : e.en) || e.en || '';
+  function setCaption(cell, entry) {
+    const cap = cell.querySelector('.room-caption');
+    if (!cap) return;
+    cap.dataset.en = entry.en || ''; cap.dataset.he = entry.he || ''; cap.dataset.ru = entry.ru || '';
+    const t = capText(entry);
+    cap.textContent = t;
+    cap.style.display = t ? '' : 'none';
+  }
+
+  // ── лайтбокс ──
+  const lbImg = document.getElementById('lbImg');
+  const lbCap = document.getElementById('lbCaption');
+  const lbCnt = document.getElementById('lbCounter');
+  const lbState = { open: false, idx: 0 };
+
+  function lbShow(idx) {
+    lbState.idx = (idx + pool.length) % pool.length;
+    const entry = pool[lbState.idx];
+    lbImg.style.opacity = '0';
+    const pre = new Image();
+    pre.onload = () => { lbImg.src = entry.url; lbImg.alt = entry.en || 'Bulochka'; lbImg.style.opacity = '1'; };
+    pre.src = entry.url;
+    lbCap.textContent = capText(entry);
+    lbCnt.textContent = (lbState.idx + 1) + ' / ' + pool.length;
+    // подгрузить соседей заранее
+    [lbState.idx + 1, lbState.idx - 1].forEach(n => {
+      const e = pool[(n + pool.length) % pool.length];
+      if (e) { const p = new Image(); p.src = e.url; }
+    });
+  }
+  function lbOpen(idx) {
+    lbState.open = true;
+    lb.classList.add('open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    lbShow(idx);
+  }
+  function lbClose() {
+    lbState.open = false;
+    lb.classList.remove('open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  cells.forEach((cell, i) => cell.addEventListener('click', () => lbOpen(current[i] ?? 0)));
+  document.getElementById('lbClose').addEventListener('click', lbClose);
+  document.getElementById('lbPrev').addEventListener('click', () => lbShow(lbState.idx - 1));
+  document.getElementById('lbNext').addEventListener('click', () => lbShow(lbState.idx + 1));
+  lb.addEventListener('click', e => { if (e.target === lb) lbClose(); });
+  document.addEventListener('keydown', e => {
+    if (!lbState.open) return;
+    if (e.key === 'Escape') lbClose();
+    else if (e.key === 'ArrowRight') lbShow(lbState.idx + 1);
+    else if (e.key === 'ArrowLeft') lbShow(lbState.idx - 1);
+  });
+  // свайп на мобилке
+  let touchX = null;
+  lb.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => {
+    if (touchX == null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    touchX = null;
+    if (Math.abs(dx) > 48) lbShow(lbState.idx + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+
+  // ── медленная смена кадров (когда фото больше, чем ячеек) ──
+  let cellPtr = 0;
+  setInterval(() => {
+    if (document.hidden || lbState.open || pool.length <= cells.length) return;
+    const ci = cellPtr++ % cells.length;
+    // следующее фото, которого сейчас нет на экране
+    let idx = ((current[ci] ?? 0) + 1) % pool.length;
+    while (current.includes(idx)) idx = (idx + 1) % pool.length;
+    const cell = cells[ci];
+    const entry = pool[idx];
+    const pre = new Image();
+    pre.onload = () => {
+      const img = document.createElement('img');
+      img.src = entry.url;
+      img.alt = entry.en || 'Bulochka';
+      img.className = 'room-fade';
+      const cap = cell.querySelector('.room-caption');
+      cell.insertBefore(img, cap || null);
+      requestAnimationFrame(() => requestAnimationFrame(() => img.classList.add('show')));
+      setTimeout(() => {
+        cell.querySelectorAll('img').forEach(el => { if (el !== img) el.remove(); });
+        img.classList.remove('room-fade', 'show');
+      }, 1100);
+      setCaption(cell, entry);
+      current[ci] = idx;
+    };
+    pre.src = entry.url;
+  }, 5000);
+
+  // API для Firestore-модуля
+  window._bulGallery = {
+    // перечитать ячейки после overrides из homepage/room
+    syncCells() {
+      cells.forEach((_, i) => {
+        const e = cellEntry(i);
+        if (!e) return;
+        const ci = current[i];
+        if (ci != null && pool[ci]) pool[ci] = e;
+      });
+    },
+    // долить фото из homepage/gallery (без дублей)
+    addImages(urls) {
+      (urls || []).forEach(u => {
+        if (u && !pool.some(p => p.url === u)) pool.push({ url: u, en: '', he: '', ru: '' });
+      });
+    },
+  };
+})();
+</script>
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
   import { getFirestore, collection, onSnapshot, getDocs, getDoc, doc, query, where, orderBy } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
@@ -1112,8 +1380,8 @@
   }
 
   (async function loadHomepage() {
-    const [hero, story, room, visit] = await Promise.all([
-      _hpGet('hero'), _hpGet('story'), _hpGet('room'), _hpGet('visit'),
+    const [hero, story, room, visit, gallery] = await Promise.all([
+      _hpGet('hero'), _hpGet('story'), _hpGet('room'), _hpGet('visit'), _hpGet('gallery'),
     ]);
 
     if (hero) {
@@ -1155,6 +1423,14 @@
       _hpSetText('visitHours3', visit, 'hours3');
       _hpSetText('visitAddress', visit, 'address');
       _hpSetImg('visitBgImg', visit.bgImg);
+    }
+
+    // ── The Room: досинхронизировать пул живой галереи ──
+    // Галерея уже работает (room-gallery script ниже по файлу); здесь только
+    // обновляем ячейки после overrides из Firestore и доливаем homepage/gallery.
+    if (window._bulGallery) {
+      window._bulGallery.syncCells();
+      if (gallery && Array.isArray(gallery.images)) window._bulGallery.addImages(gallery.images);
     }
   })();
 
