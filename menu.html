@@ -6,6 +6,8 @@
   <title>Menu — Bulochka</title>
   <meta name="description" content="Full menu at Bulochka: hot and cold drinks, croissants, filled pastries, sandwiches, cakes and desserts. 98 items, fresh daily. Petah Tikva, Pinsker 29.">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="img/icons/apple-touch-icon.png">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Bulochka">
   <meta property="og:title" content="Menu — Bulochka">
@@ -160,6 +162,13 @@
       .filter-bar-pills { gap: 4px; flex-wrap: nowrap; }
       .filter-pill { padding: 4px 10px; font-size: 9px; flex-shrink: 0; }
       .menu-category:first-of-type { padding-top: 44px; }
+    }
+    @media (max-height: 500px) and (orientation: landscape) {
+      .filter-bar-inner { height: 34px; }
+      .filter-pill { padding: 3px 10px; }
+    }
+    @media (max-width: 640px) and (max-height: 500px) and (orientation: landscape) {
+      .menu-category:first-of-type { padding-top: 34px; }
     }
 
     /* ─── MENU CATEGORY ─────────────────────── */
@@ -618,14 +627,13 @@
     }
     .nav.nav--transparent .nav-cart,
     .nav.nav--transparent .nav-cart-count { color: #fbf8f2; }
-    /* mobile-only cart sits next to the burger; hidden on desktop */
-    .nav-cart--mobile { display: none; order: -1; margin-inline-end: 4px; }
+    /* mobile-only cart sits in the far corner opposite the burger; hidden on desktop */
+    .nav-cart--mobile { display: none; order: 2; margin-inline-start: auto; }
     @media (max-width: 640px) {
       #navCart { display: none; }
       .nav-cart--mobile { display: inline-flex; }
-      /* третий флекс-ребёнок ломает space-between: прижимаем бургер к корзине,
-         иначе он оказывается по центру под логотипом */
-      .nav-toggle { margin-inline-end: auto; }
+      /* соцсети сдвигаются в сторону от корзины, чтобы не перекрываться */
+      .nav-social { inset-inline-end: 82px; }
     }
     .cart-panel {
       position: fixed; top: 0; right: 0; bottom: 0; z-index: 400;
@@ -749,6 +757,7 @@
       display: flex; align-items: center; justify-content: center;
       padding: 20px;
       opacity: 0; visibility: hidden;
+      overflow-y: auto;
       transition: opacity .35s ease, visibility .35s ease;
     }
     .mpop-overlay.visible {
@@ -758,10 +767,13 @@
       background: var(--cream);
       border-radius: 18px;
       width: 100%; max-width: 420px;
-      overflow: hidden;
+      max-height: 90vh;
+      max-height: 90svh;
+      overflow-y: auto;
       box-shadow: 0 24px 60px -10px rgba(42,31,24,0.35), 0 4px 16px -4px rgba(42,31,24,0.12);
       transform: translateY(20px) scale(0.97);
       transition: transform .35s cubic-bezier(.22,.68,0,1.2);
+      margin: auto;
     }
     .mpop-overlay.visible .mpop {
       transform: translateY(0) scale(1);
@@ -824,6 +836,12 @@
       .mpop { border-radius: 14px; }
       .mpop-body { padding: 22px 20px 20px; }
     }
+    @media (max-height: 500px) and (orientation: landscape) {
+      .mpop-img { aspect-ratio: 16/9; max-height: 140px; }
+      .mpop-body { padding: 16px 24px 18px; }
+      .mpop-name { margin-bottom: 6px; }
+      .mpop-desc { margin-bottom: 14px; }
+    }
   </style>
 </head>
 <body>
@@ -843,16 +861,6 @@
       <a href="https://wa.me/972529662724" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
       <a href="https://www.instagram.com/bulochka.pt" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
       <a href="https://www.facebook.com/bulochka.bulochka.2025" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-    </div>
-    <div class="lang-globe-wrap">
-      <button class="lang-globe-btn" id="langGlobeBtn" aria-label="Select language">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-      </button>
-      <div class="lang-globe-dropdown" id="langGlobeDropdown">
-        <button class="lang-globe-option active" data-lang="en">English</button>
-        <button class="lang-globe-option" data-lang="he">עברית</button>
-        <button class="lang-globe-option" data-lang="ru">Русский</button>
-      </div>
     </div>
     <div class="lang-switch">
       <button class="lang-btn active" data-lang="en">EN</button>
@@ -2208,36 +2216,37 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="img/Main page/logotip_crop.png" alt="Bulochka" class="footer-logo-img">
-        <p data-en='A small bakery, on the corner<br>of your morning.' data-he='מאפייה קטנה, בפינה<br>של הבוקר שלך.' data-ru='Маленькая пекарня, на углу<br>вашего утра.'>A small bakery, on the corner<br>of your morning.</p>
+        <img src="img/Main page/logotip_crop_hq.png" alt="Bulochka" class="footer-logo-img">
+        <p data-en='A small bakery, on the corner of your morning.' data-he='מאפייה קטנה, בפינת הבוקר שלך.' data-ru='Маленькая пекарня на углу вашего утра.'>A small bakery, on the corner<br>of your morning.</p>
       </div>
       <div>
-        <div class="footer-col-title" data-en='Visit' data-he='בקרו אותנו' data-ru='Приходите'>Visit</div>
+        <div class="footer-col-title" data-en='Visit' data-he='ביקור' data-ru='Адрес'>Visit</div>
         <div class="footer-links">
-          <span>Petah Tikva, Pinsker 29</span>
+          <a href="https://www.google.com/maps/search/?api=1&query=Bulochka%2C+Pinsker+29%2C+Petah+Tikva" target="_blank" rel="noopener noreferrer" data-en='Petah Tikva, Pinsker 29' data-he='פתח תקווה, פינסקר 29' data-ru='Петах-Тиква, Пинскер 29'>Petah Tikva, Pinsker 29</a>
           <span data-en='Sun–Thu, 08:00–20:00' data-he='08:00–20:00 ,א׳–ה׳' data-ru='Вс–Чт, 08:00–20:00' dir="ltr">Sun–Thu, 08:00–20:00</span>
+          <span data-en='Fri, 08:00–15:00' data-he='08:00–15:00 ,ו׳' data-ru='Пт, 08:00–15:00' dir="ltr">Fri, 08:00–15:00</span>
           <a href="tel:+972529662724" dir="ltr">+972 (52) 966-2724</a>
         </div>
       </div>
       <div>
-        <div class="footer-col-title" data-en='Stay in touch' data-he='נשארים בקשר' data-ru='Оставайтесь на связи'>Stay in touch</div>
+        <div class="footer-col-title" data-en='Stay in touch' data-he='צרו קשר' data-ru='Контакты'>Stay in touch</div>
         <div class="footer-links">
           <a href="careers.html" data-en='Work with us' data-he='עבוד איתנו' data-ru='Работа у нас'>Work with us</a>
           <a href="events.html" data-en='Events' data-he='אירועים' data-ru='Мероприятия'>Events</a>
         </div>
       </div>
       <div>
-        <div class="footer-col-title" data-en='Follow' data-he='עקבו אחרינו' data-ru='Следите за нами'>Follow</div>
+        <div class="footer-col-title" data-en='Follow' data-he='עקבו אחרינו' data-ru='Соцсети'>Follow</div>
         <div class="footer-links">
           <a href="https://www.instagram.com/bulochka.pt" target="_blank" rel="noopener noreferrer">Instagram</a>
-          <a href="https://www.facebook.com/bulochka.bulochka.2025#" target="_blank" rel="noopener noreferrer">Facebook</a>
-          <a href="https://www.google.com/search?q=Bulochka%2C+Yehuda+Leib+Pinsker+Street%2C+Petah+Tikva&sca_esv=cb0ef06c41fe51d8&rlz=1C1GCEA_enIL1186IL1186&sxsrf=ANbL-n5bMXDD-7O7zs6PrRorMZKNG3hq5g%3A1779431527882&ei=Z_gPasfENciThbIP89mysQY&biw=1920&bih=911&oq=bulochka+yehuda&gs_lp=Egxnd3Mtd2l6LXNlcnAiD2J1bG9jaGthIHllaHVkYSoCCAAyAhAmMggQABiABBiiBDIFEAAY7wUyBRAAGO8FMgUQABjvBTIIEAAYgAQYogRIuy9Q4ghY1BdwAngBkAEAmAF4oAHqBqoBAzAuOLgBA8gBAPgBAZgCCqAChgfCAg0QLhjHARivARiwAxgnwgIKEAAYRxjWBBiwA8ICBhAAGBYYHsICBBAjGCfCAhAQLhiABBiKBRjHARivARgnwgIKEAAYgAQYFBiHAsICBRAAGIAEwgIIEAAYFhgeGAqYAwCIBgGQBgeSBwMyLjigB_cpsgcDMC44uAeBB8IHBDAuMTDIBxOACAE&sclient=gws-wiz-serp" target="_blank" rel="noopener noreferrer">Google</a>
+          <a href="https://www.facebook.com/bulochka.bulochka.2025" target="_blank" rel="noopener noreferrer">Facebook</a>
+          <a href="https://www.google.com/search?q=Bulochka%2C+Yehuda+Leib+Pinsker+Street%2C+Petah+Tikva#lrd=0x151d3713a80831a3:0x956fbd3c3adf20a3,3" target="_blank" rel="noopener noreferrer" data-en='Google Reviews' data-he='ביקורות גוגל' data-ru='Отзывы на Google'>Google Reviews</a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© Bulochka since 2021</span>
-      <span class="footer-tagline" data-en='Made with butter ✦' data-he='עשוי עם חמאה ✦' data-ru='Сделано с маслом ✦'>Made with butter ✦</span>
+      <span class="footer-tagline" data-en='✦ Made with butter' data-he='✦ עשוי עם חמאה' data-ru='✦ Сделано с маслом'>✦ Made with butter</span>
     </div>
   </div>
 </footer>
@@ -3159,6 +3168,9 @@
     });
     document.addEventListener('touchstart', function(e){
       var touch = e.touches[0];
+      // тапы по ссылкам/кнопкам в верхней зоне не перехватываем,
+      // иначе preventDefault() глотает клики по нав-бару
+      if (e.target.closest && e.target.closest('a, button, .lang-switch, .mobile-menu')) return;
       if (touch && touch.clientY < 50 && lastScrollY > 100) {
         e.preventDefault();
         window.scrollTo({top: 0, behavior: 'smooth'});

@@ -5,10 +5,7 @@
 
   document.body.insertAdjacentHTML('afterbegin', `
 <div class="mobile-menu" id="mobileMenu">
-  <div class="mobile-menu-banner">
-    <img src="img/Main page/background.webp" alt="" loading="eager">
-    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">✕</button>
-  </div>
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">✕</button>
   <div class="mobile-menu-content">
   <div class="mobile-menu-links">
   <a href="index.html" data-en="Home" data-he="ראשי" data-ru="Главная">Home</a>

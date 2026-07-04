@@ -10,6 +10,8 @@
   <title>Bulochka — Bakery · Coffee · Cakes</title>
   <meta name="description" content="A small neighbourhood bakery-café in Petah Tikva. Fresh croissants, sourdough breads, homemade cakes, and excellent coffee. Pinsker 29, open Sun–Thu 08:00–20:00.">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="img/icons/apple-touch-icon.png">
   <link rel="preload" as="image" href="img/Main page/ver.webp" type="image/webp">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Bulochka">
@@ -32,11 +34,22 @@
     "telephone": "+972-52-966-2724",
     "servesCuisine": ["Bakery", "Coffee", "Cakes", "Sandwiches"],
     "priceRange": "₪₪",
+    "hasMenu": "https://bulweb2.web.app/menu",
+    "acceptsReservations": "True",
+    "sameAs": [
+      "https://www.instagram.com/bulochka.pt",
+      "https://www.facebook.com/bulochka.bulochka.2025"
+    ],
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Pinsker 29",
       "addressLocality": "Petah Tikva",
       "addressCountry": "IL"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 32.0926,
+      "longitude": 34.8834
     },
     "openingHoursSpecification": [
       {
@@ -290,6 +303,88 @@
       .lb-stage img { max-height: 70vh; }
     }
 
+    /* ─── FAVOURITES (menu preview) ──────────── */
+    .fav-section {
+      border-top: 1px solid var(--brown-faint);
+      padding: 0 24px;
+    }
+    .fav-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 80px 0;
+    }
+    .fav-header { margin-bottom: 44px; }
+    .fav-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.016em;
+      font-optical-sizing: auto;
+    }
+    .fav-header h2 em { color: var(--gold-deep); }
+    .fav-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .fav-card { display: flex; flex-direction: column; gap: 10px; }
+    .fav-card-photo {
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      background: var(--cream-mid);
+    }
+    .fav-card-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.45s ease;
+    }
+    .fav-card:hover .fav-card-photo img { transform: scale(1.04); }
+    .fav-card-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .fav-card-name {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brown-dark);
+      line-height: 1.3;
+    }
+    .fav-card-price {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--brown-mid);
+      white-space: nowrap;
+    }
+    .fav-cta { margin-top: 40px; text-align: center; }
+    .fav-btn {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--brown-dark);
+      border: 1px solid var(--brown-dark);
+      padding: 14px 32px;
+      border-radius: var(--radius-pill);
+      transition: background 0.2s, color 0.2s;
+    }
+    .fav-btn:hover { background: var(--brown-dark); color: var(--cream); }
+    @media (max-width: 900px) {
+      .fav-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+    }
+    @media (max-width: 640px) {
+      .fav-inner { padding: 56px 0; }
+      .fav-header { margin-bottom: 28px; }
+    }
+
     /* ─── SHOP ───────────────────────────────── */
     .shop-section {
       background: var(--cream-mid);
@@ -401,10 +496,9 @@
         grid-auto-rows: 1fr;
         aspect-ratio: auto;
       }
-      .room-photo-1 { grid-column: 1 / 3; grid-row: auto; aspect-ratio: 16/9; }
+      .room-photo-1, .room-photo-6 { grid-column: 1 / 3; grid-row: auto; aspect-ratio: 16/9; }
       .room-photo-2, .room-photo-3,
-      .room-photo-4, .room-photo-5,
-      .room-photo-6 { grid-column: auto; grid-row: auto; aspect-ratio: 1; }
+      .room-photo-4, .room-photo-5 { grid-column: auto; grid-row: auto; aspect-ratio: 1; }
     }
     @media (max-width: 640px) {
       .hero { padding: 48px 20px 48px; }
@@ -426,6 +520,9 @@
       justify-content: center;
       overflow: hidden;
       background: var(--espresso);
+    }
+    @media (max-height: 500px) and (orientation: landscape) {
+      .fhero { min-height: 380px; }
     }
     .fhero-bg {
       position: absolute;
@@ -643,6 +740,12 @@
       .fhero-btn-primary, .fhero-btn-secondary { padding: 14px 28px; font-size: 11px; }
       .fhero-scroll-hint { display: none; }
     }
+    @media (max-height: 500px) and (orientation: landscape) {
+      .fhero-title { font-size: clamp(32px, 8vw, 56px); margin-bottom: 16px; }
+      .fhero-eyebrow { margin-bottom: 14px; }
+      .fhero-sub { margin-bottom: 20px; }
+      .fhero-scroll-hint { display: none; }
+    }
 
     /* ── Info hero ── */
     .info-hero {
@@ -655,6 +758,9 @@
       justify-content: center;
       overflow: hidden;
       background: var(--espresso);
+    }
+    @media (max-height: 500px) and (orientation: landscape) {
+      .info-hero { min-height: 380px; }
     }
     .info-hero-bg {
       position: absolute;
@@ -745,12 +851,37 @@
     .info-hero-address-link { transition: color 0.2s; }
     .info-hero-address-link:hover { color: var(--gold); }
     .info-hero-address-arrow { font-size: 0.85em; opacity: 0.7; }
+
+    /* ─── MAP ────────────────────────────────── */
+    .map-section {
+      border-top: 1px solid var(--brown-faint);
+      line-height: 0;
+      background: var(--cream-mid);
+    }
+    .map-section iframe {
+      width: 100%;
+      height: 420px;
+      border: 0;
+      display: block;
+      /* приглушаем стандартные цвета Google Maps под палитру сайта */
+      filter: grayscale(0.25) sepia(0.06);
+    }
+    @media (max-width: 640px) {
+      .map-section iframe { height: 300px; }
+    }
     @media (max-width: 640px) {
       .info-hero-hours { letter-spacing: 0.06em; }
+    }
+    @media (max-height: 500px) and (orientation: landscape) {
+      .info-hero-content { margin-top: 0; gap: 4px; }
+      .info-hero-logo { height: 44px; margin-bottom: 4px; }
+      .info-hero-hours { line-height: 1.5; }
     }
   </style>
 </head>
 <body>
+
+<a class="skip-link" href="#main" data-en='Skip to content' data-he='דלג לתוכן' data-ru='К содержимому'>Skip to content</a>
 
 <!-- ─── NAV ──────────────────────────────────────────────── -->
 <nav class="nav">
@@ -793,7 +924,7 @@
 
 
 <!-- ─── FULLSCREEN HERO ───────────────────────────────────── -->
-<section class="fhero">
+<section class="fhero" id="main" tabindex="-1">
   <div class="fhero-bg">
     <img src="img/Main page/ver.webp" alt="Bulochka entrance" id="fheroBgImg">
   </div>
@@ -828,6 +959,20 @@
   <div class="hero-right">
     <div class="hero-photo">
       <img src="img/Main page/background.webp" alt="Fresh pastries and coffee at Bulochka" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAVOURITES (menu preview, items flagged in admin) ──── -->
+<section class="fav-section" id="favourites" style="display:none">
+  <div class="fav-inner">
+    <div class="fav-header">
+      <p class="section-eyebrow" data-en='From the menu' data-he='מהתפריט' data-ru='Из меню'>From the menu</p>
+      <h2><span data-en='House <em>favourites</em>' data-he='<em>האהובים</em> שלנו' data-ru='Наше <em>любимое</em>'>House <em>favourites</em></span></h2>
+    </div>
+    <div class="fav-grid" id="favGrid"></div>
+    <div class="fav-cta">
+      <a href="menu.html" class="fav-btn" data-en='See the full menu' data-he='לתפריט המלא' data-ru='Всё меню'>See the full menu</a>
     </div>
   </div>
 </section>
@@ -910,6 +1055,16 @@
   </div>
 </section>
 
+<!-- ─── MAP ───────────────────────────────────────────────── -->
+<section class="map-section">
+  <iframe id="mapFrame"
+    data-src="https://www.google.com/maps?q=Bulochka%2C+Pinsker+29%2C+Petah+Tikva&output=embed"
+    title="Bulochka on Google Maps"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    allowfullscreen></iframe>
+</section>
+
 <!-- ─── LIGHTBOX ──────────────────────────────────────────── -->
 <div class="lightbox" id="lightbox" dir="ltr" role="dialog" aria-modal="true" aria-hidden="true">
   <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
@@ -953,7 +1108,7 @@
         <div class="footer-links">
           <a href="https://www.instagram.com/bulochka.pt" target="_blank" rel="noopener noreferrer">Instagram</a>
           <a href="https://www.facebook.com/bulochka.bulochka.2025" target="_blank" rel="noopener noreferrer">Facebook</a>
-          <a href="https://www.google.com/search?q=Bulochka%2C+Yehuda+Leib+Pinsker+Street%2C+Petah+Tikva&rlz=1C1GCEA_enIL1186IL1186&oq=bu&gs_lcrp=EgZjaHJvbWUqCAgAEEUYJxg7MggIABBFGCcYOzIICAEQRRgnGDsyBggCEEUYOzIGCAMQRRg5MgYIBBBFGDsyBggFEEUYPDIGCAYQRRg8MgYIBxBFGDzSAQgxMzg2ajBqNKgCALACAQ&sourceid=chrome&ie=UTF-8#lrd=0x151d3713a80831a3:0x956fbd3c3adf20a3,3,,,," target="_blank" rel="noopener noreferrer" data-en='Google Reviews' data-he='ביקורות גוגל' data-ru='Отзывы на Google'>Google Reviews</a>
+          <a href="https://www.google.com/search?q=Bulochka%2C+Yehuda+Leib+Pinsker+Street%2C+Petah+Tikva#lrd=0x151d3713a80831a3:0x956fbd3c3adf20a3,3" target="_blank" rel="noopener noreferrer" data-en='Google Reviews' data-he='ביקורות גוגל' data-ru='Отзывы на Google'>Google Reviews</a>
         </div>
       </div>
     </div>
@@ -1042,18 +1197,28 @@
       if (e) { const p = new Image(); p.src = e.url; }
     });
   }
+  const lbFocusables = [
+    document.getElementById('lbClose'),
+    document.getElementById('lbPrev'),
+    document.getElementById('lbNext'),
+  ];
+  let lbLastFocus = null;
+
   function lbOpen(idx) {
     lbState.open = true;
     lb.classList.add('open');
     lb.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    lbLastFocus = document.activeElement;
     lbShow(idx);
+    lbFocusables[0].focus();
   }
   function lbClose() {
     lbState.open = false;
     lb.classList.remove('open');
     lb.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    if (lbLastFocus && typeof lbLastFocus.focus === 'function') lbLastFocus.focus();
   }
 
   cells.forEach((cell, i) => cell.addEventListener('click', () => lbOpen(current[i] ?? 0)));
@@ -1066,6 +1231,13 @@
     if (e.key === 'Escape') lbClose();
     else if (e.key === 'ArrowRight') lbShow(lbState.idx + 1);
     else if (e.key === 'ArrowLeft') lbShow(lbState.idx - 1);
+    else if (e.key === 'Tab') {
+      // focus-trap: Tab не должен уходить под оверлей
+      const first = lbFocusables[0], last = lbFocusables[lbFocusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      else if (!lb.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+    }
   });
   // свайп на мобилке
   let touchX = null;
@@ -1363,6 +1535,42 @@
     if (!document.hidden && autoScrollTimer) autoPaused = false;
   });
 
+  // ── FAVOURITES: превью меню (позиции с флажком featured в админке) ──────
+  (async function loadFavourites() {
+    const FAV_CATS = ['hot-drinks','cold-drinks','sandwiches','pastries','filled','tartlets','cakes','ice-cream','alcohol','friday'];
+    const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    let items = [];
+    try {
+      const snaps = await Promise.all(FAV_CATS.map(c =>
+        getDocs(query(collection(_db, c), where('featured', '==', true)))));
+      snaps.forEach((snap, i) => snap.forEach(d => {
+        const it = d.data();
+        if (it.available !== false) items.push({ ...it, _cat: FAV_CATS[i] });
+      }));
+    } catch (e) { return; }
+    if (!items.length) return;
+    items.sort((a, b) => (a.order ?? 9999) - (b.order ?? 9999));
+    items = items.slice(0, 4);
+
+    const lang = _hpLang();
+    const grid = document.getElementById('favGrid');
+    grid.innerHTML = items.map(it => {
+      const name = (lang === 'he' && it.nameHe) ? it.nameHe
+                 : (lang === 'ru' && it.nameRu) ? it.nameRu : (it.name || '');
+      const photo = it.img
+        ? `<img src="${esc(it.img)}" alt="${esc(it.name || '')}" loading="lazy">`
+        : '';
+      return `<a class="fav-card" href="menu.html#${esc(it._cat)}">
+        <div class="fav-card-photo">${photo}</div>
+        <div class="fav-card-row">
+          <span class="fav-card-name" data-en="${esc(it.name || '')}"${it.nameHe ? ` data-he="${esc(it.nameHe)}"` : ''}${it.nameRu ? ` data-ru="${esc(it.nameRu)}"` : ''}>${esc(name)}</span>
+          <span class="fav-card-price">${esc(it.price || '')}</span>
+        </div>
+      </a>`;
+    }).join('');
+    document.getElementById('favourites').style.display = '';
+  })();
+
   // ── ANNOUNCEMENT POPUP ──────────────────────────────────────────────────
   (async function() {
     if (sessionStorage.getItem('ann-dismissed')) return;
@@ -1517,6 +1725,18 @@
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     applyParallax();
+  })();
+</script>
+<script>
+  // ленивая подгрузка карты: src ставится, когда секция близка к вьюпорту
+  (function(){
+    var frame = document.getElementById('mapFrame');
+    if (!frame) return;
+    function load() { if (!frame.src) frame.src = frame.dataset.src; }
+    if (!('IntersectionObserver' in window)) { load(); return; }
+    new IntersectionObserver(function(entries, obs){
+      if (entries[0].isIntersecting) { load(); obs.disconnect(); }
+    }, { rootMargin: '600px' }).observe(frame);
   })();
 </script>
 

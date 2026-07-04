@@ -395,7 +395,7 @@
       .cat-open{font-size:11px;padding:0 2px}
       .cat-actions{gap:1px}
     }
-    @media(max-width:640px){.dash-iframe{height:calc(100vh - 64px - 60px)}}
+    @media(max-width:640px){.dash-iframe{height:calc(100svh - 64px - 60px);min-height:220px}}
 
     /* DASHBOARD */
     .dash-body{max-width:900px;margin:0 auto;padding:28px 24px 100px;position:relative}
@@ -440,6 +440,7 @@
     .dash-card-box-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:2px}
     .dash-card-box-sub{font-size:12px;color:var(--muted)}
     .dash-top-table{width:100%;border-collapse:collapse;font-size:13px}
+    .dash-top-table td:first-child,.dash-top-table th:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:0}
     .dash-top-table th{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:0 0 8px;text-align:left;border-bottom:1px solid var(--line)}
     .dash-top-table th:not(:first-child){text-align:right}
     .dash-top-table td{padding:10px 0;border-bottom:1px solid var(--lineSoft);vertical-align:middle}
@@ -650,7 +651,7 @@
       itemName:'Item name',nameEn:'Name in English',nameHe:'Name in Hebrew',nameRu:'Name in Russian',
       descTitle:'Description',descEn:'Description in English',descHe:'Description in Hebrew',descRu:'Description in Russian',
       price:'Price',comment:'Comment',subhead:'Subhead',subheadHe:'Subhead in Hebrew',subheadRu:'Subhead in Russian',
-      selectBadges:'Select badges for this item',available:'Available',cancel:'Cancel',
+      selectBadges:'Select badges for this item',available:'Available',featured:'Featured on homepage',cancel:'Cancel',
       editCatTitle:'Edit Category',addCatTitle:'Add Category',catName:'Category name',
       catNameEn:'Name in English',catNameHe:'Name in Hebrew',catDescEn:'Description in English',catDescHe:'Description in Hebrew',
       catComment:'Comment',catSettingsTab:'Settings',visibleMenu:'Visible on menu',
@@ -761,7 +762,7 @@
       descTitle:'Описание',descEn:'Описание на английском',descHe:'Описание на иврите',descRu:'Описание на русском',
       price:'Цена',comment:'Комментарий',
       subhead:'Подзаголовок',subheadHe:'Подзаголовок на иврите',subheadRu:'Подзаголовок на русском',
-      selectBadges:'Выберите значки для позиции',available:'Доступно',cancel:'Отмена',
+      selectBadges:'Выберите значки для позиции',available:'Доступно',featured:'Показывать на главной («Любимое»)',cancel:'Отмена',
       editCatTitle:'Редактировать категорию',addCatTitle:'Добавить категорию',
       catName:'Название категории',catNameEn:'Название на английском',catNameHe:'Название на иврите',
       catDescEn:'Описание на английском',catDescHe:'Описание на иврите',
@@ -901,6 +902,7 @@
       var ibs=document.querySelector('#iBadges .modal-section-title');if(ibs)ibs.textContent=L.selectBadges;
       var ias=document.getElementById('iAddonsTitle');if(ias)ias.textContent=L.selectAddons;
       var iar=document.querySelector('#iAvail .avail-row span');if(iar)iar.textContent=L.available;
+      var ifl=document.getElementById('iFeaturedLabel');if(ifl&&L.featured)ifl.textContent=L.featured;
       $('#itemModalCancel','cancel');$('#itemModalSave','save');
       // category modal
       var cmt=document.querySelectorAll('#catModal .tab');if(cmt[0])cmt[0].textContent=L.basicInfo;if(cmt[1])cmt[1].textContent=L.catSettingsTab;
@@ -2187,6 +2189,10 @@
         <span>Available</span>
         <label class="toggle"><input type="checkbox" id="iAvailable" checked><span class="toggle-slider"></span></label>
       </div>
+      <div class="avail-row">
+        <span id="iFeaturedLabel">Featured on homepage</span>
+        <label class="toggle"><input type="checkbox" id="iFeatured"><span class="toggle-slider"></span></label>
+      </div>
     </div>
     <div class="modal-actions">
       <button class="btn-cancel" id="itemModalCancel">Cancel</button>
@@ -3033,6 +3039,7 @@
     document.getElementById('iSubheadHe').value = item?.subheadHe || '';
     document.getElementById('iSubheadRu').value = item?.subheadRu || '';
     document.getElementById('iAvailable').checked = item?.available !== false;
+    document.getElementById('iFeatured').checked = item?.featured === true;
     const preview = document.getElementById('iImgPreview');
     const placeholder = document.getElementById('iUploadPlaceholder');
     const removeBtn = document.getElementById('iImgRemove');
@@ -3183,6 +3190,7 @@
         subheadHe: document.getElementById('iSubheadHe').value.trim(),
         subheadRu: document.getElementById('iSubheadRu').value.trim(),
         available: document.getElementById('iAvailable').checked,
+        featured:  document.getElementById('iFeatured').checked,
         badges:    selectedBadgeIds,
         addons:    selectedAddonIds,
         addonPrices: addonPrices,
