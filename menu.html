@@ -236,6 +236,7 @@
       transition: box-shadow 0.2s;
     }
     .menu-item:hover { box-shadow: 0 4px 20px rgba(42,31,24,0.08); }
+    .menu-item-clickable { cursor: pointer; }
     .menu-item.item-unavailable { opacity: 0.45; pointer-events: none; }
     .menu-item.item-unavailable .menu-item-name::after { content: attr(data-sold-out); font-size: 11px; color: #999; font-style: italic; }
 
@@ -318,7 +319,8 @@
       cursor: pointer;
       align-self: flex-start;
     }
-    .menu-item-action:hover { color: var(--brown-dark); }
+    .menu-item-action:hover,
+    .menu-item-clickable:hover .menu-item-action { color: var(--brown-dark); }
 
     /* ─── ITEM BADGES ─────────────────────────────────────── */
     .menu-item-body { position: relative; }
@@ -3057,16 +3059,18 @@
       const nameEl = item.querySelector('.menu-item-name');
       const name = (nameEl?.dataset.en || nameEl?.textContent || '').trim().replace(/\s*◦\s*$/, '');
       const _lang = document.documentElement.lang;
+      // the whole card is clickable, not just the action label
       if (window.__ADDONS__[name]) {
         btn.textContent = _lang === 'he' ? 'הוסף תוספות' : _lang === 'ru' ? 'Добавить добавки →' : 'Add ingredients →';
-        btn.addEventListener('click', e => { e.preventDefault(); window.__openAddonModal__(item); });
+        item.addEventListener('click', e => { e.preventDefault(); window.__openAddonModal__(item); });
       } else {
         btn.textContent = _lang === 'he' ? '+ הוסף להזמנה' : _lang === 'ru' ? '+ В корзину' : '+ Add to order';
-        btn.addEventListener('click', e => {
+        item.addEventListener('click', e => {
           e.preventDefault();
           if (window.__addToCartDirect__) window.__addToCartDirect__(item, btn);
         });
       }
+      item.classList.add('menu-item-clickable');
     });
   }
 
