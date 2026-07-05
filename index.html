@@ -1515,6 +1515,13 @@
     const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     let items = [];
     try {
+      // категории, созданные в админке, тоже участвуют в «Любимом»
+      const metaSnap = await getDocs(collection(_db, '_categories'));
+      metaSnap.forEach(d => {
+        if (!FAV_CATS.includes(d.id) && d.data().custom) FAV_CATS.push(d.id);
+      });
+    } catch (e) { /* ignore — работаем со встроенными */ }
+    try {
       const snaps = await Promise.all(FAV_CATS.map(c =>
         getDocs(query(collection(_db, c), where('featured', '==', true)))));
       snaps.forEach((snap, i) => snap.forEach(d => {

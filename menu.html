@@ -2356,6 +2356,13 @@
 
   sections.forEach(s => s && observer.observe(s));
 
+  // Custom categories are generated later by the module script — this hook
+  // adds their pill/section to the active-state machinery above.
+  window.__registerCatPill__ = function (pill, section) {
+    pills.push(pill);
+    if (section) { sections.push(section); observer.observe(section); }
+  };
+
   // ─── ADD-ON MODAL ─────────────────────────────────────────
   (function () {
     // Add-on options are loaded from Firestore by the module script below and
@@ -2869,6 +2876,10 @@
   }
 
   const CAT_IDS = ['hot-drinks','cold-drinks','sandwiches','pastries','filled','tartlets','cakes','ice-cream','alcohol','friday'];
+  // Built-in categories have handcrafted sections in the HTML; custom ones
+  // (created in the admin, stored in _categories with custom:true) are
+  // generated at load and appended to CAT_IDS.
+  const STATIC_CAT_IDS = [...CAT_IDS];
 
   // available:false marks an item sold-out; a passed visibleAt (ms timestamp,
   // set by the admin's timed-hide options) means it should show again
@@ -3082,6 +3093,41 @@
     }
   }
 
+  // ── custom category: generate a section + filter pill like the static ones ──
+  function buildCustomCategory(id, m) {
+    const footer = document.querySelector('.footer');
+    if (!footer || document.getElementById(id)) return;
+    const label = m.label || id;
+    const section = document.createElement('div');
+    section.className = 'menu-category';
+    section.id = id;
+    section.style.display = 'none'; // shown by the snapshot once items exist
+    section.innerHTML = `
+      <div class="menu-category-inner">
+        <div class="menu-category-header">
+          <h2 class="menu-category-title">${escHtml(label)}</h2>
+          <div class="menu-category-meta">
+            <div class="menu-category-count">0</div>
+            <p class="menu-category-desc"></p>
+          </div>
+        </div>
+        <div class="${m.noPhotos ? 'menu-list' : 'menu-items'}"></div>
+      </div>`;
+    footer.parentNode.insertBefore(section, footer);
+
+    const pillsBar = document.querySelector('.filter-bar-pills');
+    if (pillsBar) {
+      const pill = document.createElement('a');
+      pill.href = '#' + id;
+      pill.className = 'filter-pill';
+      pill.dataset.target = id;
+      pill.style.display = 'none';
+      pill.innerHTML = `${escHtml(label)} <span>00</span>`;
+      pillsBar.appendChild(pill);
+      if (window.__registerCatPill__) window.__registerCatPill__(pill, section);
+    }
+  }
+
   // Category names & descriptions edited in the admin (_categories: labelHe,
   // labelRu, desc, descHe, descRu) override the static markup. English section
   // titles are built-in; a non-empty Firestore value wins per language.
@@ -3135,10 +3181,13 @@
       const m = catMeta[catId];
       const hidden = !!m && m.visible === false
         && !(typeof m.visibleAt === 'number' && Date.now() >= m.visibleAt);
+      // custom sections start hidden and are revealed by their snapshot
+      // (only once they have items) — here we only ever hide them
+      const canShow = STATIC_CAT_IDS.includes(catId);
       const section = document.getElementById(catId);
-      if (section) section.style.display = hidden ? 'none' : '';
+      if (section && (hidden || canShow)) section.style.display = hidden ? 'none' : '';
       const pill = document.querySelector(`.filter-pill[data-target="${catId}"]`);
-      if (pill) pill.style.display = hidden ? 'none' : '';
+      if (pill && (hidden || canShow)) pill.style.display = hidden ? 'none' : '';
     });
     updateTotalCount();
   }
@@ -3225,18 +3274,22 @@
       aSnap.forEach(d => { addonMap[d.id] = d.data(); });
     } catch (e) { /* addons collection may not exist yet */ }
 
-    // 2. load category meta (order + noPhotos)
-    getDocs(collection(db, '_categories')).then(snap => {
-      snap.forEach(d => { catMeta[d.id] = d.data(); });
+    // 2. load category meta (order, noPhotos, labels, visibility, custom cats).
+    // Await it so custom sections exist before snapshots start rendering.
+    try {
+      const metaSnap = await getDocs(collection(db, '_categories'));
+      metaSnap.forEach(d => { catMeta[d.id] = d.data(); });
+      // categories created in the admin get their section + pill generated here
+      Object.keys(catMeta).forEach(id => {
+        if (!STATIC_CAT_IDS.includes(id) && catMeta[id].custom) {
+          buildCustomCategory(id, catMeta[id]);
+          CAT_IDS.push(id);
+        }
+      });
       reorderCategories(catMeta);
       applyCategoryLabels(catMeta);
       applyCategoryVisibility(catMeta);
-      CAT_IDS.forEach(catId => {
-        if (catMeta[catId]?.noPhotos && cachedDocs[catId]) {
-          renderCategory(catId, cachedDocs[catId]);
-        }
-      });
-    });
+    } catch (e) { console.error('category meta load failed:', e); }
 
     // 3. live-render full categories on every snapshot
     CAT_IDS.forEach(catId => {
@@ -3244,6 +3297,17 @@
         const docs = snap.docs.map(d => d.data());
         cachedDocs[catId] = docs;
         renderCategory(catId, docs);
+        // custom category with no items yet → keep its section hidden
+        if (!STATIC_CAT_IDS.includes(catId)) {
+          const m = catMeta[catId] || {};
+          const hiddenByAdmin = m.visible === false && !(typeof m.visibleAt === 'number' && Date.now() >= m.visibleAt);
+          const hide = !docs.length || hiddenByAdmin;
+          const sec = document.getElementById(catId);
+          if (sec) sec.style.display = hide ? 'none' : '';
+          const pill = document.querySelector(`.filter-pill[data-target="${catId}"]`);
+          if (pill) pill.style.display = hide ? 'none' : '';
+          updateTotalCount();
+        }
       });
     });
   })();

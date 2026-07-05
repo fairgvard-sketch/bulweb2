@@ -1185,6 +1185,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
                 Actions
               </button>
+              <button class="btn-add-cat" id="addCatBtn">+ Add category</button>
             </div>
           </div>
           <div class="filter-bar">
@@ -2147,7 +2148,7 @@
       </div>
       <div class="modal-section-title">Category name</div>
       <div class="modal-grid">
-        <div class="field"><label>Name in English</label><input type="text" id="cName" placeholder="Hot Drinks" readonly title="Built-in category — the English name is fixed" style="opacity:.6;cursor:not-allowed"></div>
+        <div class="field"><label>Name in English</label><input type="text" id="cName" placeholder="Hot Drinks"></div>
         <div class="field"><label>Name in Hebrew</label><input type="text" id="cNameHe" placeholder="משקאות חמים" dir="rtl"></div>
       </div>
       <div class="modal-grid" style="margin-top:0">
@@ -2467,7 +2468,10 @@
   const auth = getAuth(app);
   const db = getFirestore(app);
 
-  const CATEGORIES = [
+  // Built-in categories: их секции статически свёрстаны в menu.html.
+  // Кастомные категории живут только в _categories (custom:true) и
+  // рендерятся на сайте динамически.
+  const BUILTIN_CATEGORIES = [
     { id: 'hot-drinks',  label: 'Hot Drinks',          img: '../img/hot drinks/espresso_short.webp' },
     { id: 'cold-drinks', label: 'Cold Drinks',          img: '../img/cold drinks/cold_coffee.webp' },
     { id: 'sandwiches',  label: 'Sandwiches & Salads',  img: '../img/sandwiches/sanswich_salmon.webp' },
@@ -2479,6 +2483,24 @@
     { id: 'alcohol',     label: 'Alcohol',              img: '' },
     { id: 'friday',      label: 'Friday Special',       img: '../img/friday special/cinnabon.webp' },
   ];
+  const BUILTIN_IDS = BUILTIN_CATEGORIES.map(c => c.id);
+  // id, которые нельзя занимать под категории (существующие коллекции)
+  const RESERVED_IDS = new Set(['shop','badges','addons','popups','announcements','settings','homepage']);
+
+  let CATEGORIES = [...BUILTIN_CATEGORIES]; // builtin + custom, обновляется из _categories
+  let catMetaCache = {};
+
+  async function refreshCategoryList() {
+    const meta = {};
+    const snap = await getDocs(collection(db, '_categories'));
+    snap.forEach(d => { meta[d.id] = d.data(); });
+    catMetaCache = meta;
+    const custom = Object.keys(meta)
+      .filter(id => !BUILTIN_IDS.includes(id) && meta[id].custom)
+      .map(id => ({ id, label: meta[id].label || id, img: meta[id].img || '' }));
+    CATEGORIES = [...BUILTIN_CATEGORIES, ...custom];
+    return meta;
+  }
 
   let currentCat = null;
   let editingItemId = null;
@@ -2583,18 +2605,12 @@
     showView('viewCats');
     const list = document.getElementById('catList');
     list.innerHTML = '<div class="empty">Loading...</div>';
+    const meta = await refreshCategoryList(); // тянет и кастомные категории
     const counts = {};
-    const meta = {};
-    await Promise.all([
-      ...CATEGORIES.map(async cat => {
-        const snap = await getDocs(collection(db, cat.id));
-        counts[cat.id] = snap.size;
-      }),
-      (async () => {
-        const snap = await getDocs(collection(db, '_categories'));
-        snap.forEach(d => { meta[d.id] = d.data(); });
-      })(),
-    ]);
+    await Promise.all(CATEGORIES.map(async cat => {
+      const snap = await getDocs(collection(db, cat.id));
+      counts[cat.id] = snap.size;
+    }));
 
     // sort by saved order, fallback to CATEGORIES index
     const sorted = CATEGORIES
@@ -2655,14 +2671,19 @@
       row.querySelector('.edit-cat-btn').onclick  = (e) => { e.stopPropagation(); openCatModal(cat); };
       row.querySelector('.del-cat-btn').onclick   = (e) => {
         e.stopPropagation();
+        const isBuiltin = BUILTIN_IDS.includes(cat.id);
+        const msg = isBuiltin
+          ? `This will permanently delete all ${counts[cat.id]} items in “${cat.label}”. The category itself is built-in and will stay (empty). This cannot be undone.`
+          : `This will permanently delete the category “${cat.label}” and all its ${counts[cat.id]} items. This cannot be undone.`;
         openDeleteModal(async () => {
           const snap = await getDocs(collection(db, cat.id));
           const batch = writeBatch(db);
           snap.docs.forEach(d => batch.delete(d.ref));
+          if (!isBuiltin) batch.delete(doc(db, '_categories', cat.id)); // кастомную убираем целиком
           await batch.commit();
-          toast(`Deleted ${snap.size} items`);
+          toast(isBuiltin ? `Deleted ${snap.size} items` : 'Category deleted');
           loadCategories();
-        }, `This will permanently delete all ${counts[cat.id]} items in “${cat.label}”. The category itself is built-in and will stay (empty). This cannot be undone.`);
+        }, msg);
       };
       row.onclick = (e) => { if (!e.target.closest('.icon-btn') && !e.target.closest('.cat-drag')) openCategory(cat.id, cat.label); };
       list.appendChild(row);
@@ -3174,30 +3195,88 @@
   // ── CATEGORY MODAL ──
   let editingCatId = null;
 
+  // dataset-флаги для фото категории (setupUpload сам их не ведёт)
+  document.getElementById('cImgFile').addEventListener('change', () => {
+    const area = document.getElementById('cUploadArea');
+    if (document.getElementById('cImgFile').files[0]) { area.dataset.newFile = '1'; area.dataset.removed = ''; }
+  });
+  document.getElementById('cImgRemove').addEventListener('click', () => {
+    const area = document.getElementById('cUploadArea');
+    area.dataset.newFile = ''; area.dataset.existingUrl = ''; area.dataset.removed = '1';
+  });
+
+  document.getElementById('addCatBtn').onclick = () => openCatModal(null);
   document.getElementById('catModalCancel').onclick = () => closeModal('catModal');
   document.getElementById('catModalClose').onclick  = () => closeModal('catModal');
   document.getElementById('catModalSave').onclick   = async () => {
-    if (!editingCatId) { closeModal('catModal'); return; }
-    const data = {
-      labelHe:  document.getElementById('cNameHe').value.trim(),
-      labelRu:  document.getElementById('cNameRu').value.trim(),
-      desc:     document.getElementById('cDesc').value.trim(),
-      descHe:   document.getElementById('cDescHe').value.trim(),
-      descRu:   document.getElementById('cDescRu').value.trim(),
-      comment:  document.getElementById('cComment').value.trim(),
-      visible:  document.getElementById('cVisible').checked,
-      noPhotos: document.getElementById('cNoPhotos').checked,
-    };
-    await setDoc(doc(db, '_categories', editingCatId), data, { merge: true });
-    closeModal('catModal');
-    toast('Saved ✓');
-    loadCategories();
+    const isNew = !editingCatId;
+    const isCustom = isNew || !BUILTIN_IDS.includes(editingCatId);
+    const nameEn = document.getElementById('cName').value.trim();
+    if (isCustom && !nameEn) {
+      toast('❌ Name (English) is required');
+      document.getElementById('cName').focus();
+      return;
+    }
+    const btn = document.getElementById('catModalSave');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    try {
+      const data = {
+        labelHe:  document.getElementById('cNameHe').value.trim(),
+        labelRu:  document.getElementById('cNameRu').value.trim(),
+        desc:     document.getElementById('cDesc').value.trim(),
+        descHe:   document.getElementById('cDescHe').value.trim(),
+        descRu:   document.getElementById('cDescRu').value.trim(),
+        comment:  document.getElementById('cComment').value.trim(),
+        visible:  document.getElementById('cVisible').checked,
+        noPhotos: document.getElementById('cNoPhotos').checked,
+      };
+      const area = document.getElementById('cUploadArea');
+      const file = document.getElementById('cImgFile').files[0];
+      if (area.dataset.newFile === '1' && file) {
+        btn.textContent = 'Uploading photo…';
+        data.img = await uploadToCloudinary(file, 'bulweb/categories');
+      } else if (area.dataset.removed === '1') {
+        data.img = '';
+      }
+      if (isNew) {
+        // id = слаг из английского названия
+        const id = nameEn.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        if (!id || id.startsWith('_') || RESERVED_IDS.has(id)) { toast('❌ Please use a different name'); return; }
+        await refreshCategoryList();
+        if (CATEGORIES.some(c => c.id === id)) { toast('❌ Category "' + id + '" already exists'); return; }
+        // 900 = дефолтный order последней builtin-категории (idx*100) — новые всегда в конец
+        const maxOrder = Math.max(900, ...Object.values(catMetaCache).map(m => (typeof m.order === 'number' ? m.order : 0)));
+        data.label = nameEn;
+        data.custom = true;
+        data.order = maxOrder + 10; // в конец списка
+        await setDoc(doc(db, '_categories', id), data);
+        toast('Category added ✓');
+      } else {
+        if (isCustom) data.label = nameEn;
+        await setDoc(doc(db, '_categories', editingCatId), data, { merge: true });
+        toast('Saved ✓');
+      }
+      closeModal('catModal');
+      loadCategories();
+    } catch (e) {
+      console.error('Category save error:', e);
+      toast('Error: ' + (e.message || e));
+    } finally {
+      btn.disabled = false; btn.textContent = 'Save';
+    }
   };
 
   function openCatModal(cat) {
     editingCatId = cat?.id || null;
+    const isBuiltin = !!cat && BUILTIN_IDS.includes(cat.id);
     document.getElementById('catModalTitle').textContent = cat ? 'Edit Category' : 'Add Category';
-    document.getElementById('cName').value    = cat?.label   || '';
+    const cName = document.getElementById('cName');
+    cName.value = cat?.label || '';
+    // у встроенных категорий английское имя фиксировано
+    cName.readOnly = isBuiltin;
+    cName.style.opacity = isBuiltin ? '.6' : '';
+    cName.style.cursor = isBuiltin ? 'not-allowed' : '';
+    cName.title = isBuiltin ? 'Built-in category — the English name is fixed' : '';
     document.getElementById('cNameHe').value  = cat?.labelHe || '';
     document.getElementById('cNameRu').value  = cat?.labelRu || '';
     document.getElementById('cDesc').value    = cat?.desc    || '';
@@ -3206,6 +3285,25 @@
     document.getElementById('cComment').value = cat?.comment || '';
     document.getElementById('cVisible').checked = cat?.visible !== false;
     document.getElementById('cNoPhotos').checked = cat?.noPhotos === true;
+    // фото категории
+    const area = document.getElementById('cUploadArea');
+    const preview = document.getElementById('cImgPreview');
+    const placeholder = document.getElementById('cUploadPlaceholder');
+    const removeBtn = document.getElementById('cImgRemove');
+    document.getElementById('cImgFile').value = '';
+    area.dataset.newFile = ''; area.dataset.removed = '';
+    area.dataset.existingUrl = cat?.img || '';
+    if (cat?.img) {
+      preview.src = itemImgSrc(cat.img);
+      preview.style.display = 'block';
+      placeholder.style.display = 'none';
+      removeBtn.style.display = 'block';
+    } else {
+      preview.src = '';
+      preview.style.display = 'none';
+      placeholder.style.display = 'flex';
+      removeBtn.style.display = 'none';
+    }
     document.querySelector('#catModal .tab').click();
     openModal('catModal');
   }
@@ -3499,6 +3597,7 @@
   // ── DOWNLOAD / UPLOAD MENU ──
   document.getElementById('actDownloadMenu').onclick = async () => {
     toast('Exporting…');
+    await refreshCategoryList();
     const menu = {};
     await Promise.all(CATEGORIES.map(async cat => {
       const snap = await getDocs(collection(db, cat.id));
@@ -3531,6 +3630,7 @@
     catch { toast('Invalid JSON'); return; }
     if (!confirm('This will add new items and overwrite items with matching IDs. Existing items not in the file are kept. Continue?')) return;
     toast('Uploading…');
+    await refreshCategoryList();
     const knownCats = new Set(CATEGORIES.map(c => c.id));
     let count = 0, skipped = 0;
     for (const catId of Object.keys(menu)) {
@@ -3551,6 +3651,7 @@
   // ── DOWNLOAD PDF ──
   document.getElementById('actDownloadPDF').onclick = async () => {
     toast('Preparing PDF…');
+    await refreshCategoryList();
     const menu = {};
     await Promise.all(CATEGORIES.map(async cat => {
       const snap = await getDocs(collection(db, cat.id));
