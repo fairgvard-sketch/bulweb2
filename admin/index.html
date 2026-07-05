@@ -2613,8 +2613,11 @@
     }));
 
     // sort by saved order, fallback to CATEGORIES index
+    // (пустые значения из meta не должны затирать встроенные, напр. label)
+    const cleanMeta = id => Object.fromEntries(
+      Object.entries(meta[id] || {}).filter(([, v]) => v !== '' && v != null));
     const sorted = CATEGORIES
-      .map((baseCat, idx) => ({ ...baseCat, ...meta[baseCat.id], _defaultIdx: idx }))
+      .map((baseCat, idx) => ({ ...baseCat, ...cleanMeta(baseCat.id), _defaultIdx: idx }))
       .sort((a, b) => {
         const oa = a.order != null ? a.order : a._defaultIdx * 100;
         const ob = b.order != null ? b.order : b._defaultIdx * 100;
@@ -3252,7 +3255,8 @@
         await setDoc(doc(db, '_categories', id), data);
         toast('Category added ✓');
       } else {
-        if (isCustom) data.label = nameEn;
+        // для builtin пустое имя = использовать встроенный заголовок сайта
+        data.label = nameEn;
         await setDoc(doc(db, '_categories', editingCatId), data, { merge: true });
         toast('Saved ✓');
       }
@@ -3272,11 +3276,9 @@
     document.getElementById('catModalTitle').textContent = cat ? 'Edit Category' : 'Add Category';
     const cName = document.getElementById('cName');
     cName.value = cat?.label || '';
-    // у встроенных категорий английское имя фиксировано
-    cName.readOnly = isBuiltin;
-    cName.style.opacity = isBuiltin ? '.6' : '';
-    cName.style.cursor = isBuiltin ? 'not-allowed' : '';
-    cName.title = isBuiltin ? 'Built-in category — the English name is fixed' : '';
+    // для встроенных категорий пустое имя = вернуть дизайнерский заголовок сайта
+    cName.placeholder = isBuiltin ? (BUILTIN_CATEGORIES.find(c => c.id === cat.id)?.label || '') : 'Breakfasts';
+    cName.title = isBuiltin ? 'Leave empty to use the site’s built-in title' : '';
     document.getElementById('cNameHe').value  = cat?.labelHe || '';
     document.getElementById('cNameRu').value  = cat?.labelRu || '';
     document.getElementById('cDesc').value    = cat?.desc    || '';

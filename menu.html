@@ -3145,8 +3145,9 @@
       if (!section) return;
 
       const title = section.querySelector('.menu-category-title');
-      if (title && (m.labelHe || m.labelRu)) {
+      if (title && (m.label || m.labelHe || m.labelRu)) {
         if (!title.dataset.en) title.dataset.en = title.innerHTML; // cache EN before overriding
+        if (m.label)   title.dataset.en = escHtml(m.label);
         if (m.labelHe) title.dataset.he = escHtml(m.labelHe);
         if (m.labelRu) title.dataset.ru = escHtml(m.labelRu);
         setNow(title);
@@ -3163,10 +3164,11 @@
 
       // filter pill: label part changes, count <span> stays
       const pill = document.querySelector(`.filter-pill[data-target="${catId}"]`);
-      if (pill && (m.labelHe || m.labelRu)) {
+      if (pill && (m.label || m.labelHe || m.labelRu)) {
         const cntMatch = (pill.dataset.en || pill.innerHTML).match(/<span>[\s\S]*?<\/span>/);
         const cnt = cntMatch ? ' ' + cntMatch[0] : '';
         if (!pill.dataset.en) pill.dataset.en = pill.innerHTML;
+        if (m.label)   pill.dataset.en = escHtml(m.label) + cnt;
         if (m.labelHe) pill.dataset.he = escHtml(m.labelHe) + cnt;
         if (m.labelRu) pill.dataset.ru = escHtml(m.labelRu) + cnt;
         setNow(pill);
