@@ -1519,7 +1519,9 @@
         getDocs(query(collection(_db, c), where('featured', '==', true)))));
       snaps.forEach((snap, i) => snap.forEach(d => {
         const it = d.data();
-        if (it.available !== false) items.push({ ...it, _cat: FAV_CATS[i] });
+        // hidden items count as available again once their visibleAt time passes
+        const avail = it.available !== false || (typeof it.visibleAt === 'number' && Date.now() >= it.visibleAt);
+        if (avail) items.push({ ...it, _cat: FAV_CATS[i] });
       }));
     } catch (e) { return; }
     if (!items.length) return;

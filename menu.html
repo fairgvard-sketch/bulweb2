@@ -2870,6 +2870,13 @@
 
   const CAT_IDS = ['hot-drinks','cold-drinks','sandwiches','pastries','filled','tartlets','cakes','ice-cream','alcohol','friday'];
 
+  // available:false marks an item sold-out; a passed visibleAt (ms timestamp,
+  // set by the admin's timed-hide options) means it should show again
+  function isUnavailable(data) {
+    if (data.available !== false) return false;
+    return !(typeof data.visibleAt === 'number' && Date.now() >= data.visibleAt);
+  }
+
   // ── build one menu-list-item (no-photo layout) from a Firestore doc ──
   function buildListItemEl(data) {
     const lang = document.documentElement.lang;
@@ -2880,7 +2887,7 @@
     const price = data.price || '';
 
     const el = document.createElement('div');
-    el.className = 'menu-list-item' + (data.available === false ? ' item-unavailable' : '');
+    el.className = 'menu-list-item' + (isUnavailable(data) ? ' item-unavailable' : '');
     if (data.order != null) el.dataset.order = data.order;
 
     el.innerHTML = `
@@ -2905,7 +2912,7 @@
     const img   = data.img  || '';
 
     const el = document.createElement('div');
-    el.className = 'menu-item' + (data.available === false ? ' item-unavailable' : '');
+    el.className = 'menu-item' + (isUnavailable(data) ? ' item-unavailable' : '');
     if (data.order != null) el.dataset.order = data.order;
 
     const imgSrc = img.startsWith('http') || img.startsWith('data:') ? img : img;
@@ -2988,11 +2995,16 @@
     const countEl = section.querySelector('.menu-category-count');
     if (countEl) countEl.textContent = sorted.length;
 
-    // update filter pill count
+    // update filter pill count — including data-en/he/ru, otherwise a language
+    // switch would restore the hardcoded numbers from the static markup
     const pill = document.querySelector(`.filter-pill[data-target="${catId}"]`);
     if (pill) {
+      const cnt = String(sorted.length).padStart(2, '0');
       const span = pill.querySelector('span');
-      if (span) span.textContent = String(sorted.length).padStart(2, '0');
+      if (span) span.textContent = cnt;
+      ['en', 'he', 'ru'].forEach(l => {
+        if (pill.dataset[l]) pill.dataset[l] = pill.dataset[l].replace(/<span>[\s\S]*?<\/span>/, `<span>${cnt}</span>`);
+      });
     }
 
     // update total count in filter bar
@@ -3007,17 +3019,21 @@
     let total = 0;
     CAT_IDS.forEach(id => {
       const pill = document.querySelector(`.filter-pill[data-target="${id}"]`);
-      if (pill) {
+      if (pill && pill.style.display !== 'none') { // hidden categories don't count
         const span = pill.querySelector('span');
         if (span) total += parseInt(span.textContent) || 0;
       }
     });
     const totalEl = document.querySelector('.filter-bar-total');
     if (totalEl) {
+      // refresh the data-* variants too, so language switches keep the live number
+      totalEl.dataset.en = `${total} items total`;
+      totalEl.dataset.he = `${total} פריטים`;
+      totalEl.dataset.ru = `${total} позиций`;
       const lang = document.documentElement.lang;
-      if (lang === 'he') totalEl.textContent = `${total} פריטים`;
-      else if (lang === 'ru') totalEl.textContent = `${total} позиций`;
-      else totalEl.textContent = `${total} items total`;
+      if (lang === 'he') totalEl.textContent = totalEl.dataset.he;
+      else if (lang === 'ru') totalEl.textContent = totalEl.dataset.ru;
+      else totalEl.textContent = totalEl.dataset.en;
     }
   }
 
@@ -3064,6 +3080,67 @@
       pillsBar.querySelectorAll('.filter-pill').forEach(p => { pillMap[p.dataset.target] = p; });
       sorted.forEach(({ id }) => { if (pillMap[id]) pillsBar.appendChild(pillMap[id]); });
     }
+  }
+
+  // Category names & descriptions edited in the admin (_categories: labelHe,
+  // labelRu, desc, descHe, descRu) override the static markup. English section
+  // titles are built-in; a non-empty Firestore value wins per language.
+  function applyCategoryLabels(catMeta) {
+    const lang = document.documentElement.lang;
+    const setNow = el => {
+      el.innerHTML = lang === 'he' ? (el.dataset.he || el.dataset.en || el.innerHTML)
+        : (lang === 'ru' && el.dataset.ru) ? el.dataset.ru
+        : (el.dataset.en || el.innerHTML);
+    };
+    CAT_IDS.forEach(catId => {
+      const m = catMeta[catId];
+      if (!m) return;
+      const section = document.getElementById(catId);
+      if (!section) return;
+
+      const title = section.querySelector('.menu-category-title');
+      if (title && (m.labelHe || m.labelRu)) {
+        if (!title.dataset.en) title.dataset.en = title.innerHTML; // cache EN before overriding
+        if (m.labelHe) title.dataset.he = escHtml(m.labelHe);
+        if (m.labelRu) title.dataset.ru = escHtml(m.labelRu);
+        setNow(title);
+      }
+
+      const desc = section.querySelector('.menu-category-desc');
+      if (desc && (m.desc || m.descHe || m.descRu)) {
+        if (!desc.dataset.en) desc.dataset.en = desc.innerHTML;
+        if (m.desc)   desc.dataset.en = escHtml(m.desc);
+        if (m.descHe) desc.dataset.he = escHtml(m.descHe);
+        if (m.descRu) desc.dataset.ru = escHtml(m.descRu);
+        setNow(desc);
+      }
+
+      // filter pill: label part changes, count <span> stays
+      const pill = document.querySelector(`.filter-pill[data-target="${catId}"]`);
+      if (pill && (m.labelHe || m.labelRu)) {
+        const cntMatch = (pill.dataset.en || pill.innerHTML).match(/<span>[\s\S]*?<\/span>/);
+        const cnt = cntMatch ? ' ' + cntMatch[0] : '';
+        if (!pill.dataset.en) pill.dataset.en = pill.innerHTML;
+        if (m.labelHe) pill.dataset.he = escHtml(m.labelHe) + cnt;
+        if (m.labelRu) pill.dataset.ru = escHtml(m.labelRu) + cnt;
+        setNow(pill);
+      }
+    });
+  }
+
+  // hide categories switched off in the admin (visible:false), honouring a
+  // scheduled reappear time (visibleAt as ms timestamp)
+  function applyCategoryVisibility(catMeta) {
+    CAT_IDS.forEach(catId => {
+      const m = catMeta[catId];
+      const hidden = !!m && m.visible === false
+        && !(typeof m.visibleAt === 'number' && Date.now() >= m.visibleAt);
+      const section = document.getElementById(catId);
+      if (section) section.style.display = hidden ? 'none' : '';
+      const pill = document.querySelector(`.filter-pill[data-target="${catId}"]`);
+      if (pill) pill.style.display = hidden ? 'none' : '';
+    });
+    updateTotalCount();
   }
 
   // ── POPUP ──────────────────────────────────────────────────────────────
@@ -3152,6 +3229,8 @@
     getDocs(collection(db, '_categories')).then(snap => {
       snap.forEach(d => { catMeta[d.id] = d.data(); });
       reorderCategories(catMeta);
+      applyCategoryLabels(catMeta);
+      applyCategoryVisibility(catMeta);
       CAT_IDS.forEach(catId => {
         if (catMeta[catId]?.noPhotos && cachedDocs[catId]) {
           renderCategory(catId, cachedDocs[catId]);

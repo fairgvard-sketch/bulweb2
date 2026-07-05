@@ -606,7 +606,7 @@
     en:{
       loginSub:'Admin panel',signIn:'Sign in',signOut:'Sign out',emailLabel:'Email',passwordLabel:'Password',
       live:'Live',searchPh:'Search…',
-      dashboard:'Dashboard',menu:'Menu',shop:'Shop',badges:'Badges',popups:'Popups',changes:'Changes',more:'More',settings:'Settings',
+      dashboard:'Dashboard',menu:'Menu',shop:'Shop',badges:'Badges',popups:'Popups',more:'More',settings:'Settings',
       siteAnalytics:'Site analytics',today:'Today',days7:'7 days',days14:'14 days',days30:'30 days',
       exportCsv:'⬇ Export CSV',uniqueVisitors:'Unique visitors',pageViews:'Page views',
       vsPrev:'vs prev period',visitorsNow:'visitors on the site',liveNow:'Live · right now',
@@ -693,7 +693,7 @@
       emailLabel:'Эл. почта',passwordLabel:'Пароль',
       live:'Онлайн',searchPh:'Поиск…',
       dashboard:'Дашборд',menu:'Меню',shop:'Магазин',
-      badges:'Значки',popups:'Поп-апы',changes:'Изменения',
+      badges:'Значки',popups:'Поп-апы',
       more:'Ещё',settings:'Настройки',
       siteAnalytics:'Аналитика сайта',
       today:'Сегодня',days7:'7 дней',days14:'14 дней',days30:'30 дней',
@@ -818,7 +818,7 @@
       $('.topbar-status','live');ph('.topbar-search input','searchPh');
       // sidebar
       _navTxt('navDashboard',L.dashboard);_navTxt('navMenu',L.menu);_navTxt('navShop',L.shop);
-      _navTxt('navBadges',L.badges);_navTxt('navAddons',L.addons);_navTxt('navPopups',L.popups);_navTxt('navAnnouncements',L.announcements);_navTxt('navChanges',L.changes);
+      _navTxt('navBadges',L.badges);_navTxt('navAddons',L.addons);_navTxt('navPopups',L.popups);_navTxt('navAnnouncements',L.announcements);
       // bottom nav
       _navTxt('bnDashboard',L.dashboard);_navTxt('bnMenu',L.menu);_navTxt('bnShop',L.shop);_navTxt('bnMore',L.more);
       // dashboard
@@ -835,7 +835,7 @@
       // menu view
       var cvt=document.querySelector('#viewCats .page-title');if(cvt)cvt.textContent=L.menuStructure;
       _navTxt('menuActionsToggle',L.actions);$('#addCatBtn','addCat');ph('#viewCats .filter-search input','searchCats');
-      var fs=document.querySelector('#viewCats .filter-select');if(fs){var fo=fs.querySelectorAll('option');if(fo[0])fo[0].textContent=L.allStatuses;if(fo[1])fo[1].textContent=L.statusLive;if(fo[2])fo[2].textContent=L.statusHidden;if(fo[3])fo[3].textContent=L.statusDraft;}
+      var fs=document.querySelector('#viewCats .filter-select');if(fs){var fo=fs.querySelectorAll('option');if(fo[0])fo[0].textContent=L.allStatuses;if(fo[1])fo[1].textContent=L.statusLive;if(fo[2])fo[2].textContent=L.statusHidden;}
       $('.menu-actions-title','menuActionsTitle');var mc=document.querySelector('.menu-actions-close');if(mc)mc.textContent=L.closeBtn;
       var ms=document.querySelectorAll('.menu-actions-section');if(ms[0])ms[0].textContent=L.mgmt;if(ms[1])ms[1].textContent=L.displaySection;
       var mal=document.querySelectorAll('.menu-action-label');if(mal[0])mal[0].textContent=L.downloadMenu;if(mal[1])mal[1].textContent=L.uploadMenu;if(mal[2])mal[2].textContent=L.downloadPdf;if(mal[3])mal[3].textContent=L.template;
@@ -882,9 +882,9 @@
       var scl=document.querySelectorAll('#viewRestaurantInfo .settings-card-label');if(scl[0])scl[0].textContent=L.restaurantName;if(scl[1])scl[1].textContent=L.logo;
       $('#saveRestaurantName','save');var lps=document.querySelector('#logoPlaceholder span');if(lps)lps.textContent=L.uploadLogo;$('#uploadLogoBtn','upload');$('#removeLogoBtn','remove');
       // more sheet
-      $('.more-sheet-title','moreTitle');var mss=document.querySelectorAll('.more-sheet-section');if(mss[0])mss[0].textContent=L.content;if(mss[1])mss[1].textContent=L.management;if(mss[2])mss[2].textContent=L.settings;
+      $('.more-sheet-title','moreTitle');var mss=document.querySelectorAll('.more-sheet-section');if(mss[0])mss[0].textContent=L.content;if(mss[1])mss[1].textContent=L.settings;
       var sp=function(id,key){var s=document.querySelector('#'+id+' span');if(s)s.textContent=L[key];};
-      sp('msiBadges','badges');sp('msiAddons','addons');sp('msiPopups','popups');sp('msiAnnouncements','announcements');sp('msiChanges','changes');sp('msiSettings','settings');
+      sp('msiBadges','badges');sp('msiAddons','addons');sp('msiPopups','popups');sp('msiAnnouncements','announcements');sp('msiSettings','settings');
       var mts=document.querySelector('#msiTheme span:not(.more-sheet-chevron)');if(mts)mts.textContent=L.theme;
       var mls=document.querySelector('#msiLanguages span:not(.more-sheet-chevron)');if(mls)mls.textContent=L.languages;
       var tsi=document.querySelectorAll('#msiThemeMenu .more-sheet-subitem');if(tsi[0])tsi[0].textContent=L.light;if(tsi[1])tsi[1].textContent=L.dark;
@@ -996,10 +996,6 @@
         <div class="topbar-status">Live</div>
       </div>
     </div>
-    <div class="topbar-search">
-      <svg class="topbar-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" placeholder="Search…">
-    </div>
     <div class="topbar-actions">
       <button class="topbar-icon-btn" title="Settings" id="topbarSettingsBtn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l-.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -1046,10 +1042,6 @@
         <button class="sidebar-item" id="navAnnouncements">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           Announcements
-        </button>
-        <button class="sidebar-item" id="navChanges">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18"/><path d="m8 7-4 4 4 4"/><path d="m16 13 4 4-4 4"/></svg>
-          Changes
         </button>
       </div>
       <div class="sidebar-bottom">
@@ -1193,15 +1185,14 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
                 Actions
               </button>
-              <button class="btn-add-cat" id="addCatBtn">+ Add category</button>
             </div>
           </div>
           <div class="filter-bar">
             <div class="filter-search">
               <svg class="filter-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              <input type="text" placeholder="Search categories…">
+              <input type="text" placeholder="Search categories…" id="catSearch">
             </div>
-            <select class="filter-select"><option>All Statuses</option><option>Live</option><option>Hidden</option><option>Draft</option></select>
+            <select class="filter-select" id="catStatusFilter"><option value="all">All Statuses</option><option value="live">Live</option><option value="hidden">Hidden</option></select>
           </div>
           <div class="cat-list" id="catList"></div>
         </div>
@@ -1528,57 +1519,6 @@
             </div>
           </div>
 
-          <!-- MEDOVIK CARD -->
-          <div class="modal modal-wide hp-card" style="position:static;transform:none;box-shadow:none;border:1.5px solid var(--line)">
-            <div class="modal-header">
-              <div class="hp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 13h16v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M4 13c0-3 3-5 8-5s8 2 8 5"/><path d="M9 8V5M15 8V5"/></svg></div>
-              <div class="hp-head-text">
-                <div class="modal-title">Medovik section</div>
-                <div class="hp-head-sub">Honey-cake feature — text, stats & photo</div>
-              </div>
-              <span class="hp-chev"></span>
-            </div>
-            <div class="modal-body" style="padding:20px 24px;display:flex;flex-direction:column;gap:0">
-              <div class="modal-section-title" style="margin-bottom:10px">Photo</div>
-              <div class="upload-area" id="hpMedovikUploadArea" style="min-height:140px;margin-bottom:0">
-                <img id="hpMedovikImgPreview" style="display:none">
-                <div class="upload-placeholder" id="hpMedovikUploadPlaceholder">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
-                </div>
-                <button class="upload-remove" id="hpMedovikImgRemove" style="display:none">Remove</button>
-                <input type="file" id="hpMedovikImgFile" accept="image/*" style="display:none">
-              </div>
-
-              <div class="modal-section-title" style="margin-top:16px">Eyebrow</div>
-              <div class="modal-grid">
-                <div class="field"><label>RU</label><input type="text" id="hpMedovikEyebrowRu"></div>
-                <div class="field"><label>EN</label><input type="text" id="hpMedovikEyebrowEn"></div>
-              </div>
-              <div class="field" style="margin-top:10px"><label>HE</label><input type="text" id="hpMedovikEyebrowHe" dir="rtl"></div>
-
-              <div class="modal-section-title" style="margin-top:16px">Title</div>
-              <div class="modal-grid">
-                <div class="field"><label>RU</label><input type="text" id="hpMedovikTitleRu"></div>
-                <div class="field"><label>EN</label><input type="text" id="hpMedovikTitleEn"></div>
-              </div>
-              <div class="field" style="margin-top:10px"><label>HE</label><input type="text" id="hpMedovikTitleHe" dir="rtl"></div>
-
-              <div class="modal-section-title" style="margin-top:16px">Story text</div>
-              <div class="modal-grid">
-                <div class="field"><label>RU</label><textarea id="hpMedovikStoryRu" rows="4" style="resize:vertical;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--ink);outline:none"></textarea></div>
-                <div class="field"><label>EN</label><textarea id="hpMedovikStoryEn" rows="4" style="resize:vertical;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--ink);outline:none"></textarea></div>
-              </div>
-              <div class="field" style="margin-top:10px"><label>HE</label><textarea id="hpMedovikStoryHe" rows="4" dir="rtl" style="resize:vertical;padding:10px 13px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--ink);outline:none"></textarea></div>
-
-              <div class="modal-section-title" style="margin-top:18px">Stats (3)</div>
-              <div id="hpMedovikStats" style="display:flex;flex-direction:column;gap:16px;margin-top:8px"></div>
-            </div>
-            <div class="modal-actions">
-              <button class="btn-cancel" id="hpMedovikResetBtn">Reset</button>
-              <button class="btn-primary" id="hpMedovikSaveBtn">Save</button>
-            </div>
-          </div>
-
           <!-- VISIT CARD -->
           <div class="modal modal-wide hp-card" style="position:static;transform:none;box-shadow:none;border:1.5px solid var(--line)">
             <div class="modal-header">
@@ -1775,18 +1715,6 @@
       </div>
 
       <!-- SETTINGS -->
-      <div class="view" id="viewChanges">
-        <div class="page-body">
-          <div class="page-header">
-            <div class="page-title">Changes</div>
-          </div>
-          <div style="margin-top:32px;padding:20px 24px;background:#fff8e6;border-left:4px solid #f0a500;border-radius:8px;font-size:14px;font-family:sans-serif;color:#7a5a1a;display:flex;align-items:center;gap:12px;">
-            <span style="font-size:20px;">⚠️</span>
-            <span>Сайт находится в разработке!</span>
-          </div>
-        </div>
-      </div>
-
       <div class="view" id="viewSettings">
         <div class="page-body">
           <div class="page-header" style="justify-content:flex-start">
@@ -1903,13 +1831,6 @@
     <button class="more-sheet-item" id="msiAnnouncements">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
       <span>Announcements</span>
-    </button>
-
-    <div class="more-sheet-divider"></div>
-    <div class="more-sheet-section">Management</div>
-    <button class="more-sheet-item" id="msiChanges">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18"/><path d="m8 7-4 4 4 4"/><path d="m16 13 4 4-4 4"/></svg>
-      <span>Changes</span>
     </button>
 
     <div class="more-sheet-divider"></div>
@@ -2226,7 +2147,7 @@
       </div>
       <div class="modal-section-title">Category name</div>
       <div class="modal-grid">
-        <div class="field"><label>Name in English</label><input type="text" id="cName" placeholder="Hot Drinks"></div>
+        <div class="field"><label>Name in English</label><input type="text" id="cName" placeholder="Hot Drinks" readonly title="Built-in category — the English name is fixed" style="opacity:.6;cursor:not-allowed"></div>
         <div class="field"><label>Name in Hebrew</label><input type="text" id="cNameHe" placeholder="משקאות חמים" dir="rtl"></div>
       </div>
       <div class="modal-grid" style="margin-top:0">
@@ -2383,7 +2304,6 @@
         <button class="upload-remove" id="sImgRemove" style="display:none">Remove</button>
         <input type="file" id="sImgFile" accept="image/*" style="display:none">
       </div>
-      <input type="hidden" id="sImg">
       <div class="modal-section-title">Item name</div>
       <div class="modal-grid">
         <div class="field"><label>Name in English</label><input type="text" id="sName" placeholder="Sourdough loaf"></div>
@@ -2570,7 +2490,10 @@
     try {
       await signInWithEmailAndPassword(auth, email, pass);
     } catch(e) {
-      document.getElementById('loginErr').textContent = 'Wrong email or password';
+      document.getElementById('loginErr').textContent =
+        e.code === 'auth/network-request-failed'
+          ? 'Network error — check your connection'
+          : 'Wrong email or password';
     }
   };
   document.getElementById('loginPassword').addEventListener('keydown', e => {
@@ -2688,18 +2611,23 @@
       const row = document.createElement('div');
       row.className = 'cat-row';
       row.dataset.catId = cat.id;
-      const isHidden = cat.visible === false;
+      const isHidden = hiddenNow(cat.visible === false, cat.visibleAt);
+      // timed hide expired → flip the flag back in Firestore (self-heal)
+      if (cat.visible === false && !isHidden) {
+        setDoc(doc(db, '_categories', cat.id), { visible: true, visibleAt: null, hideType: null }, { merge: true }).catch(() => {});
+      }
+      row.dataset.hidden = isHidden ? '1' : '';
       row.innerHTML = `
         <div class="cat-drag" title="Drag to reorder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg></div>
         <div class="cat-check"></div>
-        ${cat.img ? `<img class="cat-thumb" draggable="false" src="${cat.img}" onerror="this.src='../img/Main page/menu_placeholder.jpg'">` : `<img class="cat-thumb" draggable="false" src="../img/Main page/menu_placeholder.jpg">`}
+        ${cat.img ? `<img class="cat-thumb" draggable="false" src="${esc(cat.img)}" onerror="this.src='../img/Main page/menu_placeholder.jpg'">` : `<img class="cat-thumb" draggable="false" src="../img/Main page/menu_placeholder.jpg">`}
         <div class="cat-info">
-          <div class="cat-name">${cat.label}</div>
+          <div class="cat-name">${esc(cat.label)}</div>
           <div class="cat-count">${counts[cat.id]} items</div>
         </div>
-        <span class="status-badge ${isHidden ? 'status-hidden' : 'status-live'}">${isHidden ? 'Hidden' : 'Live'}</span>
+        <span class="status-badge ${isHidden ? 'status-hidden' : 'status-live'}">${isHidden ? hiddenBadgeText(cat.visibleAt) : 'Live'}</span>
         <div class="cat-actions">
-          <button class="icon-btn green vis-cat-btn" title="Visibility" style="${isHidden ? 'opacity:.5' : ''}">
+          <button class="icon-btn green vis-cat-btn" title="${isHidden ? 'Show again' : 'Hide'}" style="${isHidden ? 'opacity:.5' : ''}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           </button>
           <button class="icon-btn blue edit-cat-btn" title="Edit" data-id="${cat.id}" data-label="${cat.label}">
@@ -2713,20 +2641,34 @@
 
       setupPointerDrag(row, list, '.cat-row', saveCatOrder);
 
-      row.querySelector('.vis-cat-btn').onclick   = (e) => { e.stopPropagation(); openVisModal(cat, row, true); };
+      row.querySelector('.vis-cat-btn').onclick   = async (e) => {
+        e.stopPropagation();
+        if (isHidden) {
+          // one click to bring a hidden category back
+          await setDoc(doc(db, '_categories', cat.id), { visible: true, visibleAt: null, hideType: null }, { merge: true });
+          toast('Visible again ✓');
+          loadCategories();
+        } else {
+          openVisModal(cat, row, true);
+        }
+      };
       row.querySelector('.edit-cat-btn').onclick  = (e) => { e.stopPropagation(); openCatModal(cat); };
       row.querySelector('.del-cat-btn').onclick   = (e) => {
         e.stopPropagation();
         openDeleteModal(async () => {
           const snap = await getDocs(collection(db, cat.id));
-          await Promise.all(snap.docs.map(d => deleteDoc(d.ref)));
-          toast('Deleted');
+          const batch = writeBatch(db);
+          snap.docs.forEach(d => batch.delete(d.ref));
+          await batch.commit();
+          toast(`Deleted ${snap.size} items`);
           loadCategories();
-        });
+        }, `This will permanently delete all ${counts[cat.id]} items in “${cat.label}”. The category itself is built-in and will stay (empty). This cannot be undone.`);
       };
       row.onclick = (e) => { if (!e.target.closest('.icon-btn') && !e.target.closest('.cat-drag')) openCategory(cat.id, cat.label); };
       list.appendChild(row);
     });
+
+    applyCatFilter();
 
     // update meta bar
     const totalCats  = sorted.length;
@@ -2737,6 +2679,21 @@
     document.getElementById('metaDishCount').textContent  = totalDishes;
     document.getElementById('metaLastEdit').textContent   = timeStr;
   }
+
+  // search + status filter over the rendered category rows
+  function applyCatFilter() {
+    const q  = (document.getElementById('catSearch').value || '').trim().toLowerCase();
+    const st = document.getElementById('catStatusFilter').value;
+    document.querySelectorAll('#catList .cat-row').forEach(row => {
+      const name = row.querySelector('.cat-name').textContent.toLowerCase();
+      const hidden = row.dataset.hidden === '1';
+      const okQ = !q || name.includes(q);
+      const okS = st === 'all' || (st === 'hidden') === hidden;
+      row.style.display = okQ && okS ? '' : 'none';
+    });
+  }
+  document.getElementById('catSearch').oninput = applyCatFilter;
+  document.getElementById('catStatusFilter').onchange = applyCatFilter;
 
   async function saveCatOrder() {
     const rows = document.querySelectorAll('#catList .cat-row');
@@ -2790,19 +2747,23 @@
       const row = document.createElement('div');
       row.className = 'item-row';
       row.dataset.itemId = item.id;
-      const isHidden = item.available === false;
+      const isHidden = hiddenNow(item.available === false, item.visibleAt);
+      // timed hide expired → flip the flag back in Firestore (self-heal)
+      if (item.available === false && !isHidden) {
+        updateDoc(doc(db, currentCat, item.id), { available: true, visibleAt: null, hideType: null }).catch(() => {});
+      }
       row.innerHTML = `
         <div class="cat-drag" title="Drag to reorder" style="margin-right:4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg></div>
         ${item.img ? `<img class="item-thumb" draggable="false" src="${itemImgSrc(item.img)}" onerror="this.style.display='none'">` : '<div class="item-thumb"></div>'}
         <div class="item-info">
-          <div class="item-name">${item.name || '—'}</div>
-          <div class="item-desc">${item.desc || ''}</div>
-          ${item.badges?.length ? `<div class="item-badges">${item.badges.map(bid => { const b = window.__allBadges?.find(x => x.id === bid); if (!b) return ''; let src = ''; try { src = JSON.parse(b.icon).img; } catch(e) { const n = (b.icon||'').replace(/^.*[\\/]/,'').replace(/\.[^.]+$/,''); src = n ? `../img/Badges/${n}.webp` : ''; } return src ? `<img class="item-badge-img" src="${src}" title="${b.name}" alt="${b.name}">` : ''; }).join('')}</div>` : ''}
+          <div class="item-name">${esc(item.name) || '—'}</div>
+          <div class="item-desc">${esc(item.desc)}</div>
+          ${item.badges?.length ? `<div class="item-badges">${item.badges.map(bid => { const b = window.__allBadges?.find(x => x.id === bid); if (!b) return ''; let src = ''; try { src = JSON.parse(b.icon).img; } catch(e) { const n = (b.icon||'').replace(/^.*[\\/]/,'').replace(/\.[^.]+$/,''); src = n ? `../img/Badges/${n}.webp` : ''; } return src ? `<img class="item-badge-img" src="${esc(src)}" title="${esc(b.name)}" alt="${esc(b.name)}">` : ''; }).join('')}</div>` : ''}
         </div>
-        <div class="item-price">${item.price || ''}</div>
-        <span class="status-badge ${isHidden ? 'status-hidden' : 'status-live'}">${isHidden ? 'Hidden' : 'Live'}</span>
+        <div class="item-price">${esc(item.price)}</div>
+        <span class="status-badge ${isHidden ? 'status-hidden' : 'status-live'}">${isHidden ? hiddenBadgeText(item.visibleAt) : 'Live'}</span>
         <div class="cat-actions">
-          <button class="icon-btn green vis-btn" title="Visibility" style="${isHidden ? 'opacity:.5' : ''}">
+          <button class="icon-btn green vis-btn" title="${isHidden ? 'Show again' : 'Hide'}" style="${isHidden ? 'opacity:.5' : ''}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           </button>
           <button class="icon-btn blue edit-item-btn" title="Edit">
@@ -2815,7 +2776,17 @@
 
       setupPointerDrag(row, list, '.item-row', saveItemOrder);
 
-      row.querySelector('.vis-btn').onclick = (e) => { e.stopPropagation(); openVisModal(item, row); };
+      row.querySelector('.vis-btn').onclick = async (e) => {
+        e.stopPropagation();
+        if (isHidden) {
+          // one click to bring a hidden item back
+          await updateDoc(doc(db, currentCat, item.id), { available: true, visibleAt: null, hideType: null });
+          toast('Visible again ✓');
+          loadItems();
+        } else {
+          openVisModal(item, row);
+        }
+      };
       row.querySelector('.edit-item-btn').onclick = () => openItemModal(item);
       row.querySelector('.del-item-btn').onclick = () => {
         openDeleteModal(async () => {
@@ -2907,12 +2878,17 @@
     return '../' + img;
   }
 
+  // Экранирование пользовательских данных перед вставкой в innerHTML/атрибуты
+  const esc = s => String(s ?? '')
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
   // Загружает файл в Cloudinary, возвращает secure_url
-  async function uploadToCloudinary(file) {
+  async function uploadToCloudinary(file, folder = 'bulweb/menu') {
     const fd = new FormData();
     fd.append('file', file);
     fd.append('upload_preset', CLOUDINARY_PRESET);
-    fd.append('folder', 'bulweb/menu');
+    fd.append('folder', folder);
     const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, {
       method: 'POST',
       body: fd,
@@ -2955,66 +2931,35 @@
   })();
   setupUpload('cUploadArea','cImgFile','cImgPreview','cUploadPlaceholder','cImgRemove');
 
-  function resizeToBase64(file, maxSide, quality) {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      const url = URL.createObjectURL(file);
-      img.onload = () => {
-        URL.revokeObjectURL(url);
-        const scale = Math.min(1, maxSide / Math.max(img.width, img.height));
-        const w = Math.round(img.width * scale);
-        const h = Math.round(img.height * scale);
-        const canvas = document.createElement('canvas');
-        canvas.width = w;
-        canvas.height = h;
-        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-        resolve(canvas.toDataURL('image/jpeg', quality));
-      };
-      img.onerror = reject;
-      img.src = url;
-    });
-  }
-
-  // Shop upload — конвертирует файл в base64 и пишет в скрытый sImg
+  // Shop upload — превью сразу, загрузка в Cloudinary при Save.
+  // Старые товары с base64-картинками продолжают работать без миграции.
   (function setupShopUpload() {
     const area = document.getElementById('sUploadArea');
     const file = document.getElementById('sImgFile');
     const preview = document.getElementById('sImgPreview');
     const placeholder = document.getElementById('sUploadPlaceholder');
     const remove = document.getElementById('sImgRemove');
-    const imgInput = document.getElementById('sImg');
     area.onclick = (e) => { if (e.target !== remove) file.click(); };
-    file.onchange = async () => {
+    file.onchange = () => {
       const f = file.files[0];
       if (!f) return;
+      area.dataset.newFile = '1';
+      area.dataset.removed = '';
       preview.src = URL.createObjectURL(f);
       preview.style.display = 'block';
       placeholder.style.display = 'none';
       remove.style.display = 'block';
-      imgInput.value = '';
-      area.style.opacity = '0.5';
-      area.style.pointerEvents = 'none';
-      try {
-        imgInput.value = await resizeToBase64(f, 700, 0.82);
-      } catch(e) {
-        console.error('Image processing failed:', e);
-        alert('Image processing failed. Please try again.');
-        preview.style.display = 'none';
-        placeholder.style.display = 'flex';
-        remove.style.display = 'none';
-      } finally {
-        area.style.opacity = '';
-        area.style.pointerEvents = '';
-      }
     };
     remove.onclick = (e) => {
       e.stopPropagation();
+      area.dataset.newFile = '';
+      area.dataset.existingUrl = '';
+      area.dataset.removed = '1';
       preview.src = '';
       preview.style.display = 'none';
       placeholder.style.display = 'flex';
       remove.style.display = 'none';
       file.value = '';
-      imgInput.value = '';
     };
   })();
 
@@ -3079,8 +3024,8 @@
         cell.className = 'badge-picker-cell' + (selectedIds.includes(b.id) ? ' selected' : '');
         cell.dataset.badgeId = b.id;
         cell.innerHTML = imgSrc
-          ? `<img src="${imgSrc}" alt="${b.name}"><span>${b.name}</span>`
-          : `<div style="width:40px;height:40px;border-radius:8px;background:var(--lineSoft)"></div><span>${b.name}</span>`;
+          ? `<img src="${esc(imgSrc)}" alt="${esc(b.name)}"><span>${esc(b.name)}</span>`
+          : `<div style="width:40px;height:40px;border-radius:8px;background:var(--lineSoft)"></div><span>${esc(b.name)}</span>`;
         cell.onclick = () => cell.classList.toggle('selected');
         badgeGrid.appendChild(cell);
       });
@@ -3115,10 +3060,10 @@
         if (isGroup) {
           const opts = Array.isArray(a.options) ? a.options : [];
           const modeTag = a.mode === 'single' ? 'one choice' : 'several';
-          meta = `${opts.map(o => o.label).join(', ')}`;
+          meta = `${opts.map(o => esc(o.label)).join(', ')}`;
           priceCtl = `<span style="font-size:11px;font-weight:600;color:var(--muted);background:var(--lineSoft);padding:2px 8px;border-radius:100px;white-space:nowrap">${modeTag}</span>`;
         } else {
-          meta = [a.labelHe, a.labelRu].filter(Boolean).join(' · ');
+          meta = [a.labelHe, a.labelRu].filter(Boolean).map(esc).join(' · ');
           // per-item price: placeholder = library price; value = override if set for THIS item
           const ov = itemOverrides[a.id];
           const ovVal = (ov != null && ov !== '') ? ov : '';
@@ -3127,7 +3072,7 @@
         row.innerHTML = `
           <div class="cat-drag" title="Drag to reorder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg></div>
           <input type="checkbox" data-addon-id="${a.id}" ${selectedAddonIds.includes(a.id) ? 'checked' : ''} style="width:17px;height:17px;accent-color:var(--accent);cursor:pointer;flex-shrink:0">
-          <span style="flex:1">${a.label || '—'}${isGroup ? ' <span style="color:var(--muted);font-size:11px">(group)</span>' : ''}</span>
+          <span style="flex:1">${esc(a.label) || '—'}${isGroup ? ' <span style="color:var(--muted);font-size:11px">(group)</span>' : ''}</span>
           <span style="color:var(--muted);font-size:13px;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${meta}</span>
           <span style="display:flex;align-items:center;gap:3px;white-space:nowrap">${priceCtl}</span>`;
         // Reorder within the picker (order of selected rows = display order on site).
@@ -3160,7 +3105,13 @@
     const imgRemoved = uploadArea.dataset.removed === '1';
     const existingUrl = uploadArea.dataset.existingUrl || null;
 
-    if (!document.getElementById('iName').value) return;
+    const nameInput = document.getElementById('iName');
+    if (!nameInput.value.trim()) {
+      document.querySelector('#itemModal .tab').click(); // jump to Basic Info tab
+      nameInput.focus();
+      toast('❌ Name (English) is required');
+      return;
+    }
 
     const saveBtn = document.getElementById('itemModalSave');
     saveBtn.disabled = true;
@@ -3223,7 +3174,6 @@
   // ── CATEGORY MODAL ──
   let editingCatId = null;
 
-  document.getElementById('addCatBtn').onclick   = () => { openCatModal(null); };
   document.getElementById('catModalCancel').onclick = () => closeModal('catModal');
   document.getElementById('catModalClose').onclick  = () => closeModal('catModal');
   document.getElementById('catModalSave').onclick   = async () => {
@@ -3265,33 +3215,41 @@
   let visRow   = null;
   let visIsCat = false;
 
-  // compute next shift label
-  function nextShiftLabel() {
+  // Real opening hours: Sun–Thu 08:00–20:00, Fri 08:00–15:00, Sat closed.
+  // "Next shift" = the next moment the café opens.
+  const OPEN_HOURS = [8, 8, 8, 8, 8, 8, null]; // index = getDay(), value = opening hour
+  function nextShift() {
     const now = new Date();
-    const day = now.getDay(); // 0=Sun
-    const h = now.getHours();
-    const shifts = [
-      { open: 8, close: 19, label: 'Sun' },
-      { open: 7, close: 20, label: 'Mon' },
-      { open: 7, close: 20, label: 'Tue' },
-      { open: 7, close: 20, label: 'Wed' },
-      { open: 7, close: 20, label: 'Thu' },
-      { open: 7, close: 20, label: 'Fri' },
-      { open: 8, close: 21, label: 'Sat' },
-    ];
-    let d = day, tries = 0;
-    while (tries++ < 8) {
-      d = (d + 1) % 7;
-      return `${shifts[d].label}, ${String(shifts[d].open).padStart(2,'0')}:00`;
+    for (let i = 0; i <= 7; i++) {
+      const day = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i);
+      const openHour = OPEN_HOURS[day.getDay()];
+      if (openHour == null) continue; // closed that day
+      const openAt = new Date(day.getFullYear(), day.getMonth(), day.getDate(), openHour);
+      if (openAt <= now) continue;
+      const dayName = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][day.getDay()];
+      const prefix = i === 0 ? 'Today' : i === 1 ? 'Tomorrow' : dayName;
+      return { ts: openAt.getTime(), label: `${prefix}, ${String(openHour).padStart(2,'0')}:00` };
     }
-    return 'Tomorrow';
+    return { ts: Date.now() + 86400000, label: 'Tomorrow' };
+  }
+
+  // hidden flag + optional reappear time → is it hidden right now?
+  function hiddenNow(flagHidden, visibleAt) {
+    return flagHidden && !(typeof visibleAt === 'number' && Date.now() >= visibleAt);
+  }
+  function hiddenBadgeText(visibleAt) {
+    if (typeof visibleAt !== 'number') return 'Hidden';
+    const d = new Date(visibleAt);
+    const hm = `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+    if (d.toDateString() === new Date().toDateString()) return `Hidden until ${hm}`;
+    return `Hidden until ${d.getDate()} ${d.toLocaleString('en',{month:'short'})}, ${hm}`;
   }
 
   function openVisModal(item, row, isCat = false) {
     visItem  = item;
     visRow   = row;
     visIsCat = isCat;
-    document.getElementById('nextShiftLabel').textContent = nextShiftLabel();
+    document.getElementById('nextShiftLabel').textContent = nextShift().label;
     document.querySelectorAll('.vis-option').forEach(o => o.classList.remove('selected'));
     document.getElementById('visDurationLimited').classList.remove('show');
     document.getElementById('visDurationSpecific').classList.remove('show');
@@ -3323,31 +3281,33 @@
     const selected = document.querySelector('.vis-option.selected');
     if (!selected || !visItem) return;
     const type = selected.dataset.vis;
-    const data = { available: false, hideType: type };
+    let visibleAt = null;
     if (type === 'limited') {
       const activePill = document.querySelector('.vis-pill.active');
       const mins = activePill?.dataset.mins === 'custom'
-        ? parseInt(document.getElementById('visDurationCustom').value) * 60
+        ? (parseInt(document.getElementById('visDurationCustom').value) || 1) * 60
         : parseInt(activePill?.dataset.mins || 60);
-      data.visibleAt = Date.now() + mins * 60000;
+      visibleAt = Date.now() + mins * 60000;
     } else if (type === 'specific') {
       const val = document.getElementById('visSpecificTime').value;
-      data.visibleAt = val ? new Date(val).getTime() : null;
+      visibleAt = val ? new Date(val).getTime() : null;
     } else if (type === 'shift') {
-      data.visibleAt = 'next-shift';
-    } else {
-      data.visibleAt = null;
+      visibleAt = nextShift().ts;
     }
-    if (visIsCat) {
-      await setDoc(doc(db, '_categories', visItem.id), data, { merge: true });
-      if (visRow) visRow.querySelector('.vis-cat-btn').style.opacity = '.5';
-    } else {
-      await updateDoc(doc(db, currentCat, visItem.id), data);
-      if (visRow) visRow.querySelector('.vis-btn').style.opacity = '.5';
+    try {
+      if (visIsCat) {
+        await setDoc(doc(db, '_categories', visItem.id), { visible: false, hideType: type, visibleAt }, { merge: true });
+      } else {
+        await updateDoc(doc(db, currentCat, visItem.id), { available: false, hideType: type, visibleAt });
+      }
+      closeModal('visModal');
+      closeModal('visConfirmModal');
+      toast('Hidden ✓');
+      visIsCat ? loadCategories() : loadItems();
+    } catch (e) {
+      console.error('saveVisibility error:', e);
+      toast('Error: ' + (e.message || e));
     }
-    closeModal('visModal');
-    closeModal('visConfirmModal');
-    toast('Hidden ✓');
   }
 
   document.getElementById('visModalSave').onclick = () => {
@@ -3387,13 +3347,6 @@
   document.getElementById('msiPopups').onclick = () => {
     closeMoreSheet(); setActiveNav('Popups'); loadPopups(); stopLiveCounter();
   };
-  document.getElementById('msiChanges').onclick = () => {
-    closeMoreSheet();
-    setActiveNav('Changes');
-    stopLiveCounter();
-    document.getElementById('menuActionsPanel').classList.add('open');
-  };
-
   // update topbar brand name and avatar with logo or initial
   function updateTopbarBrand(name, logoUrl) {
     const avatar = document.getElementById('topbarAvatar');
@@ -3401,7 +3354,7 @@
     if (nameEl) nameEl.textContent = name || 'Bulochka';
     if (!avatar) return;
     if (logoUrl) {
-      avatar.innerHTML = `<img src="${logoUrl}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+      avatar.innerHTML = `<img src="${esc(logoUrl)}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
     } else {
       avatar.innerHTML = (name || 'B').charAt(0).toUpperCase();
     }
@@ -3576,10 +3529,12 @@
     let menu;
     try { menu = JSON.parse(text); }
     catch { toast('Invalid JSON'); return; }
-    if (!confirm(`This will overwrite ALL menu data. Continue?`)) return;
+    if (!confirm('This will add new items and overwrite items with matching IDs. Existing items not in the file are kept. Continue?')) return;
     toast('Uploading…');
-    let count = 0;
+    const knownCats = new Set(CATEGORIES.map(c => c.id));
+    let count = 0, skipped = 0;
     for (const catId of Object.keys(menu)) {
+      if (!knownCats.has(catId)) { skipped++; continue; }
       const cat = menu[catId];
       if (!Array.isArray(cat.items)) continue;
       for (const item of cat.items) {
@@ -3589,7 +3544,7 @@
         count++;
       }
     }
-    toast(`Uploaded ${count} items ✓`);
+    toast(`Uploaded ${count} items ✓${skipped ? ` (${skipped} unknown categories skipped)` : ''}`);
     loadCategories();
   };
 
@@ -3623,17 +3578,17 @@
         @media print{body{margin:20px}}
       </style></head><body>
       <h1>Bulochka</h1>
-      <div class="sub">14 Pekarnaya Lane, Old Town · +1 (415) 555-0179</div>`);
+      <div class="sub">Pinsker 29, Petah Tikva · +972 (52) 966-2724</div>`);
 
     for (const catId of Object.keys(menu)) {
       const cat = menu[catId];
-      win.document.write(`<h2>${cat.label}</h2>`);
+      win.document.write(`<h2>${esc(cat.label)}</h2>`);
       for (const item of cat.items) {
         win.document.write(`<div class="item">`);
-        if (showPhotos && item.img) win.document.write(`<img src="${itemImgSrc(item.img)}">`);
-        win.document.write(`<div><div class="item-name">${item.name || '—'}</div>`);
-        if (showDesc && item.desc) win.document.write(`<div class="item-desc">${item.desc}</div>`);
-        if (item.price) win.document.write(`<div class="item-price">${item.price}</div>`);
+        if (showPhotos && item.img) win.document.write(`<img src="${esc(itemImgSrc(item.img))}">`);
+        win.document.write(`<div><div class="item-name">${esc(item.name) || '—'}</div>`);
+        if (showDesc && item.desc) win.document.write(`<div class="item-desc">${esc(item.desc)}</div>`);
+        if (item.price) win.document.write(`<div class="item-price">${esc(item.price)}</div>`);
         win.document.write(`</div></div>`);
       }
     }
@@ -3698,8 +3653,9 @@
 
   // ── DELETE MODAL ──
   let deleteCallback = null;
-  function openDeleteModal(cb) {
+  function openDeleteModal(cb, msg) {
     deleteCallback = cb;
+    document.querySelector('#deleteModal .vis-confirm-body').textContent = msg || ADMIN_I18N.t('deleteBody');
     openModal('deleteModal');
   }
   document.getElementById('deleteModalClose').onclick  = () => closeModal('deleteModal');
@@ -3766,7 +3722,7 @@
     // fetch current + previous period
     const cutCur  = Date.now() - dashDays * 86400000;
     const cutPrev = Date.now() - dashDays * 2 * 86400000;
-    const snap = await getDocs(query(collection(db,'_visits'), where('ts','>=',cutPrev), orderBy('ts','desc'), limit(2000)));
+    const snap = await getDocs(query(collection(db,'_visits'), where('ts','>=',cutPrev), orderBy('ts','desc'), limit(10000)));
     const all = []; snap.forEach(d=>all.push(d.data()));
     const cur  = all.filter(v=>v.ts >= cutCur);
     const prev = all.filter(v=>v.ts >= cutPrev && v.ts < cutCur);
@@ -3897,10 +3853,19 @@
   function closeModal(id) { document.getElementById(id).classList.remove('open'); }
   // Backdrop click closes most modals, but not ones with a form to fill in
   // (avoids losing typed data on a stray click) — those close via × / Cancel only.
-  const NO_BACKDROP_CLOSE = ['addonModal', 'itemModal', 'badgeModal'];
+  const NO_BACKDROP_CLOSE = ['addonModal', 'itemModal', 'badgeModal', 'catModal', 'shopModal'];
   document.querySelectorAll('.overlay').forEach(o => {
     if (NO_BACKDROP_CLOSE.includes(o.id)) return;
     o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); });
+  });
+
+  // Escape closes the topmost open modal / wizard
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    const wiz = document.getElementById('popupWizard');
+    if (wiz && !wiz.classList.contains('hidden')) { wiz.classList.add('hidden'); return; }
+    const open = [...document.querySelectorAll('.overlay.open')];
+    if (open.length) open[open.length - 1].classList.remove('open');
   });
 
   function toast(msg) {
@@ -3912,7 +3877,6 @@
 
   // ── SHOP ──
   let editingShopItemId = null;
-  let editingShopItemImg = '';
 
   document.getElementById('addShopItemBtn').onclick  = () => openShopModal(null);
   document.getElementById('shopModalCancel').onclick = () => closeModal('shopModal');
@@ -3954,12 +3918,12 @@
       const isHidden = item.available === false;
       row.innerHTML = `
         <div class="cat-drag" title="Drag to reorder" style="margin-right:4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg></div>
-        ${item.img ? `<img class="item-thumb" draggable="false" src="${item.img}" onerror="this.style.display='none'">` : '<div class="item-thumb"></div>'}
+        ${item.img ? `<img class="item-thumb" draggable="false" src="${esc(itemImgSrc(item.img))}" onerror="this.style.display='none'">` : '<div class="item-thumb"></div>'}
         <div class="item-info">
-          <div class="item-name">${item.name || '—'}</div>
-          <div class="item-desc">${item.desc || ''}</div>
+          <div class="item-name">${esc(item.name) || '—'}</div>
+          <div class="item-desc">${esc(item.desc)}</div>
         </div>
-        <div class="item-price">${item.price || ''}</div>
+        <div class="item-price">${esc(item.price)}</div>
         <span class="status-badge ${isHidden ? 'status-hidden' : 'status-live'}">${isHidden ? 'Hidden' : 'Live'}</span>
         <div class="cat-actions">
           <button class="icon-btn blue edit-shop-btn" title="Edit">
@@ -3995,7 +3959,6 @@
 
   function openShopModal(item) {
     editingShopItemId = item ? item.id : null;
-    editingShopItemImg = item?.img || '';
     document.getElementById('shopModalTitle').textContent = item ? 'Edit item' : 'Add item';
     document.getElementById('sName').value      = item?.name    || '';
     document.getElementById('sNameHe').value    = item?.nameHe  || '';
@@ -4004,13 +3967,16 @@
     document.getElementById('sDescHe').value    = item?.descHe  || '';
     document.getElementById('sDescRu').value    = item?.descRu  || '';
     document.getElementById('sPrice').value     = item?.price   || '';
-    document.getElementById('sImg').value       = item?.img     || '';
+    const sArea = document.getElementById('sUploadArea');
     const sPreview = document.getElementById('sImgPreview');
     const sPlaceholder = document.getElementById('sUploadPlaceholder');
     const sRemove = document.getElementById('sImgRemove');
     document.getElementById('sImgFile').value = '';
+    sArea.dataset.newFile = '';
+    sArea.dataset.removed = '';
+    sArea.dataset.existingUrl = item?.img || '';
     if (item?.img) {
-      sPreview.src = item.img.startsWith('http') ? item.img : '/' + item.img;
+      sPreview.src = itemImgSrc(item.img);
       sPreview.style.display = 'block';
       sPlaceholder.style.display = 'none';
       sRemove.style.display = 'block';
@@ -4026,28 +3992,54 @@
   }
 
   async function saveShopItem() {
-    const data = {
-      name:      document.getElementById('sName').value.trim(),
-      nameHe:    document.getElementById('sNameHe').value.trim(),
-      nameRu:    document.getElementById('sNameRu').value.trim(),
-      desc:      document.getElementById('sDesc').value.trim(),
-      descHe:    document.getElementById('sDescHe').value.trim(),
-      descRu:    document.getElementById('sDescRu').value.trim(),
-      price:     document.getElementById('sPrice').value.trim(),
-      img:       document.getElementById('sImg').value.trim() || editingShopItemImg,
-      available: document.getElementById('sAvailable').checked,
-      updatedAt: serverTimestamp(),
-    };
-    if (!data.name) return;
-    if (editingShopItemId) {
-      await updateDoc(doc(db, 'shop', editingShopItemId), data);
-      toast('Saved ✓');
-    } else {
-      await addDoc(collection(db, 'shop'), data);
-      toast('Added ✓');
+    const nameInput = document.getElementById('sName');
+    if (!nameInput.value.trim()) {
+      document.querySelector('#shopModal .tab').click();
+      nameInput.focus();
+      toast('❌ Name (English) is required');
+      return;
     }
-    closeModal('shopModal');
-    loadShop();
+    const area = document.getElementById('sUploadArea');
+    const file = document.getElementById('sImgFile').files[0];
+    const isNewFile = area.dataset.newFile === '1';
+    const isRemoved = area.dataset.removed === '1';
+
+    const btn = document.getElementById('shopModalSave');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    try {
+      let img = area.dataset.existingUrl || '';
+      if (isRemoved) img = '';
+      if (isNewFile && file) {
+        btn.textContent = 'Uploading photo…';
+        img = await uploadToCloudinary(file, 'bulweb/shop');
+      }
+      const data = {
+        name:      nameInput.value.trim(),
+        nameHe:    document.getElementById('sNameHe').value.trim(),
+        nameRu:    document.getElementById('sNameRu').value.trim(),
+        desc:      document.getElementById('sDesc').value.trim(),
+        descHe:    document.getElementById('sDescHe').value.trim(),
+        descRu:    document.getElementById('sDescRu').value.trim(),
+        price:     document.getElementById('sPrice').value.trim(),
+        img:       img,
+        available: document.getElementById('sAvailable').checked,
+        updatedAt: serverTimestamp(),
+      };
+      if (editingShopItemId) {
+        await updateDoc(doc(db, 'shop', editingShopItemId), data);
+        toast('Saved ✓');
+      } else {
+        await addDoc(collection(db, 'shop'), data);
+        toast('Added ✓');
+      }
+      closeModal('shopModal');
+      loadShop();
+    } catch (e) {
+      console.error('saveShopItem error:', e);
+      toast('❌ ' + ((e.message || '').includes('Cloudinary') ? 'Photo upload failed. Check internet and try again.' : 'Save failed: ' + e.message));
+    } finally {
+      btn.disabled = false; btn.textContent = 'Save';
+    }
   }
 
   document.getElementById('navShop').onclick = () => { setActiveNav('Shop'); loadShop(); stopLiveCounter(); };
@@ -4076,7 +4068,6 @@
   let editingBadgeId = null;
 
   document.getElementById('navBadges').onclick = () => { setActiveNav('Badges'); loadBadges(); stopLiveCounter(); };
-  document.getElementById('navChanges').onclick = () => { setActiveNav('Changes'); showView('viewChanges'); stopLiveCounter(); };
 
   document.getElementById('addBadgeBtn').onclick = () => openBadgeModal(null);
   document.getElementById('badgeModalCancel').onclick = () => closeModal('badgeModal');
@@ -4106,20 +4097,20 @@
       if (badge.icon) {
         try {
           const ic = JSON.parse(badge.icon);
-          iconHtml = `<img src="${ic.img}" style="width:40px;height:40px;object-fit:contain" alt="${ic.label||''}">`;
+          iconHtml = `<img src="${esc(ic.img)}" style="width:40px;height:40px;object-fit:contain" alt="${esc(ic.label)}">`;
         } catch(e) {
           // старый формат — просто имя файла
           const name = badge.icon.replace(/^.*[\\/]/, '').replace(/\.[^.]+$/, '');
-          iconHtml = `<img src="../img/Badges/${name}.webp" style="width:40px;height:40px;object-fit:contain" alt="${badge.name||''}">`;
+          iconHtml = `<img src="../img/Badges/${esc(name)}.webp" style="width:40px;height:40px;object-fit:contain" alt="${esc(badge.name)}">`;
         }
       }
-      const badgeData = JSON.stringify({ id: badge.id, name: badge.name || '', icon: badge.icon || '' }).replace(/'/g, '&#39;');
+      const badgeData = esc(JSON.stringify({ id: badge.id, name: badge.name || '', icon: badge.icon || '' }));
       const card = document.createElement('div');
       card.style.cssText = 'background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 16px 12px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow)';
       card.innerHTML = `
         <div style="display:flex;align-items:center;gap:12px">
           <span style="flex-shrink:0">${iconHtml}</span>
-          <span style="font-size:15px;font-weight:600;color:var(--ink)">${badge.name || '—'}</span>
+          <span style="font-size:15px;font-weight:600;color:var(--ink)">${esc(badge.name) || '—'}</span>
         </div>
         <div style="display:flex;align-items:center;gap:12px">
           <button data-id="${badge.id}" class="badge-delete-btn" style="background:none;border:none;cursor:pointer;font-size:13px;color:var(--danger);font-family:var(--sans);display:flex;align-items:center;gap:4px">
@@ -4299,7 +4290,7 @@
     grid.innerHTML = '';
     addons.forEach(a => {
       const isGroup = a.type === 'group';
-      const addonData = JSON.stringify(a).replace(/'/g, '&#39;');
+      const addonData = esc(JSON.stringify(a));
       const card = document.createElement('div');
       card.style.cssText = 'background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 16px 12px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow)';
       let header;
@@ -4308,17 +4299,17 @@
         const modeTag = a.mode === 'single' ? 'one choice' : 'several';
         header = `
         <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
-          <span style="font-size:15px;font-weight:600;color:var(--ink)">${a.label || '—'}</span>
+          <span style="font-size:15px;font-weight:600;color:var(--ink)">${esc(a.label) || '—'}</span>
           <span style="font-size:11px;font-weight:600;color:var(--muted);background:var(--lineSoft);padding:2px 8px;border-radius:100px;white-space:nowrap">${modeTag}</span>
         </div>
-        <div style="font-size:12px;color:var(--muted)">${opts.map(o => `${o.label} +₪${o.price ?? 0}`).join(' · ') || '—'}</div>`;
+        <div style="font-size:12px;color:var(--muted)">${opts.map(o => `${esc(o.label)} +₪${esc(o.price ?? 0)}`).join(' · ') || '—'}</div>`;
       } else {
         header = `
         <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
-          <span style="font-size:15px;font-weight:600;color:var(--ink)">${a.label || '—'}</span>
-          <span style="font-size:14px;font-weight:600;color:var(--accent);white-space:nowrap">+₪${a.price ?? 0}</span>
+          <span style="font-size:15px;font-weight:600;color:var(--ink)">${esc(a.label) || '—'}</span>
+          <span style="font-size:14px;font-weight:600;color:var(--accent);white-space:nowrap">+₪${esc(a.price ?? 0)}</span>
         </div>
-        <div style="font-size:12px;color:var(--muted)">${[a.labelHe, a.labelRu].filter(Boolean).join(' · ') || '—'}</div>`;
+        <div style="font-size:12px;color:var(--muted)">${[a.labelHe, a.labelRu].filter(Boolean).map(esc).join(' · ') || '—'}</div>`;
       }
       card.innerHTML = `
         ${header}
@@ -4459,14 +4450,14 @@
       const card = document.createElement('div');
       card.className = 'popup-card';
       const imgHtml = p.imageURL
-        ? `<div class="popup-card-img"><img src="${p.imageURL}" alt=""></div>`
+        ? `<div class="popup-card-img"><img src="${esc(p.imageURL)}" alt=""></div>`
         : `<div class="popup-card-img"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/></svg></div>`;
       const triggerLabel = { page_load: 'On page visit', item_added: 'Item added to cart', click_item: 'On item click' }[p.trigger] || p.trigger;
       card.innerHTML = `
         ${imgHtml}
         <div class="popup-card-body">
-          <div class="popup-card-name">${p.nameRu || p.nameHe || p.nameEn || '(no name)'}</div>
-          <div class="popup-card-meta">${triggerLabel} · Priority ${p.priority || 1}</div>
+          <div class="popup-card-name">${esc(p.nameRu || p.nameHe || p.nameEn) || '(no name)'}</div>
+          <div class="popup-card-meta">${esc(triggerLabel)} · Priority ${esc(p.priority || 1)}</div>
         </div>
         <div class="popup-card-actions">
           <label class="toggle" title="Enable/disable">
@@ -4513,6 +4504,7 @@
     document.getElementById('pwizExpiry').value = '';
     document.getElementById('pwizPriority').value = '1';
     document.getElementById('pwizUploadZone').dataset.b64 = '';
+    document.getElementById('pwizUploadZone').dataset.newFile = '';
     document.getElementById('pwizUploadZone').style.display = 'block';
     document.getElementById('pwizImgInput').value = '';
     document.getElementById('pwizImgPreview').style.display = 'none';
@@ -4575,7 +4567,8 @@
     document.getElementById('sumNameHe').textContent = document.getElementById('pwizNameHe').value || '—';
     const descRu = document.getElementById('pwizDescRu').value;
     document.getElementById('sumDesc').textContent = descRu ? (descRu.length > 40 ? descRu.slice(0, 40) + '…' : descRu) : '—';
-    document.getElementById('sumImg').textContent = document.getElementById('pwizUploadZone').dataset.b64 ? 'Image attached' : 'No image';
+    const pz = document.getElementById('pwizUploadZone');
+    document.getElementById('sumImg').textContent = (pz.dataset.b64 || pz.dataset.newFile === '1') ? 'Image attached' : 'No image';
     document.getElementById('sumTrigger').textContent = triggerMap[document.getElementById('pwizTrigger').value] || '—';
     document.getElementById('sumAction').textContent = actionMap[document.getElementById('pwizAction').value] || '—';
     document.getElementById('sumPriority').textContent = document.getElementById('pwizPriority').value || '1';
@@ -4606,36 +4599,25 @@
     document.getElementById('pwizExpiryWrap').style.display = this.checked ? 'none' : '';
   });
 
-  function fileToBase64(file) {
-    return new Promise((resolve, reject) => {
-      const MAX = 800 * 1024;
-      if (file.size > MAX) { reject(new Error('Image too large. Max 800KB.')); return; }
-      const reader = new FileReader();
-      reader.onload = e => resolve(e.target.result);
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-  }
-
-  document.getElementById('pwizImgInput').addEventListener('change', async function() {
+  // New popup images go to Cloudinary on save; dataset.b64 keeps the already
+  // saved image (URL, or base64 from older popups) when editing.
+  document.getElementById('pwizImgInput').addEventListener('change', function() {
     const file = this.files[0];
     if (!file) return;
-    try {
-      const b64 = await fileToBase64(file);
-      document.getElementById('pwizImgThumb').src = b64;
-      document.getElementById('pwizImgName').textContent = file.name + ' (' + (file.size / 1024).toFixed(0) + ' KB)';
-      document.getElementById('pwizImgPreview').style.display = 'flex';
-      document.getElementById('pwizUploadZone').style.display = 'none';
-      document.getElementById('pwizUploadZone').dataset.b64 = b64;
-    } catch(e) {
-      toast(e.message);
-      this.value = '';
-    }
+    if (file.size > 10 * 1024 * 1024) { toast('Image too large. Max 10 MB.'); this.value = ''; return; }
+    const zone = document.getElementById('pwizUploadZone');
+    zone.dataset.newFile = '1';
+    document.getElementById('pwizImgThumb').src = URL.createObjectURL(file);
+    document.getElementById('pwizImgName').textContent = file.name + ' (' + (file.size / 1024).toFixed(0) + ' KB)';
+    document.getElementById('pwizImgPreview').style.display = 'flex';
+    zone.style.display = 'none';
   });
 
   document.getElementById('pwizImgRemove').addEventListener('click', function() {
-    document.getElementById('pwizUploadZone').dataset.b64 = '';
-    document.getElementById('pwizUploadZone').style.display = 'block';
+    const zone = document.getElementById('pwizUploadZone');
+    zone.dataset.b64 = '';
+    zone.dataset.newFile = '';
+    zone.style.display = 'block';
     document.getElementById('pwizImgPreview').style.display = 'none';
     document.getElementById('pwizImgInput').value = '';
   });
@@ -4675,9 +4657,15 @@
     const noExpiry = document.getElementById('pwizNoExpiry').checked;
     const expiry = noExpiry ? null : (document.getElementById('pwizExpiry').value || null);
     const editingId = pwizEditingId;
-    const imgURL = document.getElementById('pwizUploadZone').dataset.b64 || null;
+    const zone = document.getElementById('pwizUploadZone');
 
     const doSave = async () => {
+      let imgURL = zone.dataset.b64 || null;
+      const newFile = zone.dataset.newFile === '1' ? document.getElementById('pwizImgInput').files[0] : null;
+      if (newFile) {
+        btn.textContent = 'Uploading…';
+        imgURL = await uploadToCloudinary(newFile, 'bulweb/popups');
+      }
       const data = {
         nameHe, nameRu, nameEn, descHe, descRu, descEn,
         imageOnly, imageURL: imgURL || null,
@@ -4742,8 +4730,8 @@
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
         </div>
         <div class="popup-card-body">
-          <div class="popup-card-name">${a.titleRu || a.titleEn || a.titleHe || '(no title)'}</div>
-          <div class="popup-card-meta" style="display:flex;align-items:center;gap:8px">${statusTag} <span>${dateRange}</span></div>
+          <div class="popup-card-name">${esc(a.titleRu || a.titleEn || a.titleHe) || '(no title)'}</div>
+          <div class="popup-card-meta" style="display:flex;align-items:center;gap:8px">${statusTag} <span>${esc(dateRange)}</span></div>
         </div>
         <div class="popup-card-actions">
           <label class="toggle" title="Enable/disable">
@@ -4861,17 +4849,12 @@
     const isRemoved = annArea.dataset.removed === '1';
     const existingUrl = annArea.dataset.existingUrl || null;
 
+    try {
     let imageURL = existingUrl;
     if (isRemoved) imageURL = null;
     if (isNewFile && annImgFile) {
       btn.textContent = 'Uploading…';
-      const fd = new FormData();
-      fd.append('file', annImgFile);
-      fd.append('upload_preset', CLOUDINARY_PRESET);
-      fd.append('folder', 'bulweb/announcements');
-      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, { method: 'POST', body: fd });
-      const json = await res.json();
-      imageURL = json.secure_url;
+      imageURL = await uploadToCloudinary(annImgFile, 'bulweb/announcements');
     }
 
     const data = {
@@ -4888,7 +4871,6 @@
       imageURL: imageURL,
       updatedAt: new Date().toISOString(),
     };
-    try {
       if (annEditingId) {
         await updateDoc(doc(db, 'announcements', annEditingId), data);
         toast(ADMIN_I18N.t('toastSaved'));
@@ -5049,17 +5031,6 @@
         caption3Ru:'терраса', caption3En:'the terrace', caption3He:'המרפסת', img3:'img/Main page/tables.webp',
         caption4Ru:'флэт уайт, 09:14', caption4En:'flat white, 09:14', caption4He:'פלט וייט, 09:14', img4:'img/Main page/clients2.webp',
         caption5Ru:'утренний ритуал', caption5En:'morning ritual', caption5He:'טקס הבוקר', img5:'img/Main page/creambon.jpg',
-      },
-      medovik: {
-        eyebrowRu:'Ради чего мы открылись', eyebrowEn:'The reason we opened', eyebrowHe:'הסיבה שפתחנו',
-        titleRu:'Медовик', titleEn:'Medovik', titleHe:'מדוביק',
-        storyRu:'Восемь тончайших коржей медового бисквита, испечённых по одному и переложенных на смазанных сметанным кремом. Ночь в холодильнике — чтобы коржи пропитались, а крем схватился до идеального среза.',
-        storyEn:'Eight paper-thin sheets of honey sponge, baked one at a time and stacked with sour-cream cream. Rested overnight in the fridge so the layers go tender and the cream sets enough to slice clean.',
-        storyHe:'שמונה שכבות דקות כנייר של בצק דבש, אפויות אחת אחת ומוערמות עם קרם שמנת חמוצה. נח לילה שלם במקרר כדי שהשכבות יתרככו והקרם יתייצב לפרוסה נקייה.',
-        stat1KeyRu:'Коржей', stat1KeyEn:'Layers', stat1KeyHe:'שכבות', stat1ValRu:'8', stat1ValEn:'8', stat1ValHe:'8',
-        stat2KeyRu:'Пропитка', stat2KeyEn:'Rests', stat2KeyHe:'מנוחה', stat2ValRu:'12 ч', stat2ValEn:'12 hrs', stat2ValHe:'12 שעות',
-        stat3KeyRu:'Мёд', stat3KeyEn:'Honey', stat3KeyHe:'דבש', stat3ValRu:'Местный', stat3ValEn:'Local', stat3ValHe:'מקומי',
-        img:'img/Cakes/medovik_hd.webp',
       },
       visit: {
         tagline:'I have a dream', phone:'+972 (52) 966-2724',
@@ -5277,7 +5248,7 @@
       function render() {
         grid.innerHTML = items.map((it, i) => `
           <div style="position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;border:1.5px solid var(--line);background:#f4f2ee">
-            <img src="${it.file ? it.blob : itemImgSrc(it.url)}" style="width:100%;height:100%;object-fit:cover;display:block">
+            <img src="${esc(it.file ? it.blob : itemImgSrc(it.url))}" style="width:100%;height:100%;object-fit:cover;display:block">
             ${it.file ? '<span style="position:absolute;top:5px;left:5px;background:#4a7c3f;color:#fff;font-size:9px;font-weight:600;padding:2px 7px;border-radius:100px;letter-spacing:.04em">NEW</span>' : ''}
             <button type="button" class="gal-rm" data-i="${i}" style="position:absolute;top:5px;right:5px;width:22px;height:22px;border:none;border-radius:50%;background:rgba(15,17,21,0.7);color:#fff;font-size:12px;line-height:1;cursor:pointer">✕</button>
           </div>`).join('') + `
@@ -5322,33 +5293,6 @@
       return { load };
     })();
 
-    // ── MEDOVIK (text + 3 stats + photo) ──
-    (function buildMedovikStats() {
-      const wrap = document.getElementById('hpMedovikStats');
-      let html = '';
-      for (let i = 1; i <= 3; i++) {
-        html += `<div style="padding-top:${i===1?0:14}px;${i===1?'':'border-top:1px solid var(--line)'}">
-          <div class="modal-section-title" style="margin:0 0 8px">Stat ${i} — label / value</div>
-          <div class="modal-grid">
-            <div class="field"><label>Label RU</label><input type="text" id="hpMedovikStat${i}KeyRu"></div>
-            <div class="field"><label>Label EN</label><input type="text" id="hpMedovikStat${i}KeyEn"></div>
-          </div>
-          <div class="field" style="margin-top:8px"><label>Label HE</label><input type="text" id="hpMedovikStat${i}KeyHe" dir="rtl"></div>
-          <div class="modal-grid" style="margin-top:8px">
-            <div class="field"><label>Value RU</label><input type="text" id="hpMedovikStat${i}ValRu"></div>
-            <div class="field"><label>Value EN</label><input type="text" id="hpMedovikStat${i}ValEn"></div>
-          </div>
-          <div class="field" style="margin-top:8px"><label>Value HE</label><input type="text" id="hpMedovikStat${i}ValHe" dir="rtl"></div>
-        </div>`;
-      }
-      wrap.innerHTML = html;
-    })();
-    const MEDOVIK_FIELDS = ['eyebrowRu','eyebrowEn','eyebrowHe','titleRu','titleEn','titleHe','storyRu','storyEn','storyHe'];
-    for (let i = 1; i <= 3; i++) ['KeyRu','KeyEn','KeyHe','ValRu','ValEn','ValHe'].forEach(s => MEDOVIK_FIELDS.push(`stat${i}${s}`));
-    const medovik = imgTextSaver('medovik', 'hpMedovik', MEDOVIK_FIELDS, 'img',
-      { area:'hpMedovikUploadArea', file:'hpMedovikImgFile', preview:'hpMedovikImgPreview', placeholder:'hpMedovikUploadPlaceholder', remove:'hpMedovikImgRemove' },
-      'hpMedovikSaveBtn','hpMedovikResetBtn','Medovik');
-
     // ── VISIT (text + bg photo) ──
     const VISIT_FIELDS = ['tagline','phone','hours1Ru','hours1En','hours1He','hours2Ru','hours2En','hours2He','hours3Ru','hours3En','hours3He','addressRu','addressEn','addressHe'];
     const visit = imgTextSaver('visit', 'hpVisit', VISIT_FIELDS, 'bgImg',
@@ -5369,7 +5313,7 @@
 
     function loadHomepage() {
       showView('viewHomepage');
-      loadHero(); story.load(); tickerSaver.load(); loadRoom(); galleryUI.load(); medovik.load(); visit.load();
+      loadHero(); story.load(); tickerSaver.load(); loadRoom(); galleryUI.load(); visit.load();
       // collapse all on entry so the user picks a section
       hpCards.forEach(c => c.classList.remove('open'));
     }
