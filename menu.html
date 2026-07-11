@@ -2755,6 +2755,7 @@
       newOrder: { en: 'New order', he: 'הזמנה חדשה', ru: 'Новый заказ' },
       errName:  { en: 'Please enter your name and phone', he: 'נא למלא שם וטלפון', ru: 'Укажите имя и телефон' },
       errClosed:{ en: 'The café is closed right now — ordering is paused', he: 'בית הקפה סגור כרגע — לא ניתן להזמין', ru: 'Кофейня сейчас закрыта — приём заказов на паузе' },
+      errOff:   { en: 'Online ordering is unavailable right now — use WhatsApp', he: 'הזמנות אונליין אינן זמינות כרגע — אפשר בוואטסאפ', ru: 'Онлайн-заказы временно недоступны — закажите через WhatsApp' },
       errRate:  { en: 'Too many orders in a row — try later', he: 'יותר מדי הזמנות ברצף — נסו מאוחר יותר', ru: 'Слишком много заказов подряд — попробуйте позже' },
       errSold:  { en: 'Sold out', he: 'אזל מהמלאי', ru: 'Закончилось' },
       errMiss:  { en: 'These items can’t be ordered online — send them via WhatsApp:', he: 'את הפריטים האלה אי אפשר להזמין אונליין — שלחו אותם בוואטסאפ:', ru: 'Эти позиции нельзя заказать онлайн — отправьте их через WhatsApp:' },
@@ -2864,6 +2865,7 @@
       koSubmit.textContent = koL('sending');
       try {
         const menu = await kassaMenu();
+        if (menu.location.accepting === false) { koShowErr(esc(koL('errOff'))); return; }
         if (!menu.location.is_open) { koShowErr(esc(koL('errClosed'))); return; }
         const { out, missing } = koResolve(menu);
         if (missing.length) {
@@ -2893,7 +2895,8 @@
         const body = await res.json().catch(() => ({}));
         if (!res.ok) {
           const code = body.error || 'unknown';
-          if (code === 'closed') koShowErr(esc(koL('errClosed')));
+          if (code === 'disabled') koShowErr(esc(koL('errOff')));
+          else if (code === 'closed') koShowErr(esc(koL('errClosed')));
           else if (code === 'rate_limited' || code === 'busy') koShowErr(esc(koL('errRate')));
           else if (code === 'item_unavailable') koShowErr(esc(koL('errSold')) + (body.detail ? ': ' + esc(body.detail) : ''));
           else koShowErr(esc(koL('errGen')));
