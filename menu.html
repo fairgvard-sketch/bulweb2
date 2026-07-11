@@ -2298,6 +2298,30 @@
   <span id="cartToastText" data-en="Added to cart" data-he="נוסף לעגלה" data-ru="Добавлено в корзину">Added to cart</span>
 </div>
 
+<!-- ─── ONLINE ORDER → KASSA (checkout + status) ──────────── -->
+<style>
+  .ko-form { display:none; margin-top:14px; padding-top:14px; border-top:1px solid var(--brown-faint); }
+  .ko-form.open { display:block; }
+  .ko-field { width:100%; height:46px; padding:0 14px; margin-bottom:10px; border:1px solid rgba(42,31,24,0.18); border-radius:10px; background:#fff; font:inherit; font-size:15px; color:var(--brown-dark); box-sizing:border-box; }
+  .ko-field:focus { outline:none; border-color:var(--brown-mid); }
+  .ko-field::placeholder { color:var(--brown-light); }
+  .ko-time-row { display:flex; gap:8px; margin-bottom:10px; }
+  .ko-chip { flex:1; height:44px; border-radius:100px; border:1px solid rgba(42,31,24,0.18); background:#fff; font:inherit; font-size:14px; color:var(--brown-dark); cursor:pointer; transition:background 0.15s; }
+  .ko-chip.active { background:var(--brown-dark); color:#fbf8f2; border-color:var(--brown-dark); }
+  .ko-time-input { width:104px; height:44px; border:1px solid rgba(42,31,24,0.18); border-radius:10px; padding:0 8px; font:inherit; font-size:14px; color:var(--brown-dark); display:none; box-sizing:border-box; }
+  .ko-err { display:none; margin:0 0 10px; padding:10px 12px; border-radius:10px; background:#fdf0ee; color:#a4392b; font-size:13.5px; line-height:1.4; }
+  .ko-wa { width:100%; margin-top:8px; height:40px; background:none; border:none; font:inherit; font-size:13.5px; color:var(--brown-light); text-decoration:underline; cursor:pointer; }
+  .ko-wa:hover { color:var(--brown-mid); }
+  .ko-hint { font-size:12.5px; color:var(--brown-light); margin:8px 0 0; text-align:center; }
+  .ko-status { display:none; text-align:center; padding:36px 20px; }
+  .ko-spinner { width:34px; height:34px; margin:0 auto 18px; border-radius:50%; border:3px solid rgba(42,31,24,0.12); border-top-color:var(--brown-dark); animation:koSpin 0.9s linear infinite; }
+  @keyframes koSpin { to { transform:rotate(360deg); } }
+  .ko-status-title { font-family:var(--serif); font-weight:300; font-size:26px; color:var(--brown-dark); margin:0 0 8px; }
+  .ko-status-sub { font-size:14px; color:var(--brown-light); line-height:1.5; margin:0; }
+  .ko-num { font-family:var(--serif); font-weight:300; font-size:64px; color:var(--brown-dark); line-height:1.1; margin:6px 0 10px; }
+  .ko-new-btn { margin-top:22px; height:46px; padding:0 26px; border-radius:100px; border:1px solid var(--brown-dark); background:var(--brown-dark); color:#fbf8f2; font:inherit; font-size:14px; cursor:pointer; }
+</style>
+
 <!-- ─── CART ───────────────────────────────────────────────── -->
 <div class="cart-overlay-bg" id="cartBg"></div>
 <aside class="cart-panel" id="cartPanel">
@@ -2310,12 +2334,29 @@
   <div class="cart-items" id="cartItems">
     <p class="cart-empty" data-en="No items yet" data-he="אין פריטים עדיין" data-ru="Корзина пуста">No items yet</p>
   </div>
-  <div class="cart-foot">
+  <!-- Статус онлайн-заказа: занимает место списка, пока заказ активен -->
+  <div class="ko-status" id="koStatus"></div>
+  <div class="cart-foot" id="cartFoot">
     <div class="cart-total-row">
       <span class="cart-total-label" data-en="Subtotal" data-he='סה"כ ביניים' data-ru="Подытог">Subtotal</span>
       <span class="cart-total-sum" id="cartTotal">₪0</span>
     </div>
     <button class="cart-finalize-btn" id="cartFinalize" data-en="Finalize the order" data-he="לסיום ההזמנה" data-ru="Оформить заказ">Finalize the order</button>
+    <!-- Онлайн-заказ в кассу: форма раскрывается по «Оформить заказ» -->
+    <div class="ko-form" id="koForm">
+      <input class="ko-field" id="koName" autocomplete="name">
+      <input class="ko-field" id="koPhone" type="tel" dir="ltr" autocomplete="tel">
+      <div class="ko-time-row">
+        <button class="ko-chip active" id="koAsap" type="button"></button>
+        <button class="ko-chip" id="koLater" type="button"></button>
+        <input class="ko-time-input" id="koTime" type="time">
+      </div>
+      <input class="ko-field" id="koNote">
+      <div class="ko-err" id="koErr"></div>
+      <button class="cart-finalize-btn" id="koSubmit"></button>
+      <button class="ko-wa" id="koWhatsapp" type="button"></button>
+      <p class="ko-hint" id="koHint"></p>
+    </div>
     <button class="cart-clear-btn" id="cartClear" style="display:none" data-en="Clear cart" data-he="רוקן עגלה" data-ru="Очистить корзину">Clear cart</button>
   </div>
 </aside>
@@ -2666,7 +2707,86 @@
       });
     }
 
+    // ─── ОНЛАЙН-ЗАКАЗ В КАССУ (Kassa / Arrow POS) ─────────
+    // «Оформить» раскрывает форму: имя/телефон/время → POST в public-order.
+    // Корзина матчится с каталогом кассы по ивритским названиям через живое
+    // public-menu (цены и чек считает касса). WhatsApp — запасной путь.
+    const KASSA_FN  = 'https://qgmnxrgtlpyqglwqmsej.supabase.co/functions/v1';
+    const KASSA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnbW54cmd0bHB5cWdsd3Ftc2VqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMyNTg3MDgsImV4cCI6MjA5ODgzNDcwOH0.CuDJ-Gc6QMwWZS6epCOG04xJS6TnccBUUIwXML_72bU';
+    const KASSA_LOC = 'fe2eebf0-65e3-45b4-a81f-331359d71955';
+    const KASSA_HDR = { apikey: KASSA_KEY, Authorization: 'Bearer ' + KASSA_KEY };
+    const KO_LS = 'bulochka-kassa-order';
+    const WA_PHONE = '972529662724';
+    // Позиции, названные в кассе иначе, чем на сайте
+    const KO_ALIASES = { 'שוקו חם עם מרשמלו': 'שוקו חם', 'קרואסון שוקולד קטן': 'קרואסון שוקולד' };
+
+    const koForm = document.getElementById('koForm');
+    const koStatusEl = document.getElementById('koStatus');
+    const cartFoot = document.getElementById('cartFoot');
+    const koName = document.getElementById('koName');
+    const koPhone = document.getElementById('koPhone');
+    const koNote = document.getElementById('koNote');
+    const koAsap = document.getElementById('koAsap');
+    const koLater = document.getElementById('koLater');
+    const koTime = document.getElementById('koTime');
+    const koErr = document.getElementById('koErr');
+    const koSubmit = document.getElementById('koSubmit');
+    const koWa = document.getElementById('koWhatsapp');
+    const koHint = document.getElementById('koHint');
+
+    const KO_T = {
+      name:     { en: 'Your name', he: 'השם שלך', ru: 'Ваше имя' },
+      phone:    { en: 'Phone', he: 'טלפון', ru: 'Телефон' },
+      note:     { en: 'Note (optional)', he: 'הערה (לא חובה)', ru: 'Комментарий (не обязательно)' },
+      asap:     { en: 'As soon as possible', he: 'בהקדם האפשרי', ru: 'Как можно скорее' },
+      later:    { en: 'Pick a time', he: 'לשעה', ru: 'Ко времени' },
+      submit:   { en: 'Send the order', he: 'לשלוח הזמנה', ru: 'Отправить заказ' },
+      sending:  { en: 'Sending…', he: 'שולחים…', ru: 'Отправляем…' },
+      wa:       { en: 'or order via WhatsApp', he: 'או להזמין בוואטסאפ', ru: 'или заказать через WhatsApp' },
+      hint:     { en: 'Pay at the counter on pickup', he: 'התשלום בקופה בעת האיסוף', ru: 'Оплата на кассе при получении' },
+      waiting:  { en: 'Waiting for the café to confirm', he: 'ממתינים לאישור בית הקפה', ru: 'Ждём подтверждения кофейни' },
+      waitSub:  { en: 'Usually under a minute. You can close the page — the order will be here.', he: 'בדרך כלל פחות מדקה. אפשר לסגור את הדף — ההזמנה תישאר כאן.', ru: 'Обычно меньше минуты. Страницу можно закрыть — заказ останется здесь.' },
+      accepted: { en: 'Order confirmed — being prepared!', he: 'ההזמנה אושרה — מכינים!', ru: 'Заказ принят — готовим!' },
+      accSub:   { en: 'Show this number at the counter. Pay on pickup.', he: 'הציגו את המספר בקופה. התשלום בעת האיסוף.', ru: 'Назовите номер на кассе. Оплата при получении.' },
+      done:     { en: 'Order picked up', he: 'ההזמנה נמסרה', ru: 'Заказ выдан' },
+      doneSub:  { en: 'Thank you! See you again.', he: 'תודה! נתראה שוב.', ru: 'Спасибо! Приходите ещё.' },
+      rejected: { en: 'The café could not take the order', he: 'בית הקפה לא יכול היה לקבל את ההזמנה', ru: 'Кофейня не смогла принять заказ' },
+      cancelled:{ en: 'Order cancelled', he: 'ההזמנה בוטלה', ru: 'Заказ отменён' },
+      newOrder: { en: 'New order', he: 'הזמנה חדשה', ru: 'Новый заказ' },
+      errName:  { en: 'Please enter your name and phone', he: 'נא למלא שם וטלפון', ru: 'Укажите имя и телефон' },
+      errClosed:{ en: 'The café is closed right now — ordering is paused', he: 'בית הקפה סגור כרגע — לא ניתן להזמין', ru: 'Кофейня сейчас закрыта — приём заказов на паузе' },
+      errRate:  { en: 'Too many orders in a row — try later', he: 'יותר מדי הזמנות ברצף — נסו מאוחר יותר', ru: 'Слишком много заказов подряд — попробуйте позже' },
+      errSold:  { en: 'Sold out', he: 'אזל מהמלאי', ru: 'Закончилось' },
+      errMiss:  { en: 'These items can’t be ordered online — send them via WhatsApp:', he: 'את הפריטים האלה אי אפשר להזמין אונליין — שלחו אותם בוואטסאפ:', ru: 'Эти позиции нельзя заказать онлайн — отправьте их через WhatsApp:' },
+      errGen:   { en: 'Could not send the order. Try again or use WhatsApp.', he: 'שליחת ההזמנה נכשלה. נסו שוב או בוואטסאפ.', ru: 'Не удалось отправить заказ. Попробуйте ещё раз или через WhatsApp.' },
+    };
+    const koL = (k) => { const l = document.documentElement.lang; return KO_T[k][l] || KO_T[k].en; };
+
+    function applyKoLabels() {
+      koName.placeholder = koL('name');
+      koPhone.placeholder = koL('phone');
+      koNote.placeholder = koL('note');
+      koAsap.textContent = koL('asap');
+      koLater.textContent = koL('later');
+      if (!koSubmit.disabled) koSubmit.textContent = koL('submit');
+      koWa.textContent = koL('wa');
+      koHint.textContent = koL('hint');
+    }
+    applyKoLabels();
+    document.addEventListener('bulochka-lang-changed', () => { applyKoLabels(); renderKoStatus(); });
+
+    koAsap.addEventListener('click', () => { koAsap.classList.add('active'); koLater.classList.remove('active'); koTime.style.display = 'none'; });
+    koLater.addEventListener('click', () => { koLater.classList.add('active'); koAsap.classList.remove('active'); koTime.style.display = 'block'; koTime.focus(); });
+
     finalizeBtn.addEventListener('click', () => {
+      if (!cart.length) return;
+      koForm.classList.add('open');
+      finalizeBtn.style.display = 'none';
+      koName.focus();
+    });
+
+    // Запасной путь: прежнее сообщение в WhatsApp
+    koWa.addEventListener('click', () => {
       if (!cart.length) return;
       const lang = document.documentElement.lang;
       const head = lang === 'he' ? 'הזמנה חדשה:' : lang === 'ru' ? 'Новый заказ:' : 'New order:';
@@ -2679,8 +2799,194 @@
       });
       const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
       const msg = `${head}\n${lines.join('\n')}\n\n${totalLbl}: ₪${total}`;
-      window.open('https://wa.me/972529662724?text=' + encodeURIComponent(msg), '_blank');
+      window.open('https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent(msg), '_blank');
     });
+
+    const koNorm = s => String(s || '').normalize('NFC').replace(/[’'׳`´]/g, "'").replace(/\s+/g, ' ').trim().toLowerCase();
+
+    // Живое меню кассы (короткий кэш — цены/доступность всегда свежие)
+    let koMenuCache = null, koMenuAt = 0;
+    async function kassaMenu() {
+      if (koMenuCache && Date.now() - koMenuAt < 60000) return koMenuCache;
+      const res = await fetch(KASSA_FN + '/public-menu?loc=' + KASSA_LOC, { headers: KASSA_HDR });
+      if (!res.ok) throw new Error('menu');
+      koMenuCache = await res.json(); koMenuAt = Date.now();
+      return koMenuCache;
+    }
+
+    // Корзина сайта → позиции кассы: товар по названию, добавки → размер
+    // (item_variants) или модификаторы; несматченное — в notes позиции
+    function koResolve(menu) {
+      const items = {};
+      menu.categories.forEach(c => c.items.forEach(i => { items[koNorm(i.name)] = i; }));
+      const out = [], missing = [];
+      for (const line of cart) {
+        const item = items[koNorm(KO_ALIASES[line.nameHe] || line.nameHe)] || items[koNorm(line.nameRu)] || items[koNorm(line.nameEn)];
+        if (!item) { missing.push(line); continue; }
+        const variants = {}, mods = {};
+        item.variants.forEach(v => { variants[koNorm(v.name)] = v.id; });
+        item.modifier_groups.forEach(g => g.modifiers.forEach(m => { mods[koNorm(m.name)] = m.id; }));
+        let variantId = null; const modifierIds = []; const noteBits = [];
+        for (const ex of (line.extrasHe || [])) {
+          const n = koNorm(ex);
+          if (variants[n]) variantId = variants[n];
+          else if (mods[n]) modifierIds.push(mods[n]);
+          else noteBits.push(ex);
+        }
+        if (!variantId && item.variants.length) {
+          const def = item.variants.find(v => v.is_default) || item.variants[0];
+          variantId = def.id;
+        }
+        out.push({ menu_item_id: item.id, variant_id: variantId, modifier_ids: modifierIds, qty: line.qty, notes: noteBits.join(', ') || null });
+      }
+      return { out, missing };
+    }
+
+    function koShowErr(html) { koErr.innerHTML = html; koErr.style.display = 'block'; }
+
+    let koPending = null; // {fp, uuid} — попытка отправки текущей корзины
+    function koFallbackUuid() {
+      // Старый WebView без crypto.randomUUID: версия/варианты по RFC 4122
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+        const r = Math.random() * 16 | 0;
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+      });
+    }
+
+    koSubmit.addEventListener('click', async () => {
+      if (!cart.length || koSubmit.disabled) return;
+      koErr.style.display = 'none';
+      const name = koName.value.trim();
+      const phone = koPhone.value.replace(/\D/g, '');
+      if (!name || phone.length < 9) { koShowErr(esc(koL('errName'))); return; }
+
+      koSubmit.disabled = true;
+      koSubmit.textContent = koL('sending');
+      try {
+        const menu = await kassaMenu();
+        if (!menu.location.is_open) { koShowErr(esc(koL('errClosed'))); return; }
+        const { out, missing } = koResolve(menu);
+        if (missing.length) {
+          const lang = document.documentElement.lang;
+          const names = missing.map(l => lang === 'he' ? (l.nameHe || l.nameEn) : lang === 'ru' ? (l.nameRu || l.nameEn) : l.nameEn);
+          koShowErr(esc(koL('errMiss')) + '<br>• ' + names.map(esc).join('<br>• '));
+          return;
+        }
+        let pickupAt = null;
+        if (koLater.classList.contains('active') && koTime.value) {
+          const [h, m] = koTime.value.split(':').map(Number);
+          const d = new Date(); d.setHours(h, m, 0, 0);
+          pickupAt = d.toISOString();
+        }
+        // Идемпотентность: uuid живёт, пока корзина не изменилась — ретрай
+        // после сбоя сети не создаст вторую заявку (сервер вернёт первую)
+        const fp = JSON.stringify(cart);
+        if (!koPending || koPending.fp !== fp) {
+          koPending = { fp, uuid: (crypto.randomUUID ? crypto.randomUUID() : koFallbackUuid()) };
+        }
+        const clientUuid = koPending.uuid;
+        const res = await fetch(KASSA_FN + '/public-order', {
+          method: 'POST',
+          headers: Object.assign({ 'Content-Type': 'application/json' }, KASSA_HDR),
+          body: JSON.stringify({ loc: KASSA_LOC, client_uuid: clientUuid, name, phone, pickup_at: pickupAt, note: koNote.value.trim() || null, items: out }),
+        });
+        const body = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          const code = body.error || 'unknown';
+          if (code === 'closed') koShowErr(esc(koL('errClosed')));
+          else if (code === 'rate_limited' || code === 'busy') koShowErr(esc(koL('errRate')));
+          else if (code === 'item_unavailable') koShowErr(esc(koL('errSold')) + (body.detail ? ': ' + esc(body.detail) : ''));
+          else koShowErr(esc(koL('errGen')));
+          return;
+        }
+        // Заявка ушла: корзину чистим, показываем статус и поллим
+        koPending = null;
+        localStorage.setItem(KO_LS, JSON.stringify({ uuid: clientUuid, at: Date.now() }));
+        cart = []; saveCart(); renderCart();
+        koForm.classList.remove('open');
+        startKoStatus(clientUuid);
+      } catch (e) {
+        koShowErr(esc(koL('errGen')));
+      } finally {
+        koSubmit.disabled = false;
+        koSubmit.textContent = koL('submit');
+      }
+    });
+
+    // ── Статус активного заказа (занимает панель корзины) ──
+    let koPollTimer = null, koLast = null, koUuid = null;
+
+    function renderKoStatus() {
+      if (!koUuid) return;
+      const s = koLast;
+      let html = '';
+      if (!s || s.status === 'new') {
+        html = '<div class="ko-spinner"></div><h3 class="ko-status-title">' + esc(koL('waiting')) + '</h3><p class="ko-status-sub">' + esc(koL('waitSub')) + '</p>';
+      } else if (s.status === 'rejected') {
+        html = '<h3 class="ko-status-title">' + esc(koL('rejected')) + '</h3><p class="ko-status-sub">' + esc(s.reject_reason || '') + '</p><button class="ko-new-btn" id="koNewBtn">' + esc(koL('newOrder')) + '</button>';
+      } else if (s.order_status === 'voided') {
+        html = '<h3 class="ko-status-title">' + esc(koL('cancelled')) + '</h3><button class="ko-new-btn" id="koNewBtn">' + esc(koL('newOrder')) + '</button>';
+      } else {
+        const done = s.order_status === 'paid' || s.order_status === 'fulfilled';
+        html = '<div class="ko-num">#' + esc(s.daily_number ?? '') + '</div>'
+          + '<h3 class="ko-status-title">' + esc(done ? koL('done') : koL('accepted')) + '</h3>'
+          + '<p class="ko-status-sub">' + esc(done ? koL('doneSub') : koL('accSub')) + '</p>'
+          + '<p class="ko-status-sub" style="margin-top:8px">₪' + esc(Math.round((s.total || 0) / 100)) + '</p>'
+          + (done ? '<button class="ko-new-btn" id="koNewBtn">' + esc(koL('newOrder')) + '</button>' : '');
+      }
+      koStatusEl.innerHTML = html;
+      const nb = document.getElementById('koNewBtn');
+      if (nb) nb.addEventListener('click', stopKoStatus);
+    }
+
+    function koFinal(s) {
+      return s && (s.status === 'rejected' || s.order_status === 'voided' || s.order_status === 'paid' || s.order_status === 'fulfilled');
+    }
+
+    async function koPoll() {
+      try {
+        const res = await fetch(KASSA_FN + '/public-order?id=' + koUuid, { headers: KASSA_HDR });
+        if (res.status === 404) { stopKoStatus(); return; }
+        if (!res.ok) return; // сеть мигнула — попробуем в следующий тик
+        koLast = await res.json();
+        renderKoStatus();
+        if (koFinal(koLast)) { clearInterval(koPollTimer); koPollTimer = null; }
+      } catch (e) { /* тихо ждём следующего тика */ }
+    }
+
+    function startKoStatus(uuid) {
+      koUuid = uuid; koLast = null;
+      itemsEl.style.display = 'none';
+      cartFoot.style.display = 'none';
+      koStatusEl.style.display = 'block';
+      renderKoStatus();
+      koPoll();
+      if (koPollTimer) clearInterval(koPollTimer);
+      koPollTimer = setInterval(koPoll, 5000);
+    }
+
+    function stopKoStatus() {
+      if (koPollTimer) { clearInterval(koPollTimer); koPollTimer = null; }
+      koUuid = null; koLast = null;
+      localStorage.removeItem(KO_LS);
+      koStatusEl.style.display = 'none';
+      itemsEl.style.display = '';
+      cartFoot.style.display = '';
+      finalizeBtn.style.display = '';
+      renderCart();
+    }
+
+    // Активный заказ переживает перезагрузку: показываем статус и панель.
+    // Заказы старше 12 часов считаем завершёнными — не воскрешаем.
+    try {
+      const savedKo = JSON.parse(localStorage.getItem(KO_LS) || 'null');
+      if (savedKo && savedKo.uuid && Date.now() - savedKo.at < 12 * 3600 * 1000) {
+        startKoStatus(savedKo.uuid);
+        openCart();
+      } else if (savedKo) {
+        localStorage.removeItem(KO_LS);
+      }
+    } catch (e) { /* мусор в LS — игнор */ }
     // очистка корзины: первый тап — просьба подтвердить, второй — очищает
     let clearConfirmTimer = null;
     function resetClearBtn() {

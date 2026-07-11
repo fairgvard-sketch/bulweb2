@@ -1,0 +1,815 @@
+{
+  "generatedAt": "2026-07-11T11:31:38.826Z",
+  "location": "fe2eebf0-65e3-45b4-a81f-331359d71955",
+  "items": {
+    "857sQMeMYP9fRyaPx6q1": {
+      "kassaItemId": "6a4c7b48-4356-47f3-88ce-61fc4076314e",
+      "name": "מקיאטו",
+      "category": "hot-drinks",
+      "variants": {
+        "יחיד": "79477cd0-75dd-499a-b176-5bff5daf1601",
+        "כפול": "4b1f5447-f194-4ed0-8f18-c99c2b596495"
+      },
+      "sizeAddonId": "OiHbMmn0TS3JGIb6TUZG"
+    },
+    "8Z5GvXvctcP15M6MfblM": {
+      "kassaItemId": "499d819b-d7f8-4929-80d7-13ed3c29cca9",
+      "name": "שוקולטה חמה",
+      "category": "hot-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "JKJqJ7jyxSvqh1RVGLIm": {
+      "kassaItemId": "e7c2cf0d-6c64-478d-a5f3-f9da99a0e17e",
+      "name": "תה חם",
+      "category": "hot-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "M20P5wlG4Aqjk1HHuV9W": {
+      "kassaItemId": "ca949849-dc25-4ff8-a2db-075930b22170",
+      "name": "קפוצ'ינו",
+      "category": "hot-drinks",
+      "variants": {
+        "קטן": "080ed548-a2d1-44df-bcdb-56e8bbd5e1bb",
+        "גדול": "8bdd92c7-0b06-4e80-aeee-f771df2edc04"
+      },
+      "sizeAddonId": "VPolh0XJ5pSzTWs9fUPN"
+    },
+    "Q6EKi70pRa2OaLQs5bkU": {
+      "kassaItemId": "3f7023a1-5f88-4074-9486-70cc5cbedd3c",
+      "name": "לאטה",
+      "category": "hot-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "UPEC0AjuJE7yqIFRL1gR": {
+      "kassaItemId": "6a776379-d189-470b-9290-7069af0a38dc",
+      "name": "קפה שחור",
+      "category": "hot-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "W918nHTE1cVQKus7m1OG": {
+      "kassaItemId": "cac5fca3-49c7-42b4-bf5e-2a11c9047c4f",
+      "name": "אספרסו",
+      "category": "hot-drinks",
+      "variants": {
+        "יחיד": "3dae2d29-89df-467d-8646-019a5b9f8b3e",
+        "כפול": "ec54eb62-dd57-4ea8-9db8-c4b4e855f9d7"
+      },
+      "sizeAddonId": "OiHbMmn0TS3JGIb6TUZG"
+    },
+    "ZVrzTX7qfnVbKXCS0w5r": {
+      "kassaItemId": "075d3ccf-9ac8-4792-bf1f-1fd56179ce4c",
+      "name": "ראף",
+      "category": "hot-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "b8elgRPpTJhRsVcnsP8J": {
+      "kassaItemId": "be0ccada-6d82-4feb-8fe5-01efd8bf0e3c",
+      "name": "סחלב חם",
+      "category": "hot-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "chcuk2QTyZSQtef0VN00": {
+      "kassaItemId": "ab9e2ead-e23e-45fa-8237-0bf676ccf7cd",
+      "name": "אמריקנו",
+      "category": "hot-drinks",
+      "variants": {
+        "קטן": "eb0a9471-60d8-48f6-9b8b-b16ed287de3c",
+        "גדול": "1f1360ad-1657-435d-b63f-3348617915e8"
+      },
+      "sizeAddonId": "VPolh0XJ5pSzTWs9fUPN"
+    },
+    "iXt1weLdaCytPFGMPohT": {
+      "kassaItemId": "9208a985-f669-4056-975b-04a95dcedba9",
+      "name": "פלאט וואיט",
+      "category": "hot-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "kF0Fdpz0Qxu7RbA6LYEU": {
+      "kassaItemId": "2e9f2d77-a933-47c6-bb8e-2c2dcc1d4752",
+      "name": "אפוגטו",
+      "category": "hot-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "kxSbOFRuDyamSH1FLQCa": {
+      "kassaItemId": "f2320fc0-f866-41a6-a600-39f6a9817150",
+      "name": "מאצ'ה לאטה",
+      "category": "hot-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "xG8NyTHC31AiTnMExvwL": {
+      "kassaItemId": "a9163f1a-4e7c-4577-a550-74886c5811f6",
+      "name": "שוקו חם",
+      "category": "hot-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "3lIbsMvJ7qcMxipQpQJV": {
+      "kassaItemId": "9640c18f-9f8c-4b26-be2e-2b217f0b0139",
+      "name": "מיץ ריאל",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "5mwhjebX5wBsVYvBuCHA": {
+      "kassaItemId": "4af496a9-9035-4f1f-ba0a-dde356a7bea4",
+      "name": "מנגו-פסיפלורה",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "91iU0CG2yt5CZWVBJFzH": {
+      "kassaItemId": "7475f05b-c277-458a-afdf-ac55ee17a400",
+      "name": "מיץ מיקס פירות וירקות - ורוד",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "CtmlDGmObJZ3jLG9Lzto": {
+      "kassaItemId": "8a5c75f6-73a6-4e38-8753-70edd7b574e7",
+      "name": "שוקו קר",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "GT8uHKhE7SXLZQLphGoZ": {
+      "kassaItemId": "3cc4db11-1470-4809-b6be-b9addd17d511",
+      "name": "מיץ מיקס פירות וירקות - צהוב",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "Igd1XX0HACFCvffudChV": {
+      "kassaItemId": "15b48745-cb48-4073-8c02-80b1dc6011da",
+      "name": "מיץ רימון אורגני",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "KYUGdGPyIzIeu55gdhCq": {
+      "kassaItemId": "2b1775eb-e886-4509-b606-9424f811b98d",
+      "name": "מי קוקוס בטעמים",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "SeZDr8HrAbZginK4PrUM": {
+      "kassaItemId": "00babac1-3ac0-448e-82fc-09911930c94e",
+      "name": "אסרולה-ג'ינג'ר",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "TIjL0MHAvZp9PmB96JhI": {
+      "kassaItemId": "673ef244-7759-4245-bc5f-bf9888230cbd",
+      "name": "ורדים",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "Tx7nIGkKSGWN43RIEMGH": {
+      "kassaItemId": "19d10a3f-f295-4ecd-9ac6-ea598ef04f98",
+      "name": "מיץ משמש אורגני",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "UyCwrBSan2uLf3srThJg": {
+      "kassaItemId": "e4ce66d7-a609-4314-b4c9-37db2d9c852b",
+      "name": "מיץ אגס אורגני",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "bLZhHea8SfAnJfJenmr7": {
+      "kassaItemId": "aad9c813-b2d3-471c-ba25-b2be60f61fe3",
+      "name": "מיץ תפוח עץ אורגני",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "c4PaTClkCrNveNTWsjob": {
+      "kassaItemId": "4df275d6-9d89-4314-82bb-73a2720206a4",
+      "name": "מיץ תות עץ אורגני",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "fjqKyoDlWTiyk3rDgL2D": {
+      "kassaItemId": "e25ffe03-65d5-4a8a-b794-c03b426a14ea",
+      "name": "פרישייק",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "nFIhm5YuQg5jBCMoshlL": {
+      "kassaItemId": "5396403a-2089-4a5a-bdcd-48b3ffb0befb",
+      "name": "מאטה-קופאין",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "pyc7ItQJGuoq88ISEhFp": {
+      "kassaItemId": "48153e74-9b5e-40d9-888e-ec51db1b558d",
+      "name": "קפה קר",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "tsbSFHLcxQjXTdE2bTjr": {
+      "kassaItemId": "8449fc16-43fa-41dd-85fc-c67c2f66a4fe",
+      "name": "באמבל בי",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "vGlhmWbB72onKghvthPl": {
+      "kassaItemId": "95c5b38f-8195-4926-b26f-fb978cb196b4",
+      "name": "מאצ'ה קרה",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "vI92RR7E8ZwYZL7Oq9eC": {
+      "kassaItemId": "98fd70de-fcf7-4061-9858-59112b00dcf9",
+      "name": "בלאק לארה",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "xCeFRUddGN0rK5vHLHVa": {
+      "kassaItemId": "398cbc11-b584-439e-8128-0a366ee64207",
+      "name": "תה קר ביתי",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "zJkh10tSxmuQD05aIoJL": {
+      "kassaItemId": "c0f2d38d-0744-46c9-97c0-83254c8b9429",
+      "name": "מיץ מיקס פירות וירקות - אדום",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "zqJByNFkQdC5MacfdqTp": {
+      "kassaItemId": "ba1b827f-1163-47aa-802e-a69254129801",
+      "name": "מלפפון כוסברה",
+      "category": "cold-drinks",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "0ga4D4f7b9fg48kHHq6N": {
+      "kassaItemId": "06ea74c9-94de-4efd-a3d5-1982dce45f82",
+      "name": "מוזלי",
+      "category": "sandwiches",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "3H8H9ENQFpgCAKZU89K2": {
+      "kassaItemId": "3f21d04a-0c11-4837-92c8-7ca0eea5d7f0",
+      "name": "קרואסון אבוקדו",
+      "category": "sandwiches",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "4LxmV15M1WmZdbHdTLCu": {
+      "kassaItemId": "792444fd-8da6-49bb-8fcf-aec5b35fa991",
+      "name": "סלט ירקות דק",
+      "category": "sandwiches",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "D2NApCcqQkKibiFcmIbq": {
+      "kassaItemId": "1156840a-fb80-4682-aeff-3fae97181b68",
+      "name": "קיש פיטריות עם סלט אישי",
+      "category": "sandwiches",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "E1DYty1lUGNgmE26UXTo": {
+      "kassaItemId": "194008d4-c3d0-4bc5-99f8-79c2129d5f69",
+      "name": "קרואסון אנטיפסטי",
+      "category": "sandwiches",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "EIDaUBs4PnPWGMJMxXGR": {
+      "kassaItemId": "f24b4c7d-8d11-498f-a9bb-4b739fabf31d",
+      "name": "כריך טונה",
+      "category": "sandwiches",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "HxlyKZyk1zJv3T8aKQ4A": {
+      "kassaItemId": "44b0c11d-f4ef-41ea-8f25-fdbd5f85bd9b",
+      "name": "כריך סלמון מעושן",
+      "category": "sandwiches",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "JdjPKrjuZWj3cIDxcFIK": {
+      "kassaItemId": "1eb32f55-3c87-4e7f-8112-0a5b1a649017",
+      "name": "כריך אבוקדו",
+      "category": "sandwiches",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "LuQB1JNm5TmprNKfnaOa": {
+      "kassaItemId": "5b0b22ef-2408-4b15-9b37-3a38630ce8c8",
+      "name": "קרואסון פסטו",
+      "category": "sandwiches",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "NnyjsNikazrKUlR3iVpy": {
+      "kassaItemId": "3c9a1096-8992-49f6-9f97-7549f237e16e",
+      "name": "רוסטיק אבוקדו VEGAN",
+      "category": "sandwiches",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "PVr2m2A3M0lKqY32PmpB": {
+      "kassaItemId": "509b65dc-7087-45e9-add5-c7ced4351047",
+      "name": "קיש אנטיפסטי עם סלט אישי",
+      "category": "sandwiches",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "k9FLvm0vCd57DazuLNKw": {
+      "kassaItemId": "666cd47b-f4c7-4394-87d2-aa7df9482b97",
+      "name": "סלט בולגרית",
+      "category": "sandwiches",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "laIG3Sb4JTDQP3Vb5FMp": {
+      "kassaItemId": "bb2a7322-79ae-4ef4-9124-16f6433409da",
+      "name": "סלט טונה",
+      "category": "sandwiches",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "wgKx4FgB6msAGoaJ7KXQ": {
+      "kassaItemId": "3ab2a6da-aea3-40cc-8cef-f648b04eb875",
+      "name": "טוסט חמש גבינות",
+      "category": "sandwiches",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "yvLvqQXLoBSMOrM4uGuU": {
+      "kassaItemId": "620e08e9-07b4-45f1-8dc0-efaff80de0e4",
+      "name": "קרואסון סלמון מעושן",
+      "category": "sandwiches",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "zifYY1BmrfOYpmZr3C5P": {
+      "kassaItemId": "a0c6a236-c44e-4020-b7a2-74c1ba7e1a4a",
+      "name": "קרואסון טונה",
+      "category": "sandwiches",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "4JWQWJDZWRVQfm4otMxP": {
+      "kassaItemId": "94c26623-c832-4d8e-b5c5-649039da83b1",
+      "name": "קיש אנטיפסטי",
+      "category": "pastries",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "5wgzoijxJ1yaPeSI5TKW": {
+      "kassaItemId": "e918e3d4-29d8-4d9a-a325-60b417eece2d",
+      "name": "קרואסון צרפתי קטן",
+      "category": "pastries",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "9mLN5TnS0og9JQ98gXnE": {
+      "kassaItemId": "62a04105-95e4-4ec4-a278-af02e7aa6bf7",
+      "name": "קיש פטריות",
+      "category": "pastries",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "IF4EoR7so6Bsw3NZqDqH": {
+      "kassaItemId": "5a7ddd4b-f00d-4385-b897-6fad1f0c7750",
+      "name": "רול קינמון",
+      "category": "pastries",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "RfXSu2ErEkctDI7U8F2o": {
+      "kassaItemId": "0aba85a1-c518-421d-8917-36bcec642f82",
+      "name": "שוסון תפוח עץ",
+      "category": "pastries",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "Wp6sYD4tF5Lp2oa8HJz9": {
+      "kassaItemId": "eb3cdf61-dfbf-4356-8a80-307d16ff6669",
+      "name": "רול וניל צימוקים",
+      "category": "pastries",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "cNlbfELm7mcvX6PH9MdY": {
+      "kassaItemId": "be851e3b-1a28-42d4-b70f-5e844d4199b5",
+      "name": "קרואסון צרפתי קלאסי",
+      "category": "pastries",
+      "variants": {
+        "קטן": "e552ac09-73d8-420f-91ee-6e292dac4c2f",
+        "גדול": "6af6347e-29a1-4cdd-b26b-198229ed411f"
+      },
+      "sizeAddonId": null
+    },
+    "gDSFxlvswUk04qiBWIgx": {
+      "kassaItemId": "409ab34e-80c7-4817-ac55-26a556943b92",
+      "name": "אצבעות פילו",
+      "category": "pastries",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "kxMNhJoK4S9y1IfX3k3x": {
+      "kassaItemId": "26210aeb-e045-4d9d-9af2-2adb510e6be6",
+      "name": "קרואסון שוקולד גדול",
+      "category": "pastries",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "y22zEEWk7ADh00Y9OW2o": {
+      "kassaItemId": "52b02eaa-bf70-44d8-904d-f5f9e9f033ca",
+      "name": "קרואסון שוקולד",
+      "category": "pastries",
+      "variants": {
+        "קטן": "839cf44a-3c57-410b-824b-b25ec1f52caf",
+        "גדול": "b5803c9f-a076-4017-a08c-a85d85da1150"
+      },
+      "sizeAddonId": null
+    },
+    "2tbpxT2SAFMBOvC1jBdB": {
+      "kassaItemId": "c7c57183-8947-4745-8be7-946b67b50d03",
+      "name": "קרואסון קרם וניל-פירות יער",
+      "category": "filled",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "4sM6xdJLXDkSvSBNLgen": {
+      "kassaItemId": "e49478d5-be37-4895-8669-c4e935fb6ba1",
+      "name": "קרואסון קרם בייגל-קרמל מלוח",
+      "category": "filled",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "KbX8zwc8PbbhHnvv1m9r": {
+      "kassaItemId": "b3c7834c-aaad-406c-975d-5979e2ef1e1f",
+      "name": "קרואסון קרם חלבה-קרם פיסטוק",
+      "category": "filled",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "QLO6ehEIQJffbhQ33IYx": {
+      "kassaItemId": "8393a0fd-451f-40ea-af91-a86f5f417b65",
+      "name": "קרואסון תפוח עץ-קרם לימון",
+      "category": "filled",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "Qsu9MUokoIEeTpKV3wp6": {
+      "kassaItemId": "d770f89f-af79-4a2b-985d-e498930651ce",
+      "name": "קרואסון קרם פיסטוק-אגוזי פיסטוק",
+      "category": "filled",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "nYwbCpgdA6Bkha6cq9El": {
+      "kassaItemId": "0810d51c-27bc-47fe-ba3c-58fae94ab74c",
+      "name": "קרואסון קרם לימון-פטל אדום",
+      "category": "filled",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "o6AhCUlKXcHVGxCi6rMq": {
+      "kassaItemId": "ff2bf66a-7055-4490-b90a-8e6c2ea0d5fb",
+      "name": "קרואסון נוטלה-בננה-שקדים",
+      "category": "filled",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "864MrXFT3Yf06vJP0tjx": {
+      "kassaItemId": "56d8152b-4e47-4fc7-afde-f3d4b6a6b0e5",
+      "name": "בראוניז, שוקולד חלב וקרמל אגוזי לוז",
+      "category": "tartlets",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "I4DJWXkBIJVi2S7PPpQ0": {
+      "kassaItemId": "58f4c1a4-2209-4412-926d-b74b56b3f22c",
+      "name": "לימון מרנג ופרנג'יפן שקדים",
+      "category": "tartlets",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "ZimPF62cN02L64vf2S70": {
+      "kassaItemId": "dfb58c23-af22-4fe4-8079-3fc88884fc49",
+      "name": "טארטלט מסקרפונה - קרם וניל - פירות יער",
+      "category": "tartlets",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "bZBsbGwsgxInQCjMdCv6": {
+      "kassaItemId": "ae4b8b17-7ce0-4d17-b4ac-f9f2ba980d5c",
+      "name": "טארטלט מסקרפונה - קרם פיסטוק-פטל",
+      "category": "tartlets",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "dxDTwYzc5fQAATeDUEpV": {
+      "kassaItemId": "0867fbcc-b23d-428d-89ee-3ea3e15a7f60",
+      "name": "טארטלט מסקרפונה - מנגו",
+      "category": "tartlets",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "uz836MXH5C0GgtzGgpSb": {
+      "kassaItemId": "8bc170a8-d702-4ca1-b725-b6b7fcaf2d0d",
+      "name": "טארטלט מסקרפונה - תות שדה",
+      "category": "tartlets",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "2g255MEEJEv0GbzJXjfS": {
+      "kassaItemId": "aa9bee89-b1b6-42cc-9774-dbee22abae64",
+      "name": "קרם ברולה",
+      "category": "cakes",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "dLNQqlNeeb3JJ2h42Sr3": {
+      "kassaItemId": "ac63c57c-ebea-43d2-b757-ebf2d38ac50f",
+      "name": "טירמיסו",
+      "category": "cakes",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "kWvndVx2PHMeVkTM3LIM": {
+      "kassaItemId": "49d3b29c-f233-4883-9715-3fc96cb95ec7",
+      "name": "עוגת הבית (משתנה)",
+      "category": "cakes",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "pjA8da3OmrrrxKelOYk5": {
+      "kassaItemId": "8c52453e-8981-4884-9a55-2759fa39a8d4",
+      "name": "עוגת גבינה אפויה",
+      "category": "cakes",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "4R3iqSJhN1zQy91cEm1b": {
+      "kassaItemId": "ca0a4ace-3483-45ef-ac1d-d05680dbbfc5",
+      "name": "Тропическое",
+      "category": "ice-cream",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "hiPGYDHYDQxSQyVHTHyF": {
+      "kassaItemId": "44c71229-c7c4-4cd7-a5e2-2337cdd7413c",
+      "name": "Классика",
+      "category": "ice-cream",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "oDl1MNX7DvIGXVn77zV4": {
+      "kassaItemId": "e6ced664-9401-4560-9f9e-4e41f26d71e1",
+      "name": "Темный Лес",
+      "category": "ice-cream",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "1uLtv7hQ9GCnKIEFBpi3": {
+      "kassaItemId": "311ca32e-7e40-46d7-b936-e3cb945eb6c3",
+      "name": "רוזה פריין — \"לה ויה פארם\", עמק הרון, צרפת",
+      "category": "alcohol",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "5BtwdaJhlsLO9pQ9HEkL": {
+      "kassaItemId": "48e6337d-4dfa-410b-a896-d3922b60671e",
+      "name": "עראק עלית",
+      "category": "alcohol",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "8DvyiqmzOR98fodmUbI7": {
+      "kassaItemId": "55b2f910-c8b9-4fe6-9166-9730399d1b03",
+      "name": "בייליס",
+      "category": "alcohol",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "8ND78K5MZDAgpISZSyq1": {
+      "kassaItemId": "220ca9b3-ddbc-4d91-b80e-d1a1ce28868b",
+      "name": "גולדסטאר",
+      "category": "alcohol",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "8j6NwvuF4gKyrg2qTtcm": {
+      "kassaItemId": "99969541-5149-4986-90c5-b3397f1268ee",
+      "name": "הופ גורו – IPA",
+      "category": "alcohol",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "Imn74oUiN5U6RpiJyg87": {
+      "kassaItemId": "cb8b4160-405a-4987-8bb3-6b456bf565ee",
+      "name": "ואלפוליצ'לה — \"טומאסי\", ונטו, איטליה",
+      "category": "alcohol",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "NL9y5ZRLNrhMbPRX41sb": {
+      "kassaItemId": "5448f387-da29-4f14-a4c6-028d9cc9fb08",
+      "name": "בלנד אדום פריין — \"לה ויה פארם\", עמק הרון, צרפת",
+      "category": "alcohol",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "duJnqElJRYfUY2Air2BG": {
+      "kassaItemId": "24bd7607-b387-44b1-ab18-c86fdbb05825",
+      "name": "שרדונה — \"לה קוטי\", דומיין רו, צרפת",
+      "category": "alcohol",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "jpyVDIh3YhcpEK8HWVp5": {
+      "kassaItemId": "bbef4c4c-964f-42bf-862c-a2b0dd8e0ca6",
+      "name": "רד קנייט – אייל אירי",
+      "category": "alcohol",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "mIFCYrI3XZU7E8sCnvKV": {
+      "kassaItemId": "37439b13-0865-4fd3-8773-968e0d09b7f8",
+      "name": "גורצטרמינר — \"ולה וולף\", פפאלץ, גרמניה",
+      "category": "alcohol",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "nL4ipOBDAcQYVGqTGvTt": {
+      "kassaItemId": "73bfebbb-cd74-4ca9-b8a1-cef8f2786416",
+      "name": "ויסקי ג'ימסון",
+      "category": "alcohol",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "q2KFeRvLb0UNQkYsrAFH": {
+      "kassaItemId": "1be1012b-bb7c-4d30-b523-8d9c0c178487",
+      "name": "ג'ין בומביי סמפייר",
+      "category": "alcohol",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "0J9clddwJ4kVD3BUaJxL": {
+      "kassaItemId": "d6f6168b-94f1-4d26-ae59-3b7361461920",
+      "name": "סוצ'ניק",
+      "category": "friday",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "2kBJ2YTLGjhbjSpovmkm": {
+      "kassaItemId": "b2591ccd-806a-4c9c-a265-50c37613f3d4",
+      "name": "בולוצ'קה",
+      "category": "friday",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "44ksLWIQjsm2xZB0BQww": {
+      "kassaItemId": "0030dbd9-123b-4e93-aac4-d6b34cf983af",
+      "name": "קרמבון",
+      "category": "friday",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "CQCbglH5BBIl0AwkFUAU": {
+      "kassaItemId": "9d7cf99f-cc48-4057-8a00-111d2e8476a1",
+      "name": "ואטרושקה",
+      "category": "friday",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "cILT9Ntm4cMXpWyip6LR": {
+      "kassaItemId": "6acdde89-8f41-4b85-a214-f1b8152adfb0",
+      "name": "סינבון",
+      "category": "friday",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "ggOyLLL7cpXd4WqxEjyt": {
+      "kassaItemId": "231ddf1a-0ef7-47d9-8174-7414734054d3",
+      "name": "פליושקה",
+      "category": "friday",
+      "variants": {},
+      "sizeAddonId": null
+    },
+    "wJjOf7dqa5mTmIY2KDhQ": {
+      "kassaItemId": "41ebaefe-6e08-4eb1-be36-eaf8c33ad5b8",
+      "name": "קארינוצ'קה",
+      "category": "friday",
+      "variants": {},
+      "sizeAddonId": null
+    }
+  },
+  "addons": {
+    "תוספות": {
+      "kassaGroupId": "1590b35f-e45c-471f-a5cb-cc5a35bf576e",
+      "options": {
+        "עגבנייה": "91360ae5-0d9e-4231-b293-23bf9ce0434b",
+        "גבינה בולגרית": "85e9ec9b-2120-48b1-a0ae-2902a0d73fb7",
+        "בצל סגול": "a844597d-9ea7-47c1-b5b0-67977b0872f0",
+        "אבוקדו": "f4bf907a-67c4-4bc7-8784-c9b334ceab3f",
+        "זיתי קלמטה": "be743546-6231-4a5d-aa06-70ef25ccab26",
+        "ביצה קשה": "9c3d31ba-a122-47c8-aba3-3f589653b367",
+        "תירס": "77483a1f-2807-47a7-841d-9bf332b6f378",
+        "טונה": "3af96148-6c37-4ced-9ffe-a237a6b27b40"
+      }
+    },
+    "BCbRBblJI2u6rf98QCrK": {
+      "kassaGroupId": "1590b35f-e45c-471f-a5cb-cc5a35bf576e",
+      "modifierId": "91360ae5-0d9e-4231-b293-23bf9ce0434b",
+      "simple": true
+    },
+    "CW0r56ha5sa3ZWDuOosJ": {
+      "kassaGroupId": "1590b35f-e45c-471f-a5cb-cc5a35bf576e",
+      "modifierId": "85e9ec9b-2120-48b1-a0ae-2902a0d73fb7",
+      "simple": true
+    },
+    "LStVYqv9Ac7q6BrxEJRB": {
+      "kassaGroupId": "1590b35f-e45c-471f-a5cb-cc5a35bf576e",
+      "modifierId": "a844597d-9ea7-47c1-b5b0-67977b0872f0",
+      "simple": true
+    },
+    "YpQkemqRqQ0ObSRuPtaz": {
+      "kassaGroupId": "1590b35f-e45c-471f-a5cb-cc5a35bf576e",
+      "modifierId": "f4bf907a-67c4-4bc7-8784-c9b334ceab3f",
+      "simple": true
+    },
+    "aMhMk2v2cD15u9BrPtYd": {
+      "kassaGroupId": "1590b35f-e45c-471f-a5cb-cc5a35bf576e",
+      "modifierId": "be743546-6231-4a5d-aa06-70ef25ccab26",
+      "simple": true
+    },
+    "kwc4kpcAYSfOvBwgDNk0": {
+      "kassaGroupId": "1590b35f-e45c-471f-a5cb-cc5a35bf576e",
+      "modifierId": "9c3d31ba-a122-47c8-aba3-3f589653b367",
+      "simple": true
+    },
+    "mZLQ5PUQmXbVcbLjYQS0": {
+      "kassaGroupId": "1590b35f-e45c-471f-a5cb-cc5a35bf576e",
+      "modifierId": "77483a1f-2807-47a7-841d-9bf332b6f378",
+      "simple": true
+    },
+    "t9WOTa5vFF0Ho6FUoOu9": {
+      "kassaGroupId": "1590b35f-e45c-471f-a5cb-cc5a35bf576e",
+      "modifierId": "3af96148-6c37-4ced-9ffe-a237a6b27b40",
+      "simple": true
+    },
+    "5ebgMr1iMtgqZszKMeV9": {
+      "kassaGroupId": "28fa43ae-92e1-4f31-a601-1eadf75ef5c0",
+      "options": {
+        "קצר": "edf624f2-4e43-4158-a210-a7056084b930",
+        "ארוך": "80361e46-9362-4419-bb44-2c58f010d545"
+      }
+    },
+    "EZhqC3RsULpV1NSKU6xy": {
+      "kassaGroupId": "29e0ccde-0a6a-4bce-b6f7-d9bf36a388e3",
+      "options": {
+        "וניל": "072d661c-4afa-44aa-9e17-309fbf23a673",
+        "קרמל": "41b7872c-6f80-43de-919a-4de4d2ea917e",
+        "אגוז לוז": "f837fbe2-d75c-4d65-be7e-1218b46de77e",
+        "אייריש קרים": "c90978b4-431f-4a87-b138-86d1aff96a2e"
+      }
+    },
+    "jXONnPMl3nIAAmFwzqJY": {
+      "kassaGroupId": "2a39e0fb-c8ac-4a40-be85-91ef460b5429",
+      "options": {
+        "לחם רוסטיק": "b4630c21-810a-4006-8b5b-f0baf7220216"
+      }
+    },
+    "wiu5S9Z0c48XQ5JU39Z5": {
+      "kassaGroupId": "f8acbcaf-43a2-4829-8f2e-23b240c64965",
+      "options": {
+        "סויה": "dfab0105-78e5-420c-a90b-c671f6e135c1",
+        "שיבולת שועל": "7268f05d-f745-41d7-92dd-d47b2beda929"
+      }
+    }
+  }
+}
